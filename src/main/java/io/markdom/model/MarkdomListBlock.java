@@ -10,7 +10,7 @@ public interface MarkdomListBlock extends MarkdomBlock, Iterable<MarkdomListItem
 
 	public MarkdomListBlockType getListBlockType();
 
-	public List<MarkdomListItem> getListItems();
+	public List<? extends MarkdomListItem> getListItems();
 
 	public MarkdomListBlock addListItem(MarkdomListItem listItem);
 

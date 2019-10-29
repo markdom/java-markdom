@@ -10,7 +10,7 @@ public interface MarkdomContentParent extends MarkdomNode, Iterable<MarkdomConte
 
 	public MarkdomContentParentType getContentParentType();
 
-	public List<MarkdomContent> getContents();
+	public List<? extends MarkdomContent> getContents();
 
 	public MarkdomContentParent addContent(MarkdomContent content);
 

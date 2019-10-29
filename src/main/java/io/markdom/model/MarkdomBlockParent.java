@@ -10,7 +10,7 @@ public interface MarkdomBlockParent extends MarkdomNode, Iterable<MarkdomBlock> 
 
 	public MarkdomBlockParentType getBlockParentType();
 
-	public List<MarkdomBlock> getBlocks();
+	public List<? extends MarkdomBlock> getBlocks();
 
 	public MarkdomBlockParent addBlock(MarkdomBlock block);
 
