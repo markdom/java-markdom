@@ -1,12 +1,11 @@
 package io.markdom.model;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import io.markdom.common.MarkdomBlockParentType;
 
-public interface MarkdomBlockParent extends MarkdomNode, Iterable<MarkdomBlock> {
+public interface MarkdomBlockParent extends MarkdomNode {
 
 	public MarkdomBlockParentType getBlockParentType();
 
@@ -21,11 +20,6 @@ public interface MarkdomBlockParent extends MarkdomNode, Iterable<MarkdomBlock> 
 	@Override
 	public default List<MarkdomBlock> getChildren() {
 		return Collections.unmodifiableList(getBlocks());
-	}
-
-	@Override
-	public default Iterator<MarkdomBlock> iterator() {
-		return getChildren().iterator();
 	}
 
 }

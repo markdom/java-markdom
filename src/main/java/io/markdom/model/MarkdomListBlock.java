@@ -1,12 +1,11 @@
 package io.markdom.model;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import io.markdom.common.MarkdomListBlockType;
 
-public interface MarkdomListBlock extends MarkdomBlock, Iterable<MarkdomListItem> {
+public interface MarkdomListBlock extends MarkdomBlock {
 
 	public MarkdomListBlockType getListBlockType();
 
@@ -21,11 +20,6 @@ public interface MarkdomListBlock extends MarkdomBlock, Iterable<MarkdomListItem
 	@Override
 	public default List<MarkdomListItem> getChildren() {
 		return Collections.unmodifiableList(getListItems());
-	}
-
-	@Override
-	public default Iterator<MarkdomListItem> iterator() {
-		return getChildren().iterator();
 	}
 
 }
