@@ -38,22 +38,25 @@ abstract class AbstractMarkdomContent extends AbstractMarkdomNode implements Man
 	}
 
 	@Override
-	public final void onAttach(MarkdomContentParent parent) {
+	public final Runnable onAttach(MarkdomContentParent parent) {
 		if (null == parent) {
 			throw new IllegalArgumentException("The given Markdom content parent is null");
 		}
 		if (null != this.parent) {
 			throw new IllegalStateException("This Markdom content is already attached to a content parent");
 		}
-		this.parent = parent;
+		return () -> AbstractMarkdomContent.this.parent = parent;
 	}
 
 	@Override
-	public final void onDetach() {
+	public final Runnable onDetach(MarkdomContentParent parent) {
 		if (null == this.parent) {
 			throw new IllegalStateException("This Markdom content is currently not attached to a content parent");
 		}
-		this.parent = null;
+		if (this.parent != parent) {
+			throw new IllegalStateException("This Markdom content is not attached to teh given content parent");
+		}
+		return () -> AbstractMarkdomContent.this.parent = null;
 	}
 
 	@Override

@@ -12,20 +12,18 @@ final class BasicMarkdomContentList extends AbstractObservableList<ManagedMarkdo
 	}
 
 	@Override
-	protected void beforeInsert(ManagedMarkdomContent content) {
+	protected Runnable beforeInsert(ManagedMarkdomContent content) {
 		if (null == content) {
 			throw new IllegalArgumentException("The given Markdom content is null");
 		}
+		return content.onAttach(parent);
 	}
 
 	@Override
-	protected void onInsert(ManagedMarkdomContent content) {
-		content.onAttach(parent);
+	protected Runnable beforeRemove(ManagedMarkdomContent content) {
+		if (null == content) {
+			throw new IllegalArgumentException("The given Markdom content is null");
+		}
+		return content.onDetach(parent);
 	}
-
-	@Override
-	protected void onRemove(ManagedMarkdomContent content) {
-		content.onDetach();
-	}
-
 }

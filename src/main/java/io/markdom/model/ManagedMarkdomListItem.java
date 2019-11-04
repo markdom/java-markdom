@@ -4,10 +4,10 @@ import io.markdom.handler.MarkdomHandler;
 
 public interface ManagedMarkdomListItem extends MarkdomListItem {
 
-	void onAttach(MarkdomListBlock listBlock) throws IllegalArgumentException, IllegalStateException;
+	public Runnable onAttach(MarkdomListBlock listBlock);
 
-	void onDetach() throws IllegalStateException;
+	public Runnable onDetach(MarkdomListBlock listBlock);
 
-	void onHandle(MarkdomHandler<?> handler);
+	public void onHandle(MarkdomHandler<?> handler);
 
 }

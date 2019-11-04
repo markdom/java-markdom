@@ -38,22 +38,25 @@ public abstract class AbstractMarkdomListItem extends AbstractMarkdomNode implem
 	}
 
 	@Override
-	public final void onAttach(MarkdomListBlock listBlock) throws IllegalArgumentException, IllegalStateException {
+	public final Runnable onAttach(MarkdomListBlock listBlock) throws IllegalArgumentException, IllegalStateException {
 		if (null == listBlock) {
 			throw new IllegalArgumentException("The given Markdom list block is null");
 		}
 		if (null != this.listBlock) {
-			throw new IllegalStateException("This Markdom  list item is already attached to a list block");
+			throw new IllegalStateException("This Markdom list item is already attached to a list block");
 		}
-		this.listBlock = listBlock;
+		return () -> AbstractMarkdomListItem.this.listBlock = listBlock;
 	}
 
 	@Override
-	public final void onDetach() throws IllegalStateException {
+	public final Runnable onDetach(MarkdomListBlock listBlock) throws IllegalStateException {
 		if (null == this.listBlock) {
 			throw new IllegalStateException("This Markdom list item is currently not attached to a list block");
 		}
-		this.listBlock = null;
+		if (this.listBlock != listBlock) {
+			throw new IllegalStateException("This Markdom list item is not attached to the given list block");
+		}
+		return () -> AbstractMarkdomListItem.this.listBlock = null;
 	}
 
 	@Override

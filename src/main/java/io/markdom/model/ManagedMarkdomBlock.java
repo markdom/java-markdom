@@ -4,9 +4,9 @@ import io.markdom.handler.MarkdomHandler;
 
 public interface ManagedMarkdomBlock extends MarkdomBlock {
 
-	public void onAttach(MarkdomBlockParent parent);
+	public Runnable onAttach(MarkdomBlockParent parent);
 
-	public void onDetach();
+	public Runnable onDetach(MarkdomBlockParent parent);
 
 	public void onHandle(MarkdomHandler<?> handler);
 

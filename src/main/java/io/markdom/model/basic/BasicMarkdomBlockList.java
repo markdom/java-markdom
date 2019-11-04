@@ -12,20 +12,19 @@ final class BasicMarkdomBlockList extends AbstractObservableList<ManagedMarkdomB
 	}
 
 	@Override
-	protected void beforeInsert(ManagedMarkdomBlock block) {
+	protected Runnable beforeInsert(ManagedMarkdomBlock block) {
 		if (null == block) {
 			throw new IllegalArgumentException("The given Markdom block is null");
 		}
+		return block.onAttach(parent);
 	}
 
 	@Override
-	protected void onInsert(ManagedMarkdomBlock block) {
-		block.onAttach(parent);
-	}
-
-	@Override
-	protected void onRemove(ManagedMarkdomBlock block) {
-		block.onDetach();
+	protected Runnable beforeRemove(ManagedMarkdomBlock block) {
+		if (null == block) {
+			throw new IllegalArgumentException("The given Markdom block is null");
+		}
+		return block.onDetach(parent);
 	}
 
 }

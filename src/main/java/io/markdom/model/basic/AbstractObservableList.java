@@ -2,6 +2,7 @@ package io.markdom.model.basic;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -38,30 +39,7 @@ abstract class AbstractObservableList<Payload> implements List<Payload> {
 
 	@Override
 	public Iterator<Payload> iterator() {
-		return new Iterator<Payload>() {
-
-			private final Iterator<Payload> iterator = list.iterator();
-
-			private Payload currentPayload;
-
-			@Override
-			public boolean hasNext() {
-				return iterator.hasNext();
-			}
-
-			@Override
-			public Payload next() {
-				currentPayload = iterator.next();
-				return currentPayload;
-			}
-
-			@Override
-			public void remove() {
-				iterator.remove();
-				onRemove(currentPayload);
-			}
-
-		};
+		return listIterator();
 	}
 
 	@Override
@@ -76,20 +54,23 @@ abstract class AbstractObservableList<Payload> implements List<Payload> {
 
 	@Override
 	public boolean add(Payload payload) {
-		beforeInsert(payload);
+		Runnable afterInsert = beforeInsert(payload);
 		boolean result = list.add(payload);
-		onInsert(payload);
+		afterInsert.run();
 		return result;
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public boolean remove(Object object) {
-		boolean removed = list.remove(object);
-		if (removed) {
-			onRemove((Payload) object);
+		if (contains(object)) {
+			Runnable afterRemove = beforeRemove((Payload) object);
+			boolean removed = list.remove(object);
+			afterRemove.run();
+			return removed;
+		} else {
+			return false;
 		}
-		return removed;
 	}
 
 	@Override
@@ -111,16 +92,14 @@ abstract class AbstractObservableList<Payload> implements List<Payload> {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public boolean removeAll(Collection<?> payloads) {
 		Objects.requireNonNull(payloads);
 		boolean result = false;
-		Iterator<?> iterator = list.iterator();
+		Iterator<Payload> iterator = iterator();
 		while (iterator.hasNext()) {
-			Object object = iterator.next();
-			if (payloads.contains(object)) {
+			Payload payload = iterator.next();
+			if (payloads.contains(payload)) {
 				iterator.remove();
-				onRemove((Payload) object);
 				result = true;
 			}
 		}
@@ -128,16 +107,14 @@ abstract class AbstractObservableList<Payload> implements List<Payload> {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public boolean retainAll(Collection<?> payloads) {
 		Objects.requireNonNull(payloads);
 		boolean result = false;
-		Iterator<?> iterator = list.iterator();
+		Iterator<Payload> iterator = iterator();
 		while (iterator.hasNext()) {
-			Object object = iterator.next();
-			if (!payloads.contains(object)) {
+			Payload payload = iterator.next();
+			if (!payloads.contains(payload)) {
 				iterator.remove();
-				onRemove((Payload) object);
 				result = true;
 			}
 		}
@@ -146,10 +123,7 @@ abstract class AbstractObservableList<Payload> implements List<Payload> {
 
 	@Override
 	public void clear() {
-		for (Payload payload : list) {
-			onRemove(payload);
-		}
-		list.clear();
+		retainAll(Collections.EMPTY_LIST);
 	}
 
 	@Override
@@ -159,25 +133,29 @@ abstract class AbstractObservableList<Payload> implements List<Payload> {
 
 	@Override
 	public Payload set(int index, Payload payload) {
-		beforeInsert(payload);
-		Payload previousPayload = list.set(index, payload);
-		onRemove(previousPayload);
-		onInsert(payload);
+		Payload previousPayload = list.get(index);
+		Runnable afterRemove = beforeRemove(previousPayload);
+		Runnable afterInsert = beforeInsert(payload);
+		list.set(index, payload);
+		afterInsert.run();
+		afterRemove.run();
 		return previousPayload;
 	}
 
 	@Override
 	public void add(int index, Payload payload) {
-		beforeInsert(payload);
+		Runnable afterInsert = beforeInsert(payload);
 		list.add(index, payload);
-		onInsert(payload);
+		afterInsert.run();
 	}
 
 	@Override
 	public Payload remove(int index) {
-		Payload payload = list.remove(index);
-		onRemove(payload);
-		return payload;
+		Payload previousPayload = list.get(index);
+		Runnable afterRemove = beforeRemove(previousPayload);
+		list.remove(index);
+		afterRemove.run();
+		return previousPayload;
 	}
 
 	@Override
@@ -198,6 +176,7 @@ abstract class AbstractObservableList<Payload> implements List<Payload> {
 
 	@Override
 	public ListIterator<Payload> listIterator(int index) {
+
 		return new ListIterator<Payload>() {
 
 			private final ListIterator<Payload> iterator = list.listIterator(index);
@@ -238,23 +217,27 @@ abstract class AbstractObservableList<Payload> implements List<Payload> {
 
 			@Override
 			public void remove() {
+				Runnable afterRemove = beforeRemove(currentPayload);
 				iterator.remove();
-				onRemove(currentPayload);
+				currentPayload = null;
+				afterRemove.run();
 			}
 
 			@Override
 			public void set(Payload payload) {
-				beforeInsert(payload);
+				Runnable afterRemove = beforeRemove(currentPayload);
+				Runnable afterInsert = beforeInsert(payload);
 				iterator.set(payload);
-				onRemove(currentPayload);
-				onInsert(payload);
+				currentPayload = payload;
+				afterInsert.run();
+				afterRemove.run();
 			}
 
 			@Override
 			public void add(Payload payload) {
-				beforeInsert(payload);
+				Runnable afterInsert = beforeInsert(payload);
 				iterator.add(payload);
-				onInsert(payload);
+				afterInsert.run();
 			}
 
 		};
@@ -265,27 +248,30 @@ abstract class AbstractObservableList<Payload> implements List<Payload> {
 		return new AbstractObservableList<Payload>(list.subList(fromIndex, toIndex)) {
 
 			@Override
-			protected void beforeInsert(Payload payload) {
-				AbstractObservableList.this.beforeInsert(payload);
+			protected Runnable beforeInsert(Payload payload) {
+				return AbstractObservableList.this.beforeInsert(payload);
 			}
 
 			@Override
-			protected void onInsert(Payload payload) {
-				AbstractObservableList.this.onInsert(payload);
-			}
-
-			@Override
-			protected void onRemove(Payload payload) {
-				AbstractObservableList.this.onRemove(payload);
+			protected Runnable beforeRemove(Payload payload) {
+				return AbstractObservableList.this.beforeRemove(payload);
 			}
 		};
 
 	}
 
-	protected abstract void beforeInsert(Payload payload);
+	@Override
+	public boolean equals(Object object) {
+		return list.equals(object);
+	}
 
-	protected abstract void onInsert(Payload payload);
+	@Override
+	public String toString() {
+		return list.toString();
+	}
 
-	protected abstract void onRemove(Payload payload);
+	protected abstract Runnable beforeInsert(Payload payload);
+
+	protected abstract Runnable beforeRemove(Payload payload);
 
 }

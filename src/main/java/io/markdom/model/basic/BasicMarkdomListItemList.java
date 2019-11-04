@@ -12,20 +12,18 @@ final class BasicMarkdomListItemList extends AbstractObservableList<ManagedMarkd
 	}
 
 	@Override
-	protected void beforeInsert(ManagedMarkdomListItem listItem) {
+	protected Runnable beforeInsert(ManagedMarkdomListItem listItem) {
 		if (null == listItem) {
 			throw new IllegalArgumentException("The given Markdom list item is null");
 		}
+		return listItem.onAttach(parent);
 	}
 
 	@Override
-	protected void onInsert(ManagedMarkdomListItem listItem) {
-		listItem.onAttach(parent);
+	protected Runnable beforeRemove(ManagedMarkdomListItem listItem) {
+		if (null == listItem) {
+			throw new IllegalArgumentException("The given Markdom list item is null");
+		}
+		return listItem.onDetach(parent);
 	}
-
-	@Override
-	protected void onRemove(ManagedMarkdomListItem listItem) {
-		listItem.onDetach();
-	}
-
 }

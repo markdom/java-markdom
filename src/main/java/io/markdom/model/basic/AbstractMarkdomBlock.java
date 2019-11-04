@@ -38,22 +38,25 @@ abstract class AbstractMarkdomBlock extends AbstractMarkdomNode implements Manag
 	}
 
 	@Override
-	public final void onAttach(MarkdomBlockParent parent) {
+	public final Runnable onAttach(MarkdomBlockParent parent) {
 		if (null == parent) {
 			throw new IllegalArgumentException("The given Markdom block parent is null");
 		}
 		if (null != this.parent) {
 			throw new IllegalStateException("This Markdom block is already attached to a block parent");
 		}
-		this.parent = parent;
+		return () -> AbstractMarkdomBlock.this.parent = parent;
 	}
 
 	@Override
-	public final void onDetach() {
+	public final Runnable onDetach(MarkdomBlockParent parent) {
 		if (null == this.parent) {
 			throw new IllegalStateException("This Markdom block is currently not attached to a block parent");
 		}
-		this.parent = null;
+		if (this.parent != parent) {
+			throw new IllegalStateException("This Markdom block is not attached to the given block parent");
+		}
+		return () -> AbstractMarkdomBlock.this.parent = null;
 	}
 
 	@Override
