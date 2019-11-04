@@ -57,24 +57,24 @@ public final class MarkdomDocumentMarkdomHandler extends AbstractMarkdomHandler<
 	@Override
 	public void onCodeBlock(String code, Optional<String> hint) {
 		MarkdomCodeBlock block = factory.codeBlock(code, hint);
-		blockParents.firstElement().addBlock(block);
+		blockParents.peek().addBlock(block);
 	}
 
 	@Override
 	public void onCommentBlock(String comment) {
 		MarkdomCommentBlock block = factory.commentBlock(comment);
-		blockParents.firstElement().addBlock(block);
+		blockParents.peek().addBlock(block);
 	}
 
 	@Override
 	public void onDivisionBlock() {
-		blockParents.firstElement().addBlock(factory.divisionBlock());
+		blockParents.peek().addBlock(factory.divisionBlock());
 	}
 
 	@Override
 	public void onHeadingBlockBegin(MarkdomHeadingLevel level) {
 		MarkdomHeadingBlock block = factory.headingBlock(level);
-		blockParents.firstElement().addBlock(block);
+		blockParents.peek().addBlock(block);
 		contentParents.push(block);
 	}
 
@@ -86,21 +86,21 @@ public final class MarkdomDocumentMarkdomHandler extends AbstractMarkdomHandler<
 	@Override
 	public void onUnorderedListBlockBegin() {
 		MarkdomUnorderedListBlock block = factory.unorderedListBlock();
-		blockParents.firstElement().addBlock(block);
+		blockParents.peek().addBlock(block);
 		listBlocks.push(block);
 	}
 
 	@Override
 	public void onOrderedListBlockBegin(Integer startIndex) {
 		MarkdomOrderedListBlock block = factory.orderedListBlock(startIndex);
-		blockParents.firstElement().addBlock(block);
+		blockParents.peek().addBlock(block);
 		listBlocks.push(block);
 	}
 
 	@Override
 	public void onListItemBegin() {
 		MarkdomListItem item = factory.listItem();
-		listBlocks.firstElement().addListItem(item);
+		listBlocks.peek().addListItem(item);
 		blockParents.push(item);
 	}
 
@@ -122,7 +122,7 @@ public final class MarkdomDocumentMarkdomHandler extends AbstractMarkdomHandler<
 	@Override
 	public void onParagraphBlockBegin() {
 		MarkdomParagraphBlock block = factory.paragraphBlock();
-		blockParents.firstElement().addBlock(block);
+		blockParents.peek().addBlock(block);
 		contentParents.push(block);
 	}
 
@@ -134,7 +134,7 @@ public final class MarkdomDocumentMarkdomHandler extends AbstractMarkdomHandler<
 	@Override
 	public void onQuoteBlockBegin() {
 		MarkdomQuoteBlock block = factory.quoteBlock();
-		blockParents.firstElement().addBlock(block);
+		blockParents.peek().addBlock(block);
 		blockParents.push(block);
 	}
 
@@ -146,13 +146,13 @@ public final class MarkdomDocumentMarkdomHandler extends AbstractMarkdomHandler<
 	@Override
 	public void onCodeContent(String code) {
 		MarkdomCodeContent content = factory.codeContent(code);
-		contentParents.firstElement().addContent(content);
+		contentParents.peek().addContent(content);
 	}
 
 	@Override
 	public void onEmphasisContentBegin(MarkdomEmphasisLevel level) {
 		MarkdomEmphasisContent content = factory.emphasisContent(level);
-		contentParents.firstElement().addContent(content);
+		contentParents.peek().addContent(content);
 		contentParents.push(content);
 	}
 
@@ -164,18 +164,18 @@ public final class MarkdomDocumentMarkdomHandler extends AbstractMarkdomHandler<
 	@Override
 	public void onImageContent(String uri, Optional<String> title, Optional<String> alternative) {
 		MarkdomImageContent content = factory.imageContent(uri, title, alternative);
-		contentParents.firstElement().addContent(content);
+		contentParents.peek().addContent(content);
 	}
 
 	@Override
 	public void onLineBreakContent(Boolean hard) {
-		contentParents.firstElement().addContent(factory.lineBreakContent(hard));
+		contentParents.peek().addContent(factory.lineBreakContent(hard));
 	}
 
 	@Override
 	public void onLinkContentBegin(String uri, Optional<String> title) {
 		MarkdomLinkContent content = factory.linkContent(uri, title);
-		contentParents.firstElement().addContent(content);
+		contentParents.peek().addContent(content);
 		contentParents.push(content);
 	}
 
@@ -187,7 +187,7 @@ public final class MarkdomDocumentMarkdomHandler extends AbstractMarkdomHandler<
 	@Override
 	public void onTextContent(String text) {
 		MarkdomTextContent content = factory.textContent(text);
-		contentParents.firstElement().addContent(content);
+		contentParents.peek().addContent(content);
 	}
 
 	@Override
