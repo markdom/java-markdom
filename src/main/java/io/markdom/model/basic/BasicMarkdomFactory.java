@@ -57,6 +57,11 @@ public final class BasicMarkdomFactory implements MarkdomFactory {
 	}
 
 	@Override
+	public MarkdomDocument document(MarkdomBlock block) {
+		return new BasicMarkdomDocument(this).addBlock(block);
+	}
+
+	@Override
 	public MarkdomDocument document(MarkdomBlock... blocks) {
 		return new BasicMarkdomDocument(this).addBlocks(blocks);
 	}
@@ -72,6 +77,11 @@ public final class BasicMarkdomFactory implements MarkdomFactory {
 	}
 
 	@Override
+	public MarkdomEmphasisContent emphasisContent(MarkdomEmphasisLevel level, MarkdomContent content) {
+		return emphasisContent(level).addContents(content);
+	}
+
+	@Override
 	public MarkdomEmphasisContent emphasisContent(MarkdomEmphasisLevel level, MarkdomContent... contents) {
 		return emphasisContent(level).addContents(contents);
 	}
@@ -84,6 +94,11 @@ public final class BasicMarkdomFactory implements MarkdomFactory {
 	@Override
 	public MarkdomHeadingBlock headingBlock(MarkdomHeadingLevel level) {
 		return new BasicMarkdomHeadingBlock(this, level);
+	}
+
+	@Override
+	public MarkdomHeadingBlock headingBlock(MarkdomHeadingLevel level, MarkdomContent content) {
+		return headingBlock(level).addContents(content);
 	}
 
 	@Override
@@ -117,6 +132,11 @@ public final class BasicMarkdomFactory implements MarkdomFactory {
 	}
 
 	@Override
+	public MarkdomLinkContent linkContent(String uri, MarkdomContent content) {
+		return linkContent(uri, Optional.empty()).addContents(content);
+	}
+
+	@Override
 	public MarkdomLinkContent linkContent(String uri, MarkdomContent... contents) {
 		return linkContent(uri, Optional.empty()).addContents(contents);
 	}
@@ -129,6 +149,11 @@ public final class BasicMarkdomFactory implements MarkdomFactory {
 	@Override
 	public MarkdomLinkContent linkContent(String uri, Optional<String> title) {
 		return new BasicMarkdomLinkContent(this, uri, title);
+	}
+
+	@Override
+	public MarkdomLinkContent linkContent(String uri, Optional<String> title, MarkdomContent content) {
+		return linkContent(uri, title).addContents(content);
 	}
 
 	@Override
@@ -147,6 +172,11 @@ public final class BasicMarkdomFactory implements MarkdomFactory {
 	}
 
 	@Override
+	public MarkdomListItem listItem(MarkdomBlock block) {
+		return listItem().addBlocks(block);
+	}
+
+	@Override
 	public MarkdomListItem listItem(MarkdomBlock... blocks) {
 		return listItem().addBlocks(blocks);
 	}
@@ -159,6 +189,11 @@ public final class BasicMarkdomFactory implements MarkdomFactory {
 	@Override
 	public MarkdomOrderedListBlock orderedListBlock(Integer startIndex) {
 		return new BasicMarkdomOrderedListBlock(this, startIndex);
+	}
+
+	@Override
+	public MarkdomOrderedListBlock orderedListBlock(Integer startIndex, MarkdomListItem listItem) {
+		return orderedListBlock(startIndex).addListItems(listItem);
 	}
 
 	@Override
@@ -177,6 +212,11 @@ public final class BasicMarkdomFactory implements MarkdomFactory {
 	}
 
 	@Override
+	public MarkdomParagraphBlock paragraphBlock(MarkdomContent content) {
+		return paragraphBlock().addContents(content);
+	}
+
+	@Override
 	public MarkdomParagraphBlock paragraphBlock(MarkdomContent... contents) {
 		return paragraphBlock().addContents(contents);
 	}
@@ -189,6 +229,11 @@ public final class BasicMarkdomFactory implements MarkdomFactory {
 	@Override
 	public MarkdomQuoteBlock quoteBlock() {
 		return new BasicMarkdomQuoteBlock(this);
+	}
+
+	@Override
+	public MarkdomQuoteBlock quoteBlock(MarkdomBlock block) {
+		return quoteBlock().addBlocks(block);
 	}
 
 	@Override
@@ -209,6 +254,11 @@ public final class BasicMarkdomFactory implements MarkdomFactory {
 	@Override
 	public MarkdomUnorderedListBlock unorderedListBlock() {
 		return new BasicMarkdomUnorderedListBlock(this);
+	}
+
+	@Override
+	public MarkdomUnorderedListBlock unorderedListBlock(MarkdomListItem listItem) {
+		return unorderedListBlock().addListItems(listItem);
 	}
 
 	@Override
