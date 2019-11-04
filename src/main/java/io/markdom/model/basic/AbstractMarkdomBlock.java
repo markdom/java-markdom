@@ -5,12 +5,11 @@ import java.util.Optional;
 import io.markdom.common.MarkdomBlockType;
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.ManagedMarkdomBlock;
-import io.markdom.model.MarkdomBlock;
 import io.markdom.model.MarkdomBlockParent;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 
-abstract class AbstractMarkdomBlock extends AbstractMarkdomNode implements MarkdomBlock, ManagedMarkdomBlock {
+abstract class AbstractMarkdomBlock extends AbstractMarkdomNode implements ManagedMarkdomBlock {
 
 	private MarkdomBlockParent parent;
 

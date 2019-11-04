@@ -5,12 +5,11 @@ import java.util.Optional;
 import io.markdom.common.MarkdomContentType;
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.ManagedMarkdomContent;
-import io.markdom.model.MarkdomContent;
 import io.markdom.model.MarkdomContentParent;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 
-abstract class AbstractMarkdomContent extends AbstractMarkdomNode implements MarkdomContent, ManagedMarkdomContent {
+abstract class AbstractMarkdomContent extends AbstractMarkdomNode implements ManagedMarkdomContent {
 
 	AbstractMarkdomContent(MarkdomFactory factory) {
 		super(factory);
