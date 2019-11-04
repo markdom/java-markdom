@@ -55,4 +55,9 @@ public final class BasicMarkdomBlockParentDelegate {
 		handler.onBlocksEnd();
 	}
 
+	@Override
+	public String toString() {
+		return blocks.toString();
+	}
+
 }

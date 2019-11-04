@@ -55,4 +55,9 @@ public final class BasicMarkdomListBlockDelegate {
 		handler.onListItemsEnd();
 	}
 
+	@Override
+	public String toString() {
+		return listItems.toString();
+	}
+
 }

@@ -55,4 +55,9 @@ public final class BasicMarkdomContentParentDelegate {
 		handler.onContentsEnd();
 	}
 
+	@Override
+	public String toString() {
+		return contents.toString();
+	}
+
 }
