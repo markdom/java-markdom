@@ -1,6 +1,7 @@
 package io.markdom.model.basic;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import io.markdom.handler.MarkdomHandler;
@@ -79,8 +80,33 @@ public final class BasicMarkdomLinkContent extends AbstractMarkdomContent implem
 	}
 
 	@Override
+	public int hashCode() {
+		return Objects.hash(uri, title, getContents());
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		} else if (null == object) {
+			return false;
+		} else if (!(object instanceof MarkdomLinkContent)) {
+			return false;
+		}
+		MarkdomLinkContent other = (MarkdomLinkContent) object;
+		if (!Objects.equals(uri, other.getUri())) {
+			return false;
+		} else if (!Objects.equals(title, other.getTitle())) {
+			return false;
+		} else if (!getContents().equals(other.getContents())) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [uri=" + uri + ", title=" + title + ", content=" + getContents() + "]";
+		return getClass().getSimpleName() + " [uri=" + uri + ", title=" + title + ", contents=" + getContents() + "]";
 	}
 
 }

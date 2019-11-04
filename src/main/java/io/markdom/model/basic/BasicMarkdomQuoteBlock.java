@@ -1,6 +1,7 @@
 package io.markdom.model.basic;
 
 import java.util.List;
+import java.util.Objects;
 
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.MarkdomBlock;
@@ -43,6 +44,27 @@ public final class BasicMarkdomQuoteBlock extends AbstractMarkdomBlock implement
 		handler.onQuoteBlockBegin();
 		delegate.onHandle(handler);
 		handler.onQuoteBlockEnd();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getBlocks());
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		} else if (null == object) {
+			return false;
+		} else if (!(object instanceof MarkdomQuoteBlock)) {
+			return false;
+		}
+		MarkdomQuoteBlock other = (MarkdomQuoteBlock) object;
+		if (!getBlocks().equals(other.getBlocks())) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

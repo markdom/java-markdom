@@ -1,5 +1,7 @@
 package io.markdom.model.basic;
 
+import java.util.Objects;
+
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.MarkdomCodeContent;
 import io.markdom.model.MarkdomFactory;
@@ -29,6 +31,27 @@ public final class BasicMarkdomCodeContent extends AbstractMarkdomContent implem
 	@Override
 	public void doHandle(MarkdomHandler<?> handler) {
 		handler.onCodeContent(code);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(code);
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		} else if (null == object) {
+			return false;
+		} else if (!(object instanceof MarkdomCodeContent)) {
+			return false;
+		}
+		MarkdomCodeContent other = (MarkdomCodeContent) object;
+		if (!Objects.equals(code, other.getCode())) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

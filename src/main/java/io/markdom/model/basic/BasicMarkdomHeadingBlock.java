@@ -1,6 +1,7 @@
 package io.markdom.model.basic;
 
 import java.util.List;
+import java.util.Objects;
 
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.handler.MarkdomHandler;
@@ -63,8 +64,31 @@ public final class BasicMarkdomHeadingBlock extends AbstractMarkdomBlock impleme
 	}
 
 	@Override
+	public int hashCode() {
+		return Objects.hash(level, getContents());
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		} else if (null == object) {
+			return false;
+		} else if (!(object instanceof MarkdomHeadingBlock)) {
+			return false;
+		}
+		MarkdomHeadingBlock other = (MarkdomHeadingBlock) object;
+		if (!Objects.equals(level, other.getLevel())) {
+			return false;
+		} else if (!getContents().equals(other.getContents())) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [level=" + level + ", content=" + getContents() + "]";
+		return getClass().getSimpleName() + " [level=" + level + ", contents=" + getContents() + "]";
 	}
 
 }

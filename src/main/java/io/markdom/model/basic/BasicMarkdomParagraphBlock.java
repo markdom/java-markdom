@@ -1,6 +1,7 @@
 package io.markdom.model.basic;
 
 import java.util.List;
+import java.util.Objects;
 
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.MarkdomContent;
@@ -46,8 +47,29 @@ public final class BasicMarkdomParagraphBlock extends AbstractMarkdomBlock imple
 	}
 
 	@Override
+	public int hashCode() {
+		return Objects.hash(getContents());
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		} else if (null == object) {
+			return false;
+		} else if (!(object instanceof MarkdomParagraphBlock)) {
+			return false;
+		}
+		MarkdomParagraphBlock other = (MarkdomParagraphBlock) object;
+		if (!getContents().equals(other.getContents())) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [content=" + getContents() + "]";
+		return getClass().getSimpleName() + " [contents=" + getContents() + "]";
 	}
 
 }

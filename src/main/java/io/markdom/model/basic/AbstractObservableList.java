@@ -261,6 +261,11 @@ abstract class AbstractObservableList<Payload> implements List<Payload> {
 	}
 
 	@Override
+	public int hashCode() {
+		return list.hashCode();
+	}
+
+	@Override
 	public boolean equals(Object object) {
 		return list.equals(object);
 	}

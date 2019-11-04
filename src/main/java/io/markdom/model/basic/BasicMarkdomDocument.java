@@ -1,6 +1,7 @@
 package io.markdom.model.basic;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import io.markdom.handler.MarkdomHandler;
@@ -64,6 +65,27 @@ public final class BasicMarkdomDocument extends AbstractMarkdomNode implements M
 		delegate.onHandle(handler);
 		handler.onDocumentEnd();
 		return handler.getResult();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getBlocks());
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		} else if (null == object) {
+			return false;
+		} else if (!(object instanceof MarkdomDocument)) {
+			return false;
+		}
+		MarkdomDocument other = (MarkdomDocument) object;
+		if (!getBlocks().equals(other.getBlocks())) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

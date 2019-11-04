@@ -1,6 +1,7 @@
 package io.markdom.model.basic;
 
 import java.util.List;
+import java.util.Objects;
 
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.MarkdomFactory;
@@ -58,6 +59,29 @@ public final class BasicMarkdomOrderedListBlock extends AbstractMarkdomBlock imp
 		handler.onOrderedListBlockBegin(startIndex);
 		delegate.onHandle(handler);
 		handler.onOrderedListBlockEnd(startIndex);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(startIndex, getListItems());
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		} else if (null == object) {
+			return false;
+		} else if (!(object instanceof MarkdomOrderedListBlock)) {
+			return false;
+		}
+		MarkdomOrderedListBlock other = (MarkdomOrderedListBlock) object;
+		if (!Objects.equals(startIndex, other.getStartIndex())) {
+			return false;
+		} else if (!getListItems().equals(other.getListItems())) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

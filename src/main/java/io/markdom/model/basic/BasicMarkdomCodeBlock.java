@@ -1,5 +1,6 @@
 package io.markdom.model.basic;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import io.markdom.handler.MarkdomHandler;
@@ -47,6 +48,29 @@ public final class BasicMarkdomCodeBlock extends AbstractMarkdomBlock implements
 	@Override
 	public void doHandle(MarkdomHandler<?> handler) {
 		handler.onCodeBlock(code, hint);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(code, hint);
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		} else if (null == object) {
+			return false;
+		} else if (!(object instanceof MarkdomCodeBlock)) {
+			return false;
+		}
+		MarkdomCodeBlock other = (MarkdomCodeBlock) object;
+		if (!Objects.equals(code, other.getCode())) {
+			return false;
+		} else if (!Objects.equals(hint, other.getHint())) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

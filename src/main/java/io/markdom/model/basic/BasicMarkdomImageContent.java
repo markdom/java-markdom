@@ -1,5 +1,6 @@
 package io.markdom.model.basic;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import io.markdom.handler.MarkdomHandler;
@@ -63,6 +64,31 @@ public final class BasicMarkdomImageContent extends AbstractMarkdomContent imple
 	@Override
 	public void doHandle(MarkdomHandler<?> handler) {
 		handler.onImageContent(uri, title, alternative);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(uri, title, alternative);
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		} else if (null == object) {
+			return false;
+		} else if (!(object instanceof MarkdomImageContent)) {
+			return false;
+		}
+		MarkdomImageContent other = (MarkdomImageContent) object;
+		if (!Objects.equals(uri, other.getUri())) {
+			return false;
+		} else if (!Objects.equals(title, other.getTitle())) {
+			return false;
+		} else if (!Objects.equals(alternative, other.getAlternative())) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

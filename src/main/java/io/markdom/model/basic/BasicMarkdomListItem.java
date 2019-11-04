@@ -1,10 +1,12 @@
 package io.markdom.model.basic;
 
 import java.util.List;
+import java.util.Objects;
 
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.MarkdomBlock;
 import io.markdom.model.MarkdomFactory;
+import io.markdom.model.MarkdomListItem;
 
 public final class BasicMarkdomListItem extends AbstractMarkdomListItem {
 
@@ -40,6 +42,27 @@ public final class BasicMarkdomListItem extends AbstractMarkdomListItem {
 	@Override
 	protected void doHandle(MarkdomHandler<?> handler) {
 		delegate.onHandle(handler);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getBlocks());
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		} else if (null == object) {
+			return false;
+		} else if (!(object instanceof MarkdomListItem)) {
+			return false;
+		}
+		MarkdomListItem other = (MarkdomListItem) object;
+		if (!getBlocks().equals(other.getBlocks())) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
