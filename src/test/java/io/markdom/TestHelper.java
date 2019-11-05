@@ -10,6 +10,8 @@ import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
+import lombok.SneakyThrows;
+import net.markenwerk.utils.text.fetcher.BufferedTextFetcher;
 
 public class TestHelper {
 
@@ -17,6 +19,11 @@ public class TestHelper {
 		InputStream in = TestHelper.class.getResourceAsStream("/example.json");
 		Reader reader = new InputStreamReader(in, Charset.forName("UTF-8"));
 		return new BufferedReader(reader);
+	}
+
+	@SneakyThrows
+	public static String readExampleJson() {
+		return new BufferedTextFetcher().read(openExampleJson(), true);
 	}
 
 	public static MarkdomDocument getExampleDocument(MarkdomFactory factory) {

@@ -93,10 +93,25 @@
 			<version>2.3.3</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>net.markenwerk</groupId>
+			<artifactId>utils-text-fetcher</artifactId>
+			<version>1.0.2</version>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
 			<version>5.5.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.skyscreamer</groupId>
+			<artifactId>jsonassert</artifactId>
+			<version>1.5.0</version>
 			<scope>test</scope>
 		</dependency>
 
