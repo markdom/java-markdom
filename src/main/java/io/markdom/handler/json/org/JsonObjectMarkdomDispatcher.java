@@ -7,9 +7,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import io.markdom.handler.json.AbstractJsonMarkdomDispatcher;
+import io.markdom.handler.json.AbstractJsonObjectMarkdomDispatcher;
 
-public final class JsonObjectMarkdomDispatcher extends AbstractJsonMarkdomDispatcher<JSONObject, JSONArray> {
+public final class JsonObjectMarkdomDispatcher extends AbstractJsonObjectMarkdomDispatcher<JSONObject, JSONArray> {
 
 	private final JSONObject jsonObject;
 

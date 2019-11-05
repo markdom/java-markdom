@@ -13,7 +13,7 @@ import io.markdom.handler.MarkdomDispatcher;
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.handler.SimpleMarkdomHandler;
 
-public abstract class AbstractJsonMarkdomDispatcher<JsonObject, JsonArray> implements MarkdomDispatcher {
+public abstract class AbstractJsonObjectMarkdomDispatcher<JsonObject, JsonArray> implements MarkdomDispatcher {
 
 	private SimpleMarkdomHandler<?> handler;
 

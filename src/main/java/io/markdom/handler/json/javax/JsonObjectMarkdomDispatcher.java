@@ -8,9 +8,9 @@ import javax.json.JsonArray;
 import javax.json.JsonException;
 import javax.json.JsonObject;
 
-import io.markdom.handler.json.AbstractJsonMarkdomDispatcher;
+import io.markdom.handler.json.AbstractJsonObjectMarkdomDispatcher;
 
-public final class JsonObjectMarkdomDispatcher extends AbstractJsonMarkdomDispatcher<JsonObject, JsonArray> {
+public final class JsonObjectMarkdomDispatcher extends AbstractJsonObjectMarkdomDispatcher<JsonObject, JsonArray> {
 
 	private final JsonObject jsonObject;
 

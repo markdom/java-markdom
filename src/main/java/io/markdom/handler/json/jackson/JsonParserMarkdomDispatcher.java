@@ -11,10 +11,10 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import io.markdom.handler.json.AbstractJsonMarkdomDispatcher;
+import io.markdom.handler.json.AbstractJsonObjectMarkdomDispatcher;
 import lombok.SneakyThrows;
 
-public final class JsonParserMarkdomDispatcher extends AbstractJsonMarkdomDispatcher<ObjectNode, ArrayNode> {
+public final class JsonParserMarkdomDispatcher extends AbstractJsonObjectMarkdomDispatcher<ObjectNode, ArrayNode> {
 
 	private static final JsonNodeFactory JSON_NODE_FACTORY = new JsonNodeFactory(true);
 

@@ -8,9 +8,9 @@ import com.github.cliftonlabs.json_simple.JsonKey;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
 import io.markdom.common.MarkdomException;
-import io.markdom.handler.json.AbstractJsonMarkdomDispatcher;
+import io.markdom.handler.json.AbstractJsonObjectMarkdomDispatcher;
 
-public final class JsonObjectMarkdomDispatcher extends AbstractJsonMarkdomDispatcher<JsonObject, JsonArray> {
+public final class JsonObjectMarkdomDispatcher extends AbstractJsonObjectMarkdomDispatcher<JsonObject, JsonArray> {
 
 	private final JsonObject jsonObject;
 
