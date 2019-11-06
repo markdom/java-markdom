@@ -1,7 +1,8 @@
 package io.markdom.handler.json.simple;
 
+import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
+
 import org.junit.jupiter.api.Test;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
@@ -24,7 +25,7 @@ public class JsonSimpleObjectMarkdomHandlerTest {
 		JsonObject jsonObject = document.handle(new JsonSimpleObjectMarkdomHandler());
 		String json = jsonObject.toJson();
 
-		JSONAssert.assertEquals(TestHelper.readExampleJson(), json, JSONCompareMode.STRICT_ORDER);
+		assertEquals(TestHelper.readExampleJson(), json, JSONCompareMode.STRICT_ORDER);
 
 	}
 

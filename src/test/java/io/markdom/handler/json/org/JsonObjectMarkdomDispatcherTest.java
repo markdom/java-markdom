@@ -21,10 +21,10 @@ public class JsonObjectMarkdomDispatcherTest {
 	@SneakyThrows
 	public void dispatchExampleDocument() {
 
-		JSONObject object = new JSONObject(new JSONTokener(TestHelper.openExampleJson()));
+		JSONObject jsonObject = new JSONObject(new JSONTokener(TestHelper.openExampleJson()));
 
 		MarkdomFactory factory = new BasicMarkdomFactory();
-		MarkdomDispatcher dispatcher = new JsonObjectMarkdomDispatcher(object);
+		MarkdomDispatcher dispatcher = new JsonObjectMarkdomDispatcher(jsonObject);
 		MarkdomHandler<MarkdomDocument> handler = new MarkdomDocumentMarkdomHandler(factory);
 
 		MarkdomDocument document = dispatcher.handle(handler);

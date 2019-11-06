@@ -1,13 +1,13 @@
 package io.markdom.handler.json.jakarta;
 
+import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
+
 import javax.json.JsonObject;
 
 import org.junit.jupiter.api.Test;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
 import io.markdom.TestHelper;
-import io.markdom.handler.json.jakarta.JakartaJsonObjectMarkdomHandler;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
@@ -25,7 +25,7 @@ public class JakartaJsonObjectMarkdomHandlerTest {
 		JsonObject jsonObject = document.handle(new JakartaJsonObjectMarkdomHandler());
 		String json = jsonObject.toString();
 
-		JSONAssert.assertEquals(TestHelper.readExampleJson(), json, JSONCompareMode.STRICT_ORDER);
+		assertEquals(TestHelper.readExampleJson(), json, JSONCompareMode.STRICT_ORDER);
 
 	}
 

@@ -1,12 +1,12 @@
 package io.markdom.handler.json.jackson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.Charset;
 
 import org.junit.jupiter.api.Test;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,7 +49,7 @@ public class JacksonJsonModuleTest {
 
 		String json = new String(buffer.toByteArray(), Charset.forName("UTF-8"));
 
-		JSONAssert.assertEquals(TestHelper.readExampleJson(), json, JSONCompareMode.STRICT_ORDER);
+		assertEquals(TestHelper.readExampleJson(), json, JSONCompareMode.STRICT_ORDER);
 
 	}
 

@@ -23,10 +23,10 @@ public class JacksonJsonParserMarkdomDispatcherTest {
 	@SneakyThrows
 	public void dispatchExampleDocument() {
 
-		JsonParser parser = new JsonFactory(new ObjectMapper()).createParser(TestHelper.openExampleJson());
+		JsonParser jsonParser = new JsonFactory(new ObjectMapper()).createParser(TestHelper.openExampleJson());
 
 		MarkdomFactory factory = new BasicMarkdomFactory();
-		MarkdomDispatcher dispatcher = new JacksonJsonParserMarkdomDispatcher(parser);
+		MarkdomDispatcher dispatcher = new JacksonJsonParserMarkdomDispatcher(jsonParser);
 		MarkdomHandler<MarkdomDocument> handler = new MarkdomDocumentMarkdomHandler(factory);
 
 		MarkdomDocument document = dispatcher.handle(handler);

@@ -23,10 +23,10 @@ public class JakartaJsonObjectMarkdomDispatcherTest {
 	@SneakyThrows
 	public void dispatchExampleDocument() {
 
-		JsonObject object = Json.createReader(TestHelper.openExampleJson()).readObject();
+		JsonObject jsonObject = Json.createReader(TestHelper.openExampleJson()).readObject();
 
 		MarkdomFactory factory = new BasicMarkdomFactory();
-		MarkdomDispatcher dispatcher = new JakartaJsonObjectMarkdomDispatcher(object);
+		MarkdomDispatcher dispatcher = new JakartaJsonObjectMarkdomDispatcher(jsonObject);
 		MarkdomHandler<MarkdomDocument> handler = new MarkdomDocumentMarkdomHandler(factory);
 
 		MarkdomDocument document = dispatcher.handle(handler);
