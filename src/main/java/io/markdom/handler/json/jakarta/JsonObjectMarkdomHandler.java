@@ -1,4 +1,4 @@
-package io.markdom.handler.json.javax;
+package io.markdom.handler.json.jakarta;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
