@@ -39,14 +39,25 @@ public class TestHelper {
 		return new BufferedReader(reader);
 	}
 
+	public static Reader openExampleXhtml() {
+		InputStream in = TestHelper.class.getResourceAsStream("/example.xhtml");
+		Reader reader = new InputStreamReader(in, Charset.forName("UTF-8"));
+		return new BufferedReader(reader);
+	}
+
 	@SneakyThrows
 	public static String readExampleJson() {
 		return new BufferedTextFetcher().read(openExampleJson(), true);
 	}
-	
+
 	@SneakyThrows
 	public static String readExampleXml() {
 		return new BufferedTextFetcher().read(openExampleXml(), true);
+	}
+
+	@SneakyThrows
+	public static String readExampleXhtml() {
+		return new BufferedTextFetcher().read(openExampleXhtml(), true);
 	}
 
 	public static MarkdomDocument getExampleDocument(MarkdomFactory factory) {
