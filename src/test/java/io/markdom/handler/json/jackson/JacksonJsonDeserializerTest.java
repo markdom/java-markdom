@@ -16,14 +16,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 
-public class JsonDeserializerTest {
+public class JacksonJsonDeserializerTest {
 
 	@Data
 	@NoArgsConstructor
 	@AllArgsConstructor
 	private static class Holder {
 
-		@JsonDeserialize(using = MarkdomDeserializer.class)
+		@JsonDeserialize(using = JacksonMarkdomDeserializer.class)
 		private MarkdomDocument document;
 
 	}

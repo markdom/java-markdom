@@ -10,11 +10,11 @@ import javax.json.JsonObject;
 
 import io.markdom.handler.json.AbstractJsonObjectMarkdomDispatcher;
 
-public final class JsonObjectMarkdomDispatcher extends AbstractJsonObjectMarkdomDispatcher<JsonObject, JsonArray> {
+public final class JakartaJsonObjectMarkdomDispatcher extends AbstractJsonObjectMarkdomDispatcher<JsonObject, JsonArray> {
 
 	private final JsonObject jsonObject;
 
-	public JsonObjectMarkdomDispatcher(JsonObject jsonObject) {
+	public JakartaJsonObjectMarkdomDispatcher(JsonObject jsonObject) {
 		if (null == jsonObject) {
 			throw new IllegalArgumentException("The given Json object is null");
 		}

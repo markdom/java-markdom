@@ -5,13 +5,13 @@ import com.github.cliftonlabs.json_simple.JsonObject;
 
 import io.markdom.handler.json.AbstractJsonObjectMarkdomHandler;
 
-public final class JsonObjectMarkdomHandler extends AbstractJsonObjectMarkdomHandler<JsonObject, JsonArray, JsonObject> {
+public final class JsonSimpleObjectMarkdomHandler extends AbstractJsonObjectMarkdomHandler<JsonObject, JsonArray, JsonObject> {
 
-	public JsonObjectMarkdomHandler() {
+	public JsonSimpleObjectMarkdomHandler() {
 		this(false);
 	}
 
-	public JsonObjectMarkdomHandler(boolean includeSchema) {
+	public JsonSimpleObjectMarkdomHandler(boolean includeSchema) {
 		super(includeSchema);
 	}
 

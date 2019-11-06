@@ -14,13 +14,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.markdom.handler.json.AbstractJsonObjectMarkdomDispatcher;
 import lombok.SneakyThrows;
 
-public final class JsonParserMarkdomDispatcher extends AbstractJsonObjectMarkdomDispatcher<ObjectNode, ArrayNode> {
+public final class JacksonJsonParserMarkdomDispatcher extends AbstractJsonObjectMarkdomDispatcher<ObjectNode, ArrayNode> {
 
 	private static final JsonNodeFactory JSON_NODE_FACTORY = new JsonNodeFactory(true);
 
 	private final JsonParser parser;
 
-	public JsonParserMarkdomDispatcher(JsonParser jsonParser) {
+	public JacksonJsonParserMarkdomDispatcher(JsonParser jsonParser) {
 		if (null == jsonParser) {
 			throw new IllegalArgumentException("The given JSON parser is null");
 		}

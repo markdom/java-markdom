@@ -13,17 +13,17 @@ import io.markdom.common.MarkdomSchemas;
 import io.markdom.handler.AbstractMarkdomHandler;
 import lombok.SneakyThrows;
 
-public final class JsonGeneratorMarkdomHandler extends AbstractMarkdomHandler<Void> {
+public final class JacksonJsonGeneratorMarkdomHandler extends AbstractMarkdomHandler<Void> {
 
 	private final JsonGenerator generator;
 
 	private final boolean includeSchema;
 
-	public JsonGeneratorMarkdomHandler(JsonGenerator generator) {
+	public JacksonJsonGeneratorMarkdomHandler(JsonGenerator generator) {
 		this(generator, false);
 	}
 
-	public JsonGeneratorMarkdomHandler(JsonGenerator generator, boolean includeSchema) {
+	public JacksonJsonGeneratorMarkdomHandler(JsonGenerator generator, boolean includeSchema) {
 		if (null == generator) {
 			throw new IllegalArgumentException("The given JSON generator is null");
 		}

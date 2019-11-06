@@ -1,32 +1,32 @@
-package io.markdom.handler.json.jackson;
+package io.markdom.handler.json.jakarta;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import javax.json.Json;
+import javax.json.JsonObject;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
 
 import io.markdom.TestHelper;
 import io.markdom.handler.MarkdomDispatcher;
 import io.markdom.handler.MarkdomDocumentMarkdomHandler;
 import io.markdom.handler.MarkdomHandler;
+import io.markdom.handler.json.jakarta.JakartaJsonObjectMarkdomDispatcher;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
 import lombok.SneakyThrows;
 
-public class JsonParserMarkdomDispatcherTest {
+public class JakartaJsonObjectMarkdomDispatcherTest {
 
 	@Test
 	@SneakyThrows
 	public void dispatchExampleDocument() {
 
-		JsonParser parser = new JsonFactory(new ObjectMapper()).createParser(TestHelper.openExampleJson());
+		JsonObject object = Json.createReader(TestHelper.openExampleJson()).readObject();
 
 		MarkdomFactory factory = new BasicMarkdomFactory();
-		MarkdomDispatcher dispatcher = new JsonParserMarkdomDispatcher(parser);
+		MarkdomDispatcher dispatcher = new JakartaJsonObjectMarkdomDispatcher(object);
 		MarkdomHandler<MarkdomDocument> handler = new MarkdomDocumentMarkdomHandler(factory);
 
 		MarkdomDocument document = dispatcher.handle(handler);

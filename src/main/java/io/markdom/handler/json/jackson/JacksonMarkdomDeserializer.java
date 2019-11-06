@@ -12,15 +12,15 @@ import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
 
-public final class MarkdomDeserializer extends JsonDeserializer<MarkdomDocument> {
+public final class JacksonMarkdomDeserializer extends JsonDeserializer<MarkdomDocument> {
 
 	private final MarkdomFactory factory;
 
-	public MarkdomDeserializer() {
+	public JacksonMarkdomDeserializer() {
 		this(new BasicMarkdomFactory());
 	}
 
-	public MarkdomDeserializer(MarkdomFactory factory) {
+	public JacksonMarkdomDeserializer(MarkdomFactory factory) {
 		if (null == factory) {
 			throw new IllegalArgumentException("The given Markdom factory is null");
 		}
@@ -30,7 +30,7 @@ public final class MarkdomDeserializer extends JsonDeserializer<MarkdomDocument>
 	@Override
 	public MarkdomDocument deserialize(JsonParser parser, DeserializationContext context)
 			throws IOException, JsonProcessingException {
-		return new JsonParserMarkdomDispatcher(parser).handle(new MarkdomDocumentMarkdomHandler(factory));
+		return new JacksonJsonParserMarkdomDispatcher(parser).handle(new MarkdomDocumentMarkdomHandler(factory));
 	}
 
 }

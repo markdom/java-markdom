@@ -16,7 +16,7 @@ import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
 import lombok.SneakyThrows;
 
-public class JsonObjectMarkdomDispatcherTest {
+public class JsonSimpleObjectMarkdomDispatcherTest {
 
 	@Test
 	@SneakyThrows
@@ -25,7 +25,7 @@ public class JsonObjectMarkdomDispatcherTest {
 		JsonObject object = (JsonObject) Jsoner.deserialize(TestHelper.openExampleJson());
 
 		MarkdomFactory factory = new BasicMarkdomFactory();
-		MarkdomDispatcher dispatcher = new JsonObjectMarkdomDispatcher(object);
+		MarkdomDispatcher dispatcher = new JsonSimpleObjectMarkdomDispatcher(object);
 		MarkdomHandler<MarkdomDocument> handler = new MarkdomDocumentMarkdomHandler(factory);
 
 		MarkdomDocument document = dispatcher.handle(handler);

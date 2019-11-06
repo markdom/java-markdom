@@ -7,14 +7,14 @@ import javax.json.JsonObjectBuilder;
 
 import io.markdom.handler.json.AbstractJsonObjectMarkdomHandler;
 
-public final class JsonObjectMarkdomHandler
+public final class JakartaJsonObjectMarkdomHandler
 		extends AbstractJsonObjectMarkdomHandler<JsonObjectBuilder, JsonArrayBuilder, JsonObject> {
 
-	public JsonObjectMarkdomHandler() {
+	public JakartaJsonObjectMarkdomHandler() {
 		this(false);
 	}
 
-	public JsonObjectMarkdomHandler(boolean includeSchema) {
+	public JakartaJsonObjectMarkdomHandler(boolean includeSchema) {
 		super(includeSchema);
 	}
 

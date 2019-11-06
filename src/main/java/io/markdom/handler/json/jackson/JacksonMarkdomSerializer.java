@@ -8,21 +8,21 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import io.markdom.model.MarkdomDocument;
 
-public final class MarkdomSerializer extends JsonSerializer<MarkdomDocument> {
+public final class JacksonMarkdomSerializer extends JsonSerializer<MarkdomDocument> {
 
 	private final boolean generateSchema;
 
-	public MarkdomSerializer() {
+	public JacksonMarkdomSerializer() {
 		this(false);
 	}
 
-	public MarkdomSerializer(boolean generateSchema) {
+	public JacksonMarkdomSerializer(boolean generateSchema) {
 		this.generateSchema = generateSchema;
 	}
 
 	@Override
 	public void serialize(MarkdomDocument document, JsonGenerator generator, SerializerProvider serializers) throws IOException {
-		document.handle(new JsonGeneratorMarkdomHandler(generator, generateSchema));
+		document.handle(new JacksonJsonGeneratorMarkdomHandler(generator, generateSchema));
 		generator.flush();
 	}
 }
