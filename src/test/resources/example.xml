@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Document version="1.0"
+	xmlns="http://schema.markdom.io/markdom-1.0.xsd">
+	<Heading level="1">
+		<Text>Markdom</Text>
+	</Heading>
+	<OrderedList startIndex="1">
+		<ListItem>
+			<Paragraph>
+				<Link uri="#Bar">
+					<Text>Foo</Text>
+				</Link>
+			</Paragraph>
+		</ListItem>
+		<ListItem>
+			<Paragraph>
+				<Text>Lorem ipsum</Text>
+				<LineBreak hard="true" />
+				<Code>dolor sit amet</Code>
+			</Paragraph>
+		</ListItem>
+		<ListItem>
+			<Quote>
+				<Paragraph>
+					<Emphasis level="1">
+						<Text>Baz</Text>
+					</Emphasis>
+				</Paragraph>
+			</Quote>
+		</ListItem>
+	</OrderedList>
+	<Code><![CDATA[goto 11]]></Code>
+</Document>

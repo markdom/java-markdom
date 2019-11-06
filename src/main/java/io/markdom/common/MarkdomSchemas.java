@@ -7,4 +7,6 @@ public final class MarkdomSchemas {
 
 	public static final String JSON = "http://schema.markdom.io/markdom-1.0.json#";
 
+	public static final String XML = "http://schema.markdom.io/markdom-1.0.xsd";
+
 }
