@@ -7,12 +7,6 @@ import io.markdom.common.MarkdomContentType;
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 
-/**
- * An {@link AbstractMarkdomHandler} is an abstract {@link MarkdomHandler} that does nothing.
- * 
- * An {@link AbstractMarkdomHandler} is intended as a base class for specific {@link MarkdomHandler}s that don't need to
- * implement all callback methods.
- */
 public abstract class AbstractMarkdomHandler<Result> implements MarkdomHandler<Result> {
 
 	@Override

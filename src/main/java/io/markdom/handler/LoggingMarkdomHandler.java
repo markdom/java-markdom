@@ -30,11 +30,6 @@ import io.markdom.common.MarkdomContentType;
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 
-/**
- * A {@link LoggingMarkdomHandler} is a {@link MarkdomHandler} that can be
- * wrapped around a given {@link MarkdomHandler} and appends debug information
- * that corresponds to the dispatched events to a given {@link Appendable}.
- */
 public final class LoggingMarkdomHandler<Result> implements MarkdomHandler<Result> {
 
 	private final Appendable appendable;

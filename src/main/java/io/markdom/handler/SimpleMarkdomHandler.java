@@ -8,47 +8,6 @@ import io.markdom.common.MarkdomContentType;
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 
-/**
- * A {@link SimpleMarkdomHandler} takes an existing {@link MarkdomHandler} and
- * provides a simplified interface.
- * 
- * A {@link SimpleMarkdomHandler} is intended as a utility for
- * {@link MarkdomDispatcher}s and simplifies the handling of a Markdom document
- * 
- * 
- * <ul>
- * <li>by automatically calling the methods for
- * <ul>
- * <li>sequences of blocks, list items and contents
- * ({@link MarkdomHandler#onBlocksBegin() onBlocksBegin},
- * {@link MarkdomHandler#onNextBlock() onNextBlock},
- * {@link MarkdomHandler#onBlocksEnd() onBlocksEnd},
- * {@link MarkdomHandler#onListItemsBegin() onListItemsBegin},
- * {@link MarkdomHandler#onNextListItem() onNextListItem},
- * {@link MarkdomHandler#onListItemsEnd() onListItemsEnd},
- * {@link MarkdomHandler#onContentsBegin() onContentsBegin},
- * {@link MarkdomHandler#onNextContent() onNextContent},
- * {@link MarkdomHandler#onContentsEnd() onContentsEnd})</li>
- * <li>generic blocks, list items and contents
- * ({@link MarkdomHandler#onBlockBegin(MarkdomBlockType) onBlockBegin},
- * {@link MarkdomHandler#onBlockEnd(MarkdomBlockType) onBlockEnd},
- * {@link MarkdomHandler#onListItemBegin() onListItemBegin},
- * {@link MarkdomHandler#onListItemEnd() onListItemEnd},
- * {@link MarkdomHandler#onContentBegin(MarkdomContentType) onContentBegin},
- * {@link MarkdomHandler#onContentEnd(MarkdomContentType) onContentEnd})</li>
- * </ul>
- * </li>
- * <li>and by remembering and automatically adding the parameters for ending
- * methods ({@link MarkdomHandler#onHeadingBlockEnd(MarkdomHeadingLevel)
- * onHeadingBlockEnd},
- * {@link MarkdomHandler#onHeadingBlockEnd(MarkdomHeadingLevel)
- * onHeadingBlockEnd}, {@link MarkdomHandler#onOrderedListBlockEnd(int)
- * onOrderedListBlockEnd},
- * {@link MarkdomHandler#onEmphasisContentEnd(MarkdomEmphasisLevel)
- * onEmphasisContentEnd}, {@link MarkdomHandler#onLinkContentEnd(String)
- * onLinkContentEnd}).</li>
- * </ul>
- */
 public final class SimpleMarkdomHandler<Result> {
 
 	private final Stack<Boolean> firsts = new Stack<>();
