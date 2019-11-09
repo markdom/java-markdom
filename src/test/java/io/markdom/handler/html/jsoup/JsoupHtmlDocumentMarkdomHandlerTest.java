@@ -22,7 +22,7 @@ public class JsoupHtmlDocumentMarkdomHandlerTest {
 		MarkdomFactory factory = new BasicMarkdomFactory();
 		MarkdomDocument document = TestHelper.getExampleDocument(factory);
 
-		Document htmlDocument = document.handle(new JsoupHtmlDocumentMarkdomHandler());
+		Document htmlDocument = document.handle(new JsoupHtmlDocumentMarkdomHandler()).asDocument();
 		htmlDocument.outputSettings().syntax(Document.OutputSettings.Syntax.xml);
 		String html = htmlDocument.outerHtml();
 

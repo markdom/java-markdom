@@ -2,9 +2,6 @@ package io.markdom.handler.html.w3c;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.xmlunit.matchers.CompareMatcher;
@@ -24,11 +21,7 @@ public class XhtmlDocumentMarkdomHandlerTest {
 		MarkdomFactory factory = new BasicMarkdomFactory();
 		MarkdomDocument document = TestHelper.getExampleDocument(factory);
 
-		DocumentBuilderFactory xmlFactory = DocumentBuilderFactory.newInstance();
-		xmlFactory.setNamespaceAware(true);
-
-		DocumentBuilder xmlBuilder = xmlFactory.newDocumentBuilder();
-		Document xhtmlDocument = document.handle(new XhtmlDocumentMarkdomHandler(xmlBuilder));
+		Document xhtmlDocument = document.handle(new XhtmlDocumentMarkdomHandler(TestHelper.getDocumentBuilder())).asDocument();
 		String xhtml = TestHelper.toString(xhtmlDocument);
 
 		assertThat(xhtml, CompareMatcher.isIdenticalTo(TestHelper.readExampleXhtml()).ignoreWhitespace());

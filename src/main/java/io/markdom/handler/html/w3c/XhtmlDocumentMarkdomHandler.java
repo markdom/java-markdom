@@ -13,7 +13,7 @@ import io.markdom.handler.html.AbstractHtmlDocumentMarkdomHandler;
 import io.markdom.handler.html.DefaultHtmlDelegate;
 import io.markdom.handler.html.HtmlDelegate;
 
-public final class XhtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkdomHandler<Document> {
+public final class XhtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkdomHandler<XhtmlDocumentResult> {
 
 	private static final DefaultHtmlDelegate DEFAULT_DELEGATE = new DefaultHtmlDelegate();
 
@@ -55,9 +55,9 @@ public final class XhtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkd
 
 	@Override
 	protected final void beginDocument(String rootTagName) {
-		DOMImplementation dom = builder.getDOMImplementation();
-		DocumentType doctype = dom.createDocumentType(DTD_QUALIFIED_NAME, "", "");
-		document = builder.getDOMImplementation().createDocument(XMLNS_NAMESPACE, rootTagName, doctype);
+		DOMImplementation domImplementation = builder.getDOMImplementation();
+		DocumentType doctype = domImplementation.createDocumentType(DTD_QUALIFIED_NAME, "", "");
+		document = domImplementation.createDocument(XMLNS_NAMESPACE, rootTagName, doctype);
 		element = document.getDocumentElement();
 	}
 
@@ -98,8 +98,8 @@ public final class XhtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkd
 	}
 
 	@Override
-	public Document getResult() {
-		return document;
+	public XhtmlDocumentResult getResult() {
+		return new XhtmlDocumentResult(builder, document);
 	}
 
 }

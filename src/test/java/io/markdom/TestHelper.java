@@ -7,6 +7,8 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -130,6 +132,13 @@ public class TestHelper {
 		transformer.transform(source, result);
 
 		return result.getWriter().toString();
+	}
+
+	@SneakyThrows
+	public static DocumentBuilder getDocumentBuilder() {
+		DocumentBuilderFactory xmlFactory = DocumentBuilderFactory.newInstance();
+		xmlFactory.setNamespaceAware(true);
+		return xmlFactory.newDocumentBuilder();
 	}
 
 }

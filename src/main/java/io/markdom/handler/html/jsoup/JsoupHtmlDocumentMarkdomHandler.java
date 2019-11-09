@@ -9,7 +9,7 @@ import io.markdom.handler.html.AbstractHtmlDocumentMarkdomHandler;
 import io.markdom.handler.html.DefaultHtmlDelegate;
 import io.markdom.handler.html.HtmlDelegate;
 
-public final class JsoupHtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkdomHandler<Document> {
+public final class JsoupHtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkdomHandler<JsoupHtmlDocumentResult> {
 
 	private static final DefaultHtmlDelegate DEFAULT_DELEGATE = new DefaultHtmlDelegate();
 
@@ -85,8 +85,8 @@ public final class JsoupHtmlDocumentMarkdomHandler extends AbstractHtmlDocumentM
 	}
 
 	@Override
-	public Document getResult() {
-		return document;
+	public JsoupHtmlDocumentResult getResult() {
+		return new JsoupHtmlDocumentResult(document);
 	}
 
 }
