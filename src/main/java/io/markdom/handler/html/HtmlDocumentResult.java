@@ -2,7 +2,7 @@ package io.markdom.handler.html;
 
 import java.util.Collections;
 
-import io.markdom.common.Attribute;
+import io.markdom.util.Attribute;
 
 public interface HtmlDocumentResult<Document, Element, Elements> {
 

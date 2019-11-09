@@ -3,13 +3,13 @@ package io.markdom.handler.html;
 import java.util.Optional;
 import java.util.Stack;
 
-import io.markdom.common.Attribute;
-import io.markdom.common.Element;
 import io.markdom.common.MarkdomBlockType;
 import io.markdom.common.MarkdomContentType;
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.handler.MarkdomHandler;
+import io.markdom.util.Attribute;
+import io.markdom.util.Element;
 
 public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements MarkdomHandler<Result> {
 

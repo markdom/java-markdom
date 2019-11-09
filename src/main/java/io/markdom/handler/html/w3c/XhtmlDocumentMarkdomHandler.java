@@ -8,10 +8,10 @@ import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import io.markdom.common.Attribute;
 import io.markdom.handler.html.AbstractHtmlDocumentMarkdomHandler;
 import io.markdom.handler.html.DefaultHtmlDelegate;
 import io.markdom.handler.html.HtmlDelegate;
+import io.markdom.util.Attribute;
 
 public final class XhtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkdomHandler<XhtmlDocumentResult> {
 

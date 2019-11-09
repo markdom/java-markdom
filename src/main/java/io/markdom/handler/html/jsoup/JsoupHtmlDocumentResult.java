@@ -4,8 +4,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import io.markdom.common.Attribute;
 import io.markdom.handler.html.HtmlDocumentResult;
+import io.markdom.util.Attribute;
 
 public final class JsoupHtmlDocumentResult implements HtmlDocumentResult<Document, Element, Elements> {
 

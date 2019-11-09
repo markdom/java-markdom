@@ -2,9 +2,9 @@ package io.markdom.handler.html;
 
 import java.util.Optional;
 
-import io.markdom.common.Element;
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
+import io.markdom.util.Element;
 
 public interface HtmlDelegate {
 

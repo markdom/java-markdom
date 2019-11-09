@@ -5,10 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import io.markdom.common.Attribute;
-import io.markdom.common.Element;
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
+import io.markdom.util.Attribute;
+import io.markdom.util.Element;
 
 public class DefaultHtmlDelegate implements HtmlDelegate {
 

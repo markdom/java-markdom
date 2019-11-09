@@ -1,4 +1,4 @@
-package io.markdom.common;
+package io.markdom.util;
 
 import lombok.Data;
 

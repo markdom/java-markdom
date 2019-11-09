@@ -15,8 +15,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import io.markdom.common.Attribute;
 import io.markdom.handler.html.HtmlDocumentResult;
+import io.markdom.util.Attribute;
 import lombok.SneakyThrows;
 import net.markenwerk.commons.iterables.NodeListIterable;
 
