@@ -21,7 +21,6 @@ public class ObjectHelper {
 		return objects;
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <Entity> boolean equals(Entity entity, Class<Entity> type, List<Property<Entity, ?>> properties, Object object) {
 		if (entity == object) {
 			return true;
@@ -30,7 +29,7 @@ public class ObjectHelper {
 		} else if (!type.isInstance(object)) {
 			return false;
 		}
-		Entity other = (Entity) object;
+		Entity other = type.cast(object);
 		for (Property<Entity, ?> property : properties) {
 			if (!Objects.equals(property.apply(entity), property.apply(other))) {
 				return false;
