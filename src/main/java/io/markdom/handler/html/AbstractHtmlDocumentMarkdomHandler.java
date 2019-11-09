@@ -31,7 +31,7 @@ public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements Mark
 
 	@Override
 	public final void onDocumentBegin() {
-		beginDocument();
+		beginDocument("html");
 		pushElement("head");
 		pushElement("title");
 		setText(title);
@@ -220,7 +220,7 @@ public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements Mark
 	public final void onContentsEnd() {
 	}
 
-	protected abstract void beginDocument();
+	protected abstract void beginDocument(String rootTagName);
 
 	private void pushElements(Iterable<Element> elements) {
 		int depth = 0;

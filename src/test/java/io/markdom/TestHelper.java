@@ -27,37 +27,46 @@ import net.markenwerk.utils.text.fetcher.BufferedTextFetcher;
 @UtilityClass
 public class TestHelper {
 
-	public static Reader openExampleJson() {
-		InputStream in = TestHelper.class.getResourceAsStream("/example.json");
-		Reader reader = new InputStreamReader(in, Charset.forName("UTF-8"));
-		return new BufferedReader(reader);
-	}
-
-	public static Reader openExampleXml() {
-		InputStream in = TestHelper.class.getResourceAsStream("/example.xml");
-		Reader reader = new InputStreamReader(in, Charset.forName("UTF-8"));
-		return new BufferedReader(reader);
+	public static Reader openExampleHtml() {
+		return open("example.html");
 	}
 
 	public static Reader openExampleXhtml() {
-		InputStream in = TestHelper.class.getResourceAsStream("/example.xhtml");
-		Reader reader = new InputStreamReader(in, Charset.forName("UTF-8"));
-		return new BufferedReader(reader);
+		return open("example.xhtml");
 	}
 
-	@SneakyThrows
-	public static String readExampleJson() {
-		return new BufferedTextFetcher().read(openExampleJson(), true);
+	public static Reader openExampleJson() {
+		return open("example.json");
 	}
 
-	@SneakyThrows
-	public static String readExampleXml() {
-		return new BufferedTextFetcher().read(openExampleXml(), true);
+	public static Reader openExampleXml() {
+		return open("example.xml");
 	}
 
-	@SneakyThrows
+	private static Reader open(String filename) {
+		InputStream in = TestHelper.class.getResourceAsStream("/" + filename);
+		return new BufferedReader(new InputStreamReader(in, Charset.forName("UTF-8")));
+	}
+
+	public static String readExampleHtml() {
+		return read(openExampleHtml());
+	}
+
 	public static String readExampleXhtml() {
-		return new BufferedTextFetcher().read(openExampleXhtml(), true);
+		return read(openExampleXhtml());
+	}
+
+	public static String readExampleJson() {
+		return read(openExampleJson());
+	}
+
+	public static String readExampleXml() {
+		return read(openExampleXml());
+	}
+
+	@SneakyThrows
+	private static String read(Reader reader) {
+		return new BufferedTextFetcher().read(reader, true);
 	}
 
 	public static MarkdomDocument getExampleDocument(MarkdomFactory factory) {

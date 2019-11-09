@@ -23,8 +23,6 @@ public final class XhtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkd
 
 	private static final String XMLNS_NAMESPACE = "http://www.w3.org/1999/xhtml";
 
-	private static final String ROOT_TAG_NAME = "html";
-
 	private final DocumentBuilder builder;
 
 	private Document document;
@@ -56,10 +54,10 @@ public final class XhtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkd
 	}
 
 	@Override
-	protected final void beginDocument() {
+	protected final void beginDocument(String rootTagName) {
 		DOMImplementation dom = builder.getDOMImplementation();
 		DocumentType doctype = dom.createDocumentType(DTD_QUALIFIED_NAME, "", "");
-		document = builder.getDOMImplementation().createDocument(XMLNS_NAMESPACE, ROOT_TAG_NAME, doctype);
+		document = builder.getDOMImplementation().createDocument(XMLNS_NAMESPACE, rootTagName, doctype);
 		element = document.getDocumentElement();
 	}
 

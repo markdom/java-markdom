@@ -28,10 +28,10 @@ public class XhtmlDocumentMarkdomHandlerTest {
 		xmlFactory.setNamespaceAware(true);
 
 		DocumentBuilder xmlBuilder = xmlFactory.newDocumentBuilder();
-		Document xmlDocument = document.handle(new XhtmlDocumentMarkdomHandler(xmlBuilder));
-		String html = TestHelper.toString(xmlDocument);
+		Document xhtmlDocument = document.handle(new XhtmlDocumentMarkdomHandler(xmlBuilder));
+		String xhtml = TestHelper.toString(xhtmlDocument);
 
-		assertThat(html, CompareMatcher.isIdenticalTo(TestHelper.readExampleXhtml()).ignoreWhitespace());
+		assertThat(xhtml, CompareMatcher.isIdenticalTo(TestHelper.readExampleXhtml()).ignoreWhitespace());
 
 	}
 
