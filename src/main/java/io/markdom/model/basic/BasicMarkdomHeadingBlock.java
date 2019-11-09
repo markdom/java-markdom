@@ -1,15 +1,26 @@
 package io.markdom.model.basic;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 import io.markdom.common.MarkdomHeadingLevel;
+import io.markdom.common.MarkdomKeys;
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.MarkdomContent;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.MarkdomHeadingBlock;
+import io.markdom.util.ObjectHelper;
+import io.markdom.util.Property;
 
 public final class BasicMarkdomHeadingBlock extends AbstractMarkdomBlock implements MarkdomHeadingBlock {
+
+	// @formatter:off
+	private static final List<Property<MarkdomHeadingBlock, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+		new Property<>(MarkdomKeys.LEVEL, MarkdomHeadingBlock::getLevel),
+		new Property<>(MarkdomKeys.CONTENTS, MarkdomHeadingBlock::getContents)
+	));
+	// @formatter:on	
 
 	private final BasicMarkdomContentParentDelegate delegate = new BasicMarkdomContentParentDelegate(this);
 
@@ -65,30 +76,17 @@ public final class BasicMarkdomHeadingBlock extends AbstractMarkdomBlock impleme
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(level, getContents());
+		return ObjectHelper.hashCode(this, PROPERTIES);
 	}
 
 	@Override
 	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		} else if (null == object) {
-			return false;
-		} else if (!(object instanceof MarkdomHeadingBlock)) {
-			return false;
-		}
-		MarkdomHeadingBlock other = (MarkdomHeadingBlock) object;
-		if (!Objects.equals(level, other.getLevel())) {
-			return false;
-		} else if (!getContents().equals(other.getContents())) {
-			return false;
-		}
-		return true;
+		return ObjectHelper.equals(this, MarkdomHeadingBlock.class, PROPERTIES, object);
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [level=" + level + ", contents=" + getContents() + "]";
+		return ObjectHelper.toString(this, PROPERTIES);
 	}
 
 }

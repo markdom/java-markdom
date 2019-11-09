@@ -1,15 +1,27 @@
 package io.markdom.model.basic;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
+import io.markdom.common.MarkdomKeys;
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.MarkdomContent;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.MarkdomLinkContent;
+import io.markdom.util.ObjectHelper;
+import io.markdom.util.Property;
 
 public final class BasicMarkdomLinkContent extends AbstractMarkdomContent implements MarkdomLinkContent {
+
+	// @formatter:off
+	private static final List<Property<MarkdomLinkContent, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+		new Property<>(MarkdomKeys.URI, MarkdomLinkContent::getUri),
+		new Property<>(MarkdomKeys.TITLE, MarkdomLinkContent::getTitle),
+		new Property<>(MarkdomKeys.CONTENTS, MarkdomLinkContent::getContents)
+	));
+	// @formatter:on	
 
 	private final BasicMarkdomContentParentDelegate delegate = new BasicMarkdomContentParentDelegate(this);
 
@@ -81,32 +93,17 @@ public final class BasicMarkdomLinkContent extends AbstractMarkdomContent implem
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(uri, title, getContents());
+		return ObjectHelper.hashCode(this, PROPERTIES);
 	}
 
 	@Override
 	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		} else if (null == object) {
-			return false;
-		} else if (!(object instanceof MarkdomLinkContent)) {
-			return false;
-		}
-		MarkdomLinkContent other = (MarkdomLinkContent) object;
-		if (!Objects.equals(uri, other.getUri())) {
-			return false;
-		} else if (!Objects.equals(title, other.getTitle())) {
-			return false;
-		} else if (!getContents().equals(other.getContents())) {
-			return false;
-		}
-		return true;
+		return ObjectHelper.equals(this, MarkdomLinkContent.class, PROPERTIES, object);
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [uri=" + uri + ", title=" + title + ", contents=" + getContents() + "]";
+		return ObjectHelper.toString(this, PROPERTIES);
 	}
 
 }

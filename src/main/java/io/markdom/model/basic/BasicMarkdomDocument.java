@@ -1,16 +1,26 @@
 package io.markdom.model.basic;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
+import io.markdom.common.MarkdomKeys;
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.MarkdomBlock;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.MarkdomNode;
+import io.markdom.util.ObjectHelper;
+import io.markdom.util.Property;
 
 public final class BasicMarkdomDocument extends AbstractMarkdomNode implements MarkdomDocument {
+
+	// @formatter:off
+	private static final List<Property<MarkdomDocument, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+		new Property<>(MarkdomKeys.BLOCKS, MarkdomDocument::getBlocks)
+	));
+	// @formatter:on	
 
 	private final BasicMarkdomBlockParentDelegate delegate = new BasicMarkdomBlockParentDelegate(this);
 
@@ -69,28 +79,17 @@ public final class BasicMarkdomDocument extends AbstractMarkdomNode implements M
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(getBlocks());
+		return ObjectHelper.hashCode(this, PROPERTIES);
 	}
 
 	@Override
 	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		} else if (null == object) {
-			return false;
-		} else if (!(object instanceof MarkdomDocument)) {
-			return false;
-		}
-		MarkdomDocument other = (MarkdomDocument) object;
-		if (!getBlocks().equals(other.getBlocks())) {
-			return false;
-		}
-		return true;
+		return ObjectHelper.equals(this, MarkdomDocument.class, PROPERTIES, object);
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [blocks=" + getBlocks() + "]";
+		return ObjectHelper.toString(this, PROPERTIES);
 	}
 
 }

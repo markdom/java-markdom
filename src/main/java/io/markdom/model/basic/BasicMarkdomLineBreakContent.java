@@ -1,12 +1,23 @@
 package io.markdom.model.basic;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import io.markdom.common.MarkdomKeys;
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.MarkdomLineBreakContent;
+import io.markdom.util.ObjectHelper;
+import io.markdom.util.Property;
 
 public final class BasicMarkdomLineBreakContent extends AbstractMarkdomContent implements MarkdomLineBreakContent {
+
+	// @formatter:off
+	private static final List<Property<MarkdomLineBreakContent, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+		new Property<>(MarkdomKeys.HARD, MarkdomLineBreakContent::getHard)
+	));
+	// @formatter:on	
 
 	private Boolean hard;
 
@@ -36,28 +47,17 @@ public final class BasicMarkdomLineBreakContent extends AbstractMarkdomContent i
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(hard);
+		return ObjectHelper.hashCode(this, PROPERTIES);
 	}
 
 	@Override
 	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		} else if (null == object) {
-			return false;
-		} else if (!(object instanceof MarkdomLineBreakContent)) {
-			return false;
-		}
-		MarkdomLineBreakContent other = (MarkdomLineBreakContent) object;
-		if (!Objects.equals(hard, other.getHard())) {
-			return false;
-		}
-		return true;
+		return ObjectHelper.equals(this, MarkdomLineBreakContent.class, PROPERTIES, object);
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [hard=" + hard + "]";
+		return ObjectHelper.toString(this, PROPERTIES);
 	}
 
 }

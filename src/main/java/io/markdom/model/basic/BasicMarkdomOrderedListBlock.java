@@ -1,14 +1,25 @@
 package io.markdom.model.basic;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
+import io.markdom.common.MarkdomKeys;
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.MarkdomListItem;
 import io.markdom.model.MarkdomOrderedListBlock;
+import io.markdom.util.ObjectHelper;
+import io.markdom.util.Property;
 
 public final class BasicMarkdomOrderedListBlock extends AbstractMarkdomBlock implements MarkdomOrderedListBlock {
+
+	// @formatter:off
+	private static final List<Property<MarkdomOrderedListBlock, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+		new Property<>(MarkdomKeys.START_INDEX, MarkdomOrderedListBlock::getStartIndex),
+		new Property<>(MarkdomKeys.ITEMS, MarkdomOrderedListBlock::getListItems)
+	));
+	// @formatter:on	
 
 	private final BasicMarkdomListBlockDelegate delegate = new BasicMarkdomListBlockDelegate(this);
 
@@ -63,30 +74,17 @@ public final class BasicMarkdomOrderedListBlock extends AbstractMarkdomBlock imp
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(startIndex, getListItems());
+		return ObjectHelper.hashCode(this, PROPERTIES);
 	}
 
 	@Override
 	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		} else if (null == object) {
-			return false;
-		} else if (!(object instanceof MarkdomOrderedListBlock)) {
-			return false;
-		}
-		MarkdomOrderedListBlock other = (MarkdomOrderedListBlock) object;
-		if (!Objects.equals(startIndex, other.getStartIndex())) {
-			return false;
-		} else if (!getListItems().equals(other.getListItems())) {
-			return false;
-		}
-		return true;
+		return ObjectHelper.equals(this, MarkdomOrderedListBlock.class, PROPERTIES, object);
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [listItems=" + getListItems() + "]";
+		return ObjectHelper.toString(this, PROPERTIES);
 	}
 
 }

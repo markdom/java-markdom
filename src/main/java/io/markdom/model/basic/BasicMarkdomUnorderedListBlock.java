@@ -1,14 +1,24 @@
 package io.markdom.model.basic;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
+import io.markdom.common.MarkdomKeys;
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.MarkdomListItem;
 import io.markdom.model.MarkdomUnorderedListBlock;
+import io.markdom.util.ObjectHelper;
+import io.markdom.util.Property;
 
 public final class BasicMarkdomUnorderedListBlock extends AbstractMarkdomBlock implements MarkdomUnorderedListBlock {
+
+	// @formatter:off
+	private static final List<Property<MarkdomUnorderedListBlock, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+		new Property<>(MarkdomKeys.ITEMS, MarkdomUnorderedListBlock::getListItems)
+	));
+	// @formatter:on	
 
 	private final BasicMarkdomListBlockDelegate delegate = new BasicMarkdomListBlockDelegate(this);
 
@@ -48,28 +58,17 @@ public final class BasicMarkdomUnorderedListBlock extends AbstractMarkdomBlock i
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(getListItems());
+		return ObjectHelper.hashCode(this, PROPERTIES);
 	}
 
 	@Override
 	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		} else if (null == object) {
-			return false;
-		} else if (!(object instanceof MarkdomUnorderedListBlock)) {
-			return false;
-		}
-		MarkdomUnorderedListBlock other = (MarkdomUnorderedListBlock) object;
-		if (!getListItems().equals(other.getListItems())) {
-			return false;
-		}
-		return true;
+		return ObjectHelper.equals(this, MarkdomUnorderedListBlock.class, PROPERTIES, object);
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [listItems=" + getListItems() + "]";
+		return ObjectHelper.toString(this, PROPERTIES);
 	}
 
 }

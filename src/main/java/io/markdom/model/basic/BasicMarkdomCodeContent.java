@@ -1,12 +1,23 @@
 package io.markdom.model.basic;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import io.markdom.common.MarkdomKeys;
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.MarkdomCodeContent;
 import io.markdom.model.MarkdomFactory;
+import io.markdom.util.ObjectHelper;
+import io.markdom.util.Property;
 
 public final class BasicMarkdomCodeContent extends AbstractMarkdomContent implements MarkdomCodeContent {
+
+	// @formatter:off
+	private static final List<Property<MarkdomCodeContent, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+		new Property<>(MarkdomKeys.CODE, MarkdomCodeContent::getCode)
+	));
+	// @formatter:on		
 
 	private String code;
 
@@ -35,28 +46,17 @@ public final class BasicMarkdomCodeContent extends AbstractMarkdomContent implem
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(code);
+		return ObjectHelper.hashCode(this, PROPERTIES);
 	}
 
 	@Override
 	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		} else if (null == object) {
-			return false;
-		} else if (!(object instanceof MarkdomCodeContent)) {
-			return false;
-		}
-		MarkdomCodeContent other = (MarkdomCodeContent) object;
-		if (!Objects.equals(code, other.getCode())) {
-			return false;
-		}
-		return true;
+		return ObjectHelper.equals(this, MarkdomCodeContent.class, PROPERTIES, object);
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [code=" + code + "]";
+		return ObjectHelper.toString(this, PROPERTIES);
 	}
 
 }

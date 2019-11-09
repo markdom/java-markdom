@@ -1,12 +1,21 @@
 package io.markdom.model.basic;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.MarkdomDivisionBlock;
 import io.markdom.model.MarkdomFactory;
+import io.markdom.util.ObjectHelper;
+import io.markdom.util.Property;
 
 public final class BasicMarkdomDivisionBlock extends AbstractMarkdomBlock implements MarkdomDivisionBlock {
+
+	// @formatter:off
+	private static final List<Property<MarkdomDivisionBlock, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+	));
+	// @formatter:on	
 
 	BasicMarkdomDivisionBlock(MarkdomFactory factory) {
 		super(factory);
@@ -19,24 +28,17 @@ public final class BasicMarkdomDivisionBlock extends AbstractMarkdomBlock implem
 
 	@Override
 	public int hashCode() {
-		return Objects.hash();
+		return ObjectHelper.hashCode(this, PROPERTIES);
 	}
 
 	@Override
 	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		} else if (null == object) {
-			return false;
-		} else if (!(object instanceof MarkdomDivisionBlock)) {
-			return false;
-		}
-		return false;
+		return ObjectHelper.equals(this, MarkdomDivisionBlock.class, PROPERTIES, object);
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " []";
+		return ObjectHelper.toString(this, PROPERTIES);
 	}
 
 }

@@ -1,13 +1,26 @@
 package io.markdom.model.basic;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
+import io.markdom.common.MarkdomKeys;
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.MarkdomImageContent;
+import io.markdom.util.ObjectHelper;
+import io.markdom.util.Property;
 
 public final class BasicMarkdomImageContent extends AbstractMarkdomContent implements MarkdomImageContent {
+
+	// @formatter:off
+	private static final List<Property<MarkdomImageContent, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+		new Property<>(MarkdomKeys.URI, MarkdomImageContent::getUri),
+		new Property<>(MarkdomKeys.TITLE, MarkdomImageContent::getTitle),
+		new Property<>(MarkdomKeys.ALTERNATIVE, MarkdomImageContent::getAlternative)
+	));
+	// @formatter:on	
 
 	private String uri;
 
@@ -68,32 +81,17 @@ public final class BasicMarkdomImageContent extends AbstractMarkdomContent imple
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(uri, title, alternative);
+		return ObjectHelper.hashCode(this, PROPERTIES);
 	}
 
 	@Override
 	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		} else if (null == object) {
-			return false;
-		} else if (!(object instanceof MarkdomImageContent)) {
-			return false;
-		}
-		MarkdomImageContent other = (MarkdomImageContent) object;
-		if (!Objects.equals(uri, other.getUri())) {
-			return false;
-		} else if (!Objects.equals(title, other.getTitle())) {
-			return false;
-		} else if (!Objects.equals(alternative, other.getAlternative())) {
-			return false;
-		}
-		return true;
+		return ObjectHelper.equals(this, MarkdomImageContent.class, PROPERTIES, object);
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [uri=" + uri + ", title=" + title + ", alternative=" + alternative + "]";
+		return ObjectHelper.toString(this, PROPERTIES);
 	}
 
 }

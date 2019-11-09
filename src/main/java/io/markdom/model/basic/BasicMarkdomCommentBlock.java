@@ -1,12 +1,23 @@
 package io.markdom.model.basic;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import io.markdom.common.MarkdomKeys;
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.MarkdomCommentBlock;
 import io.markdom.model.MarkdomFactory;
+import io.markdom.util.ObjectHelper;
+import io.markdom.util.Property;
 
 public final class BasicMarkdomCommentBlock extends AbstractMarkdomBlock implements MarkdomCommentBlock {
+
+	// @formatter:off
+	private static final List<Property<MarkdomCommentBlock, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+		new Property<>(MarkdomKeys.COMMENT, MarkdomCommentBlock::getComment)
+	));
+	// @formatter:on		
 
 	private String comment;
 
@@ -35,28 +46,17 @@ public final class BasicMarkdomCommentBlock extends AbstractMarkdomBlock impleme
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(comment);
+		return ObjectHelper.hashCode(this, PROPERTIES);
 	}
 
 	@Override
 	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		} else if (null == object) {
-			return false;
-		} else if (!(object instanceof MarkdomCommentBlock)) {
-			return false;
-		}
-		MarkdomCommentBlock other = (MarkdomCommentBlock) object;
-		if (!Objects.equals(comment, other.getComment())) {
-			return false;
-		}
-		return true;
+		return ObjectHelper.equals(this, MarkdomCommentBlock.class, PROPERTIES, object);
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [comment=" + comment + "]";
+		return ObjectHelper.toString(this, PROPERTIES);
 	}
 
 }

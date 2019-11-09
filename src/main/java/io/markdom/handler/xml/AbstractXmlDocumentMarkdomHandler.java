@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import io.markdom.common.Attribute;
 import io.markdom.common.MarkdomBlockType;
 import io.markdom.common.MarkdomContentType;
 import io.markdom.common.MarkdomEmphasisLevel;
@@ -12,6 +11,7 @@ import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.common.MarkdomKeys;
 import io.markdom.common.MarkdomSchemas;
 import io.markdom.handler.MarkdomHandler;
+import io.markdom.util.Attribute;
 import net.markenwerk.commons.iterables.ObjectIterable;
 
 public abstract class AbstractXmlDocumentMarkdomHandler<Result> implements MarkdomHandler<Result> {
