@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import io.markdom.common.MarkdomNodeType;
+import io.markdom.model.choice.MarkdomNodeChoice;
+import io.markdom.model.selection.MarkdomNodeChoiceSelection;
+import io.markdom.model.selection.MarkdomNodeSelection;
 
 public interface MarkdomNode {
 
@@ -37,5 +40,11 @@ public interface MarkdomNode {
 	};
 
 	public MarkdomFactory getFactory();
+
+	public default void choose(MarkdomNodeChoice choice) {
+		select(new MarkdomNodeChoiceSelection(choice));
+	}
+
+	public <Result> Result select(MarkdomNodeSelection<Result> selection);
 
 }

@@ -4,8 +4,8 @@ public enum MarkdomBlockParentType {
 
 	DOCUMENT,
 
-	QUOTE_BLOCK,
+	LIST_ITEM,
 
-	LIST_ITEM;
+	QUOTE_BLOCK;
 
 }

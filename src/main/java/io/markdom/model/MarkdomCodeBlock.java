@@ -3,6 +3,7 @@ package io.markdom.model;
 import java.util.Optional;
 
 import io.markdom.common.MarkdomBlockType;
+import io.markdom.model.selection.MarkdomBlockSelection;
 
 public interface MarkdomCodeBlock extends MarkdomBlock {
 
@@ -18,5 +19,10 @@ public interface MarkdomCodeBlock extends MarkdomBlock {
 	public Optional<String> getHint();
 
 	public MarkdomCodeBlock setHint(Optional<String> hint);
+
+	@Override
+	public default <Result> Result select(MarkdomBlockSelection<Result> selection) {
+		return selection.onCodeBlock(this);
+	}
 
 }

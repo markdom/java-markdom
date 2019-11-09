@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import io.markdom.common.MarkdomContentParentType;
 import io.markdom.common.MarkdomContentType;
+import io.markdom.model.selection.MarkdomContentParentSelection;
+import io.markdom.model.selection.MarkdomContentSelection;
 
 public interface MarkdomLinkContent extends MarkdomContentParentContent {
 
@@ -33,5 +35,14 @@ public interface MarkdomLinkContent extends MarkdomContentParentContent {
 
 	@Override
 	public MarkdomLinkContent addContents(Iterable<MarkdomContent> contents);
+
+	public default <Result> Result select(MarkdomContentSelection<Result> selection) {
+		return selection.onLinkContent(this);
+	}
+
+	@Override
+	public default <Result> Result select(MarkdomContentParentSelection<Result> selection) {
+		return selection.onLinkContent(this);
+	}
 
 }

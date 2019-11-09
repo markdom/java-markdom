@@ -1,6 +1,7 @@
 package io.markdom.model;
 
 import io.markdom.common.MarkdomContentType;
+import io.markdom.model.selection.MarkdomContentSelection;
 
 public interface MarkdomLineBreakContent extends MarkdomContent {
 
@@ -12,5 +13,9 @@ public interface MarkdomLineBreakContent extends MarkdomContent {
 	public Boolean getHard();
 
 	public MarkdomLineBreakContent setHard(Boolean hard);
+
+	public default <Result> Result select(MarkdomContentSelection<Result> selection) {
+		return selection.onLineBreakContent(this);
+	}
 
 }

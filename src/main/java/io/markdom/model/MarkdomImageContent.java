@@ -3,6 +3,7 @@ package io.markdom.model;
 import java.util.Optional;
 
 import io.markdom.common.MarkdomContentType;
+import io.markdom.model.selection.MarkdomContentSelection;
 
 public interface MarkdomImageContent extends MarkdomContent {
 
@@ -22,5 +23,9 @@ public interface MarkdomImageContent extends MarkdomContent {
 	public Optional<String> getAlternative();
 
 	public MarkdomImageContent setAlternative(Optional<String> alternative);
+
+	public default <Result> Result select(MarkdomContentSelection<Result> selection) {
+		return selection.onImageContent(this);
+	}
 
 }

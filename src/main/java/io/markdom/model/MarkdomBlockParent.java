@@ -4,6 +4,9 @@ import java.util.Collections;
 import java.util.List;
 
 import io.markdom.common.MarkdomBlockParentType;
+import io.markdom.model.choice.MarkdomBlockParentChoice;
+import io.markdom.model.selection.MarkdomBlockParentChoiceSelection;
+import io.markdom.model.selection.MarkdomBlockParentSelection;
 
 public interface MarkdomBlockParent extends MarkdomNode {
 
@@ -21,5 +24,11 @@ public interface MarkdomBlockParent extends MarkdomNode {
 	public default List<MarkdomBlock> getChildren() {
 		return Collections.unmodifiableList(getBlocks());
 	}
+
+	public default void choose(MarkdomBlockParentChoice choice) {
+		select(new MarkdomBlockParentChoiceSelection(choice));
+	}
+
+	public <Result> Result select(MarkdomBlockParentSelection<Result> selection);
 
 }
