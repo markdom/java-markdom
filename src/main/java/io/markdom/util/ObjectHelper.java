@@ -3,7 +3,6 @@ package io.markdom.util;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Function;
 
 import lombok.experimental.UtilityClass;
 
@@ -17,7 +16,7 @@ public class ObjectHelper {
 	private static <Entity> Object[] mapProperties(Entity entity, List<Property<Entity, ?>> properties) {
 		Object[] objects = new Object[properties.size()];
 		for (int i = 0, n = properties.size(); i < n; i++) {
-			objects[i] = properties.get(i).getAccessor().apply(entity);
+			objects[i] = properties.get(i).apply(entity);
 		}
 		return objects;
 	}
@@ -33,8 +32,7 @@ public class ObjectHelper {
 		}
 		Entity other = (Entity) object;
 		for (Property<Entity, ?> property : properties) {
-			Function<Entity, ?> accessor = property.getAccessor();
-			if (!Objects.equals(accessor.apply(entity), property.getAccessor().apply(other))) {
+			if (!Objects.equals(property.apply(entity), property.apply(other))) {
 				return false;
 			}
 		}
@@ -46,10 +44,10 @@ public class ObjectHelper {
 		Iterator<Property<Entity, ?>> iterator = properties.iterator();
 		if (iterator.hasNext()) {
 			Property<Entity, ?> first = iterator.next();
-			builder.append(first.getName()).append("=").append(first.getAccessor().apply(entity));
+			builder.append(first.getName()).append("=").append(first.apply(entity));
 			while (iterator.hasNext()) {
 				Property<Entity, ?> following = iterator.next();
-				builder.append(", ").append(following.getName()).append("=").append(following.getAccessor().apply(entity));
+				builder.append(", ").append(following.getName()).append("=").append(following.apply(entity));
 			}
 		}
 		builder.append("]");
