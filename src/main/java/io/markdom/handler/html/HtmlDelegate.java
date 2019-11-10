@@ -30,7 +30,7 @@ public interface HtmlDelegate {
 
 	public Iterable<Element> onImageContent(String uri, Optional<String> title, Optional<String> alternative);
 
-	public Iterable<Element> onLinebreakContent();
+	public Iterable<Element> onLineBreakContent();
 
 	public Iterable<Element> onLinkContent(String uri, Optional<String> title);
 

@@ -82,7 +82,7 @@ public class DefaultHtmlDelegate implements HtmlDelegate {
 	}
 
 	@Override
-	public Iterable<Element> onLinebreakContent() {
+	public Iterable<Element> onLineBreakContent() {
 		return Arrays.asList(new Element("br"));
 	}
 

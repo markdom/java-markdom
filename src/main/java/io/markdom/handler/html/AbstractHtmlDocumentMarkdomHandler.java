@@ -180,7 +180,7 @@ public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements Mark
 	@Override
 	public final void onLineBreakContent(Boolean hard) {
 		if (hard) {
-			pushElements(delegate.onLinebreakContent());
+			pushElements(delegate.onLineBreakContent());
 		}
 	}
 
