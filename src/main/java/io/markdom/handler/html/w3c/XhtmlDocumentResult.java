@@ -1,6 +1,7 @@
 package io.markdom.handler.html.w3c;
 
 import java.io.StringWriter;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.transform.OutputKeys;
@@ -44,7 +45,11 @@ public class XhtmlDocumentResult implements HtmlDocumentResult<Document, Element
 
 	@Override
 	public String asDocumentText(boolean pretty) {
-		return transform(asDocument(), pretty);
+		if (pretty) {
+			return transform(asDocument(), true);
+		} else {
+			return transform(asDocument(), false).replaceFirst(Pattern.quote("\n"), "");
+		}
 	}
 
 	@Override
