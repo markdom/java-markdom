@@ -3,38 +3,32 @@ package io.markdom.handler.json.jackson;
 import java.util.Iterator;
 import java.util.Optional;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.TreeNode;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import io.markdom.common.MarkdomException;
 import io.markdom.handler.json.AbstractJsonObjectMarkdomDispatcher;
 import lombok.SneakyThrows;
 
-public final class JacksonJsonParserMarkdomDispatcher extends AbstractJsonObjectMarkdomDispatcher<ObjectNode, ArrayNode> {
+public final class JacksonJsonObjectMarkdomDispatcher extends AbstractJsonObjectMarkdomDispatcher<ObjectNode, ArrayNode> {
 
 	private static final JsonNodeFactory JSON_NODE_FACTORY = new JsonNodeFactory(true);
 
-	private final JsonParser parser;
+	private final ObjectNode object;
 
-	public JacksonJsonParserMarkdomDispatcher(JsonParser jsonParser) {
-		if (null == jsonParser) {
-			throw new IllegalArgumentException("The given JSON parser is null");
+	public JacksonJsonObjectMarkdomDispatcher(ObjectNode object) {
+		if (null == object) {
+			throw new IllegalArgumentException("The given object is null");
 		}
-		this.parser = jsonParser;
+		this.object = object;
 	}
 
 	@Override
 	@SneakyThrows
 	protected ObjectNode getRootObject() {
-		TreeNode jsonNode = parser.readValueAsTree();
-		if (!jsonNode.isObject()) {
-			throw new JsonMappingException(parser, "Expected object node as root");
-		}
-		return (ObjectNode) jsonNode;
+		return object;
 	}
 
 	@Override
@@ -53,7 +47,7 @@ public final class JacksonJsonParserMarkdomDispatcher extends AbstractJsonObject
 			public ObjectNode next() {
 				JsonNode jsonNode = iterator.next();
 				if (!jsonNode.isObject()) {
-					throw new JsonMappingException(parser, "Expected object node inside array");
+					throw new MarkdomException("Expected object node inside array");
 				}
 				return (ObjectNode) jsonNode;
 			}
@@ -67,7 +61,7 @@ public final class JacksonJsonParserMarkdomDispatcher extends AbstractJsonObject
 		JsonNode jsonNode = objectNode.get(key);
 		if (null != jsonNode) {
 			if (!jsonNode.isArray()) {
-				throw new JsonMappingException(parser, "Expected array node for key " + key);
+				throw new MarkdomException("Expected array node for key " + key);
 			}
 			return (ArrayNode) jsonNode;
 		} else {
@@ -81,7 +75,7 @@ public final class JacksonJsonParserMarkdomDispatcher extends AbstractJsonObject
 		JsonNode jsonNode = objectNode.get(key);
 		if (null != jsonNode) {
 			if (!jsonNode.isTextual()) {
-				throw new JsonMappingException(parser, "Expected text node for key " + key);
+				throw new MarkdomException("Expected text node for key " + key);
 			}
 			return Optional.of(jsonNode.asText());
 		} else {
@@ -94,7 +88,7 @@ public final class JacksonJsonParserMarkdomDispatcher extends AbstractJsonObject
 	protected String reqString(ObjectNode objectNode, String key) {
 		JsonNode jsonNode = objectNode.get(key);
 		if (null == jsonNode || !jsonNode.isTextual()) {
-			throw new JsonMappingException(parser, "Expected text node for key " + key);
+			throw new MarkdomException("Expected text node for key " + key);
 		}
 		return jsonNode.asText();
 	}
@@ -104,7 +98,7 @@ public final class JacksonJsonParserMarkdomDispatcher extends AbstractJsonObject
 	protected Boolean reqBoolean(ObjectNode objectNode, String key) {
 		JsonNode jsonNode = objectNode.get(key);
 		if (null == jsonNode || !jsonNode.isBoolean()) {
-			throw new JsonMappingException(parser, "Expected boolean node for key " + key);
+			throw new MarkdomException("Expected boolean node for key " + key);
 		}
 		return Boolean.valueOf(jsonNode.asBoolean());
 	}
@@ -114,7 +108,7 @@ public final class JacksonJsonParserMarkdomDispatcher extends AbstractJsonObject
 	protected Integer reqInteger(ObjectNode objectNode, String key) {
 		JsonNode jsonNode = objectNode.get(key);
 		if (null == jsonNode || !jsonNode.isInt()) {
-			throw new JsonMappingException(parser, "Expected integer node for key " + key);
+			throw new MarkdomException("Expected integer node for key " + key);
 		}
 		return Integer.valueOf(jsonNode.asInt());
 	}

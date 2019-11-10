@@ -28,9 +28,8 @@ public final class JacksonMarkdomDocumentDeserializer extends JsonDeserializer<M
 	}
 
 	@Override
-	public MarkdomDocument deserialize(JsonParser parser, DeserializationContext context)
-			throws IOException, JsonProcessingException {
-		return new JacksonJsonParserMarkdomDispatcher(parser).handle(new MarkdomDocumentMarkdomHandler(factory));
+	public MarkdomDocument deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
+		return new JacksonJsonObjectMarkdomDispatcher(parser.readValueAsTree()).handle(new MarkdomDocumentMarkdomHandler(factory));
 	}
 
 }
