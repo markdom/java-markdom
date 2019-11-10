@@ -69,8 +69,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-
-
 		<!-- json / org -->
 		<dependency>
 			<groupId>org.json</groupId>
@@ -109,6 +107,13 @@
 			<artifactId>htmlcleaner</artifactId>
 			<version>2.23</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<!-- cmark / atlassian -->
+		<dependency>
+			<groupId>com.atlassian.commonmark</groupId>
+			<artifactId>commonmark</artifactId>
+			<version>0.13.0</version>
 		</dependency>
 
 		<!-- spanned -->
