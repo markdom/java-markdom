@@ -10,11 +10,11 @@ import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.common.MarkdomKeys;
 import io.markdom.common.MarkdomSchemas;
-import io.markdom.handler.AbstractMarkdomHandler;
+import io.markdom.handler.MarkdomHandler;
 import io.markdom.util.ObjectHelper;
 import lombok.SneakyThrows;
 
-public final class JacksonJsonGeneratorMarkdomHandler extends AbstractMarkdomHandler<Void> {
+public final class JacksonJsonGeneratorMarkdomHandler implements MarkdomHandler<Void> {
 
 	private final JsonGenerator generator;
 
@@ -44,11 +44,7 @@ public final class JacksonJsonGeneratorMarkdomHandler extends AbstractMarkdomHan
 	}
 
 	@Override
-	@SneakyThrows
-	public void onDocumentEnd() {
-		generator.writeEndArray();
-		generator.writeEndObject();
-		generator.flush();
+	public void onBlocksBegin() {
 	}
 
 	@Override
@@ -78,10 +74,54 @@ public final class JacksonJsonGeneratorMarkdomHandler extends AbstractMarkdomHan
 	}
 
 	@Override
+	public void onDivisionBlock() {
+	}
+
+	@Override
 	@SneakyThrows
 	public void onHeadingBlockBegin(MarkdomHeadingLevel level) {
 		generator.writeFieldName(MarkdomKeys.LEVEL);
 		generator.writeNumber(level.ordinal() + 1);
+	}
+
+	@Override
+	public void onHeadingBlockEnd(MarkdomHeadingLevel level) {
+	}
+
+	@Override
+	@SneakyThrows
+	public void onOrderedListBlockBegin(Integer startIndex) {
+		generator.writeFieldName(MarkdomKeys.START_INDEX);
+		generator.writeNumber(startIndex);
+		generator.writeFieldName(MarkdomKeys.ITEMS);
+		generator.writeStartArray();
+	}
+
+	@Override
+	@SneakyThrows
+	public void onOrderedListBlockEnd(Integer startIndex) {
+		generator.writeEndArray();
+	}
+
+	@Override
+	public void onParagraphBlockBegin() {
+	}
+
+	@Override
+	public void onParagraphBlockEnd() {
+	}
+
+	@Override
+	@SneakyThrows
+	public void onQuoteBlockBegin() {
+		generator.writeFieldName(MarkdomKeys.BLOCKS);
+		generator.writeStartArray();
+	}
+
+	@Override
+	@SneakyThrows
+	public void onQuoteBlockEnd() {
+		generator.writeEndArray();
 	}
 
 	@Override
@@ -93,11 +133,26 @@ public final class JacksonJsonGeneratorMarkdomHandler extends AbstractMarkdomHan
 
 	@Override
 	@SneakyThrows
-	public void onOrderedListBlockBegin(Integer startIndex) {
-		generator.writeFieldName(MarkdomKeys.START_INDEX);
-		generator.writeNumber(startIndex);
-		generator.writeFieldName(MarkdomKeys.ITEMS);
-		generator.writeStartArray();
+	public void onUnorderedListBlockEnd() {
+		generator.writeEndArray();
+	}
+
+	@Override
+	@SneakyThrows
+	public void onBlockEnd(MarkdomBlockType type) {
+		generator.writeEndObject();
+	}
+
+	@Override
+	public void onNextBlock() {
+	}
+
+	@Override
+	public void onBlocksEnd() {
+	}
+
+	@Override
+	public void onListItemsBegin() {
 	}
 
 	@Override
@@ -116,34 +171,11 @@ public final class JacksonJsonGeneratorMarkdomHandler extends AbstractMarkdomHan
 	}
 
 	@Override
-	@SneakyThrows
-	public void onUnorderedListBlockEnd() {
-		generator.writeEndArray();
+	public void onNextListItem() {
 	}
 
 	@Override
-	@SneakyThrows
-	public void onOrderedListBlockEnd(Integer startIndex) {
-		generator.writeEndArray();
-	}
-
-	@Override
-	@SneakyThrows
-	public void onQuoteBlockBegin() {
-		generator.writeFieldName(MarkdomKeys.BLOCKS);
-		generator.writeStartArray();
-	}
-
-	@Override
-	@SneakyThrows
-	public void onQuoteBlockEnd() {
-		generator.writeEndArray();
-	}
-
-	@Override
-	@SneakyThrows
-	public void onBlockEnd(MarkdomBlockType type) {
-		generator.writeEndObject();
+	public void onListItemsEnd() {
 	}
 
 	@Override
@@ -173,6 +205,10 @@ public final class JacksonJsonGeneratorMarkdomHandler extends AbstractMarkdomHan
 	public void onEmphasisContentBegin(MarkdomEmphasisLevel level) {
 		generator.writeFieldName(MarkdomKeys.LEVEL);
 		generator.writeNumber(level.ordinal() + 1);
+	}
+
+	@Override
+	public void onEmphasisContentEnd(MarkdomEmphasisLevel level) {
 	}
 
 	@Override
@@ -209,6 +245,10 @@ public final class JacksonJsonGeneratorMarkdomHandler extends AbstractMarkdomHan
 	}
 
 	@Override
+	public void onLinkContentEnd(String uri, Optional<String> title) {
+	}
+
+	@Override
 	@SneakyThrows
 	public void onTextContent(String text) {
 		generator.writeFieldName(MarkdomKeys.TEXT);
@@ -222,9 +262,21 @@ public final class JacksonJsonGeneratorMarkdomHandler extends AbstractMarkdomHan
 	}
 
 	@Override
+	public void onNextContent() {
+	}
+
+	@Override
 	@SneakyThrows
 	public void onContentsEnd() {
 		generator.writeEndArray();
+	}
+
+	@Override
+	@SneakyThrows
+	public void onDocumentEnd() {
+		generator.writeEndArray();
+		generator.writeEndObject();
+		generator.flush();
 	}
 
 	@Override

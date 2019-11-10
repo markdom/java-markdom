@@ -3,6 +3,8 @@ package io.markdom.handler;
 import java.util.Optional;
 import java.util.Stack;
 
+import io.markdom.common.MarkdomBlockType;
+import io.markdom.common.MarkdomContentType;
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.model.MarkdomBlockParent;
@@ -25,7 +27,7 @@ import io.markdom.model.MarkdomTextContent;
 import io.markdom.model.MarkdomUnorderedListBlock;
 import io.markdom.util.ObjectHelper;
 
-public final class MarkdomDocumentMarkdomHandler extends AbstractMarkdomHandler<MarkdomDocument> {
+public final class MarkdomDocumentMarkdomHandler implements MarkdomHandler<MarkdomDocument> {
 
 	private final MarkdomFactory factory;
 
@@ -48,8 +50,11 @@ public final class MarkdomDocumentMarkdomHandler extends AbstractMarkdomHandler<
 	}
 
 	@Override
-	public void onDocumentEnd() {
-		blockParents.pop();
+	public void onBlocksBegin() {
+	}
+
+	@Override
+	public void onBlockBegin(MarkdomBlockType type) {
 	}
 
 	@Override
@@ -82,34 +87,10 @@ public final class MarkdomDocumentMarkdomHandler extends AbstractMarkdomHandler<
 	}
 
 	@Override
-	public void onUnorderedListBlockBegin() {
-		MarkdomUnorderedListBlock block = factory.unorderedListBlock();
-		blockParents.peek().addBlock(block);
-		listBlocks.push(block);
-	}
-
-	@Override
 	public void onOrderedListBlockBegin(Integer startIndex) {
 		MarkdomOrderedListBlock block = factory.orderedListBlock(startIndex);
 		blockParents.peek().addBlock(block);
 		listBlocks.push(block);
-	}
-
-	@Override
-	public void onListItemBegin() {
-		MarkdomListItem item = factory.listItem();
-		listBlocks.peek().addListItem(item);
-		blockParents.push(item);
-	}
-
-	@Override
-	public void onListItemEnd() {
-		blockParents.pop();
-	}
-
-	@Override
-	public void onUnorderedListBlockEnd() {
-		listBlocks.pop();
 	}
 
 	@Override
@@ -139,6 +120,62 @@ public final class MarkdomDocumentMarkdomHandler extends AbstractMarkdomHandler<
 	@Override
 	public void onQuoteBlockEnd() {
 		blockParents.pop();
+	}
+
+	@Override
+	public void onUnorderedListBlockBegin() {
+		MarkdomUnorderedListBlock block = factory.unorderedListBlock();
+		blockParents.peek().addBlock(block);
+		listBlocks.push(block);
+	}
+
+	@Override
+	public void onUnorderedListBlockEnd() {
+		listBlocks.pop();
+	}
+
+	@Override
+	public void onBlockEnd(MarkdomBlockType type) {
+	}
+
+	@Override
+	public void onNextBlock() {
+	}
+
+	@Override
+	public void onBlocksEnd() {
+	}
+
+	@Override
+	public void onListItemsBegin() {
+	}
+
+	@Override
+	public void onListItemBegin() {
+		MarkdomListItem item = factory.listItem();
+		listBlocks.peek().addListItem(item);
+		blockParents.push(item);
+	}
+
+	@Override
+	public void onListItemEnd() {
+		blockParents.pop();
+	}
+
+	@Override
+	public void onNextListItem() {
+	}
+
+	@Override
+	public void onListItemsEnd() {
+	}
+
+	@Override
+	public void onContentsBegin() {
+	}
+
+	@Override
+	public void onContentBegin(MarkdomContentType type) {
 	}
 
 	@Override
@@ -186,6 +223,23 @@ public final class MarkdomDocumentMarkdomHandler extends AbstractMarkdomHandler<
 	public void onTextContent(String text) {
 		MarkdomTextContent content = factory.textContent(text);
 		contentParents.peek().addContent(content);
+	}
+
+	@Override
+	public void onContentEnd(MarkdomContentType type) {
+	}
+
+	@Override
+	public void onNextContent() {
+	}
+
+	@Override
+	public void onContentsEnd() {
+	}
+
+	@Override
+	public void onDocumentEnd() {
+		blockParents.pop();
 	}
 
 	@Override

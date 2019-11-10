@@ -22,11 +22,6 @@ public abstract class AbstractXmlDocumentMarkdomHandler<Result> implements Markd
 	}
 
 	@Override
-	public final void onDocumentEnd() {
-		endDocument();
-	}
-
-	@Override
 	public final void onBlocksBegin() {
 	}
 
@@ -212,8 +207,13 @@ public abstract class AbstractXmlDocumentMarkdomHandler<Result> implements Markd
 	public final void onContentsEnd() {
 	}
 
+	@Override
+	public final void onDocumentEnd() {
+		endDocument();
+	}
+
 	protected abstract void beginDocument(String dtdQualifiedName, String dtdPublicId, String dtdSystemId, String rootTagName,
-			String documentVersion, String xmlnsNameSpace);
+		String documentVersion, String xmlnsNameSpace);
 
 	protected abstract void pushElement(String tagName);
 

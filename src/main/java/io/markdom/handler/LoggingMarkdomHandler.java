@@ -56,12 +56,6 @@ public final class LoggingMarkdomHandler<Result> implements MarkdomHandler<Resul
 	}
 
 	@Override
-	public void onDocumentEnd() {
-		appendClosingLine("onDocumentEnd()");
-		handler.onDocumentEnd();
-	}
-
-	@Override
 	public void onBlocksBegin() {
 		appendOpeningLine("onBlocksBegin()");
 		handler.onBlocksBegin();
@@ -104,51 +98,9 @@ public final class LoggingMarkdomHandler<Result> implements MarkdomHandler<Resul
 	}
 
 	@Override
-	public void onUnorderedListBlockBegin() {
-		appendOpeningLine("onUnorderedListBlockBegin()");
-		handler.onUnorderedListBlockBegin();
-	}
-
-	@Override
 	public void onOrderedListBlockBegin(Integer startIndex) {
 		appendOpeningLine("onOrderedListBlockBegin(" + startIndex + ")");
 		handler.onOrderedListBlockBegin(startIndex);
-	}
-
-	@Override
-	public void onListItemsBegin() {
-		appendOpeningLine("onListItemsBegin()");
-		handler.onListItemsBegin();
-	}
-
-	@Override
-	public void onListItemBegin() {
-		appendOpeningLine("onListItemBegin()");
-		handler.onListItemBegin();
-	}
-
-	@Override
-	public void onListItemEnd() {
-		appendClosingLine("onListItemEnd()");
-		handler.onListItemEnd();
-	}
-
-	@Override
-	public void onNextListItem() {
-		appendLeafLine("onNextListItem()", -1);
-		handler.onNextListItem();
-	}
-
-	@Override
-	public void onListItemsEnd() {
-		appendClosingLine("onListItemsEnd()");
-		handler.onListItemsEnd();
-	}
-
-	@Override
-	public void onUnorderedListBlockEnd() {
-		appendClosingLine("onUnorderedListBlockEnd()");
-		handler.onUnorderedListBlockEnd();
 	}
 
 	@Override
@@ -182,6 +134,18 @@ public final class LoggingMarkdomHandler<Result> implements MarkdomHandler<Resul
 	}
 
 	@Override
+	public void onUnorderedListBlockBegin() {
+		appendOpeningLine("onUnorderedListBlockBegin()");
+		handler.onUnorderedListBlockBegin();
+	}
+
+	@Override
+	public void onUnorderedListBlockEnd() {
+		appendClosingLine("onUnorderedListBlockEnd()");
+		handler.onUnorderedListBlockEnd();
+	}
+
+	@Override
 	public void onBlockEnd(MarkdomBlockType type) {
 		appendLeafLine("onBlockEnd(" + name(type) + ")");
 		handler.onBlockEnd(type);
@@ -197,6 +161,36 @@ public final class LoggingMarkdomHandler<Result> implements MarkdomHandler<Resul
 	public void onBlocksEnd() {
 		appendClosingLine("onBlocksEnd()");
 		handler.onBlocksEnd();
+	}
+
+	@Override
+	public void onListItemsBegin() {
+		appendOpeningLine("onListItemsBegin()");
+		handler.onListItemsBegin();
+	}
+
+	@Override
+	public void onListItemBegin() {
+		appendOpeningLine("onListItemBegin()");
+		handler.onListItemBegin();
+	}
+
+	@Override
+	public void onListItemEnd() {
+		appendClosingLine("onListItemEnd()");
+		handler.onListItemEnd();
+	}
+
+	@Override
+	public void onNextListItem() {
+		appendLeafLine("onNextListItem()", -1);
+		handler.onNextListItem();
+	}
+
+	@Override
+	public void onListItemsEnd() {
+		appendClosingLine("onListItemsEnd()");
+		handler.onListItemsEnd();
 	}
 
 	@Override
@@ -275,6 +269,12 @@ public final class LoggingMarkdomHandler<Result> implements MarkdomHandler<Resul
 	public void onContentsEnd() {
 		appendClosingLine("onContentsEnd()");
 		handler.onContentsEnd();
+	}
+
+	@Override
+	public void onDocumentEnd() {
+		appendClosingLine("onDocumentEnd()");
+		handler.onDocumentEnd();
 	}
 
 	private String name(Enum<?> value) {

@@ -11,17 +11,9 @@ public interface MarkdomHandler<Result> {
 
 	public void onDocumentBegin();
 
-	public void onDocumentEnd();
-
 	public void onBlocksBegin();
 
 	public void onBlockBegin(MarkdomBlockType type);
-
-	public void onBlockEnd(MarkdomBlockType type);
-
-	public void onNextBlock();
-
-	public void onBlocksEnd();
 
 	public void onCodeBlock(String code, Optional<String> hint);
 
@@ -49,6 +41,12 @@ public interface MarkdomHandler<Result> {
 
 	public void onUnorderedListBlockEnd();
 
+	public void onBlockEnd(MarkdomBlockType type);
+
+	public void onNextBlock();
+
+	public void onBlocksEnd();
+
 	public void onListItemsBegin();
 
 	public void onListItemBegin();
@@ -62,12 +60,6 @@ public interface MarkdomHandler<Result> {
 	public void onContentsBegin();
 
 	public void onContentBegin(MarkdomContentType type);
-
-	public void onContentEnd(MarkdomContentType type);
-
-	public void onNextContent();
-
-	public void onContentsEnd();
 
 	public void onCodeContent(String code);
 
@@ -84,6 +76,14 @@ public interface MarkdomHandler<Result> {
 	public void onLinkContentEnd(String uri, Optional<String> title);
 
 	public void onTextContent(String text);
+
+	public void onContentEnd(MarkdomContentType type);
+
+	public void onNextContent();
+
+	public void onContentsEnd();
+
+	public void onDocumentEnd();
 
 	public Result getResult();
 

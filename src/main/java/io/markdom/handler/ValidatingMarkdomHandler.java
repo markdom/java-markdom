@@ -29,11 +29,6 @@ public final class ValidatingMarkdomHandler<Result> implements MarkdomHandler<Re
 	}
 
 	@Override
-	public void onDocumentEnd() {
-		handler.onDocumentEnd();
-	}
-
-	@Override
 	public void onBlocksBegin() {
 		handler.onBlocksBegin();
 	}
@@ -73,46 +68,11 @@ public final class ValidatingMarkdomHandler<Result> implements MarkdomHandler<Re
 	}
 
 	@Override
-	public void onUnorderedListBlockBegin() {
-		handler.onUnorderedListBlockBegin();
-	}
-
-	@Override
 	public void onOrderedListBlockBegin(Integer startIndex) {
 		if (startIndex < 0) {
 			throw new MarkdomException("The given start index is negative: " + startIndex);
 		}
 		handler.onOrderedListBlockBegin(startIndex);
-	}
-
-	@Override
-	public void onListItemsBegin() {
-		handler.onListItemsBegin();
-	}
-
-	@Override
-	public void onListItemBegin() {
-		handler.onListItemBegin();
-	}
-
-	@Override
-	public void onListItemEnd() {
-		handler.onListItemEnd();
-	}
-
-	@Override
-	public void onNextListItem() {
-		handler.onNextListItem();
-	}
-
-	@Override
-	public void onListItemsEnd() {
-		handler.onListItemsEnd();
-	}
-
-	@Override
-	public void onUnorderedListBlockEnd() {
-		handler.onUnorderedListBlockEnd();
 	}
 
 	@Override
@@ -141,6 +101,16 @@ public final class ValidatingMarkdomHandler<Result> implements MarkdomHandler<Re
 	}
 
 	@Override
+	public void onUnorderedListBlockBegin() {
+		handler.onUnorderedListBlockBegin();
+	}
+
+	@Override
+	public void onUnorderedListBlockEnd() {
+		handler.onUnorderedListBlockEnd();
+	}
+
+	@Override
 	public void onBlockEnd(MarkdomBlockType type) {
 		handler.onBlockEnd(type);
 	}
@@ -153,6 +123,31 @@ public final class ValidatingMarkdomHandler<Result> implements MarkdomHandler<Re
 	@Override
 	public void onBlocksEnd() {
 		handler.onBlocksEnd();
+	}
+
+	@Override
+	public void onListItemsBegin() {
+		handler.onListItemsBegin();
+	}
+
+	@Override
+	public void onListItemBegin() {
+		handler.onListItemBegin();
+	}
+
+	@Override
+	public void onListItemEnd() {
+		handler.onListItemEnd();
+	}
+
+	@Override
+	public void onNextListItem() {
+		handler.onNextListItem();
+	}
+
+	@Override
+	public void onListItemsEnd() {
+		handler.onListItemsEnd();
 	}
 
 	@Override
@@ -233,6 +228,11 @@ public final class ValidatingMarkdomHandler<Result> implements MarkdomHandler<Re
 	@Override
 	public void onContentsEnd() {
 		handler.onContentsEnd();
+	}
+
+	@Override
+	public void onDocumentEnd() {
+		handler.onDocumentEnd();
 	}
 
 	@Override

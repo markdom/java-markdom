@@ -225,6 +225,10 @@ public abstract class AbstractJsonObjectMarkdomHandler<JsonObject, JsonArray, Re
 	}
 
 	@Override
+	public final void onDocumentEnd() {
+	}
+
+	@Override
 	public final Result getResult() {
 		return toResult(jsonObject);
 	}
@@ -247,10 +251,6 @@ public abstract class AbstractJsonObjectMarkdomHandler<JsonObject, JsonArray, Re
 
 	private void closeArray() {
 		currentArray = jsonArrays.pop();
-	}
-
-	@Override
-	public final void onDocumentEnd() {
 	}
 
 	protected abstract JsonObject createObject();

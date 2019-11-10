@@ -37,12 +37,6 @@ public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements Mark
 	}
 
 	@Override
-	public final void onDocumentEnd() {
-		popElement();
-		endDocument();
-	}
-
-	@Override
 	public final void onBlocksBegin() {
 	}
 
@@ -214,6 +208,12 @@ public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements Mark
 
 	@Override
 	public final void onContentsEnd() {
+	}
+
+	@Override
+	public final void onDocumentEnd() {
+		popElement();
+		endDocument();
 	}
 
 	protected abstract void beginDocument(String dtdQualifiedName, String rootTagName);

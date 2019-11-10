@@ -10,11 +10,11 @@ import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.common.MarkdomKeys;
 import io.markdom.common.MarkdomSchemas;
-import io.markdom.handler.AbstractMarkdomHandler;
+import io.markdom.handler.MarkdomHandler;
 import io.markdom.util.ObjectHelper;
 import lombok.SneakyThrows;
 
-public final class GsonJsonWriterMarkdomHandler extends AbstractMarkdomHandler<Void> {
+public final class GsonJsonWriterMarkdomHandler implements MarkdomHandler<Void> {
 
 	private final JsonWriter writer;
 
@@ -44,11 +44,7 @@ public final class GsonJsonWriterMarkdomHandler extends AbstractMarkdomHandler<V
 	}
 
 	@Override
-	@SneakyThrows
-	public void onDocumentEnd() {
-		writer.endArray();
-		writer.endObject();
-		writer.flush();
+	public void onBlocksBegin() {
 	}
 
 	@Override
@@ -71,6 +67,10 @@ public final class GsonJsonWriterMarkdomHandler extends AbstractMarkdomHandler<V
 	}
 
 	@Override
+	public void onDivisionBlock() {
+	}
+
+	@Override
 	@SneakyThrows
 	public void onCommentBlock(String comment) {
 		writer.name(MarkdomKeys.COMMENT);
@@ -85,10 +85,7 @@ public final class GsonJsonWriterMarkdomHandler extends AbstractMarkdomHandler<V
 	}
 
 	@Override
-	@SneakyThrows
-	public void onUnorderedListBlockBegin() {
-		writer.name(MarkdomKeys.ITEMS);
-		writer.beginArray();
+	public void onHeadingBlockEnd(MarkdomHeadingLevel level) {
 	}
 
 	@Override
@@ -98,6 +95,64 @@ public final class GsonJsonWriterMarkdomHandler extends AbstractMarkdomHandler<V
 		writer.value(startIndex);
 		writer.name(MarkdomKeys.ITEMS);
 		writer.beginArray();
+	}
+
+	@Override
+	@SneakyThrows
+	public void onOrderedListBlockEnd(Integer startIndex) {
+		writer.endArray();
+	}
+
+	@Override
+	public void onParagraphBlockBegin() {
+	}
+
+	@Override
+	public void onParagraphBlockEnd() {
+	}
+
+	@Override
+	@SneakyThrows
+	public void onQuoteBlockBegin() {
+		writer.name(MarkdomKeys.BLOCKS);
+		writer.beginArray();
+	}
+
+	@Override
+	@SneakyThrows
+	public void onQuoteBlockEnd() {
+		writer.endArray();
+	}
+
+	@Override
+	@SneakyThrows
+	public void onUnorderedListBlockBegin() {
+		writer.name(MarkdomKeys.ITEMS);
+		writer.beginArray();
+	}
+
+	@Override
+	@SneakyThrows
+	public void onUnorderedListBlockEnd() {
+		writer.endArray();
+	}
+
+	@Override
+	@SneakyThrows
+	public void onBlockEnd(MarkdomBlockType type) {
+		writer.endObject();
+	}
+
+	@Override
+	public void onNextBlock() {
+	}
+
+	@Override
+	public void onBlocksEnd() {
+	}
+
+	@Override
+	public void onListItemsBegin() {
 	}
 
 	@Override
@@ -116,34 +171,11 @@ public final class GsonJsonWriterMarkdomHandler extends AbstractMarkdomHandler<V
 	}
 
 	@Override
-	@SneakyThrows
-	public void onUnorderedListBlockEnd() {
-		writer.endArray();
+	public void onNextListItem() {
 	}
 
 	@Override
-	@SneakyThrows
-	public void onOrderedListBlockEnd(Integer startIndex) {
-		writer.endArray();
-	}
-
-	@Override
-	@SneakyThrows
-	public void onQuoteBlockBegin() {
-		writer.name(MarkdomKeys.BLOCKS);
-		writer.beginArray();
-	}
-
-	@Override
-	@SneakyThrows
-	public void onQuoteBlockEnd() {
-		writer.endArray();
-	}
-
-	@Override
-	@SneakyThrows
-	public void onBlockEnd(MarkdomBlockType type) {
-		writer.endObject();
+	public void onListItemsEnd() {
 	}
 
 	@Override
@@ -173,6 +205,10 @@ public final class GsonJsonWriterMarkdomHandler extends AbstractMarkdomHandler<V
 	public void onEmphasisContentBegin(MarkdomEmphasisLevel level) {
 		writer.name(MarkdomKeys.LEVEL);
 		writer.value(level.ordinal() + 1);
+	}
+
+	@Override
+	public void onEmphasisContentEnd(MarkdomEmphasisLevel level) {
 	}
 
 	@Override
@@ -209,6 +245,10 @@ public final class GsonJsonWriterMarkdomHandler extends AbstractMarkdomHandler<V
 	}
 
 	@Override
+	public void onLinkContentEnd(String uri, Optional<String> title) {
+	}
+
+	@Override
 	@SneakyThrows
 	public void onTextContent(String text) {
 		writer.name(MarkdomKeys.TEXT);
@@ -222,9 +262,21 @@ public final class GsonJsonWriterMarkdomHandler extends AbstractMarkdomHandler<V
 	}
 
 	@Override
+	public void onNextContent() {
+	}
+
+	@Override
 	@SneakyThrows
 	public void onContentsEnd() {
 		writer.endArray();
+	}
+
+	@Override
+	@SneakyThrows
+	public void onDocumentEnd() {
+		writer.endArray();
+		writer.endObject();
+		writer.flush();
 	}
 
 	@Override
