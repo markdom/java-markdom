@@ -96,8 +96,7 @@ public class XhtmlDocumentResult implements HtmlDocumentResult<Document, Element
 		if (node instanceof Document) {
 			DocumentType doctype = ((Document) node).getDoctype();
 			if (null != doctype) {
-				transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, doctype.getPublicId());
-				transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
+				transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "about:legacy-compat");
 			}
 		} else {
 			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
