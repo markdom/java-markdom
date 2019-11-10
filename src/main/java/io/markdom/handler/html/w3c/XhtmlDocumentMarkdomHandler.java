@@ -19,8 +19,6 @@ public final class XhtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkd
 
 	private static final String DEFAULT_TITLE = "Markdom";
 
-	private static final String DTD_QUALIFIED_NAME = "html";
-
 	private static final String XMLNS_NAMESPACE = "http://www.w3.org/1999/xhtml";
 
 	private final DocumentBuilder builder;
@@ -49,14 +47,10 @@ public final class XhtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkd
 		this.builder = builder;
 	}
 
-	protected final Document getDocument() {
-		return document;
-	}
-
 	@Override
-	protected final void beginDocument(String rootTagName) {
+	protected final void beginDocument(String dtdQualifiedName, String rootTagName) {
 		DOMImplementation domImplementation = builder.getDOMImplementation();
-		DocumentType doctype = domImplementation.createDocumentType(DTD_QUALIFIED_NAME, "", "");
+		DocumentType doctype = domImplementation.createDocumentType(dtdQualifiedName, "", "");
 		document = domImplementation.createDocument(XMLNS_NAMESPACE, rootTagName, doctype);
 		element = document.getDocumentElement();
 	}

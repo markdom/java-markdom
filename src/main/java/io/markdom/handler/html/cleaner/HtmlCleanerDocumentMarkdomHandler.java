@@ -1,52 +1,51 @@
-package io.markdom.handler.html.jsoup;
+package io.markdom.handler.html.cleaner;
 
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.DocumentType;
-import org.jsoup.nodes.Element;
+import org.htmlcleaner.ContentNode;
+import org.htmlcleaner.DoctypeToken;
+import org.htmlcleaner.TagNode;
 
 import io.markdom.handler.html.AbstractHtmlDocumentMarkdomHandler;
 import io.markdom.handler.html.DefaultHtmlDelegate;
 import io.markdom.handler.html.HtmlDelegate;
 import io.markdom.util.Attribute;
 
-public final class JsoupHtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkdomHandler<JsoupHtmlDocumentResult> {
+public final class HtmlCleanerDocumentMarkdomHandler extends AbstractHtmlDocumentMarkdomHandler<HtmlCleanerDocumentResult> {
 
 	private static final DefaultHtmlDelegate DEFAULT_DELEGATE = new DefaultHtmlDelegate();
 
 	private static final String DEFAULT_TITLE = "Markdom";
 
-	private Document document;
+	private TagNode document;
 
-	private Element element;
+	private TagNode element;
 
-	public JsoupHtmlDocumentMarkdomHandler() {
+	public HtmlCleanerDocumentMarkdomHandler() {
 		this(DEFAULT_DELEGATE, DEFAULT_TITLE);
 	}
 
-	public JsoupHtmlDocumentMarkdomHandler(String title) {
+	public HtmlCleanerDocumentMarkdomHandler(String title) {
 		this(DEFAULT_DELEGATE, title);
 	}
 
-	public JsoupHtmlDocumentMarkdomHandler(HtmlDelegate delegate) {
+	public HtmlCleanerDocumentMarkdomHandler(HtmlDelegate delegate) {
 		this(delegate, DEFAULT_TITLE);
 	}
 
-	public JsoupHtmlDocumentMarkdomHandler(HtmlDelegate delegate, String title) {
+	public HtmlCleanerDocumentMarkdomHandler(HtmlDelegate delegate, String title) {
 		super(delegate, title);
 	}
 
 	@Override
 	protected final void beginDocument(String dtdQualifiedName, String rootTagName) {
-		document = new Document("");
-		document.appendChild(new DocumentType(dtdQualifiedName, "", ""));
+		document = new TagNode(rootTagName);
+		document.setDocType(new DoctypeToken(dtdQualifiedName, null, null, null));
 		element = document;
-		pushElement(rootTagName);
 	}
 
 	@Override
 	protected final void pushElement(String tagName) {
-		Element element = document.createElement(tagName);
-		this.element.appendChild(element);
+		TagNode element = new TagNode(tagName);
+		this.element.addChild(element);
 		this.element = element;
 
 	}
@@ -54,33 +53,32 @@ public final class JsoupHtmlDocumentMarkdomHandler extends AbstractHtmlDocumentM
 	@Override
 	protected final void setAttributes(Iterable<Attribute> attributes) {
 		for (Attribute attribute : attributes) {
-			element.attr(attribute.getKey(), attribute.getValue());
+			element.addAttribute(attribute.getKey(), attribute.getValue());
 		}
 	}
 
 	@Override
 	protected final void setText(String text) {
-		element.text(text);
+		element.addChild(new ContentNode(text));
 	}
 
 	@Override
 	protected void setCharacterData(String text) {
-		element.text(text);
+		element.addChild(new ContentNode(text));
 	}
 
 	@Override
 	protected final void popElement() {
-		element = (Element) element.parent();
+		element = (TagNode) element.getParent();
 	}
 
 	@Override
 	protected void endDocument() {
-		popElement();
 	}
 
 	@Override
-	public JsoupHtmlDocumentResult getResult() {
-		return new JsoupHtmlDocumentResult(document);
+	public HtmlCleanerDocumentResult getResult() {
+		return new HtmlCleanerDocumentResult(document);
 	}
 
 }
