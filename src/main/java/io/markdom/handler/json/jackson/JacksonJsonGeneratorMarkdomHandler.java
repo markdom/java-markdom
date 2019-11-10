@@ -11,6 +11,7 @@ import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.common.MarkdomKeys;
 import io.markdom.common.MarkdomSchemas;
 import io.markdom.handler.AbstractMarkdomHandler;
+import io.markdom.util.ObjectHelper;
 import lombok.SneakyThrows;
 
 public final class JacksonJsonGeneratorMarkdomHandler extends AbstractMarkdomHandler<Void> {
@@ -24,10 +25,7 @@ public final class JacksonJsonGeneratorMarkdomHandler extends AbstractMarkdomHan
 	}
 
 	public JacksonJsonGeneratorMarkdomHandler(JsonGenerator generator, boolean includeSchema) {
-		if (null == generator) {
-			throw new IllegalArgumentException("The given JSON generator is null");
-		}
-		this.generator = generator;
+		this.generator = ObjectHelper.notNull("generator", generator);
 		this.includeSchema = includeSchema;
 	}
 

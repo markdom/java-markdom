@@ -2,15 +2,14 @@ package io.markdom.handler.json.org;
 
 import org.json.JSONObject;
 
+import io.markdom.util.ObjectHelper;
+
 public class JsonObjectResult implements io.markdom.handler.json.JsonObjectResult<JSONObject> {
 
 	private final JSONObject object;
 
 	public JsonObjectResult(JSONObject object) {
-		if (null == object) {
-			throw new IllegalArgumentException("The given object is null");
-		}
-		this.object = object;
+		this.object = ObjectHelper.notNull("object", object);
 	}
 
 	@Override

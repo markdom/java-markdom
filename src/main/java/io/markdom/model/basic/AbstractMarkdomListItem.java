@@ -8,6 +8,7 @@ import io.markdom.model.ManagedMarkdomListItem;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.MarkdomListBlock;
+import io.markdom.util.ObjectHelper;
 
 public abstract class AbstractMarkdomListItem extends AbstractMarkdomNode implements ManagedMarkdomListItem {
 
@@ -39,22 +40,21 @@ public abstract class AbstractMarkdomListItem extends AbstractMarkdomNode implem
 
 	@Override
 	public final Runnable onAttach(MarkdomListBlock listBlock) throws IllegalArgumentException, IllegalStateException {
-		if (null == listBlock) {
-			throw new IllegalArgumentException("The given Markdom list block is null");
-		}
+		ObjectHelper.notNull("list block", listBlock);
 		if (null != this.listBlock) {
-			throw new IllegalStateException("This Markdom list item is already attached to a list block");
+			throw new IllegalStateException("This list item is already attached to a list block");
 		}
 		return () -> AbstractMarkdomListItem.this.listBlock = listBlock;
 	}
 
 	@Override
 	public final Runnable onDetach(MarkdomListBlock listBlock) throws IllegalStateException {
+		ObjectHelper.notNull("list block", listBlock);
 		if (null == this.listBlock) {
-			throw new IllegalStateException("This Markdom list item is currently not attached to a list block");
+			throw new IllegalStateException("This list item is currently not attached to a list block");
 		}
 		if (this.listBlock != listBlock) {
-			throw new IllegalStateException("This Markdom list item is not attached to the given list block");
+			throw new IllegalStateException("This list item is not attached to the given list block");
 		}
 		return () -> AbstractMarkdomListItem.this.listBlock = null;
 	}

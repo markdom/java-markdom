@@ -7,6 +7,7 @@ import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.ManagedMarkdomContent;
 import io.markdom.model.MarkdomContent;
 import io.markdom.model.MarkdomContentParent;
+import io.markdom.util.ObjectHelper;
 
 public final class BasicMarkdomContentParentDelegate {
 
@@ -25,19 +26,13 @@ public final class BasicMarkdomContentParentDelegate {
 	}
 
 	public void addContents(MarkdomContent... contents) {
-		if (null == contents) {
-			throw new IllegalArgumentException("The given array of Markdom contents is null");
-		}
-		for (MarkdomContent content : contents) {
+		for (MarkdomContent content : ObjectHelper.notNull("array of contents", contents)) {
 			addContent(content);
 		}
 	}
 
 	public void addContents(Iterable<MarkdomContent> contents) {
-		if (null == contents) {
-			throw new IllegalArgumentException("The given iterable of Markdom contents is null");
-		}
-		for (MarkdomContent content : contents) {
+		for (MarkdomContent content : ObjectHelper.notNull("iterable of contents", contents)) {
 			addContent(content);
 		}
 	}

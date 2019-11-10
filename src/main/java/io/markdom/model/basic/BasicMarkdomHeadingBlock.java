@@ -37,10 +37,7 @@ public final class BasicMarkdomHeadingBlock extends AbstractMarkdomBlock impleme
 	}
 
 	public BasicMarkdomHeadingBlock setLevel(MarkdomHeadingLevel level) {
-		if (null == level) {
-			throw new IllegalArgumentException("The given level is null");
-		}
-		this.level = level;
+		this.level = ObjectHelper.notNull("level", level);
 		return this;
 	}
 

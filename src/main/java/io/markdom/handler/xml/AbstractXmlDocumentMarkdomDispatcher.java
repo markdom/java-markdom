@@ -12,6 +12,7 @@ import io.markdom.common.MarkdomKeys;
 import io.markdom.handler.MarkdomDispatcher;
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.handler.SimpleMarkdomHandler;
+import io.markdom.util.ObjectHelper;
 
 public abstract class AbstractXmlDocumentMarkdomDispatcher<XmlElement> implements MarkdomDispatcher {
 
@@ -19,10 +20,7 @@ public abstract class AbstractXmlDocumentMarkdomDispatcher<XmlElement> implement
 
 	@Override
 	public final <Result> Result handle(MarkdomHandler<Result> handler) {
-		if (null == handler) {
-			throw new IllegalArgumentException("The given Markdom handler is null");
-		}
-		this.handler = new SimpleMarkdomHandler<Result>(handler);
+		this.handler = new SimpleMarkdomHandler<Result>(ObjectHelper.notNull("handler", handler));
 		try {
 			XmlElement documentElement = getRootElement();
 			checkVersion(reqString(documentElement, MarkdomKeys.VERSION));
@@ -60,30 +58,30 @@ public abstract class AbstractXmlDocumentMarkdomDispatcher<XmlElement> implement
 	private void block(XmlElement blockElement) {
 		MarkdomBlockType type = MarkdomBlockType.fromName(getName(blockElement));
 		switch (type) {
-		case CODE:
-			codeBlock(blockElement);
-			return;
-		case COMMENT:
-			commentBlock(blockElement);
-			return;
-		case DIVISION:
-			divisionBlock(blockElement);
-			return;
-		case HEADING:
-			headingBlock(blockElement);
-			return;
-		case ORDERED_LIST:
-			orderedListBlock(blockElement);
-			return;
-		case PARAGRAPH:
-			paragraphBlock(blockElement);
-			return;
-		case QUOTE:
-			quoteBlock(blockElement);
-			return;
-		case UNORDERED_LIST:
-			unorderedListBlock(blockElement);
-			return;
+			case CODE:
+				codeBlock(blockElement);
+				return;
+			case COMMENT:
+				commentBlock(blockElement);
+				return;
+			case DIVISION:
+				divisionBlock(blockElement);
+				return;
+			case HEADING:
+				headingBlock(blockElement);
+				return;
+			case ORDERED_LIST:
+				orderedListBlock(blockElement);
+				return;
+			case PARAGRAPH:
+				paragraphBlock(blockElement);
+				return;
+			case QUOTE:
+				quoteBlock(blockElement);
+				return;
+			case UNORDERED_LIST:
+				unorderedListBlock(blockElement);
+				return;
 		}
 		throw new InternalError("Unexpected block type: " + type);
 	}
@@ -152,24 +150,24 @@ public abstract class AbstractXmlDocumentMarkdomDispatcher<XmlElement> implement
 	private void content(XmlElement contentElement) {
 		MarkdomContentType type = MarkdomContentType.fromName(getName(contentElement));
 		switch (type) {
-		case CODE:
-			codeContent(contentElement);
-			return;
-		case EMPHASIS:
-			emphasisContent(contentElement);
-			return;
-		case IMAGE:
-			imageContent(contentElement);
-			return;
-		case LINE_BREAK:
-			lineBreakContent(contentElement);
-			return;
-		case LINK:
-			linkContent(contentElement);
-			return;
-		case TEXT:
-			textContent(contentElement);
-			return;
+			case CODE:
+				codeContent(contentElement);
+				return;
+			case EMPHASIS:
+				emphasisContent(contentElement);
+				return;
+			case IMAGE:
+				imageContent(contentElement);
+				return;
+			case LINE_BREAK:
+				lineBreakContent(contentElement);
+				return;
+			case LINK:
+				linkContent(contentElement);
+				return;
+			case TEXT:
+				textContent(contentElement);
+				return;
 		}
 		throw new InternalError("Unexpected content type: " + type);
 	}

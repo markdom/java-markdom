@@ -11,6 +11,7 @@ import org.w3c.dom.NodeList;
 
 import io.markdom.handler.html.HtmlDocumentResult;
 import io.markdom.util.Attribute;
+import io.markdom.util.ObjectHelper;
 import io.markdom.util.XmlHelper;
 import net.markenwerk.commons.iterables.NodeListIterable;
 
@@ -21,14 +22,8 @@ public class XhtmlDocumentResult implements HtmlDocumentResult<Document, Element
 	private final Document document;
 
 	public XhtmlDocumentResult(DocumentBuilder builder, Document document) {
-		if (null == builder) {
-			throw new IllegalArgumentException("The given document builder is null");
-		}
-		if (null == document) {
-			throw new IllegalArgumentException("The given document is null");
-		}
-		this.builder = builder;
-		this.document = document;
+		this.builder = ObjectHelper.notNull("builder", builder);
+		this.document = ObjectHelper.notNull("document", document);
 	}
 
 	@Override

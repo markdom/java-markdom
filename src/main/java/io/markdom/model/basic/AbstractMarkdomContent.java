@@ -8,6 +8,7 @@ import io.markdom.model.ManagedMarkdomContent;
 import io.markdom.model.MarkdomContentParent;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
+import io.markdom.util.ObjectHelper;
 
 abstract class AbstractMarkdomContent extends AbstractMarkdomNode implements ManagedMarkdomContent {
 
@@ -39,22 +40,21 @@ abstract class AbstractMarkdomContent extends AbstractMarkdomNode implements Man
 
 	@Override
 	public final Runnable onAttach(MarkdomContentParent parent) {
-		if (null == parent) {
-			throw new IllegalArgumentException("The given Markdom content parent is null");
-		}
+		ObjectHelper.notNull("content parent", parent);
 		if (null != this.parent) {
-			throw new IllegalStateException("This Markdom content is already attached to a content parent");
+			throw new IllegalStateException("This content is already attached to a content parent");
 		}
 		return () -> AbstractMarkdomContent.this.parent = parent;
 	}
 
 	@Override
 	public final Runnable onDetach(MarkdomContentParent parent) {
+		ObjectHelper.notNull("content parent", parent);
 		if (null == this.parent) {
-			throw new IllegalStateException("This Markdom content is currently not attached to a content parent");
+			throw new IllegalStateException("This content is currently not attached to a content parent");
 		}
 		if (this.parent != parent) {
-			throw new IllegalStateException("This Markdom content is not attached to teh given content parent");
+			throw new IllegalStateException("This content is not attached to the given content parent");
 		}
 		return () -> AbstractMarkdomContent.this.parent = null;
 	}

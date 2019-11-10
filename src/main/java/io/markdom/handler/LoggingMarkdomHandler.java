@@ -21,7 +21,6 @@
  */
 package io.markdom.handler;
 
-import java.io.IOException;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -29,6 +28,8 @@ import io.markdom.common.MarkdomBlockType;
 import io.markdom.common.MarkdomContentType;
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
+import io.markdom.util.ObjectHelper;
+import lombok.SneakyThrows;
 
 public final class LoggingMarkdomHandler<Result> implements MarkdomHandler<Result> {
 
@@ -44,14 +45,8 @@ public final class LoggingMarkdomHandler<Result> implements MarkdomHandler<Resul
 	}
 
 	public LoggingMarkdomHandler(Appendable appendable, MarkdomHandler<Result> handler) {
-		if (null == appendable) {
-			throw new IllegalArgumentException("The given appendable is null");
-		}
-		if (null == handler) {
-			throw new IllegalArgumentException("The given handler is null");
-		}
-		this.appendable = appendable;
-		this.handler = handler;
+		this.appendable = ObjectHelper.notNull("appendable", appendable);
+		this.handler = ObjectHelper.notNull("handler", handler);
 	}
 
 	@Override
@@ -294,40 +289,31 @@ public final class LoggingMarkdomHandler<Result> implements MarkdomHandler<Resul
 		return null == object ? "null" : ("\"" + object.toString().replaceAll(Pattern.quote("\n"), "\\\\n") + "\"");
 	}
 
+	@SneakyThrows
 	private void appendOpeningLine(String line) {
-		try {
-			appendable.append(indentation(depth));
-			appendable.append(line);
-			appendable.append("\n");
-			depth++;
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		appendable.append(indentation(depth));
+		appendable.append(line);
+		appendable.append("\n");
+		depth++;
 	}
 
 	private void appendLeafLine(String line) {
 		appendLeafLine(line, 0);
 	}
 
+	@SneakyThrows
 	private void appendLeafLine(String line, int offset) {
-		try {
-			appendable.append(indentation(Math.max(0, depth + offset)));
-			appendable.append(line);
-			appendable.append("\n");
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		appendable.append(indentation(Math.max(0, depth + offset)));
+		appendable.append(line);
+		appendable.append("\n");
 	}
 
+	@SneakyThrows
 	private void appendClosingLine(String line) {
-		try {
-			depth--;
-			appendable.append(indentation(depth));
-			appendable.append(line);
-			appendable.append("\n");
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		depth--;
+		appendable.append(indentation(depth));
+		appendable.append(line);
+		appendable.append("\n");
 	}
 
 	private String indentation(int depth) {

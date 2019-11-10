@@ -5,25 +5,23 @@ import java.util.Optional;
 
 import javax.json.Json;
 import javax.json.JsonArray;
-import javax.json.JsonException;
 import javax.json.JsonObject;
 
+import io.markdom.common.MarkdomException;
 import io.markdom.handler.json.AbstractJsonObjectMarkdomDispatcher;
+import io.markdom.util.ObjectHelper;
 
 public final class JakartaJsonObjectMarkdomDispatcher extends AbstractJsonObjectMarkdomDispatcher<JsonObject, JsonArray> {
 
-	private final JsonObject jsonObject;
+	private final JsonObject object;
 
-	public JakartaJsonObjectMarkdomDispatcher(JsonObject jsonObject) {
-		if (null == jsonObject) {
-			throw new IllegalArgumentException("The given Json object is null");
-		}
-		this.jsonObject = jsonObject;
+	public JakartaJsonObjectMarkdomDispatcher(JsonObject object) {
+		this.object = ObjectHelper.notNull("object", object);
 	}
 
 	@Override
 	protected JsonObject getRootObject() {
-		return jsonObject;
+		return object;
 	}
 
 	@Override
@@ -43,7 +41,7 @@ public final class JakartaJsonObjectMarkdomDispatcher extends AbstractJsonObject
 			public JsonObject next() {
 				Object jsonNode = jsonArray.get(cursor++);
 				if (!(jsonNode instanceof JsonObject)) {
-					throw new JsonException("Expected object node inside array");
+					throw new MarkdomException("Expected object node inside array");
 				}
 				return (JsonObject) jsonNode;
 			}

@@ -23,6 +23,7 @@ import io.markdom.model.MarkdomParagraphBlock;
 import io.markdom.model.MarkdomQuoteBlock;
 import io.markdom.model.MarkdomTextContent;
 import io.markdom.model.MarkdomUnorderedListBlock;
+import io.markdom.util.ObjectHelper;
 
 public final class MarkdomDocumentMarkdomHandler extends AbstractMarkdomHandler<MarkdomDocument> {
 
@@ -37,10 +38,7 @@ public final class MarkdomDocumentMarkdomHandler extends AbstractMarkdomHandler<
 	private final Stack<MarkdomContentParent> contentParents = new Stack<MarkdomContentParent>();
 
 	public MarkdomDocumentMarkdomHandler(MarkdomFactory factory) {
-		if (null == factory) {
-			throw new IllegalArgumentException("The given Markdom factory is null");
-		}
-		this.factory = factory;
+		this.factory = ObjectHelper.notNull("factory", factory);
 		this.document = factory.document();
 	}
 

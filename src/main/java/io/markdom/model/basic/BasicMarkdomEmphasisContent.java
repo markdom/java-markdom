@@ -37,10 +37,7 @@ public final class BasicMarkdomEmphasisContent extends AbstractMarkdomContent im
 	}
 
 	public BasicMarkdomEmphasisContent setLevel(MarkdomEmphasisLevel level) {
-		if (null == level) {
-			throw new IllegalArgumentException("The given level is null");
-		}
-		this.level = level;
+		this.level = ObjectHelper.notNull("level", level);
 		return this;
 	}
 

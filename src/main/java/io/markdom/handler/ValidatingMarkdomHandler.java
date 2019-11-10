@@ -9,6 +9,7 @@ import io.markdom.common.MarkdomContentType;
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomException;
 import io.markdom.common.MarkdomHeadingLevel;
+import io.markdom.util.ObjectHelper;
 
 public final class ValidatingMarkdomHandler<Result> implements MarkdomHandler<Result> {
 
@@ -19,10 +20,7 @@ public final class ValidatingMarkdomHandler<Result> implements MarkdomHandler<Re
 	private boolean insideHeading;
 
 	public ValidatingMarkdomHandler(MarkdomHandler<Result> handler) {
-		if (null == handler) {
-			throw new IllegalArgumentException("The given Markdom handler is null");
-		}
-		this.handler = handler;
+		this.handler = ObjectHelper.notNull("handler", handler);
 	}
 
 	@Override

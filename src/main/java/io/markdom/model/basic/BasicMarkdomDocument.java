@@ -68,9 +68,7 @@ public final class BasicMarkdomDocument extends AbstractMarkdomNode implements M
 
 	@Override
 	public <Result> Result handle(MarkdomHandler<Result> handler) {
-		if (null == handler) {
-			throw new IllegalArgumentException("The given Markdom handler is null");
-		}
+		ObjectHelper.notNull("handler", handler);
 		handler.onDocumentBegin();
 		delegate.onHandle(handler);
 		handler.onDocumentEnd();

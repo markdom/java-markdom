@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
+import io.markdom.util.ObjectHelper;
 
 public class JacksonMarkdomDocumentModule extends SimpleModule {
 
@@ -14,9 +15,7 @@ public class JacksonMarkdomDocumentModule extends SimpleModule {
 	}
 
 	public JacksonMarkdomDocumentModule(MarkdomFactory factory, boolean generateSchema) {
-		if (null == factory) {
-			throw new IllegalArgumentException("The given Markdom factory is null");
-		}
+		factory = ObjectHelper.notNull("factory", factory);
 		addSerializer(MarkdomDocument.class, new JacksonMarkdomDocumentSerializer(generateSchema));
 		addDeserializer(MarkdomDocument.class, new JacksonMarkdomDocumentDeserializer(factory));
 	}

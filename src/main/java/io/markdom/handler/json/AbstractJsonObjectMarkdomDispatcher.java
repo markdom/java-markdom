@@ -12,6 +12,7 @@ import io.markdom.common.MarkdomKeys;
 import io.markdom.handler.MarkdomDispatcher;
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.handler.SimpleMarkdomHandler;
+import io.markdom.util.ObjectHelper;
 
 public abstract class AbstractJsonObjectMarkdomDispatcher<JsonObject, JsonArray> implements MarkdomDispatcher {
 
@@ -19,10 +20,7 @@ public abstract class AbstractJsonObjectMarkdomDispatcher<JsonObject, JsonArray>
 
 	@Override
 	public final <Result> Result handle(MarkdomHandler<Result> handler) {
-		if (null == handler) {
-			throw new IllegalArgumentException("The given Markdom handler is null");
-		}
-		this.handler = new SimpleMarkdomHandler<Result>(handler);
+		this.handler = new SimpleMarkdomHandler<Result>(ObjectHelper.notNull("handler", handler));
 		try {
 			JsonObject documentObject = getRootObject();
 			checkVersion(reqString(documentObject, MarkdomKeys.VERSION));
@@ -52,30 +50,30 @@ public abstract class AbstractJsonObjectMarkdomDispatcher<JsonObject, JsonArray>
 	private void block(JsonObject blockObject) {
 		MarkdomBlockType type = MarkdomBlockType.fromName(reqString(blockObject, MarkdomKeys.TYPE));
 		switch (type) {
-		case CODE:
-			codeBlock(blockObject);
-			return;
-		case COMMENT:
-			commentBlock(blockObject);
-			return;
-		case DIVISION:
-			divisionBlock(blockObject);
-			return;
-		case HEADING:
-			headingBlock(blockObject);
-			return;
-		case ORDERED_LIST:
-			orderedListBlock(blockObject);
-			return;
-		case PARAGRAPH:
-			paragraphBlock(blockObject);
-			return;
-		case QUOTE:
-			quoteBlock(blockObject);
-			return;
-		case UNORDERED_LIST:
-			unorderedListBlock(blockObject);
-			return;
+			case CODE:
+				codeBlock(blockObject);
+				return;
+			case COMMENT:
+				commentBlock(blockObject);
+				return;
+			case DIVISION:
+				divisionBlock(blockObject);
+				return;
+			case HEADING:
+				headingBlock(blockObject);
+				return;
+			case ORDERED_LIST:
+				orderedListBlock(blockObject);
+				return;
+			case PARAGRAPH:
+				paragraphBlock(blockObject);
+				return;
+			case QUOTE:
+				quoteBlock(blockObject);
+				return;
+			case UNORDERED_LIST:
+				unorderedListBlock(blockObject);
+				return;
 		}
 		throw new InternalError("Unexpected block type: " + type);
 	}
@@ -144,24 +142,24 @@ public abstract class AbstractJsonObjectMarkdomDispatcher<JsonObject, JsonArray>
 	private void content(JsonObject contentObject) {
 		MarkdomContentType type = MarkdomContentType.fromName(reqString(contentObject, MarkdomKeys.TYPE));
 		switch (type) {
-		case CODE:
-			codeContent(contentObject);
-			return;
-		case EMPHASIS:
-			emphasisContent(contentObject);
-			return;
-		case IMAGE:
-			imageContent(contentObject);
-			return;
-		case LINE_BREAK:
-			lineBreakContent(contentObject);
-			return;
-		case LINK:
-			linkContent(contentObject);
-			return;
-		case TEXT:
-			textContent(contentObject);
-			return;
+			case CODE:
+				codeContent(contentObject);
+				return;
+			case EMPHASIS:
+				emphasisContent(contentObject);
+				return;
+			case IMAGE:
+				imageContent(contentObject);
+				return;
+			case LINE_BREAK:
+				lineBreakContent(contentObject);
+				return;
+			case LINK:
+				linkContent(contentObject);
+				return;
+			case TEXT:
+				textContent(contentObject);
+				return;
 		}
 		throw new InternalError("Unexpected content type: " + type);
 	}

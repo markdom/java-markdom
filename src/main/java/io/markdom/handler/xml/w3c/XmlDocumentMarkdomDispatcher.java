@@ -9,6 +9,7 @@ import org.w3c.dom.Node;
 
 import io.markdom.common.MarkdomException;
 import io.markdom.handler.xml.AbstractXmlDocumentMarkdomDispatcher;
+import io.markdom.util.ObjectHelper;
 import lombok.SneakyThrows;
 import net.markenwerk.commons.interfaces.Predicate;
 import net.markenwerk.commons.iterators.ConvertingIterator;
@@ -31,26 +32,20 @@ public final class XmlDocumentMarkdomDispatcher extends AbstractXmlDocumentMarkd
 		}
 	};
 
-	private final Element xmlElement;
+	private final Element element;
 
 	@SneakyThrows
-	public XmlDocumentMarkdomDispatcher(Document xmlDocument) {
-		if (null == xmlDocument) {
-			throw new IllegalArgumentException("The given XML document is null");
-		}
-		this.xmlElement = xmlDocument.getDocumentElement();
+	public XmlDocumentMarkdomDispatcher(Document document) {
+		this.element = ObjectHelper.notNull("document", document).getDocumentElement();
 	}
 
-	public XmlDocumentMarkdomDispatcher(Element xmlElement) {
-		if (null == xmlElement) {
-			throw new IllegalArgumentException("The given XML element is null");
-		}
-		this.xmlElement = xmlElement;
+	public XmlDocumentMarkdomDispatcher(Element element) {
+		this.element = ObjectHelper.notNull("element", element);
 	}
 
 	@Override
 	protected Element getRootElement() {
-		return xmlElement;
+		return element;
 	}
 
 	@Override

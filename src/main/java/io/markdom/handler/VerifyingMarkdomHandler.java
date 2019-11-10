@@ -9,6 +9,7 @@ import io.markdom.common.MarkdomContentType;
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomException;
 import io.markdom.common.MarkdomHeadingLevel;
+import io.markdom.util.ObjectHelper;
 import lombok.Data;
 
 public final class VerifyingMarkdomHandler<Result> implements MarkdomHandler<Result> {
@@ -133,10 +134,7 @@ public final class VerifyingMarkdomHandler<Result> implements MarkdomHandler<Res
 	private final EnumSet<Method> expectedMethods = EnumSet.noneOf(Method.class);
 
 	public VerifyingMarkdomHandler(MarkdomHandler<Result> handler) {
-		if (null == handler) {
-			throw new IllegalArgumentException("The given Markdom handler is null");
-		}
-		this.handler = handler;
+		this.handler = ObjectHelper.notNull("handler", handler);
 		expect(Method.ON_DOCUMENT_BEGIN);
 	}
 
@@ -193,7 +191,7 @@ public final class VerifyingMarkdomHandler<Result> implements MarkdomHandler<Res
 			case UNORDERED_LIST:
 				return Method.ON_UNORDERED_LIST_BLOCK_BEGIN;
 		}
-		throw new AssertionError("Unexpected block type: " + type);
+		throw new InternalError("Unexpected block type: " + type);
 	}
 
 	@Override
@@ -228,7 +226,7 @@ public final class VerifyingMarkdomHandler<Result> implements MarkdomHandler<Res
 				return Method.ON_QUOTE_BLOCK_END;
 			default:
 		}
-		throw new AssertionError("Unexpected blocks end context: " + context);
+		throw new InternalError("Unexpected blocks end context: " + context);
 	}
 
 	@Override
@@ -390,7 +388,7 @@ public final class VerifyingMarkdomHandler<Result> implements MarkdomHandler<Res
 				return Method.ON_UNORDERED_LIST_BLOCK_END;
 			default:
 		}
-		throw new AssertionError("Unexpected imtem end context: " + context);
+		throw new InternalError("Unexpected imtem end context: " + context);
 	}
 
 	@Override
@@ -426,7 +424,7 @@ public final class VerifyingMarkdomHandler<Result> implements MarkdomHandler<Res
 			case TEXT:
 				return Method.ON_TEXT_CONTENT;
 		}
-		throw new AssertionError("Unexpected content type: " + type);
+		throw new InternalError("Unexpected content type: " + type);
 	}
 
 	@Override
@@ -463,7 +461,7 @@ public final class VerifyingMarkdomHandler<Result> implements MarkdomHandler<Res
 				return Method.ON_LINK_CONTENT_END;
 			default:
 		}
-		throw new AssertionError("Unexpected contents end context: " + context);
+		throw new InternalError("Unexpected contents end context: " + context);
 	}
 
 	@Override

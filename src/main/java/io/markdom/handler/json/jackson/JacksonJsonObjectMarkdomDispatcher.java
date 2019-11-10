@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import io.markdom.common.MarkdomException;
 import io.markdom.handler.json.AbstractJsonObjectMarkdomDispatcher;
+import io.markdom.util.ObjectHelper;
 import lombok.SneakyThrows;
 
 public final class JacksonJsonObjectMarkdomDispatcher extends AbstractJsonObjectMarkdomDispatcher<ObjectNode, ArrayNode> {
@@ -19,10 +20,7 @@ public final class JacksonJsonObjectMarkdomDispatcher extends AbstractJsonObject
 	private final ObjectNode object;
 
 	public JacksonJsonObjectMarkdomDispatcher(ObjectNode object) {
-		if (null == object) {
-			throw new IllegalArgumentException("The given object is null");
-		}
-		this.object = object;
+		this.object = ObjectHelper.notNull("object", object);
 	}
 
 	@Override

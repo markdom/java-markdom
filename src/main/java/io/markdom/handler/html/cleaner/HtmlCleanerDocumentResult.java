@@ -13,6 +13,7 @@ import org.htmlcleaner.TagNode;
 
 import io.markdom.handler.html.HtmlDocumentResult;
 import io.markdom.util.Attribute;
+import io.markdom.util.ObjectHelper;
 
 public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNode, TagNode, List<TagNode>> {
 
@@ -25,11 +26,7 @@ public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNo
 	private final TagNode document;
 
 	public HtmlCleanerDocumentResult(TagNode document) {
-
-		if (null == document) {
-			throw new IllegalArgumentException("The given document is null");
-		}
-		this.document = document;
+		this.document = ObjectHelper.notNull("document", document);
 
 		cleaner = new HtmlCleaner();
 

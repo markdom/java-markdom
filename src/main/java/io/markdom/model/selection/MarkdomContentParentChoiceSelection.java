@@ -5,16 +5,14 @@ import io.markdom.model.MarkdomHeadingBlock;
 import io.markdom.model.MarkdomLinkContent;
 import io.markdom.model.MarkdomParagraphBlock;
 import io.markdom.model.choice.MarkdomContentParentChoice;
+import io.markdom.util.ObjectHelper;
 
 public final class MarkdomContentParentChoiceSelection extends AbstractMarkdomContentParentSelection<Void> {
 
 	private final MarkdomContentParentChoice choice;
 
 	public MarkdomContentParentChoiceSelection(MarkdomContentParentChoice choice) {
-		if (null == choice) {
-			throw new IllegalArgumentException("The given choice is null");
-		}
-		this.choice = choice;
+		this.choice = ObjectHelper.notNull("choice", choice);
 	}
 
 	@Override

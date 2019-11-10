@@ -6,16 +6,14 @@ import org.jsoup.select.Elements;
 
 import io.markdom.handler.html.HtmlDocumentResult;
 import io.markdom.util.Attribute;
+import io.markdom.util.ObjectHelper;
 
 public final class JsoupHtmlDocumentResult implements HtmlDocumentResult<Document, Element, Elements> {
 
 	private final Document document;
 
 	public JsoupHtmlDocumentResult(Document document) {
-		if (null == document) {
-			throw new IllegalArgumentException("The given document is null");
-		}
-		this.document = document;
+		this.document = ObjectHelper.notNull("document", document);
 	}
 
 	@Override

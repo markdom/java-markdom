@@ -37,7 +37,7 @@ public enum MarkdomContentType {
 	public static MarkdomContentType fromName(String value) throws IllegalArgumentException {
 		MarkdomContentType type = MAP.get(value);
 		if (null == type) {
-			throw new IllegalArgumentException("There is no Markdom content type with the given string value: " + value);
+			throw new IllegalArgumentException("There is no content type with the given string value: " + value);
 		} else {
 			return type;
 		}

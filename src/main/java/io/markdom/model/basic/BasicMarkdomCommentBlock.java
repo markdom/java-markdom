@@ -32,10 +32,7 @@ public final class BasicMarkdomCommentBlock extends AbstractMarkdomBlock impleme
 	}
 
 	public BasicMarkdomCommentBlock setComment(String comment) {
-		if (null == comment) {
-			throw new IllegalArgumentException("The given comment is null");
-		}
-		this.comment = comment;
+		this.comment = ObjectHelper.notNull("comment", comment);;
 		return this;
 	}
 

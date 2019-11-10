@@ -9,16 +9,14 @@ import io.markdom.model.MarkdomParagraphBlock;
 import io.markdom.model.MarkdomQuoteBlock;
 import io.markdom.model.MarkdomUnorderedListBlock;
 import io.markdom.model.choice.MarkdomBlockChoice;
+import io.markdom.util.ObjectHelper;
 
 public final class MarkdomBlockChoiceSelection extends AbstractMarkdomBlockSelection<Void> {
 
 	private final MarkdomBlockChoice choice;
 
 	public MarkdomBlockChoiceSelection(MarkdomBlockChoice choice) {
-		if (null == choice) {
-			throw new IllegalArgumentException("The given choice is null");
-		}
-		this.choice = choice;
+		this.choice = ObjectHelper.notNull("choice", choice);
 	}
 
 	@Override

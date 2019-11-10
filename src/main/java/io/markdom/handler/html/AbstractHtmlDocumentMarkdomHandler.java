@@ -10,6 +10,7 @@ import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.util.Attribute;
 import io.markdom.util.Element;
+import io.markdom.util.ObjectHelper;
 
 public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements MarkdomHandler<Result> {
 
@@ -20,13 +21,8 @@ public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements Mark
 	private final String title;
 
 	public AbstractHtmlDocumentMarkdomHandler(HtmlDelegate delegate, String title) {
-		if (null == delegate) {
-			throw new IllegalArgumentException("The given HTML delegate is null");
-		} else if (null == title) {
-			throw new IllegalArgumentException("The given title is null");
-		}
-		this.delegate = delegate;
-		this.title = title;
+		this.delegate = ObjectHelper.notNull("delegate", delegate);
+		this.title = ObjectHelper.notNull("title", title);
 	}
 
 	@Override

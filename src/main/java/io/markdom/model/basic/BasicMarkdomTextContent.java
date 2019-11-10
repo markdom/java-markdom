@@ -32,10 +32,7 @@ public final class BasicMarkdomTextContent extends AbstractMarkdomContent implem
 	}
 
 	public BasicMarkdomTextContent setText(String text) {
-		if (null == text) {
-			throw new IllegalArgumentException("The given text is null");
-		}
-		this.text = text;
+		this.text = ObjectHelper.notNull("text", text);
 		return this;
 	}
 

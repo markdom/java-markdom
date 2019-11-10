@@ -11,6 +11,7 @@ import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.common.MarkdomKeys;
 import io.markdom.common.MarkdomSchemas;
 import io.markdom.handler.AbstractMarkdomHandler;
+import io.markdom.util.ObjectHelper;
 import lombok.SneakyThrows;
 
 public final class GsonJsonWriterMarkdomHandler extends AbstractMarkdomHandler<Void> {
@@ -24,10 +25,7 @@ public final class GsonJsonWriterMarkdomHandler extends AbstractMarkdomHandler<V
 	}
 
 	public GsonJsonWriterMarkdomHandler(JsonWriter writer, boolean includeSchema) {
-		if (null == writer) {
-			throw new IllegalArgumentException("The given JSON writer is null");
-		}
-		this.writer = writer;
+		this.writer = ObjectHelper.notNull("writer", writer);
 		this.includeSchema = includeSchema;
 	}
 

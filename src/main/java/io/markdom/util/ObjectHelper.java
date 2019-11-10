@@ -9,6 +9,13 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class ObjectHelper {
 
+	public static <Entity> Entity notNull(String name, Entity entity) {
+		if (null == entity) {
+			throw new IllegalArgumentException("The given " + name + " is null");
+		}
+		return entity;
+	}
+
 	public static <Entity> int hashCode(Entity entity, List<Property<Entity, ?>> properties) {
 		return Objects.hash(mapProperties(entity, properties));
 	}

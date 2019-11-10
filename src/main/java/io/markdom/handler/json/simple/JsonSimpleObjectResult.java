@@ -4,16 +4,14 @@ import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsoner;
 
 import io.markdom.handler.json.JsonObjectResult;
+import io.markdom.util.ObjectHelper;
 
 public class JsonSimpleObjectResult implements JsonObjectResult<JsonObject> {
 
 	private final JsonObject object;
 
 	public JsonSimpleObjectResult(JsonObject object) {
-		if (null == object) {
-			throw new IllegalArgumentException("The given object is null");
-		}
-		this.object = object;
+		this.object = ObjectHelper.notNull("object", object);
 	}
 
 	@Override

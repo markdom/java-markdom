@@ -12,6 +12,7 @@ import io.markdom.handler.html.AbstractHtmlDocumentMarkdomHandler;
 import io.markdom.handler.html.DefaultHtmlDelegate;
 import io.markdom.handler.html.HtmlDelegate;
 import io.markdom.util.Attribute;
+import io.markdom.util.ObjectHelper;
 
 public final class XhtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkdomHandler<XhtmlDocumentResult> {
 
@@ -30,23 +31,20 @@ public final class XhtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkd
 	private Element element;
 
 	public XhtmlDocumentMarkdomHandler(DocumentBuilder builder) {
-		this(DEFAULT_DELEGATE, DEFAULT_TITLE, builder);
+		this(builder, DEFAULT_DELEGATE, DEFAULT_TITLE);
 	}
 
 	public XhtmlDocumentMarkdomHandler(DocumentBuilder builder, String title) {
-		this(DEFAULT_DELEGATE, title, builder);
+		this(builder, DEFAULT_DELEGATE, title);
 	}
 
-	public XhtmlDocumentMarkdomHandler(HtmlDelegate delegate, DocumentBuilder builder) {
-		this(delegate, DEFAULT_TITLE, builder);
+	public XhtmlDocumentMarkdomHandler(DocumentBuilder builder, HtmlDelegate delegate) {
+		this(builder, delegate, DEFAULT_TITLE);
 	}
 
-	public XhtmlDocumentMarkdomHandler(HtmlDelegate delegate, String title, DocumentBuilder builder) {
+	public XhtmlDocumentMarkdomHandler(DocumentBuilder builder, HtmlDelegate delegate, String title) {
 		super(delegate, title);
-		if (null == builder) {
-			throw new IllegalArgumentException("The given document builder is null");
-		}
-		this.builder = builder;
+		this.builder = ObjectHelper.notNull("builder", builder);
 	}
 
 	@Override

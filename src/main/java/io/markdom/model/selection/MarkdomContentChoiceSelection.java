@@ -7,16 +7,14 @@ import io.markdom.model.MarkdomLineBreakContent;
 import io.markdom.model.MarkdomLinkContent;
 import io.markdom.model.MarkdomTextContent;
 import io.markdom.model.choice.MarkdomContentChoice;
+import io.markdom.util.ObjectHelper;
 
 public final class MarkdomContentChoiceSelection extends AbstractMarkdomContentSelection<Void> {
 
 	private final MarkdomContentChoice choice;
 
 	public MarkdomContentChoiceSelection(MarkdomContentChoice choice) {
-		if (null == choice) {
-			throw new IllegalArgumentException("The given choice is null");
-		}
-		this.choice = choice;
+		this.choice = ObjectHelper.notNull("choice", choice);
 	}
 
 	@Override

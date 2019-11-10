@@ -33,10 +33,7 @@ public final class BasicMarkdomLineBreakContent extends AbstractMarkdomContent i
 
 	@Override
 	public BasicMarkdomLineBreakContent setHard(Boolean hard) {
-		if (null == hard) {
-			throw new IllegalArgumentException("The given hard is null");
-		}
-		this.hard = hard;
+		this.hard = ObjectHelper.notNull("hard", hard);
 		return this;
 	}
 

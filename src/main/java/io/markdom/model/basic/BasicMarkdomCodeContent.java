@@ -32,10 +32,7 @@ public final class BasicMarkdomCodeContent extends AbstractMarkdomContent implem
 	}
 
 	public BasicMarkdomCodeContent setCode(String code) {
-		if (null == code) {
-			throw new IllegalArgumentException("The given code is null");
-		}
-		this.code = code;
+		this.code = ObjectHelper.notNull("code", code);;
 		return this;
 	}
 

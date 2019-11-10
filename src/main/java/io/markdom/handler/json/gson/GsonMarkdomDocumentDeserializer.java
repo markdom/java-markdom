@@ -11,6 +11,7 @@ import io.markdom.handler.MarkdomDocumentMarkdomHandler;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
+import io.markdom.util.ObjectHelper;
 
 public final class GsonMarkdomDocumentDeserializer implements JsonDeserializer<MarkdomDocument> {
 
@@ -21,11 +22,7 @@ public final class GsonMarkdomDocumentDeserializer implements JsonDeserializer<M
 	}
 
 	public GsonMarkdomDocumentDeserializer(MarkdomFactory factory) {
-		if (null == factory) {
-			throw new IllegalArgumentException("The given Markdom factory is null");
-		}
-		this.factory = factory;
-	}
+		this.factory = ObjectHelper.notNull("factory", factory);	}
 
 	@Override
 	public MarkdomDocument deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {

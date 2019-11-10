@@ -9,21 +9,19 @@ import com.google.gson.JsonObject;
 
 import io.markdom.common.MarkdomException;
 import io.markdom.handler.json.AbstractJsonObjectMarkdomDispatcher;
+import io.markdom.util.ObjectHelper;
 
 public final class GsonJsonObjectMarkdomDispatcher extends AbstractJsonObjectMarkdomDispatcher<JsonObject, JsonArray> {
 
-	private final JsonObject jsonObject;
+	private final JsonObject object;
 
-	public GsonJsonObjectMarkdomDispatcher(JsonObject jsonObject) {
-		if (null == jsonObject) {
-			throw new IllegalArgumentException("The given Json object is null");
-		}
-		this.jsonObject = jsonObject;
+	public GsonJsonObjectMarkdomDispatcher(JsonObject object) {
+		this.object = ObjectHelper.notNull("object", object);
 	}
 
 	@Override
 	protected JsonObject getRootObject() {
-		return jsonObject;
+		return object;
 	}
 
 	@Override

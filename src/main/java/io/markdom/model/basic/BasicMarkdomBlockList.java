@@ -2,6 +2,7 @@ package io.markdom.model.basic;
 
 import io.markdom.model.ManagedMarkdomBlock;
 import io.markdom.model.MarkdomBlockParent;
+import io.markdom.util.ObjectHelper;
 
 final class BasicMarkdomBlockList extends AbstractObservableList<ManagedMarkdomBlock> {
 
@@ -13,18 +14,12 @@ final class BasicMarkdomBlockList extends AbstractObservableList<ManagedMarkdomB
 
 	@Override
 	protected Runnable beforeInsert(ManagedMarkdomBlock block) {
-		if (null == block) {
-			throw new IllegalArgumentException("The given Markdom block is null");
-		}
-		return block.onAttach(parent);
+		return ObjectHelper.notNull("block", block).onAttach(parent);
 	}
 
 	@Override
 	protected Runnable beforeRemove(ManagedMarkdomBlock block) {
-		if (null == block) {
-			throw new IllegalArgumentException("The given Markdom block is null");
-		}
-		return block.onDetach(parent);
+		return ObjectHelper.notNull("block", block).onDetach(parent);
 	}
 
 }

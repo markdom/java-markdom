@@ -35,10 +35,7 @@ public final class BasicMarkdomOrderedListBlock extends AbstractMarkdomBlock imp
 	}
 
 	public BasicMarkdomOrderedListBlock setStartIndex(Integer startIndex) {
-		if (null == startIndex) {
-			throw new IllegalArgumentException("The given start index is null");
-		}
-		this.startIndex = startIndex;
+		this.startIndex = ObjectHelper.notNull("start index", startIndex);
 		return this;
 	}
 

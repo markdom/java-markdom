@@ -7,6 +7,7 @@ import io.markdom.common.MarkdomBlockType;
 import io.markdom.common.MarkdomContentType;
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
+import io.markdom.util.ObjectHelper;
 
 public final class SimpleMarkdomHandler<Result> {
 
@@ -17,10 +18,7 @@ public final class SimpleMarkdomHandler<Result> {
 	private final MarkdomHandler<Result> handler;
 
 	public SimpleMarkdomHandler(MarkdomHandler<Result> handler) {
-		if (null == handler) {
-			throw new IllegalArgumentException("The given Markdom handler is null");
-		}
-		this.handler = handler;
+		this.handler = ObjectHelper.notNull("handler", handler);
 	}
 
 	public void onDocumentBegin() {

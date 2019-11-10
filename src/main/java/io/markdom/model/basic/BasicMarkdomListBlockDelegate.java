@@ -7,6 +7,7 @@ import io.markdom.handler.MarkdomHandler;
 import io.markdom.model.ManagedMarkdomListItem;
 import io.markdom.model.MarkdomListBlock;
 import io.markdom.model.MarkdomListItem;
+import io.markdom.util.ObjectHelper;
 
 public final class BasicMarkdomListBlockDelegate {
 
@@ -25,19 +26,13 @@ public final class BasicMarkdomListBlockDelegate {
 	}
 
 	public void addListItems(MarkdomListItem... listItems) {
-		if (null == listItems) {
-			throw new IllegalArgumentException("The given array of Markdom list items is null");
-		}
-		for (MarkdomListItem listItem : listItems) {
+		for (MarkdomListItem listItem : ObjectHelper.notNull("array of list items", listItems)) {
 			addListItem(listItem);
 		}
 	}
 
 	public void addListItems(Iterable<MarkdomListItem> listItems) {
-		if (null == listItems) {
-			throw new IllegalArgumentException("The given iterable of Markdom list items is null");
-		}
-		for (MarkdomListItem listItem : listItems) {
+		for (MarkdomListItem listItem : ObjectHelper.notNull("iterable of list items", listItems)) {
 			addListItem(listItem);
 		}
 	}

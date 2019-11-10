@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import io.markdom.util.ObjectHelper;
 import io.markdom.util.XmlHelper;
 
 public class XmlDocumentResult implements io.markdom.handler.xml.XmlDocumentResult<Document, Element> {
@@ -12,10 +13,7 @@ public class XmlDocumentResult implements io.markdom.handler.xml.XmlDocumentResu
 	private final Document document;
 
 	public XmlDocumentResult(Document document) {
-		if (null == document) {
-			throw new IllegalArgumentException("The given document is null");
-		}
-		this.document = document;
+		this.document = ObjectHelper.notNull("document", document);
 	}
 
 	@Override

@@ -5,16 +5,14 @@ import io.markdom.model.MarkdomContent;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomListItem;
 import io.markdom.model.choice.MarkdomNodeChoice;
+import io.markdom.util.ObjectHelper;
 
 public final class MarkdomNodeChoiceSelection extends AbstractMarkdomNodeSelection<Void> {
 
 	private final MarkdomNodeChoice choice;
 
 	public MarkdomNodeChoiceSelection(MarkdomNodeChoice choice) {
-		if (null == choice) {
-			throw new IllegalArgumentException("The given choice is null");
-		}
-		this.choice = choice;
+		this.choice = ObjectHelper.notNull("choice", choice);
 	}
 
 	@Override

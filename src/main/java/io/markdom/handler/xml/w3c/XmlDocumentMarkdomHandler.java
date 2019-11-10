@@ -10,6 +10,7 @@ import org.w3c.dom.Node;
 
 import io.markdom.handler.xml.AbstractXmlDocumentMarkdomHandler;
 import io.markdom.util.Attribute;
+import io.markdom.util.ObjectHelper;
 
 public final class XmlDocumentMarkdomHandler extends AbstractXmlDocumentMarkdomHandler<XmlDocumentResult> {
 
@@ -20,10 +21,7 @@ public final class XmlDocumentMarkdomHandler extends AbstractXmlDocumentMarkdomH
 	private Element element;
 
 	public XmlDocumentMarkdomHandler(DocumentBuilder builder) {
-		if (null == builder) {
-			throw new IllegalArgumentException("The given document builder is null");
-		}
-		this.builder = builder;
+		this.builder = ObjectHelper.notNull("builder", builder);
 	}
 
 	protected final Document getDocument() {

@@ -8,6 +8,7 @@ import io.markdom.model.ManagedMarkdomBlock;
 import io.markdom.model.MarkdomBlockParent;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
+import io.markdom.util.ObjectHelper;
 
 abstract class AbstractMarkdomBlock extends AbstractMarkdomNode implements ManagedMarkdomBlock {
 
@@ -39,22 +40,21 @@ abstract class AbstractMarkdomBlock extends AbstractMarkdomNode implements Manag
 
 	@Override
 	public final Runnable onAttach(MarkdomBlockParent parent) {
-		if (null == parent) {
-			throw new IllegalArgumentException("The given Markdom block parent is null");
-		}
+		ObjectHelper.notNull("block parent", parent);
 		if (null != this.parent) {
-			throw new IllegalStateException("This Markdom block is already attached to a block parent");
+			throw new IllegalStateException("This block is already attached to a block parent");
 		}
 		return () -> AbstractMarkdomBlock.this.parent = parent;
 	}
 
 	@Override
 	public final Runnable onDetach(MarkdomBlockParent parent) {
+		ObjectHelper.notNull("block parent", parent);
 		if (null == this.parent) {
-			throw new IllegalStateException("This Markdom block is currently not attached to a block parent");
+			throw new IllegalStateException("This block is currently not attached to a block parent");
 		}
 		if (this.parent != parent) {
-			throw new IllegalStateException("This Markdom block is not attached to the given block parent");
+			throw new IllegalStateException("This block is not attached to the given block parent");
 		}
 		return () -> AbstractMarkdomBlock.this.parent = null;
 	}

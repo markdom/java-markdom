@@ -2,6 +2,7 @@ package io.markdom.model.basic;
 
 import io.markdom.model.ManagedMarkdomContent;
 import io.markdom.model.MarkdomContentParent;
+import io.markdom.util.ObjectHelper;
 
 final class BasicMarkdomContentList extends AbstractObservableList<ManagedMarkdomContent> {
 
@@ -13,17 +14,11 @@ final class BasicMarkdomContentList extends AbstractObservableList<ManagedMarkdo
 
 	@Override
 	protected Runnable beforeInsert(ManagedMarkdomContent content) {
-		if (null == content) {
-			throw new IllegalArgumentException("The given Markdom content is null");
-		}
-		return content.onAttach(parent);
+		return ObjectHelper.notNull("content", content).onAttach(parent);
 	}
 
 	@Override
 	protected Runnable beforeRemove(ManagedMarkdomContent content) {
-		if (null == content) {
-			throw new IllegalArgumentException("The given Markdom content is null");
-		}
-		return content.onDetach(parent);
+		return ObjectHelper.notNull("content", content).onDetach(parent);
 	}
 }

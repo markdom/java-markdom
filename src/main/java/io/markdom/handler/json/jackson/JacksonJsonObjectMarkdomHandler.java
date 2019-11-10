@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import io.markdom.handler.json.AbstractJsonObjectMarkdomHandler;
+import io.markdom.util.ObjectHelper;
 
 public final class JacksonJsonObjectMarkdomHandler
 	extends AbstractJsonObjectMarkdomHandler<ObjectNode, ArrayNode, JacksonJsonObjectResult> {
@@ -25,10 +26,7 @@ public final class JacksonJsonObjectMarkdomHandler
 
 	public JacksonJsonObjectMarkdomHandler(JsonNodeFactory factory, boolean includeSchema) {
 		super(includeSchema);
-		if (null == factory) {
-			throw new IllegalArgumentException("The given factory is null");
-		}
-		this.factory = factory;
+		this.factory = ObjectHelper.notNull("factory", factory);
 	}
 
 	@Override

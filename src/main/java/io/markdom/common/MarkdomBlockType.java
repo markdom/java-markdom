@@ -41,7 +41,7 @@ public enum MarkdomBlockType {
 	public static MarkdomBlockType fromName(String value) throws IllegalArgumentException {
 		MarkdomBlockType type = MAP.get(value);
 		if (null == type) {
-			throw new IllegalArgumentException("There is no Markdom block type with the given string value: " + value);
+			throw new IllegalArgumentException("There is no block type with the given string value: " + value);
 		} else {
 			return type;
 		}

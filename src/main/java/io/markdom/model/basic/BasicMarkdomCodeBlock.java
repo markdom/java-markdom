@@ -37,10 +37,7 @@ public final class BasicMarkdomCodeBlock extends AbstractMarkdomBlock implements
 	}
 
 	public BasicMarkdomCodeBlock setCode(String code) {
-		if (null == code) {
-			throw new IllegalArgumentException("The given code is null");
-		}
-		this.code = code;
+		this.code = ObjectHelper.notNull("code", code);
 		return this;
 	}
 
@@ -50,10 +47,7 @@ public final class BasicMarkdomCodeBlock extends AbstractMarkdomBlock implements
 	}
 
 	public BasicMarkdomCodeBlock setHint(Optional<String> hint) {
-		if (null == hint) {
-			throw new IllegalArgumentException("The given hint is null");
-		}
-		this.hint = hint;
+		this.hint = ObjectHelper.notNull("optional hint", hint);
 		return this;
 	}
 

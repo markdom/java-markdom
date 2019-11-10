@@ -41,10 +41,7 @@ public final class BasicMarkdomImageContent extends AbstractMarkdomContent imple
 	}
 
 	public BasicMarkdomImageContent setUri(String uri) {
-		if (null == uri) {
-			throw new IllegalArgumentException("The given URI is null");
-		}
-		this.uri = uri;
+		this.uri = ObjectHelper.notNull("uri", uri);
 		return this;
 	}
 
@@ -54,10 +51,7 @@ public final class BasicMarkdomImageContent extends AbstractMarkdomContent imple
 	}
 
 	public BasicMarkdomImageContent setTitle(Optional<String> title) {
-		if (null == uri) {
-			throw new IllegalArgumentException("The given title	 is null");
-		}
-		this.title = title;
+		this.title = ObjectHelper.notNull("optional title", title);
 		return this;
 	}
 
@@ -67,10 +61,7 @@ public final class BasicMarkdomImageContent extends AbstractMarkdomContent imple
 	}
 
 	public BasicMarkdomImageContent setAlternative(Optional<String> alternative) {
-		if (null == uri) {
-			throw new IllegalArgumentException("The given alternative is null");
-		}
-		this.alternative = alternative;
+		this.alternative = ObjectHelper.notNull("optional alternative", alternative);
 		return this;
 	}
 
