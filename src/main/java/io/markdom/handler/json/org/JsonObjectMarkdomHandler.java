@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 import io.markdom.handler.json.AbstractJsonObjectMarkdomHandler;
 
-public final class JsonObjectMarkdomHandler extends AbstractJsonObjectMarkdomHandler<JSONObject, JSONArray, JSONObject> {
+public final class JsonObjectMarkdomHandler extends AbstractJsonObjectMarkdomHandler<JSONObject, JSONArray, JsonObjectResult> {
 
 	public JsonObjectMarkdomHandler() {
 		this(false);
@@ -51,8 +51,8 @@ public final class JsonObjectMarkdomHandler extends AbstractJsonObjectMarkdomHan
 	}
 
 	@Override
-	protected JSONObject toResult(JSONObject object) {
-		return object;
+	protected JsonObjectResult toResult(JSONObject object) {
+		return new JsonObjectResult(object);
 	}
 
 }

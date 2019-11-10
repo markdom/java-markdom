@@ -60,7 +60,7 @@ public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNo
 		for (Attribute attribute : attributes) {
 			tagNode.addAttribute(attribute.getKey(), attribute.getValue());
 		}
-		for (TagNode blockNode : asBlockElements()) {
+		for (TagNode blockNode : asElements()) {
 			tagNode.addChild(makeDeepCopy(blockNode));
 		}
 		return tagNode;
@@ -72,14 +72,14 @@ public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNo
 	}
 
 	@Override
-	public List<TagNode> asBlockElements() {
+	public List<TagNode> asElements() {
 		return asDocument().findElementByName("body", true).getChildTagList();
 	}
 
 	@Override
-	public String asBlockElementsText(boolean pretty) {
+	public String asElementsText(boolean pretty) {
 		StringBuilder builder = new StringBuilder();
-		for (TagNode blockNode : asBlockElements()) {
+		for (TagNode blockNode : asElements()) {
 			builder.append(asText(blockNode, pretty));
 		}
 		return builder.toString();

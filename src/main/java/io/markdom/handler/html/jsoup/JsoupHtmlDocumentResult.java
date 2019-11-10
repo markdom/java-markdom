@@ -37,7 +37,7 @@ public final class JsoupHtmlDocumentResult implements HtmlDocumentResult<Documen
 		for (Attribute attribute : attributes) {
 			element.attr(attribute.getKey(), attribute.getValue());
 		}
-		for (Element blockElement : asBlockElements()) {
+		for (Element blockElement : asElements()) {
 			element.appendChild(blockElement.clone());
 		}
 		return element;
@@ -51,14 +51,14 @@ public final class JsoupHtmlDocumentResult implements HtmlDocumentResult<Documen
 	}
 
 	@Override
-	public Elements asBlockElements() {
+	public Elements asElements() {
 		return asDocument().body().children();
 	}
 
 	@Override
-	public String asBlockElementsText(boolean pretty) {
+	public String asElementsText(boolean pretty) {
 		StringBuilder builder = new StringBuilder();
-		for (Element blockElement : asBlockElements()) {
+		for (Element blockElement : asElements()) {
 			blockElement.ownerDocument().outputSettings().prettyPrint(pretty);
 			builder.append(blockElement.outerHtml());
 		}

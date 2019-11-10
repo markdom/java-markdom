@@ -34,12 +34,12 @@ public interface HtmlDocumentResult<Document, Element, Elements> {
 
 	public String asElementText(String tagName, Iterable<Attribute> attributes, boolean pretty);
 
-	public Elements asBlockElements();
+	public Elements asElements();
 
-	public default String asBlockElementsText() {
-		return asBlockElementsText(false);
+	public default String asElementsText() {
+		return asElementsText(false);
 	}
 
-	public String asBlockElementsText(boolean pretty);
+	public String asElementsText(boolean pretty);
 
 }

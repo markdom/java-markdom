@@ -5,7 +5,7 @@ import com.github.cliftonlabs.json_simple.JsonObject;
 
 import io.markdom.handler.json.AbstractJsonObjectMarkdomHandler;
 
-public final class JsonSimpleObjectMarkdomHandler extends AbstractJsonObjectMarkdomHandler<JsonObject, JsonArray, JsonObject> {
+public final class JsonSimpleObjectMarkdomHandler extends AbstractJsonObjectMarkdomHandler<JsonObject, JsonArray, JsonSimpleObjectResult> {
 
 	public JsonSimpleObjectMarkdomHandler() {
 		this(false);
@@ -51,8 +51,8 @@ public final class JsonSimpleObjectMarkdomHandler extends AbstractJsonObjectMark
 	}
 
 	@Override
-	protected JsonObject toResult(JsonObject object) {
-		return object;
+	protected JsonSimpleObjectResult toResult(JsonObject object) {
+		return new JsonSimpleObjectResult(object);
 	}
 
 }

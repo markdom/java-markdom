@@ -22,7 +22,7 @@ public class JakartaJsonObjectMarkdomHandlerTest {
 		MarkdomFactory factory = new BasicMarkdomFactory();
 		MarkdomDocument document = TestHelper.getExampleDocument(factory);
 
-		JsonObject jsonObject = document.handle(new JakartaJsonObjectMarkdomHandler());
+		JsonObject jsonObject = document.handle(new JakartaJsonObjectMarkdomHandler()).asObject();
 		String json = jsonObject.toString();
 
 		assertEquals(TestHelper.readExampleJson(), json, JSONCompareMode.STRICT_ORDER);

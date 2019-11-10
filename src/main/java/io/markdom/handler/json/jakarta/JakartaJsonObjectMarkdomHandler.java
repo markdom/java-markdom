@@ -2,13 +2,12 @@ package io.markdom.handler.json.jakarta;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
-import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 
 import io.markdom.handler.json.AbstractJsonObjectMarkdomHandler;
 
 public final class JakartaJsonObjectMarkdomHandler
-		extends AbstractJsonObjectMarkdomHandler<JsonObjectBuilder, JsonArrayBuilder, JsonObject> {
+	extends AbstractJsonObjectMarkdomHandler<JsonObjectBuilder, JsonArrayBuilder, JakartaJsonObjectResult> {
 
 	public JakartaJsonObjectMarkdomHandler() {
 		this(false);
@@ -54,8 +53,8 @@ public final class JakartaJsonObjectMarkdomHandler
 	}
 
 	@Override
-	protected JsonObject toResult(JsonObjectBuilder object) {
-		return object.build();
+	protected JakartaJsonObjectResult toResult(JsonObjectBuilder object) {
+		return new JakartaJsonObjectResult(object.build());
 	}
 
 }

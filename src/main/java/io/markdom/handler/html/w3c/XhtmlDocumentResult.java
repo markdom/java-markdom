@@ -52,7 +52,7 @@ public class XhtmlDocumentResult implements HtmlDocumentResult<Document, Element
 		for (Attribute attribute : attributes) {
 			element.setAttribute(attribute.getKey(), attribute.getValue());
 		}
-		for (Node node : new NodeListIterable(asBlockElements())) {
+		for (Node node : new NodeListIterable(asElements())) {
 			element.appendChild(document.importNode(node, true));
 		}
 		return element;
@@ -64,14 +64,14 @@ public class XhtmlDocumentResult implements HtmlDocumentResult<Document, Element
 	}
 
 	@Override
-	public NodeList asBlockElements() {
+	public NodeList asElements() {
 		return ((Element) asDocument().getLastChild().getChildNodes()).getLastChild().getChildNodes();
 	}
 
 	@Override
-	public String asBlockElementsText(boolean pretty) {
+	public String asElementsText(boolean pretty) {
 		StringBuilder builder = new StringBuilder();
-		for (Node node : new NodeListIterable(asBlockElements())) {
+		for (Node node : new NodeListIterable(asElements())) {
 			builder.append(XmlHelper.asText(node, pretty));
 		}
 		return builder.toString();

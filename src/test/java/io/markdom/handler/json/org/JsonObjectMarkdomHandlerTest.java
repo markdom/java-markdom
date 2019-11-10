@@ -21,7 +21,7 @@ public class JsonObjectMarkdomHandlerTest {
 		MarkdomFactory factory = new BasicMarkdomFactory();
 		MarkdomDocument document = TestHelper.getExampleDocument(factory);
 
-		JSONObject jsonObject = document.handle(new JsonObjectMarkdomHandler());
+		JSONObject jsonObject = document.handle(new JsonObjectMarkdomHandler()).asObject();
 		String json = jsonObject.toString();
 
 		assertEquals(TestHelper.readExampleJson(), json, JSONCompareMode.STRICT_ORDER);
