@@ -21,6 +21,8 @@ public final class XhtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkd
 
 	private static final String XMLNS_NAMESPACE = "http://www.w3.org/1999/xhtml";
 
+	private static final String LEGACY_SYSTEM_ID = "about:legacy-compat";
+
 	private final DocumentBuilder builder;
 
 	private Document document;
@@ -50,7 +52,7 @@ public final class XhtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkd
 	@Override
 	protected final void beginDocument(String dtdQualifiedName, String rootTagName) {
 		DOMImplementation domImplementation = builder.getDOMImplementation();
-		DocumentType doctype = domImplementation.createDocumentType(dtdQualifiedName, "", "");
+		DocumentType doctype = domImplementation.createDocumentType(dtdQualifiedName, "", LEGACY_SYSTEM_ID);
 		document = domImplementation.createDocument(XMLNS_NAMESPACE, rootTagName, doctype);
 		element = document.getDocumentElement();
 	}

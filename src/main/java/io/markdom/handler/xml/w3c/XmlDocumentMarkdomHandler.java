@@ -11,7 +11,7 @@ import org.w3c.dom.Node;
 import io.markdom.handler.xml.AbstractXmlDocumentMarkdomHandler;
 import io.markdom.util.Attribute;
 
-public final class XmlDocumentMarkdomHandler extends AbstractXmlDocumentMarkdomHandler<Document> {
+public final class XmlDocumentMarkdomHandler extends AbstractXmlDocumentMarkdomHandler<XmlDocumentResult> {
 
 	private final DocumentBuilder builder;
 
@@ -32,7 +32,7 @@ public final class XmlDocumentMarkdomHandler extends AbstractXmlDocumentMarkdomH
 
 	@Override
 	protected final void beginDocument(String dtdQualifiedName, String dtdPublicId, String dtdSystemId, String rootTagName,
-			String documentVersion, String xmlnsNameSpace) {
+		String documentVersion, String xmlnsNameSpace) {
 		DOMImplementation dom = builder.getDOMImplementation();
 		if (null != dtdQualifiedName) {
 			DocumentType doctype = dom.createDocumentType(dtdQualifiedName, dtdPublicId, dtdSystemId);
@@ -80,8 +80,8 @@ public final class XmlDocumentMarkdomHandler extends AbstractXmlDocumentMarkdomH
 	}
 
 	@Override
-	public Document getResult() {
-		return document;
+	public XmlDocumentResult getResult() {
+		return new XmlDocumentResult(document);
 	}
 
 }

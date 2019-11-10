@@ -28,7 +28,7 @@ public class XmlDocumentMarkdomHandlerTest {
 		xmlFactory.setNamespaceAware(true);
 
 		DocumentBuilder xmlBuilder = xmlFactory.newDocumentBuilder();
-		Document xmlDocument = document.handle(new XmlDocumentMarkdomHandler(xmlBuilder));
+		Document xmlDocument = document.handle(new XmlDocumentMarkdomHandler(xmlBuilder)).asDocument();
 		String xml = TestHelper.toString(xmlDocument);
 
 		assertThat(xml, CompareMatcher.isIdenticalTo(TestHelper.readExampleXml()).ignoreWhitespace());

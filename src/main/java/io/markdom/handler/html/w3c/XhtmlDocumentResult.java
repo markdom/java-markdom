@@ -1,24 +1,17 @@
 package io.markdom.handler.html.w3c;
 
-import java.io.StringWriter;
 import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import io.markdom.handler.html.HtmlDocumentResult;
 import io.markdom.util.Attribute;
-import lombok.SneakyThrows;
+import io.markdom.util.XmlHelper;
 import net.markenwerk.commons.iterables.NodeListIterable;
 
 public class XhtmlDocumentResult implements HtmlDocumentResult<Document, Element, NodeList> {
@@ -46,9 +39,9 @@ public class XhtmlDocumentResult implements HtmlDocumentResult<Document, Element
 	@Override
 	public String asDocumentText(boolean pretty) {
 		if (pretty) {
-			return transform(asDocument(), true);
+			return XmlHelper.asText(asDocument(), true);
 		} else {
-			return transform(asDocument(), false).replaceFirst(Pattern.quote("\n"), "");
+			return XmlHelper.asText(asDocument(), false).replaceFirst(Pattern.quote("\n"), "");
 		}
 	}
 
@@ -67,7 +60,7 @@ public class XhtmlDocumentResult implements HtmlDocumentResult<Document, Element
 
 	@Override
 	public String asElementText(String tagName, Iterable<Attribute> attributes, boolean pretty) {
-		return transform(asElement(tagName, attributes), pretty);
+		return XmlHelper.asText(asElement(tagName, attributes), pretty);
 	}
 
 	@Override
@@ -79,37 +72,9 @@ public class XhtmlDocumentResult implements HtmlDocumentResult<Document, Element
 	public String asBlockElementsText(boolean pretty) {
 		StringBuilder builder = new StringBuilder();
 		for (Node node : new NodeListIterable(asBlockElements())) {
-			builder.append(transform(node, pretty));
+			builder.append(XmlHelper.asText(node, pretty));
 		}
 		return builder.toString();
-	}
-
-	@SneakyThrows
-	private String transform(Node node, boolean pretty) {
-
-		StreamResult result = new StreamResult(new StringWriter());
-
-		Transformer transformer = TransformerFactory.newInstance().newTransformer();
-		transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-
-		if (pretty) {
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-		}
-
-		if (node instanceof Document) {
-			DocumentType doctype = ((Document) node).getDoctype();
-			if (null != doctype) {
-				transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "about:legacy-compat");
-			}
-		} else {
-			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-		}
-
-		transformer.transform(new DOMSource(node), result);
-		return result.getWriter().toString();
-
 	}
 
 }
