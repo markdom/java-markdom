@@ -57,8 +57,12 @@ public final class JsoupHtmlDocumentResult implements HtmlDocumentResult<Documen
 
 	@Override
 	public String asBlockElementsText(boolean pretty) {
-		document.outputSettings().prettyPrint(pretty);
-		return asBlockElements().outerHtml();
+		StringBuilder builder = new StringBuilder();
+		for (Element blockElement : asBlockElements()) {
+			blockElement.ownerDocument().outputSettings().prettyPrint(pretty);
+			builder.append(blockElement.outerHtml());
+		}
+		return builder.toString();
 	}
 
 }
