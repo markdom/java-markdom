@@ -1,5 +1,7 @@
 package io.markdom.handler;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.EnumSet;
 import java.util.Optional;
 import java.util.Stack;
@@ -12,7 +14,7 @@ import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.util.ObjectHelper;
 import lombok.Data;
 
-public final class VerifyingMarkdomHandler<Result> implements MarkdomHandler<Result> {
+public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Result> {
 
 	private static enum Context {
 
@@ -133,42 +135,32 @@ public final class VerifyingMarkdomHandler<Result> implements MarkdomHandler<Res
 
 	private final EnumSet<Method> expectedMethods = EnumSet.noneOf(Method.class);
 
-	public VerifyingMarkdomHandler(MarkdomHandler<Result> handler) {
+	public DebuggingMarkdomHandler(MarkdomHandler<Result> handler) {
 		this.handler = ObjectHelper.notNull("handler", handler);
-		expect(Method.ON_DOCUMENT_BEGIN);
+		expectMethod(Method.ON_DOCUMENT_BEGIN);
 	}
 
 	@Override
 	public void onDocumentBegin() {
-		testExpectation(Method.ON_DOCUMENT_BEGIN);
+		isExpectedMethod(Method.ON_DOCUMENT_BEGIN);
 		contexts.push(Context.DOCUMENT);
-		expect(Method.ON_BLOCKS_BEGIN);
+		expectMethod(Method.ON_BLOCKS_BEGIN);
 		handler.onDocumentBegin();
 
 	}
 
 	@Override
-	public void onDocumentEnd() {
-		testExpectation(Method.ON_DOCUMENT_END);
-		expect(Method.ON_RESULT);
-		handler.onDocumentEnd();
-	}
-
-	@Override
 	public void onBlocksBegin() {
-		testExpectation(Method.ON_BLOCKS_BEGIN);
-		expect(Method.ON_BLOCK_BEGIN, Method.ON_BLOCKS_END);
+		isExpectedMethod(Method.ON_BLOCKS_BEGIN);
+		expectMethod(Method.ON_BLOCK_BEGIN, Method.ON_BLOCKS_END);
 		handler.onBlocksBegin();
 	}
 
 	@Override
 	public void onBlockBegin(MarkdomBlockType type) {
-		testExpectation(Method.ON_BLOCK_BEGIN);
-		if (null == type) {
-			throw new MarkdomException("The given block type is null");
-		}
-		parameters.push(new Parameter<MarkdomBlockType>(type));
-		expect(blockBeginCallback(type));
+		isExpectedMethod(Method.ON_BLOCK_BEGIN);
+		checkParameter("block type", type, true);
+		expectMethod(blockBeginCallback(type));
 		handler.onBlockBegin(type);
 	}
 
@@ -196,23 +188,23 @@ public final class VerifyingMarkdomHandler<Result> implements MarkdomHandler<Res
 
 	@Override
 	public void onBlockEnd(MarkdomBlockType type) {
-		testExpectation(Method.ON_BLOCK_END);
-		testParameter(type, "block type");
-		expect(Method.ON_NEXT_BLOCK, Method.ON_BLOCKS_END);
+		isExpectedMethod(Method.ON_BLOCK_END);
+		checkAndCompareParameter("block type", type);
+		expectMethod(Method.ON_NEXT_BLOCK, Method.ON_BLOCKS_END);
 		handler.onBlockEnd(type);
 	}
 
 	@Override
 	public void onNextBlock() {
-		testExpectation(Method.ON_NEXT_BLOCK);
-		expect(Method.ON_BLOCK_BEGIN);
+		isExpectedMethod(Method.ON_NEXT_BLOCK);
+		expectMethod(Method.ON_BLOCK_BEGIN);
 		handler.onNextBlock();
 	}
 
 	@Override
 	public void onBlocksEnd() {
-		testExpectation(Method.ON_BLOCKS_END);
-		expect(blocksEndCallback(contexts.firstElement()));
+		isExpectedMethod(Method.ON_BLOCKS_END);
+		expectMethod(blocksEndCallback(contexts.peek()));
 		handler.onBlocksEnd();
 	}
 
@@ -231,152 +223,148 @@ public final class VerifyingMarkdomHandler<Result> implements MarkdomHandler<Res
 
 	@Override
 	public void onCodeBlock(String code, Optional<String> hint) {
-		testExpectation(Method.ON_CODE_BLOCK);
-		if (null == code) {
-			throw new MarkdomException("The given code is null");
-		}
-		expect(Method.ON_BLOCK_END);
+		isExpectedMethod(Method.ON_CODE_BLOCK);
+		checkParameter("code", code, false);
+		checkParameter("optional hint", hint, false);
+		validateNoLineBreak(hint, "hint");
+		expectMethod(Method.ON_BLOCK_END);
 		handler.onCodeBlock(code, hint);
 	}
 
 	@Override
 	public void onCommentBlock(String comment) {
-		testExpectation(Method.ON_COMMENT_BLOCK);
-		if (null == comment) {
-			throw new MarkdomException("The given comment is null");
-		}
-		expect(Method.ON_BLOCK_END);
+		isExpectedMethod(Method.ON_COMMENT_BLOCK);
+		checkParameter("comment", comment, false);
+		expectMethod(Method.ON_BLOCK_END);
 		handler.onCommentBlock(comment);
 	}
 
 	@Override
 	public void onDivisionBlock() {
-		testExpectation(Method.ON_DIVISION_BLOCK);
-		expect(Method.ON_BLOCK_END);
+		isExpectedMethod(Method.ON_DIVISION_BLOCK);
+		expectMethod(Method.ON_BLOCK_END);
 		handler.onDivisionBlock();
 	}
 
 	@Override
 	public void onHeadingBlockBegin(MarkdomHeadingLevel level) {
-		testExpectation(Method.ON_HEADING_BLOCK_BEGIN);
-		if (null == level) {
-			throw new MarkdomException("The given heading level is null");
-		}
-		parameters.push(new Parameter<MarkdomHeadingLevel>(level));
+		isExpectedMethod(Method.ON_HEADING_BLOCK_BEGIN);
+		checkParameter("heading level", level, true);
 		contexts.push(Context.HEADING_BLOCK);
-		expect(Method.ON_CONTENTS_BEGIN);
+		expectMethod(Method.ON_CONTENTS_BEGIN);
 		handler.onHeadingBlockBegin(level);
 	}
 
 	@Override
 	public void onHeadingBlockEnd(MarkdomHeadingLevel level) {
-		testExpectation(Method.ON_HEADING_BLOCK_END);
-		testParameter(level, "heading level");
+		isExpectedMethod(Method.ON_HEADING_BLOCK_END);
+		checkAndCompareParameter("heading level", level);
 		contexts.pop();
-		expect(Method.ON_BLOCK_END);
+		expectMethod(Method.ON_BLOCK_END);
 		handler.onHeadingBlockEnd(level);
 	}
 
 	@Override
 	public void onOrderedListBlockBegin(Integer startIndex) {
-		testExpectation(Method.ON_ORDERED_LIST_BLOCK_BEGIN);
-		parameters.push(new Parameter<Integer>(startIndex));
+		isExpectedMethod(Method.ON_ORDERED_LIST_BLOCK_BEGIN);
+		checkParameter("start index", startIndex, true);
+		validateNotNegative(startIndex);
 		contexts.push(Context.ORDERED_LIST);
-		expect(Method.ON_LIST_ITEMS_BEGIN);
+		expectMethod(Method.ON_LIST_ITEMS_BEGIN);
 		handler.onOrderedListBlockBegin(startIndex);
 	}
 
 	@Override
 	public void onOrderedListBlockEnd(Integer startIndex) {
-		testExpectation(Method.ON_ORDERED_LIST_BLOCK_END);
-		testParameter(startIndex, "start index");
+		isExpectedMethod(Method.ON_ORDERED_LIST_BLOCK_END);
+		checkAndCompareParameter("start index", startIndex);
 		contexts.pop();
-		expect(Method.ON_BLOCK_END);
+		expectMethod(Method.ON_BLOCK_END);
 		handler.onOrderedListBlockEnd(startIndex);
 	}
 
 	@Override
 	public void onParagraphBlockBegin() {
-		testExpectation(Method.ON_PARAGRAPH_BLOCK_BEGIN);
+		isExpectedMethod(Method.ON_PARAGRAPH_BLOCK_BEGIN);
 		contexts.push(Context.PARAGRAPH_BLOCK);
-		expect(Method.ON_CONTENTS_BEGIN);
+		expectMethod(Method.ON_CONTENTS_BEGIN);
 		handler.onParagraphBlockBegin();
 	}
 
 	@Override
 	public void onParagraphBlockEnd() {
-		testExpectation(Method.ON_PARAGRAPH_BLOCK_END);
+		isExpectedMethod(Method.ON_PARAGRAPH_BLOCK_END);
 		contexts.pop();
-		expect(Method.ON_BLOCK_END);
+		expectMethod(Method.ON_BLOCK_END);
 		handler.onParagraphBlockEnd();
 	}
 
 	@Override
 	public void onQuoteBlockBegin() {
-		testExpectation(Method.ON_QUOTE_BLOCK_BEGIN);
+		isExpectedMethod(Method.ON_QUOTE_BLOCK_BEGIN);
 		contexts.push(Context.QUOTE_BLOCK);
-		expect(Method.ON_BLOCKS_BEGIN);
+		expectMethod(Method.ON_BLOCKS_BEGIN);
 		handler.onQuoteBlockBegin();
 	}
 
 	@Override
 	public void onQuoteBlockEnd() {
-		testExpectation(Method.ON_QUOTE_BLOCK_END);
+		isExpectedMethod(Method.ON_QUOTE_BLOCK_END);
 		contexts.pop();
-		expect(Method.ON_BLOCK_END);
+		expectMethod(Method.ON_BLOCK_END);
 		handler.onQuoteBlockEnd();
 	}
 
 	@Override
 	public void onUnorderedListBlockBegin() {
-		testExpectation(Method.ON_UNORDERED_LIST_BLOCK_BEGIN);
+		isExpectedMethod(Method.ON_UNORDERED_LIST_BLOCK_BEGIN);
 		contexts.push(Context.UNORDERED_LIST);
-		expect(Method.ON_LIST_ITEMS_BEGIN);
+		expectMethod(Method.ON_LIST_ITEMS_BEGIN);
 		handler.onUnorderedListBlockBegin();
 	}
 
 	@Override
 	public void onUnorderedListBlockEnd() {
-		testExpectation(Method.ON_UNORDERED_LIST_BLOCK_END);
+		isExpectedMethod(Method.ON_UNORDERED_LIST_BLOCK_END);
 		contexts.pop();
-		expect(Method.ON_BLOCK_END);
+		expectMethod(Method.ON_BLOCK_END);
 		handler.onUnorderedListBlockEnd();
 	}
 
 	@Override
 	public void onListItemsBegin() {
-		testExpectation(Method.ON_LIST_ITEMS_BEGIN);
-		expect(Method.ON_LIST_ITEM_BEGIN, Method.ON_LIST_ITEMS_END);
+		isExpectedMethod(Method.ON_LIST_ITEMS_BEGIN);
+		expectMethod(Method.ON_LIST_ITEM_BEGIN, Method.ON_LIST_ITEMS_END);
 		handler.onListItemsBegin();
 	}
 
 	@Override
 	public void onListItemBegin() {
-		testExpectation(Method.ON_LIST_ITEM_BEGIN);
+		isExpectedMethod(Method.ON_LIST_ITEM_BEGIN);
 		contexts.push(Context.LIST_ITEM);
-		expect(Method.ON_BLOCKS_BEGIN);
+		expectMethod(Method.ON_BLOCKS_BEGIN);
 		handler.onListItemBegin();
 	}
 
 	@Override
 	public void onListItemEnd() {
-		testExpectation(Method.ON_LIST_ITEM_END);
+		isExpectedMethod(Method.ON_LIST_ITEM_END);
 		contexts.pop();
-		expect(Method.ON_NEXT_LIST_ITEM, Method.ON_LIST_ITEMS_END);
+		expectMethod(Method.ON_NEXT_LIST_ITEM, Method.ON_LIST_ITEMS_END);
 		handler.onListItemEnd();
 	}
 
 	@Override
 	public void onNextListItem() {
-		testExpectation(Method.ON_NEXT_LIST_ITEM);
-		expect(Method.ON_LIST_ITEM_BEGIN);
+		isExpectedMethod(Method.ON_NEXT_LIST_ITEM);
+		expectMethod(Method.ON_LIST_ITEM_BEGIN);
 		handler.onNextListItem();
 	}
 
 	@Override
 	public void onListItemsEnd() {
-		testExpectation(Method.ON_LIST_ITEMS_END);
-		expect(listItemEndCallback(contexts.firstElement()));
+		isExpectedMethod(Method.ON_LIST_ITEMS_END);
+		expectMethod(listItemEndCallback(contexts.peek()));
 		handler.onListItemsEnd();
 	}
 
@@ -393,19 +381,16 @@ public final class VerifyingMarkdomHandler<Result> implements MarkdomHandler<Res
 
 	@Override
 	public void onContentsBegin() {
-		testExpectation(Method.ON_CONTENTS_BEGIN);
-		expect(Method.ON_CONTENT_BEGIN, Method.ON_CONTENTS_END);
+		isExpectedMethod(Method.ON_CONTENTS_BEGIN);
+		expectMethod(Method.ON_CONTENT_BEGIN, Method.ON_CONTENTS_END);
 		handler.onContentsBegin();
 	}
 
 	@Override
 	public void onContentBegin(MarkdomContentType type) {
-		testExpectation(Method.ON_CONTENT_BEGIN);
-		if (null == type) {
-			throw new MarkdomException("The given content type is null");
-		}
-		parameters.push(new Parameter<MarkdomContentType>(type));
-		expect(contentBeginCallback(type));
+		isExpectedMethod(Method.ON_CONTENT_BEGIN);
+		checkParameter("content type", type, true);
+		expectMethod(contentBeginCallback(type));
 		handler.onContentBegin(type);
 	}
 
@@ -429,23 +414,23 @@ public final class VerifyingMarkdomHandler<Result> implements MarkdomHandler<Res
 
 	@Override
 	public void onContentEnd(MarkdomContentType type) {
-		testExpectation(Method.ON_CONTENT_END);
-		testParameter(type, "content type");
-		expect(Method.ON_NEXT_CONTENT, Method.ON_CONTENTS_END);
+		isExpectedMethod(Method.ON_CONTENT_END);
+		checkAndCompareParameter("content type", type);
+		expectMethod(Method.ON_NEXT_CONTENT, Method.ON_CONTENTS_END);
 		handler.onContentEnd(type);
 	}
 
 	@Override
 	public void onNextContent() {
-		testExpectation(Method.ON_NEXT_CONTENT);
-		expect(Method.ON_CONTENT_BEGIN);
+		isExpectedMethod(Method.ON_NEXT_CONTENT);
+		expectMethod(Method.ON_CONTENT_BEGIN);
 		handler.onNextContent();
 	}
 
 	@Override
 	public void onContentsEnd() {
-		testExpectation(Method.ON_CONTENTS_END);
-		expect(contentsEndCallback(contexts.firstElement()));
+		isExpectedMethod(Method.ON_CONTENTS_END);
+		expectMethod(contentsEndCallback(contexts.peek()));
 		handler.onContentsEnd();
 	}
 
@@ -466,110 +451,167 @@ public final class VerifyingMarkdomHandler<Result> implements MarkdomHandler<Res
 
 	@Override
 	public void onCodeContent(String code) {
-		testExpectation(Method.ON_CODE_CONTENT);
-		if (null == code) {
-			throw new MarkdomException("The given code is null");
-		}
-		expect(Method.ON_CONTENT_END);
+		isExpectedMethod(Method.ON_CODE_CONTENT);
+		checkParameter("code", code, false);
+		validateNoLineBreak(code, "code");
+		expectMethod(Method.ON_CONTENT_END);
 		handler.onCodeContent(code);
 	}
 
 	@Override
 	public void onEmphasisContentBegin(MarkdomEmphasisLevel level) {
-		testExpectation(Method.ON_EMPHASIS_CONTENT_BEGIN);
-		if (null == level) {
-			throw new MarkdomException("The given emphasis level is null");
-		}
-		parameters.push(new Parameter<MarkdomEmphasisLevel>(level));
+		isExpectedMethod(Method.ON_EMPHASIS_CONTENT_BEGIN);
+		checkParameter("emphasis level", level, true);
 		contexts.push(Context.EMPHASIS_CONTENT);
-		expect(Method.ON_CONTENTS_BEGIN);
+		expectMethod(Method.ON_CONTENTS_BEGIN);
 		handler.onEmphasisContentBegin(level);
 	}
 
 	@Override
 	public void onEmphasisContentEnd(MarkdomEmphasisLevel level) {
-		testExpectation(Method.ON_EMPHASIS_CONTENT_END);
-		testParameter(level, "emphasis level");
+		isExpectedMethod(Method.ON_EMPHASIS_CONTENT_END);
+		checkAndCompareParameter("emphasis level", level);
 		contexts.pop();
-		expect(Method.ON_CONTENT_END);
+		expectMethod(Method.ON_CONTENT_END);
 		handler.onEmphasisContentEnd(level);
 	}
 
 	@Override
 	public void onImageContent(String uri, Optional<String> title, Optional<String> alternative) {
-		testExpectation(Method.ON_IMAGE_CONTENT);
-		if (null == uri) {
-			throw new MarkdomException("The given URI is null");
-		}
-		expect(Method.ON_CONTENT_END);
+		isExpectedMethod(Method.ON_IMAGE_CONTENT);
+		checkParameter("uri", uri, false);
+		checkParameter("optional title", title, false);
+		checkParameter("optional alternative", title, false);
+		validateValidUri(uri);
+		validateNoLineBreak(title, "title");
+		validateNoLineBreak(alternative, "alternative");
+		expectMethod(Method.ON_CONTENT_END);
 		handler.onImageContent(uri, title, alternative);
 	}
 
 	@Override
 	public void onLineBreakContent(Boolean hard) {
-		testExpectation(Method.ON_LINE_BREAK_CONTENT);
-		expect(Method.ON_CONTENT_END);
+		isExpectedMethod(Method.ON_LINE_BREAK_CONTENT);
+		checkParameter("hard", hard, false);
+		checkLineBreakContext();
+		expectMethod(Method.ON_CONTENT_END);
 		handler.onLineBreakContent(hard);
 	}
 
 	@Override
 	public void onLinkContentBegin(String uri, Optional<String> title) {
-		testExpectation(Method.ON_LINK_CONTENT_BEGIN);
-		if (null == uri) {
-			throw new MarkdomException("The given URI is null");
-		}
-		parameters.push(new Parameter<String>(uri));
+		isExpectedMethod(Method.ON_LINK_CONTENT_BEGIN);
+		checkParameter("uri", uri, true);
+		checkParameter("optional title", title, true);
+		validateValidUri(uri);
+		validateNoLineBreak(title, "title");
+		checkLinkContentContext();
 		contexts.push(Context.LINK_CONTENT);
-		expect(Method.ON_CONTENTS_BEGIN);
+		expectMethod(Method.ON_CONTENTS_BEGIN);
 		handler.onLinkContentBegin(uri, title);
 	}
 
 	@Override
 	public void onLinkContentEnd(String uri, Optional<String> title) {
-		testExpectation(Method.ON_LINK_CONTENT_END);
-		testParameter(uri, "URI");
+		isExpectedMethod(Method.ON_LINK_CONTENT_END);
+		checkAndCompareParameter("optional title", title);
+		checkAndCompareParameter("uri", uri);
 		contexts.pop();
-		expect(Method.ON_CONTENT_END);
+		expectMethod(Method.ON_CONTENT_END);
 		handler.onLinkContentEnd(uri, title);
 	}
 
 	@Override
 	public void onTextContent(String text) {
-		testExpectation(Method.ON_TEXT_CONTENT);
-		if (null == text) {
-			throw new MarkdomException("The given text is null");
-		}
-		expect(Method.ON_CONTENT_END);
+		isExpectedMethod(Method.ON_TEXT_CONTENT);
+		checkParameter("text", text, false);
+		validateNoLineBreak(text, "text");
+		expectMethod(Method.ON_CONTENT_END);
 		handler.onTextContent(text);
 	}
 
 	@Override
+	public void onDocumentEnd() {
+		isExpectedMethod(Method.ON_DOCUMENT_END);
+		expectMethod(Method.ON_RESULT);
+		handler.onDocumentEnd();
+	}
+
+	@Override
 	public Result getResult() {
-		expect(Method.ON_RESULT);
+		expectMethod(Method.ON_RESULT);
 		return handler.getResult();
 	}
 
-	private void expect(Method... callbacks) {
+	private void expectMethod(Method... methods) {
 		expectedMethods.clear();
-		for (Method callback : callbacks) {
-			expectedMethods.add(callback);
+		for (Method method : methods) {
+			expectedMethods.add(method);
 		}
 	}
 
-	private void testExpectation(Method callback) {
+	private void isExpectedMethod(Method callback) {
 		if (!expectedMethods.contains(callback)) {
-			throw new MarkdomException(
-				"The invoked callback method is none of " + expectedMethods + " in context " + parameters + ": " + callback);
+			throw new MarkdomException("The invoked method is none of " + expectedMethods + " in context " + parameters + ": " + callback);
 		}
 	}
 
-	private void testParameter(Object value, String name) {
+	private void checkParameter(String name, Object value, boolean compareLater) {
+		if (null == value) {
+			throw new MarkdomException("The given " + name + " is null");
+		}
+		if (compareLater) {
+			parameters.push(new Parameter<>(value));
+		}
+	}
+
+	private void checkAndCompareParameter(String name, Object value) {
 		if (null == value) {
 			throw new MarkdomException("The given " + name + " is null");
 		}
 		Parameter<?> parameter = parameters.pop();
 		if (!value.equals(parameter.payload)) {
 			throw new MarkdomException("The given " + name + " is not " + parameter.payload + ": " + value);
+		}
+	}
+
+	private void validateNotNegative(Integer startIndex) {
+		if (startIndex < 0) {
+			throw new MarkdomException("The given start index is negative: " + startIndex);
+		}
+	}
+
+	private void validateNoLineBreak(Optional<String> string, String name) {
+		if (string.isPresent()) {
+			validateNoLineBreak(string.get(), name);
+		}
+	}
+
+	private void validateNoLineBreak(String string, String name) {
+		for (int i = 0, n = string.length(); i < n; i++) {
+			if ('\n' == string.charAt(i)) {
+				throw new MarkdomException("The given " + name + " contains a line break at index " + i + ": " + string);
+			}
+		}
+	}
+
+	private void validateValidUri(String uri) {
+		try {
+			new URI(uri);
+		} catch (URISyntaxException e) {
+			throw new MarkdomException("The given uri is invalid: " + uri, e);
+		}
+	}
+
+	private void checkLineBreakContext() {
+		if (contexts.contains(Context.HEADING_BLOCK)) {
+			throw new MarkdomException("A line break appeared inside a heading block");
+		}
+	}
+
+	private void checkLinkContentContext() {
+		if (contexts.contains(Context.LINK_CONTENT)) {
+			throw new MarkdomException("A link content appeared inside of another link content");
 		}
 	}
 
