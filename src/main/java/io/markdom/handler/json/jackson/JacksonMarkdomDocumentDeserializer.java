@@ -12,15 +12,15 @@ import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
 
-public final class JacksonMarkdomDeserializer extends JsonDeserializer<MarkdomDocument> {
+public final class JacksonMarkdomDocumentDeserializer extends JsonDeserializer<MarkdomDocument> {
 
 	private final MarkdomFactory factory;
 
-	public JacksonMarkdomDeserializer() {
+	public JacksonMarkdomDocumentDeserializer() {
 		this(new BasicMarkdomFactory());
 	}
 
-	public JacksonMarkdomDeserializer(MarkdomFactory factory) {
+	public JacksonMarkdomDocumentDeserializer(MarkdomFactory factory) {
 		if (null == factory) {
 			throw new IllegalArgumentException("The given Markdom factory is null");
 		}

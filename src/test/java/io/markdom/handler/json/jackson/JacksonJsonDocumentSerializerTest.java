@@ -20,14 +20,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 
-public class JacksonJsonSerializerTest {
+public class JacksonJsonDocumentSerializerTest {
 
 	@Data
 	@NoArgsConstructor
 	@AllArgsConstructor
 	private static class Holder {
 
-		@JsonSerialize(using = JacksonMarkdomSerializer.class)
+		@JsonSerialize(using = JacksonMarkdomDocumentSerializer.class)
 		private MarkdomDocument document;
 
 	}

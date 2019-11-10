@@ -17,7 +17,7 @@ import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
 import lombok.SneakyThrows;
 
-public class JacksonJsonModuleTest {
+public class JacksonJsonDocumentModuleTest {
 
 	@Test
 	@SneakyThrows
@@ -26,7 +26,7 @@ public class JacksonJsonModuleTest {
 		MarkdomFactory factory = new BasicMarkdomFactory();
 
 		ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(new JacksonMarkdomModule(factory));
+		mapper.registerModule(new JacksonMarkdomDocumentModule(factory));
 
 		MarkdomDocument document = mapper.readValue(TestHelper.openExampleJson(), MarkdomDocument.class);
 
@@ -42,7 +42,7 @@ public class JacksonJsonModuleTest {
 		MarkdomDocument document = TestHelper.getExampleDocument(factory);
 
 		ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(new JacksonMarkdomModule(factory));
+		mapper.registerModule(new JacksonMarkdomDocumentModule(factory));
 
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 		mapper.writeValue(buffer, document);

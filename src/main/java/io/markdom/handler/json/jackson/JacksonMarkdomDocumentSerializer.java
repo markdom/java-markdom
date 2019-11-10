@@ -8,15 +8,15 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import io.markdom.model.MarkdomDocument;
 
-public final class JacksonMarkdomSerializer extends JsonSerializer<MarkdomDocument> {
+public final class JacksonMarkdomDocumentSerializer extends JsonSerializer<MarkdomDocument> {
 
 	private final boolean generateSchema;
 
-	public JacksonMarkdomSerializer() {
+	public JacksonMarkdomDocumentSerializer() {
 		this(false);
 	}
 
-	public JacksonMarkdomSerializer(boolean generateSchema) {
+	public JacksonMarkdomDocumentSerializer(boolean generateSchema) {
 		this.generateSchema = generateSchema;
 	}
 
