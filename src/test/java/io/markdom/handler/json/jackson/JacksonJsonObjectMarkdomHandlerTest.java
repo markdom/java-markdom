@@ -5,8 +5,6 @@ import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import io.markdom.TestHelper;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
@@ -22,8 +20,7 @@ public class JacksonJsonObjectMarkdomHandlerTest {
 		MarkdomFactory factory = new BasicMarkdomFactory();
 		MarkdomDocument document = TestHelper.getExampleDocument(factory);
 
-		ObjectNode jsonObject = document.handle(new JacksonJsonObjectMarkdomHandler()).asObject();
-		String json = jsonObject.toString();
+		String json = document.handle(new JacksonJsonObjectMarkdomHandler()).asObjectText();
 
 		assertEquals(TestHelper.readExampleJson(), json, JSONCompareMode.STRICT_ORDER);
 

@@ -2,7 +2,6 @@ package io.markdom.handler.json.org;
 
 import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -21,8 +20,7 @@ public class JsonObjectMarkdomHandlerTest {
 		MarkdomFactory factory = new BasicMarkdomFactory();
 		MarkdomDocument document = TestHelper.getExampleDocument(factory);
 
-		JSONObject jsonObject = document.handle(new JsonObjectMarkdomHandler()).asObject();
-		String json = jsonObject.toString();
+		String json = document.handle(new JsonObjectMarkdomHandler()).asObjectText();
 
 		assertEquals(TestHelper.readExampleJson(), json, JSONCompareMode.STRICT_ORDER);
 
