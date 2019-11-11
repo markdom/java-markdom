@@ -11,6 +11,7 @@ import org.w3c.dom.NodeList;
 
 import io.markdom.handler.html.HtmlDocumentResult;
 import io.markdom.util.Attribute;
+import io.markdom.util.Attributes;
 import io.markdom.util.ObjectHelper;
 import io.markdom.util.XmlHelper;
 import net.markenwerk.commons.iterables.NodeListIterable;
@@ -41,7 +42,7 @@ public class XhtmlDocumentResult implements HtmlDocumentResult<Document, Element
 	}
 
 	@Override
-	public Element asElement(String tagName, Iterable<Attribute> attributes) {
+	public Element asElement(String tagName, Attributes attributes) {
 		Document document = builder.newDocument();
 		Element element = document.createElement(tagName);
 		for (Attribute attribute : attributes) {
@@ -54,7 +55,7 @@ public class XhtmlDocumentResult implements HtmlDocumentResult<Document, Element
 	}
 
 	@Override
-	public String asElementText(String tagName, Iterable<Attribute> attributes, boolean pretty) {
+	public String asElementText(String tagName, Attributes attributes, boolean pretty) {
 		return XmlHelper.asText(asElement(tagName, attributes), pretty);
 	}
 

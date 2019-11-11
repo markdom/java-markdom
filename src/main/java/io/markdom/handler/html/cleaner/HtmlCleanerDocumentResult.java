@@ -13,6 +13,7 @@ import org.htmlcleaner.TagNode;
 
 import io.markdom.handler.html.HtmlDocumentResult;
 import io.markdom.util.Attribute;
+import io.markdom.util.Attributes;
 import io.markdom.util.ObjectHelper;
 
 public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNode, TagNode, List<TagNode>> {
@@ -52,7 +53,7 @@ public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNo
 	}
 
 	@Override
-	public TagNode asElement(String tagName, Iterable<Attribute> attributes) {
+	public TagNode asElement(String tagName, Attributes attributes) {
 		TagNode tagNode = new TagNode(tagName);
 		for (Attribute attribute : attributes) {
 			tagNode.addAttribute(attribute.getKey(), attribute.getValue());
@@ -64,7 +65,7 @@ public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNo
 	}
 
 	@Override
-	public String asElementText(String tagName, Iterable<Attribute> attributes, boolean pretty) {
+	public String asElementText(String tagName, Attributes attributes, boolean pretty) {
 		return asText(asElement(tagName, attributes), pretty);
 	}
 

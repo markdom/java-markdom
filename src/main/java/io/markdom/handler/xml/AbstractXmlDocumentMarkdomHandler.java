@@ -1,7 +1,5 @@
 package io.markdom.handler.xml;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
 
 import io.markdom.common.MarkdomBlockType;
@@ -11,8 +9,7 @@ import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.common.MarkdomKeys;
 import io.markdom.common.MarkdomSchemas;
 import io.markdom.handler.MarkdomHandler;
-import io.markdom.util.Attribute;
-import net.markenwerk.commons.iterables.ObjectIterable;
+import io.markdom.util.Attributes;
 
 public abstract class AbstractXmlDocumentMarkdomHandler<Result> implements MarkdomHandler<Result> {
 
@@ -32,11 +29,7 @@ public abstract class AbstractXmlDocumentMarkdomHandler<Result> implements Markd
 
 	@Override
 	public final void onCodeBlock(String code, Optional<String> hint) {
-		List<Attribute> attributes = new LinkedList<Attribute>();
-		if (hint.isPresent()) {
-			attributes.add(new Attribute(MarkdomKeys.HINT, hint.get()));
-		}
-		setAttributes(attributes);
+		setAttributes(new Attributes().add(MarkdomKeys.HINT, hint));
 		setCharacterData(code);
 	}
 
@@ -51,7 +44,7 @@ public abstract class AbstractXmlDocumentMarkdomHandler<Result> implements Markd
 
 	@Override
 	public final void onHeadingBlockBegin(MarkdomHeadingLevel level) {
-		setAttribute(new Attribute(MarkdomKeys.LEVEL, Integer.toString(level.ordinal() + 1)));
+		setAttributes(new Attributes().add(MarkdomKeys.LEVEL, Integer.toString(level.ordinal() + 1)));
 	}
 
 	@Override
@@ -60,7 +53,7 @@ public abstract class AbstractXmlDocumentMarkdomHandler<Result> implements Markd
 
 	@Override
 	public final void onOrderedListBlockBegin(Integer startIndex) {
-		setAttribute(new Attribute(MarkdomKeys.START_INDEX, Integer.toString(startIndex)));
+		setAttributes(new Attributes().add(MarkdomKeys.START_INDEX, Integer.toString(startIndex)));
 	}
 
 	@Override
@@ -142,7 +135,7 @@ public abstract class AbstractXmlDocumentMarkdomHandler<Result> implements Markd
 
 	@Override
 	public final void onEmphasisContentBegin(MarkdomEmphasisLevel level) {
-		setAttribute(new Attribute(MarkdomKeys.LEVEL, Integer.toString(level.ordinal() + 1)));
+		setAttributes(new Attributes().add(MarkdomKeys.LEVEL, Integer.toString(level.ordinal() + 1)));
 	}
 
 	@Override
@@ -151,30 +144,18 @@ public abstract class AbstractXmlDocumentMarkdomHandler<Result> implements Markd
 
 	@Override
 	public final void onImageContent(String uri, Optional<String> title, Optional<String> alternative) {
-		List<Attribute> attributes = new LinkedList<Attribute>();
-		attributes.add(new Attribute(MarkdomKeys.URI, uri));
-		if (title.isPresent()) {
-			attributes.add(new Attribute(MarkdomKeys.TITLE, title.get()));
-		}
-		if (alternative.isPresent()) {
-			attributes.add(new Attribute(MarkdomKeys.ALTERNATIVE, alternative.get()));
-		}
-		setAttributes(attributes);
+		setAttributes(new Attributes().add(MarkdomKeys.URI, uri).add(MarkdomKeys.TITLE, title).add(MarkdomKeys.ALTERNATIVE,
+				alternative));
 	}
 
 	@Override
 	public final void onLineBreakContent(Boolean hard) {
-		setAttribute(new Attribute(MarkdomKeys.HARD, Boolean.toString(hard)));
+		setAttributes(new Attributes().add(MarkdomKeys.HARD, Boolean.toString(hard)));
 	}
 
 	@Override
 	public final void onLinkContentBegin(String uri, Optional<String> title) {
-		List<Attribute> attributes = new LinkedList<Attribute>();
-		attributes.add(new Attribute(MarkdomKeys.URI, uri));
-		if (title.isPresent()) {
-			attributes.add(new Attribute(MarkdomKeys.TITLE, title.get()));
-		}
-		setAttributes(attributes);
+		setAttributes(new Attributes().add(MarkdomKeys.URI, uri).add(MarkdomKeys.TITLE, title));
 	}
 
 	@Override
@@ -213,15 +194,11 @@ public abstract class AbstractXmlDocumentMarkdomHandler<Result> implements Markd
 	}
 
 	protected abstract void beginDocument(String dtdQualifiedName, String dtdPublicId, String dtdSystemId, String rootTagName,
-		String documentVersion, String xmlnsNameSpace);
+			String documentVersion, String xmlnsNameSpace);
 
 	protected abstract void pushElement(String tagName);
 
-	private final void setAttribute(Attribute attribute) {
-		setAttributes(new ObjectIterable<>(attribute));
-	}
-
-	protected abstract void setAttributes(Iterable<Attribute> attributes);
+	protected abstract void setAttributes(Attributes attributes);
 
 	protected abstract void setCharacterData(String text);
 

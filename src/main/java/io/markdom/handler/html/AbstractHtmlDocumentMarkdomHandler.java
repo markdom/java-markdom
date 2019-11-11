@@ -8,8 +8,9 @@ import io.markdom.common.MarkdomContentType;
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.handler.MarkdomHandler;
-import io.markdom.util.Attribute;
+import io.markdom.util.Attributes;
 import io.markdom.util.Element;
+import io.markdom.util.Elements;
 import io.markdom.util.ObjectHelper;
 
 public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements MarkdomHandler<Result> {
@@ -218,7 +219,7 @@ public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements Mark
 
 	protected abstract void beginDocument(String dtdQualifiedName, String rootTagName);
 
-	private void pushElements(Iterable<Element> elements) {
+	private void pushElements(Elements elements) {
 		int depth = 0;
 		for (Element element : elements) {
 			pushElement(element.getTagName());
@@ -230,7 +231,7 @@ public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements Mark
 
 	protected abstract void pushElement(String tagName);
 
-	protected abstract void setAttributes(Iterable<Attribute> attributes);
+	protected abstract void setAttributes(Attributes attributes);
 
 	protected abstract void setCharacterData(String text);
 

@@ -6,6 +6,7 @@ import org.jsoup.select.Elements;
 
 import io.markdom.handler.html.HtmlDocumentResult;
 import io.markdom.util.Attribute;
+import io.markdom.util.Attributes;
 import io.markdom.util.ObjectHelper;
 
 public final class JsoupHtmlDocumentResult implements HtmlDocumentResult<Document, Element, Elements> {
@@ -28,7 +29,7 @@ public final class JsoupHtmlDocumentResult implements HtmlDocumentResult<Documen
 	}
 
 	@Override
-	public Element asElement(String tagName, Iterable<Attribute> attributes) {
+	public Element asElement(String tagName, Attributes attributes) {
 		Document document = new Document(this.document.baseUri());
 		Element element = document.createElement(tagName);
 		document.appendChild(element);
@@ -42,7 +43,7 @@ public final class JsoupHtmlDocumentResult implements HtmlDocumentResult<Documen
 	}
 
 	@Override
-	public String asElementText(String tagName, Iterable<Attribute> attributes, boolean pretty) {
+	public String asElementText(String tagName, Attributes attributes, boolean pretty) {
 		Element element = asElement(tagName, attributes);
 		element.ownerDocument().outputSettings().prettyPrint(pretty);
 		return element.outerHtml();

@@ -4,36 +4,36 @@ import java.util.Optional;
 
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
-import io.markdom.util.Element;
+import io.markdom.util.Elements;
 
 public interface HtmlDelegate {
 
-	public Iterable<Element> onCodeBlock(String code, Optional<String> hint);
+	public Elements onCodeBlock(String code, Optional<String> hint);
 
-	public Iterable<Element> onDivisionBlock();
+	public Elements onDivisionBlock();
 
-	public Iterable<Element> onHeadingBlock(MarkdomHeadingLevel level);
+	public Elements onHeadingBlock(MarkdomHeadingLevel level);
 
-	public Iterable<Element> onOrderdListBlock(Integer startIndex);
+	public Elements onOrderdListBlock(Integer startIndex);
 
-	public Iterable<Element> onParagraphBlock();
+	public Elements onParagraphBlock();
 
-	public Iterable<Element> onQuoteBlock();
+	public Elements onQuoteBlock();
 
-	public Iterable<Element> onUnorderedListBlock();
+	public Elements onUnorderedListBlock();
 
-	public Iterable<Element> onListItem();
+	public Elements onListItem();
 
-	public Iterable<Element> onCodeContent(String code);
+	public Elements onCodeContent(String code);
 
-	public Iterable<Element> onEmphasisContent(MarkdomEmphasisLevel level);
+	public Elements onEmphasisContent(MarkdomEmphasisLevel level);
 
-	public Iterable<Element> onImageContent(String uri, Optional<String> title, Optional<String> alternative);
+	public Elements onImageContent(String uri, Optional<String> title, Optional<String> alternative);
 
-	public Iterable<Element> onLineBreakContent();
+	public Elements onLineBreakContent();
 
-	public Iterable<Element> onLinkContent(String uri, Optional<String> title);
+	public Elements onLinkContent(String uri, Optional<String> title);
 
-	public Iterable<Element> onTextContent(String text);
+	public Elements onTextContent(String text);
 
 }

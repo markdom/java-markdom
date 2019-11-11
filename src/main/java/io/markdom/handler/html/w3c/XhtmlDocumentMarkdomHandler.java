@@ -12,6 +12,7 @@ import io.markdom.handler.html.AbstractHtmlDocumentMarkdomHandler;
 import io.markdom.handler.html.DefaultHtmlDelegate;
 import io.markdom.handler.html.HtmlDelegate;
 import io.markdom.util.Attribute;
+import io.markdom.util.Attributes;
 import io.markdom.util.ObjectHelper;
 
 public final class XhtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkdomHandler<XhtmlDocumentResult> {
@@ -64,7 +65,7 @@ public final class XhtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkd
 	}
 
 	@Override
-	protected final void setAttributes(Iterable<Attribute> attributes) {
+	protected final void setAttributes(Attributes attributes) {
 		for (Attribute attribute : attributes) {
 			element.setAttribute(attribute.getKey(), attribute.getValue());
 		}

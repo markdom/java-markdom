@@ -1,9 +1,6 @@
 package io.markdom.common;
 
-import lombok.experimental.UtilityClass;
-
-@UtilityClass
-public final class MarkdomKeys {
+public interface MarkdomKeys {
 
 	public static final String ALTERNATIVE = "alternative";
 

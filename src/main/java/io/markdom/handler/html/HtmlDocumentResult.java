@@ -1,8 +1,6 @@
 package io.markdom.handler.html;
 
-import java.util.Collections;
-
-import io.markdom.util.Attribute;
+import io.markdom.util.Attributes;
 
 public interface HtmlDocumentResult<Document, Element, Elements> {
 
@@ -15,24 +13,24 @@ public interface HtmlDocumentResult<Document, Element, Elements> {
 	public String asDocumentText(boolean pretty);
 
 	public default Element asElement(String tagName) {
-		return asElement(tagName, Collections.emptyList());
+		return asElement(tagName, new Attributes());
 	}
 
-	public Element asElement(String tagName, Iterable<Attribute> attributes);
+	public Element asElement(String tagName, Attributes attributes);
 
 	public default String asElementText(String tagName) {
-		return asElementText(tagName, Collections.emptyList(), false);
+		return asElementText(tagName, new Attributes(), false);
 	}
 
 	public default String asElementText(String tagName, boolean pretty) {
-		return asElementText(tagName, Collections.emptyList(), pretty);
+		return asElementText(tagName, new Attributes(), pretty);
 	}
 
-	public default String asElementText(String tagName, Iterable<Attribute> attributes) {
+	public default String asElementText(String tagName, Attributes attributes) {
 		return asElementText(tagName, attributes, false);
 	}
 
-	public String asElementText(String tagName, Iterable<Attribute> attributes, boolean pretty);
+	public String asElementText(String tagName, Attributes attributes, boolean pretty);
 
 	public Elements asElements();
 

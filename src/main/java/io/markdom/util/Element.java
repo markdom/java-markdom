@@ -1,23 +1,28 @@
 package io.markdom.util;
 
-import java.util.Collections;
+import java.util.Iterator;
 
 import lombok.Data;
 
 @Data
-public final class Element {
-
-	public Element(String tagName) {
-		this(tagName, Collections.emptyList());
-	}
-
-	public Element(String tagName, Iterable<Attribute> attributes) {
-		this.tagName = tagName;
-		this.attributes = attributes;
-	}
+public final class Element implements Iterable<Attribute> {
 
 	private final String tagName;
 
-	private final Iterable<Attribute> attributes;
+	private final Attributes  attributes;
+
+	public Element(String tagName) {
+		this(tagName, new Attributes());
+	}
+
+	public Element(String tagName, Attributes attributes) {
+		this.tagName = ObjectHelper.notNull("tag name", tagName);
+		this.attributes = ObjectHelper.notNull("attributes", attributes);
+	}
+
+	@Override
+	public Iterator<Attribute> iterator() {
+		return attributes.iterator();
+	}
 
 }

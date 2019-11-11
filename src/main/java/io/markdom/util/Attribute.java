@@ -9,4 +9,9 @@ public final class Attribute {
 
 	private final String value;
 
+	public Attribute(String key, String value) {
+		this.key = ObjectHelper.notNull("key", key);
+		this.value = ObjectHelper.notNull("value", value);
+	}
+
 }

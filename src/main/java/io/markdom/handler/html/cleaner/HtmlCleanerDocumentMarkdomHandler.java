@@ -8,6 +8,7 @@ import io.markdom.handler.html.AbstractHtmlDocumentMarkdomHandler;
 import io.markdom.handler.html.DefaultHtmlDelegate;
 import io.markdom.handler.html.HtmlDelegate;
 import io.markdom.util.Attribute;
+import io.markdom.util.Attributes;
 
 public final class HtmlCleanerDocumentMarkdomHandler extends AbstractHtmlDocumentMarkdomHandler<HtmlCleanerDocumentResult> {
 
@@ -51,7 +52,7 @@ public final class HtmlCleanerDocumentMarkdomHandler extends AbstractHtmlDocumen
 	}
 
 	@Override
-	protected final void setAttributes(Iterable<Attribute> attributes) {
+	protected final void setAttributes(Attributes attributes) {
 		for (Attribute attribute : attributes) {
 			element.addAttribute(attribute.getKey(), attribute.getValue());
 		}
