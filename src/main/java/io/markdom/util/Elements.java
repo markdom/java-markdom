@@ -18,7 +18,7 @@ public final class Elements implements Iterable<Element> {
 
 	public Elements add(String tagName, Attributes attributes) {
 		elements.add(new Element(tagName, attributes));
-		return null;
+		return this;
 	}
 
 	public Elements add(String tagName) {

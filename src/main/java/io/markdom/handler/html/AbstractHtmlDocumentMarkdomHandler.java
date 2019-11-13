@@ -172,6 +172,9 @@ public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements Mark
 	public final void onLineBreakContent(Boolean hard) {
 		if (hard) {
 			pushElements(delegate.onLineBreakContent());
+		} else {
+			pushElements(new Elements());
+			setText(" ");
 		}
 	}
 
@@ -187,15 +190,7 @@ public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements Mark
 	@Override
 	public final void onTextContent(String text) {
 		pushElements(delegate.onTextContent(text));
-		if (0 != text.length() && hasWhitespaceBorder(text)) {
-			setCharacterData(text);
-		} else {
-			setText(text);
-		}
-	}
-
-	private boolean hasWhitespaceBorder(String text) {
-		return Character.isWhitespace(text.charAt(0)) || Character.isWhitespace(text.charAt(text.length() - 1));
+		setText(text);
 	}
 
 	@Override
