@@ -30,7 +30,7 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 	private Section section;
 
 	public CommonmarkTextMarkdomHandler(ActualAppendable appendable) {
-		this(new CommonmarkTextConfiguration(), appendable);
+		this(CommonmarkTextConfiguration.builder().build(), appendable);
 	}
 
 	public CommonmarkTextMarkdomHandler(CommonmarkTextConfiguration configuration, ActualAppendable appendable) {

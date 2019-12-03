@@ -1,30 +1,73 @@
 package io.markdom.handler.text.commonmark;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class CommonmarkTextConfiguration {
 
-	private CodeBlockOption codeBlockOption = CodeBlockOption.FENCED;
+	@Data
+	@Accessors(fluent = true)
+	public static class Builder {
 
-	private CodeFenceOption codeFenceOption = CodeFenceOption.BACKTICK;
+		private CodeBlockOption codeBlockOption = CodeBlockOption.FENCED;
 
-	private DivisionOption divisionOption = DivisionOption.DASH;
+		private CodeFenceOption codeFenceOption = CodeFenceOption.BACKTICK;
 
-	private OrderedListOption orderedListOption = OrderedListOption.DOT;
+		private DivisionOption divisionOption = DivisionOption.DASH;
 
-	private UnorderedListOption unorderedListOption = UnorderedListOption.DASH;
+		private OrderedListOption orderedListOption = OrderedListOption.DOT;
 
-	private EmphasisOption emphasisLevel1Option = EmphasisOption.STAR;
+		private UnorderedListOption unorderedListOption = UnorderedListOption.DASH;
 
-	private EmphasisOption emphasisLevel2Option = EmphasisOption.STAR;
+		private String adjacentListBlocksComment = "adjacent list blocks";
 
-	private LineBreakOption lineBreakOption = LineBreakOption.BACKSLASH;
+		private EmphasisOption emphasisLevel1Option = EmphasisOption.STAR;
 
-	private LineEndOption lineEndOption = LineEndOption.UNIX;
+		private EmphasisOption emphasisLevel2Option = EmphasisOption.STAR;
+
+		private LineBreakOption lineBreakOption = LineBreakOption.BACKSLASH;
+
+		private LineEndOption lineEndOption = LineEndOption.UNIX;
+
+		public CommonmarkTextConfiguration build() {
+			// @formatter:off
+			return new CommonmarkTextConfiguration(
+				codeBlockOption,
+				codeFenceOption,
+				divisionOption,
+				orderedListOption,
+				unorderedListOption,
+				emphasisLevel1Option,
+				emphasisLevel2Option,
+				lineBreakOption,
+				lineEndOption
+			);
+			// @formatter:on
+		}
+
+	}
+
+	private final CodeBlockOption codeBlockOption;
+
+	private final CodeFenceOption codeFenceOption;
+
+	private final DivisionOption divisionOption;
+
+	private final OrderedListOption orderedListOption;
+
+	private final UnorderedListOption unorderedListOption;
+
+	private final EmphasisOption emphasisLevel1Option;
+
+	private final EmphasisOption emphasisLevel2Option;
+
+	private final LineBreakOption lineBreakOption;
+
+	private final LineEndOption lineEndOption;
+
+	public static Builder builder() {
+		return new Builder();
+	}
 
 }
