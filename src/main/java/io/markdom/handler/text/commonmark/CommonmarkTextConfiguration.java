@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommonmarkTextOptions {
+public class CommonmarkTextConfiguration {
 
 	private CodeBlockOption codeBlockOption = CodeBlockOption.FENCED;
 

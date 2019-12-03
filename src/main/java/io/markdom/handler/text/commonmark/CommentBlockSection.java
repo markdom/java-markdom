@@ -13,33 +13,33 @@ final class CommentBlockSection implements Section {
 	}
 
 	@Override
-	public void appendTo(LineAppendable sink) {
+	public void appendTo(LineAppendable appendable) {
 		Iterator<String> lines = StringUtil.splitLines(comment);
-		sink.startLine();
-		sink.append("<!--");
+		appendable.startLine();
+		appendable.append("<!--");
 		if (!lines.hasNext()) {
-			sink.append(" ");
+			appendable.append(" ");
 		} else {
 			String first = lines.next();
 			if (!lines.hasNext()) {
-				sink.append(" ");
-				sink.append(first.trim());
-				sink.append(" ");
+				appendable.append(" ");
+				appendable.append(first.trim());
+				appendable.append(" ");
 			} else {
-				sink.endLine();
-				sink.startLine();
-				sink.append(first);
-				sink.endLine();
+				appendable.endLine();
+				appendable.startLine();
+				appendable.append(first);
+				appendable.endLine();
 				while (lines.hasNext()) {
-					sink.startLine();
-					sink.append(lines.next());
-					sink.endLine();
+					appendable.startLine();
+					appendable.append(lines.next());
+					appendable.endLine();
 				}
-				sink.startLine();
+				appendable.startLine();
 			}
 		}
-		sink.append("-->");
-		sink.endLine();
+		appendable.append("-->");
+		appendable.endLine();
 	}
 
 }

@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.handler.text.commonmark.CommonmarkTextMarkdomHandler;
-import io.markdom.handler.text.commonmark.CommonmarkTextOptions;
+import io.markdom.handler.text.commonmark.CommonmarkTextConfiguration;
 import io.markdom.handler.text.commonmark.EmphasisOption;
 import io.markdom.handler.text.commonmark.LineBreakOption;
 import io.markdom.handler.text.commonmark.LineEndOption;
@@ -50,7 +50,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -67,7 +67,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -83,7 +83,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -99,7 +99,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -116,7 +116,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -133,7 +133,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -149,7 +149,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -165,7 +165,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -182,7 +182,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`foo` bar", commonmarkText);
@@ -199,7 +199,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`foo` bar", commonmarkText);
@@ -216,7 +216,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`foo` bar", commonmarkText);
@@ -233,7 +233,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`foo` bar", commonmarkText);
@@ -251,7 +251,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\nbar", commonmarkText);
@@ -269,7 +269,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\nbar", commonmarkText);
@@ -286,7 +286,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo `bar`", commonmarkText);
@@ -303,7 +303,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo `bar`", commonmarkText);
@@ -320,7 +320,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo `bar`", commonmarkText);
@@ -337,7 +337,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo `bar`", commonmarkText);
@@ -354,7 +354,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -371,7 +371,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -387,7 +387,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo bar", commonmarkText);
@@ -403,7 +403,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo bar", commonmarkText);
@@ -421,7 +421,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo bar", commonmarkText);
@@ -439,7 +439,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo bar", commonmarkText);
@@ -457,7 +457,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setLineEndOption(LineEndOption.UNIX);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
@@ -476,7 +476,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setLineEndOption(LineEndOption.WINDOWS);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
@@ -496,7 +496,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setLineEndOption(LineEndOption.UNIX);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
@@ -515,7 +515,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setLineBreakOption(LineBreakOption.BACKSLASH);
 		options.setLineEndOption(LineEndOption.UNIX);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
@@ -535,7 +535,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setLineBreakOption(LineBreakOption.DOUBLE_SPACE);
 		options.setLineEndOption(LineEndOption.WINDOWS);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
@@ -556,7 +556,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setLineBreakOption(LineBreakOption.BACKSLASH);
 		options.setLineEndOption(LineEndOption.UNIX);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
@@ -577,7 +577,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setLineBreakOption(LineBreakOption.DOUBLE_SPACE);
 		options.setLineEndOption(LineEndOption.WINDOWS);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
@@ -599,7 +599,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setLineBreakOption(LineBreakOption.BACKSLASH);
 		options.setLineEndOption(LineEndOption.UNIX);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
@@ -621,7 +621,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setLineBreakOption(LineBreakOption.DOUBLE_SPACE);
 		options.setLineEndOption(LineEndOption.WINDOWS);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
@@ -640,7 +640,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -657,7 +657,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -675,7 +675,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -693,7 +693,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -711,7 +711,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -728,7 +728,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -745,7 +745,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -763,7 +763,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -781,7 +781,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -799,7 +799,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -815,7 +815,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`foobar`", commonmarkText);
@@ -831,7 +831,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("``foo`bar``", commonmarkText);
@@ -847,7 +847,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("``foo`bar`baz``", commonmarkText);
@@ -863,7 +863,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("```foo``bar```", commonmarkText);
@@ -879,7 +879,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`` `foobar ``", commonmarkText);
@@ -895,7 +895,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`  foobar `", commonmarkText);
@@ -911,7 +911,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`` foobar` ``", commonmarkText);
@@ -927,7 +927,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("` foobar  `", commonmarkText);
@@ -943,7 +943,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`` ` ``", commonmarkText);
@@ -959,7 +959,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("``  `  ``", commonmarkText);
@@ -975,7 +975,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`   `", commonmarkText);
@@ -991,7 +991,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`foo bar`", commonmarkText);
@@ -1007,7 +1007,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`foo bar`", commonmarkText);
@@ -1023,7 +1023,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`foo bar`", commonmarkText);
@@ -1039,7 +1039,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`foo bar`", commonmarkText);
@@ -1055,7 +1055,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`foo bar baz`", commonmarkText);
@@ -1071,7 +1071,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`foobar`", commonmarkText);
@@ -1087,7 +1087,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`foobar`", commonmarkText);
@@ -1103,7 +1103,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`foo bar`", commonmarkText);
@@ -1119,7 +1119,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`foo bar`", commonmarkText);
@@ -1136,7 +1136,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("`foobar`", commonmarkText);
@@ -1154,7 +1154,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -1174,7 +1174,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\nbar", commonmarkText);
@@ -1194,7 +1194,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\nbar", commonmarkText);
@@ -1210,7 +1210,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("![](/foobar.png)", commonmarkText);
@@ -1226,7 +1226,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("![](/foobar.png)", commonmarkText);
@@ -1242,7 +1242,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("![](/foobar.png)", commonmarkText);
@@ -1258,7 +1258,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("![](/foobar.png title)", commonmarkText);
@@ -1274,7 +1274,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("![alternative](/foobar.png)", commonmarkText);
@@ -1290,7 +1290,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("![alternative](/foobar.png title)", commonmarkText);
@@ -1308,7 +1308,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -1328,7 +1328,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\nbar", commonmarkText);
@@ -1346,7 +1346,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -1366,7 +1366,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\nbar", commonmarkText);
@@ -1384,7 +1384,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -1404,7 +1404,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\nbar", commonmarkText);
@@ -1423,7 +1423,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("[foobar](/foobar.png)", commonmarkText);
@@ -1443,7 +1443,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("[foobar](/foobar.png)", commonmarkText);
@@ -1463,7 +1463,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("[foobar](/foobar.png title)", commonmarkText);
@@ -1482,7 +1482,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -1506,7 +1506,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\nbar\\\nbaz", commonmarkText);
@@ -1526,7 +1526,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -1550,7 +1550,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\nbar\\\nbaz", commonmarkText);
@@ -1572,7 +1572,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("[foobar](/foobar.png)", commonmarkText);
@@ -1591,7 +1591,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setEmphasisLevel1Option(EmphasisOption.STAR);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
@@ -1611,7 +1611,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setEmphasisLevel1Option(EmphasisOption.UNDERSCORE);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
@@ -1631,7 +1631,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setEmphasisLevel2Option(EmphasisOption.STAR);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
@@ -1651,7 +1651,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setEmphasisLevel2Option(EmphasisOption.UNDERSCORE);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
@@ -1675,7 +1675,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("*foobar*", commonmarkText);
@@ -1698,7 +1698,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("**foobar**", commonmarkText);
@@ -1718,7 +1718,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -1738,7 +1738,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -1760,7 +1760,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\nbar", commonmarkText);
@@ -1782,7 +1782,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\nbar", commonmarkText);
@@ -1803,7 +1803,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -1824,7 +1824,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -1845,7 +1845,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -1866,7 +1866,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -1889,7 +1889,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\nbar", commonmarkText);
@@ -1912,7 +1912,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\nbar", commonmarkText);
@@ -1934,7 +1934,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setEmphasisLevel1Option(EmphasisOption.STAR);
 		options.setEmphasisLevel2Option(EmphasisOption.STAR);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
@@ -1958,7 +1958,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setEmphasisLevel1Option(EmphasisOption.UNDERSCORE);
 		options.setEmphasisLevel2Option(EmphasisOption.UNDERSCORE);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
@@ -1982,7 +1982,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setEmphasisLevel1Option(EmphasisOption.UNDERSCORE);
 		options.setEmphasisLevel2Option(EmphasisOption.STAR);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
@@ -2006,7 +2006,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setEmphasisLevel1Option(EmphasisOption.STAR);
 		options.setEmphasisLevel2Option(EmphasisOption.UNDERSCORE);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
@@ -2031,7 +2031,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -2054,7 +2054,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -2079,7 +2079,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\nbar", commonmarkText);
@@ -2104,7 +2104,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\nbar", commonmarkText);
@@ -2127,7 +2127,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setEmphasisLevel1Option(EmphasisOption.STAR);
 		options.setEmphasisLevel2Option(EmphasisOption.STAR);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
@@ -2152,7 +2152,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setEmphasisLevel1Option(EmphasisOption.UNDERSCORE);
 		options.setEmphasisLevel2Option(EmphasisOption.UNDERSCORE);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
@@ -2177,7 +2177,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setEmphasisLevel1Option(EmphasisOption.UNDERSCORE);
 		options.setEmphasisLevel2Option(EmphasisOption.STAR);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
@@ -2202,7 +2202,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		options.setEmphasisLevel1Option(EmphasisOption.STAR);
 		options.setEmphasisLevel2Option(EmphasisOption.UNDERSCORE);
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
@@ -2225,7 +2225,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("*foo\nbar*", commonmarkText);
@@ -2246,7 +2246,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("*foo\\\nbar*", commonmarkText);
@@ -2270,7 +2270,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("***foo\nbar***", commonmarkText);
@@ -2294,7 +2294,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("***foo\\\nbar***", commonmarkText);
@@ -2315,7 +2315,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\n*bar*", commonmarkText);
@@ -2336,7 +2336,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("*foo*\\\nbar", commonmarkText);
@@ -2360,7 +2360,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\n***bar***", commonmarkText);
@@ -2384,7 +2384,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("***foo***\\\nbar", commonmarkText);
@@ -2404,7 +2404,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("*foobar*", commonmarkText);
@@ -2426,7 +2426,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\n**bar**", commonmarkText);
@@ -2450,7 +2450,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("***foobar***", commonmarkText);
@@ -2476,7 +2476,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\n***bar***", commonmarkText);
@@ -2502,7 +2502,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\n***bar***", commonmarkText);
@@ -2528,7 +2528,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\n***bar***", commonmarkText);
@@ -2554,7 +2554,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\n***bar***", commonmarkText);
@@ -2575,7 +2575,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -2596,7 +2596,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -2620,7 +2620,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -2644,7 +2644,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foobar", commonmarkText);
@@ -2666,7 +2666,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("*foobar*", commonmarkText);
@@ -2691,7 +2691,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("*foobar*", commonmarkText);
@@ -2716,7 +2716,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("***foobar***", commonmarkText);
@@ -2739,7 +2739,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo ***bar***", commonmarkText);
@@ -2762,7 +2762,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("*foo **bar***", commonmarkText);
@@ -2785,7 +2785,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("***foo*** bar", commonmarkText);
@@ -2808,7 +2808,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("***foo** bar*", commonmarkText);
@@ -2831,7 +2831,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo [**bar**](/foobar.png)", commonmarkText);
@@ -2854,7 +2854,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("[**foo**](/foobar.png) bar", commonmarkText);
@@ -2870,7 +2870,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\\\bar", commonmarkText);
@@ -2886,7 +2886,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\`bar", commonmarkText);
@@ -2902,7 +2902,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\*bar", commonmarkText);
@@ -2918,7 +2918,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\_bar", commonmarkText);
@@ -2934,7 +2934,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\<bar", commonmarkText);
@@ -2950,7 +2950,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\[bar", commonmarkText);
@@ -2970,7 +2970,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\\![bar](/foobar.png)", commonmarkText);
@@ -2990,7 +2990,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("!foo[bar](/foobar.png)", commonmarkText);
@@ -3010,7 +3010,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo!*bar*", commonmarkText);
@@ -3031,7 +3031,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("foo\n[bar](/foobar.png)", commonmarkText);
@@ -3052,7 +3052,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("[foo](/foobar.png)\\\nbar", commonmarkText);
@@ -3068,7 +3068,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\-", commonmarkText);
@@ -3084,7 +3084,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\- foobar", commonmarkText);
@@ -3104,7 +3104,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\- *foobar*", commonmarkText);
@@ -3120,7 +3120,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\+", commonmarkText);
@@ -3136,7 +3136,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\+ foobar", commonmarkText);
@@ -3156,7 +3156,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\+ *foobar*", commonmarkText);
@@ -3172,7 +3172,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\*", commonmarkText);
@@ -3188,7 +3188,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\* foobar", commonmarkText);
@@ -3208,7 +3208,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\* *foobar*", commonmarkText);
@@ -3225,7 +3225,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\" + hashes + " foobar", commonmarkText);
@@ -3241,7 +3241,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("####### foobar", commonmarkText);
@@ -3262,7 +3262,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\" + hashes + " *foobar*", commonmarkText);
@@ -3282,7 +3282,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("####### *foobar*", commonmarkText);
@@ -3298,7 +3298,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("42\\.", commonmarkText);
@@ -3314,7 +3314,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("42\\. foobar", commonmarkText);
@@ -3334,7 +3334,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("42\\. *foobar*", commonmarkText);
@@ -3350,7 +3350,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("42\\)", commonmarkText);
@@ -3366,7 +3366,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("42\\) foobar", commonmarkText);
@@ -3386,7 +3386,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("42\\) *foobar*", commonmarkText);
@@ -3403,7 +3403,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\" + tildes, commonmarkText);
@@ -3420,7 +3420,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals(tildes, commonmarkText);
@@ -3437,7 +3437,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\" + tildes + "foobar", commonmarkText);
@@ -3454,7 +3454,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals(tildes + "foobar", commonmarkText);
@@ -3475,7 +3475,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\" + tildes + "*foobar*", commonmarkText);
@@ -3496,7 +3496,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals(tildes + "*foobar*", commonmarkText);
@@ -3517,7 +3517,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\" + tildes + " *foobar*", commonmarkText);
@@ -3538,7 +3538,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals(tildes + " *foobar*", commonmarkText);
@@ -3555,7 +3555,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\" + equals, commonmarkText);
@@ -3572,7 +3572,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\" + dashes, commonmarkText);
@@ -3589,7 +3589,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\" + underscores, commonmarkText);
@@ -3606,7 +3606,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\" + stars, commonmarkText);
@@ -3623,7 +3623,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("\\" + hashes, commonmarkText);
@@ -3639,7 +3639,7 @@ public class CommonmarkTextMarkdomHandlerContentTest {
 		);
 		// @formatter:on
 
-		CommonmarkTextOptions options = new CommonmarkTextOptions();
+		CommonmarkTextConfiguration options = new CommonmarkTextConfiguration();
 		String commonmarkText = document.handle(new CommonmarkTextMarkdomHandler<>(options, new StringWriter())).toString();
 
 		assertEquals("#######", commonmarkText);

@@ -6,8 +6,8 @@ final class UnorderedListIndentation implements Indentation {
 
 	private boolean following;
 
-	UnorderedListIndentation(CommonmarkTextOptions options) {
-		bulletString = options.getUnorderedListOption().getBulletCharacter() + " ";
+	UnorderedListIndentation(CommonmarkTextConfiguration configuration) {
+		bulletString = configuration.getUnorderedListOption().getBulletCharacter() + " ";
 	}
 
 	@Override

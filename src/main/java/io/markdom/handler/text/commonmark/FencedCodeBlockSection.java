@@ -13,8 +13,8 @@ final class FencedCodeBlockSection implements Section {
 
 	private final Optional<String> hint;
 
-	public FencedCodeBlockSection(CommonmarkTextOptions options, String code, Optional<String> hint) {
-		char fenceCharacter = options.getCodeFenceOption().getFenceCharacter();
+	public FencedCodeBlockSection(CommonmarkTextConfiguration configuration, String code, Optional<String> hint) {
+		char fenceCharacter = configuration.getCodeFenceOption().getFenceCharacter();
 		int fenceLength = Math.max(3, StringUtil.longestSequenceLength(code, fenceCharacter) + 1);
 		this.fence = StringUtil.repeat(fenceCharacter, fenceLength);
 		this.code = code;
@@ -22,35 +22,35 @@ final class FencedCodeBlockSection implements Section {
 	}
 
 	@Override
-	public void appendTo(LineAppendable sink) {
-		appendLeadingFence(sink);
-		appendCode(sink);
-		appendTrailingFence(sink);
+	public void appendTo(LineAppendable appendable) {
+		appendLeadingFence(appendable);
+		appendCode(appendable);
+		appendTrailingFence(appendable);
 	}
 
-	private void appendLeadingFence(LineAppendable sink) {
-		sink.startLine();
-		sink.append(fence);
+	private void appendLeadingFence(LineAppendable appendable) {
+		appendable.startLine();
+		appendable.append(fence);
 		hint.ifPresent(hintString -> {
-			sink.append(' ');
-			sink.append(hintString.trim());
+			appendable.append(' ');
+			appendable.append(hintString.trim());
 		});
-		sink.endLine();
+		appendable.endLine();
 	}
 
-	private void appendCode(LineAppendable sink) {
+	private void appendCode(LineAppendable appendable) {
 		Iterator<String> lines = StringUtil.splitLines(code);
 		while (lines.hasNext()) {
-			sink.startLine();
-			sink.append(lines.next());
-			sink.endLine();
+			appendable.startLine();
+			appendable.append(lines.next());
+			appendable.endLine();
 		}
 	}
 
-	private void appendTrailingFence(LineAppendable sink) {
-		sink.startLine();
-		sink.append(fence);
-		sink.endLine();
+	private void appendTrailingFence(LineAppendable appendable) {
+		appendable.startLine();
+		appendable.append(fence);
+		appendable.endLine();
 	}
 
 }

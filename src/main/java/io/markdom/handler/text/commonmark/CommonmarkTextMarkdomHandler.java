@@ -13,7 +13,7 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 
 	private static final EmptySection EMPTY_SECTION = new EmptySection();
 
-	private final CommonmarkTextOptions options;
+	private final CommonmarkTextConfiguration configuration;
 
 	private final ActualAppendable appendable;
 
@@ -30,14 +30,14 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 	private Section section;
 
 	public CommonmarkTextMarkdomHandler(ActualAppendable appendable) {
-		this(new CommonmarkTextOptions(), appendable);
+		this(new CommonmarkTextConfiguration(), appendable);
 	}
 
-	public CommonmarkTextMarkdomHandler(CommonmarkTextOptions options, ActualAppendable appendable) {
-		this.options = ObjectHelper.notNull("options", options);
+	public CommonmarkTextMarkdomHandler(CommonmarkTextConfiguration configuration, ActualAppendable appendable) {
+		this.configuration = ObjectHelper.notNull("configuration", configuration);
 		this.appendable = ObjectHelper.notNull("appendable", appendable);
 		this.indentationStack = new IndentationStack();
-		indentationAppendable = new IndentationAppendable(options, indentationStack, appendable);
+		indentationAppendable = new IndentationAppendable(configuration, indentationStack, appendable);
 	}
 
 	@Override
@@ -67,9 +67,9 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 
 	@Override
 	public void onCodeBlock(String code, Optional<String> hint) {
-		switch (options.getCodeBlockOption()) {
+		switch (configuration.getCodeBlockOption()) {
 			case FENCED:
-				beginSection(new FencedCodeBlockSection(options, code, hint));
+				beginSection(new FencedCodeBlockSection(configuration, code, hint));
 				break;
 			case INDENTED:
 				beginSection(new IndentedCodeBlockSection(code));
@@ -86,13 +86,13 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 
 	@Override
 	public void onDivisionBlock() {
-		beginSection(new DivisionBlockSection(options));
+		beginSection(new DivisionBlockSection(configuration));
 		endSection(false);
 	}
 
 	@Override
 	public void onHeadingBlockBegin(MarkdomHeadingLevel level) {
-		beginContentSection(new HeadingBlockSection(options, level));
+		beginContentSection(new HeadingBlockSection(configuration, level));
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 
 	@Override
 	public void onOrderedListBlockBegin(Integer startIndex) {
-		indentationStack.push(new OrderedListIndentation(options, startIndex));
+		indentationStack.push(new OrderedListIndentation(configuration, startIndex));
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 
 	@Override
 	public void onParagraphBlockBegin() {
-		beginContentSection(new ParagraphSection(options));
+		beginContentSection(new ParagraphSection(configuration));
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 
 	@Override
 	public void onUnorderedListBlockBegin() {
-		indentationStack.push(new UnorderedListIndentation(options));
+		indentationStack.push(new UnorderedListIndentation(configuration));
 	}
 
 	@Override

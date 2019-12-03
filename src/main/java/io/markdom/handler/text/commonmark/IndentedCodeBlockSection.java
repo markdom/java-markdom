@@ -13,13 +13,13 @@ final class IndentedCodeBlockSection implements Section {
 	}
 
 	@Override
-	public void appendTo(LineAppendable sink) {
+	public void appendTo(LineAppendable appendable) {
 		Iterator<String> lines = StringUtil.splitLines(code);
 		while (lines.hasNext()) {
-			sink.startLine();
-			sink.append("    ");
-			sink.append(lines.next());
-			sink.endLine();
+			appendable.startLine();
+			appendable.append("    ");
+			appendable.append(lines.next());
+			appendable.endLine();
 		}
 	}
 

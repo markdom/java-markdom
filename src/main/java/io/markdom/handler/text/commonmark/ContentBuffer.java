@@ -16,7 +16,7 @@ import lombok.SneakyThrows;
 
 final class ContentBuffer {
 
-	private final CommonmarkTextOptions options;
+	private final CommonmarkTextConfiguration configuration;
 
 	private final List<Shred> shreds = new LinkedList<>();
 
@@ -28,16 +28,14 @@ final class ContentBuffer {
 
 	private final String emptyParagraphString;
 
-	private final String lineBreakString;
-
 	private boolean pendingLineBreak;
 
 	private int linkDepth;
 
 	private boolean skippedEmptyLink;
 
-	public ContentBuffer(CommonmarkTextOptions options, String emptyParagraphString) {
-		this.options = options;
+	public ContentBuffer(CommonmarkTextConfiguration configuration, String emptyParagraphString) {
+		this.configuration = configuration;
 		this.bounderyStrings = new EnumMap<>(MarkdomEmphasisLevel.class);
 		this.openLevels = EnumSet.noneOf(MarkdomEmphasisLevel.class);
 		this.ignoreLevels = new Stack<>();
@@ -45,7 +43,6 @@ final class ContentBuffer {
 			bounderyStrings.put(level, getBounderyStringByLevel(level));
 		}
 		this.emptyParagraphString = emptyParagraphString;
-		this.lineBreakString = options.getLineBreakOption().getLineBreakString();
 		beginNewLine();
 	}
 
@@ -56,9 +53,9 @@ final class ContentBuffer {
 	private char getBounderyCharacterByLevel(MarkdomEmphasisLevel level) {
 		switch (level) {
 			case LEVEL_1:
-				return options.getEmphasisLevel1Option().getBounderyCharacter();
+				return configuration.getEmphasisLevel1Option().getBounderyCharacter();
 			case LEVEL_2:
-				return options.getEmphasisLevel2Option().getBounderyCharacter();
+				return configuration.getEmphasisLevel2Option().getBounderyCharacter();
 		}
 		throw new InternalError("Unknown emphasis level: " + level);
 	}
@@ -163,7 +160,7 @@ final class ContentBuffer {
 
 	public void appendLineBreak(boolean hard) {
 		if (!lastShred().appendLineBreak(hard)) {
-			shreds.add(new LineEndShred(hard, lineBreakString));
+			shreds.add(new LineEndShred(hard, configuration.getLineBreakOption().getLineBreakString()));
 			pendingLineBreak = true;
 		}
 	}
@@ -224,15 +221,15 @@ final class ContentBuffer {
 	}
 
 	@SneakyThrows
-	public void appendTo(LineAppendable sink) {
+	public void appendTo(LineAppendable appendable) {
 		if (isEmpty()) {
-			sink.append(emptyParagraphString);
+			appendable.append(emptyParagraphString);
 		} else {
 			ensureLastShredIsASoftLineBreak();
 			shiftLeadingSpaceToTheLeftAndSetLeadingHints();
 			shiftTrailingSpaceToTheRightAndSetTrailingHints();
 			for (Shred shred : shreds) {
-				shred.appendTo(sink);
+				shred.appendTo(appendable);
 			}
 		}
 	}

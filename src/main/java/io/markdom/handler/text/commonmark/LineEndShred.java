@@ -4,13 +4,13 @@ import lombok.Getter;
 
 final class LineEndShred implements Shred {
 
-	private String lineEndString;
+	private String lineBreakString;
 
 	@Getter
 	private boolean hard;
 
-	LineEndShred(boolean hard, String lineEndString) {
-		this.lineEndString = lineEndString;
+	LineEndShred(boolean hard, String lineBreakString) {
+		this.lineBreakString = lineBreakString;
 		appendLineBreak(hard);
 	}
 
@@ -40,7 +40,7 @@ final class LineEndShred implements Shred {
 	@Override
 	public void appendTo(LineAppendable appendable) {
 		if (hard) {
-			appendable.append(lineEndString);
+			appendable.append(lineBreakString);
 		}
 		appendable.endLine();
 	}

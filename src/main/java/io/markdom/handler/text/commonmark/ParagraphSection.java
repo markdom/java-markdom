@@ -7,13 +7,13 @@ class ParagraphSection implements ContentSection {
 	@Getter
 	private final ContentBuffer buffer;
 
-	ParagraphSection(CommonmarkTextOptions options) {
-		this.buffer = new ContentBuffer(options, LineBreakOption.BACKSLASH.getLineBreakString());
+	ParagraphSection(CommonmarkTextConfiguration configuration) {
+		this.buffer = new ContentBuffer(configuration, LineBreakOption.BACKSLASH.getLineBreakString());
 	}
 
 	@Override
-	public void appendTo(LineAppendable sink) {
-		buffer.appendTo(sink);
+	public void appendTo(LineAppendable appendable) {
+		buffer.appendTo(appendable);
 	}
 
 }

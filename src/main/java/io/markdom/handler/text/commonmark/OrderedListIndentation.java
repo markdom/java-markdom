@@ -10,8 +10,8 @@ final class OrderedListIndentation implements Indentation {
 
 	private String followingString;
 
-	OrderedListIndentation(CommonmarkTextOptions options, Integer startIndex) {
-		this.commitCharacter = options.getOrderedListOption().getCommitCharacter();
+	OrderedListIndentation(CommonmarkTextConfiguration configuration, Integer startIndex) {
+		this.commitCharacter = configuration.getOrderedListOption().getCommitCharacter();
 		this.nextIndex = startIndex;
 	}
 

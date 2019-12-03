@@ -13,9 +13,9 @@ final class HeadingBlockSection implements ContentSection {
 
 	private final String levelString;
 
-	public HeadingBlockSection(CommonmarkTextOptions options, MarkdomHeadingLevel level) {
+	public HeadingBlockSection(CommonmarkTextConfiguration configuration, MarkdomHeadingLevel level) {
 		this.levelString = StringUtil.repeat('#', level.ordinal() + 1) + " ";
-		this.buffer = new ContentBuffer(options, "");
+		this.buffer = new ContentBuffer(configuration, "");
 	}
 
 	@Override

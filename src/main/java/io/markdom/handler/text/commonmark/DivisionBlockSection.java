@@ -6,15 +6,15 @@ final class DivisionBlockSection implements Section {
 
 	private final String divisionString;
 
-	DivisionBlockSection(CommonmarkTextOptions options) {
-		divisionString = StringUtil.repeat(options.getDivisionOption().getDivisionCharacter(), 3);
+	DivisionBlockSection(CommonmarkTextConfiguration configuration) {
+		divisionString = StringUtil.repeat(configuration.getDivisionOption().getDivisionCharacter(), 3);
 	}
 
 	@Override
-	public void appendTo(LineAppendable sink) {
-		sink.startLine();
-		sink.append(divisionString);
-		sink.endLine();
+	public void appendTo(LineAppendable appendable) {
+		appendable.startLine();
+		appendable.append(divisionString);
+		appendable.endLine();
 	}
 
 }

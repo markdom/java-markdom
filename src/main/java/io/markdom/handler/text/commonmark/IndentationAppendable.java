@@ -12,8 +12,8 @@ public class IndentationAppendable implements LineAppendable {
 
 	private boolean pendingLineEnd;
 
-	IndentationAppendable(CommonmarkTextOptions options, IndentationSupplier indentationSupplier, Appendable appendable) {
-		this.lineEndString = options.getLineEndOption().getLineEndString();
+	IndentationAppendable(CommonmarkTextConfiguration configuration, IndentationSupplier indentationSupplier, Appendable appendable) {
+		this.lineEndString = configuration.getLineEndOption().getLineEndString();
 		this.supplier = indentationSupplier;
 		this.appendable = appendable;
 	}
