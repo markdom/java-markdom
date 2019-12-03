@@ -7,19 +7,21 @@ import lombok.experimental.Accessors;
 public class CommonmarkTextConfiguration {
 
 	@Data
-	@Accessors(fluent=true)
+	@Accessors(fluent = true)
 	public static class Builder {
 
 		private CodeBlockOption codeBlockOption = CodeBlockOption.FENCED;
 
 		private CodeFenceOption codeFenceOption = CodeFenceOption.BACKTICK;
 
+		private String emptyIndentedCodeBlockComment = "empty code block";
+
 		private DivisionOption divisionOption = DivisionOption.DASH;
 
 		private OrderedListOption orderedListOption = OrderedListOption.DOT;
 
 		private UnorderedListOption unorderedListOption = UnorderedListOption.DASH;
-		
+
 		private String adjacentListBlocksComment = "adjacent list blocks";
 
 		private EmphasisOption emphasisLevel1Option = EmphasisOption.STAR;
@@ -35,6 +37,7 @@ public class CommonmarkTextConfiguration {
 			return new CommonmarkTextConfiguration(
 				codeBlockOption,
 				codeFenceOption,
+				emptyIndentedCodeBlockComment,
 				divisionOption,
 				orderedListOption,
 				unorderedListOption,
@@ -53,12 +56,14 @@ public class CommonmarkTextConfiguration {
 
 	private final CodeFenceOption codeFenceOption;
 
+	private final String emptyIndentedCodeBlockComment;
+
 	private final DivisionOption divisionOption;
 
 	private final OrderedListOption orderedListOption;
 
 	private final UnorderedListOption unorderedListOption;
-	
+
 	private final String adjacentListBlocksComment;
 
 	private final EmphasisOption emphasisLevel1Option;

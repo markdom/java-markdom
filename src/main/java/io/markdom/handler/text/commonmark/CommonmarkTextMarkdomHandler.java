@@ -72,7 +72,7 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 				beginSection(new FencedCodeBlockSection(configuration, code, hint));
 				break;
 			case INDENTED:
-				beginSection(new IndentedCodeBlockSection(code));
+				beginSection(new IndentedCodeBlockSection(configuration, code));
 				break;
 		}
 		endSection(false);
