@@ -55,7 +55,7 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 		if (null != lastType) {
 			EMPTY_SECTION.appendTo(indentationAppendable);
 			if (isListBlock(type) && isListBlock(lastType)) {
-				new CommentBlockSection("foo").appendTo(indentationAppendable);
+				new CommentBlockSection(configuration.getAdjacentListBlocksComment()).appendTo(indentationAppendable);
 				EMPTY_SECTION.appendTo(indentationAppendable);
 			}
 		}
