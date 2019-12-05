@@ -54,11 +54,19 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 		emptyBlocks = false;
 		if (null != lastType) {
 			EMPTY_SECTION.appendTo(indentationAppendable);
+			if (isCodeBlock(type) && isCodeBlock(lastType) && CodeBlockOption.INDENTED == configuration.getCodeBlockOption()) {
+				new CommentBlockSection(configuration.getAdjacentIndentedCodeBlockComment()).appendTo(indentationAppendable);
+				EMPTY_SECTION.appendTo(indentationAppendable);
+			}
 			if (isListBlock(type) && isListBlock(lastType)) {
 				new CommentBlockSection(configuration.getAdjacentListBlocksComment()).appendTo(indentationAppendable);
 				EMPTY_SECTION.appendTo(indentationAppendable);
 			}
 		}
+	}
+
+	private boolean isCodeBlock(MarkdomBlockType type) {
+		return MarkdomBlockType.CODE == type;
 	}
 
 	private boolean isListBlock(MarkdomBlockType type) {

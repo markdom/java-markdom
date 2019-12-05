@@ -14,8 +14,10 @@ public class CommonmarkTextConfiguration {
 
 		private CodeFenceOption codeFenceOption = CodeFenceOption.BACKTICK;
 
-		private String emptyIndentedCodeBlockComment = "empty code block";
+		private String adjacentIndentedCodeBlocksComment = "adjacent code blocks";
 
+		private String emptyIndentedCodeBlockComment = "empty code block";
+		
 		private DivisionOption divisionOption = DivisionOption.DASH;
 
 		private OrderedListOption orderedListOption = OrderedListOption.DOT;
@@ -37,6 +39,7 @@ public class CommonmarkTextConfiguration {
 			return new CommonmarkTextConfiguration(
 				codeBlockOption,
 				codeFenceOption,
+				adjacentIndentedCodeBlocksComment,
 				emptyIndentedCodeBlockComment,
 				divisionOption,
 				orderedListOption,
@@ -55,6 +58,8 @@ public class CommonmarkTextConfiguration {
 	private final CodeBlockOption codeBlockOption;
 
 	private final CodeFenceOption codeFenceOption;
+
+	private final String adjacentIndentedCodeBlockComment;
 
 	private final String emptyIndentedCodeBlockComment;
 
