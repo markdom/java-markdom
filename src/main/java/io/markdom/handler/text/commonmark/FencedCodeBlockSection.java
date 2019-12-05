@@ -1,6 +1,6 @@
 package io.markdom.handler.text.commonmark;
 
-import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 import io.markdom.util.StringUtil;
@@ -39,10 +39,10 @@ final class FencedCodeBlockSection implements Section {
 	}
 
 	private void appendCode(LineAppendable appendable) {
-		Iterator<String> lines = StringUtil.splitLines(code);
-		while (lines.hasNext()) {
+		List<String> lines = StringUtil.splitLines(code);
+		for (String line : lines) {
 			appendable.startLine();
-			appendable.append(lines.next());
+			appendable.append(line);
 			appendable.endLine();
 		}
 	}

@@ -1,6 +1,6 @@
 package io.markdom.handler.text.commonmark;
 
-import java.util.Iterator;
+import java.util.List;
 
 import io.markdom.util.StringUtil;
 
@@ -17,16 +17,16 @@ final class IndentedCodeBlockSection implements Section {
 
 	@Override
 	public void appendTo(LineAppendable appendable) {
-		Iterator<String> lines = StringUtil.splitLines(code);
-		if (lines.hasNext()) {
-			while (lines.hasNext()) {
+		List<String> lines = StringUtil.splitLines(code);
+		if (lines.isEmpty()) {
+			new CommentBlockSection(emptyIndentedCodeBlockComment).appendTo(appendable);
+		} else {
+			for (String line : lines) {
 				appendable.startLine();
 				appendable.append("    ");
-				appendable.append(lines.next());
+				appendable.append(line);
 				appendable.endLine();
 			}
-		} else {
-			new CommentBlockSection(emptyIndentedCodeBlockComment).appendTo(appendable);
 		}
 	}
 

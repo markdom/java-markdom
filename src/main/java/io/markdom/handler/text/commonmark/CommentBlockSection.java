@@ -1,6 +1,6 @@
 package io.markdom.handler.text.commonmark;
 
-import java.util.Iterator;
+import java.util.List;
 
 import io.markdom.util.StringUtil;
 
@@ -14,32 +14,31 @@ final class CommentBlockSection implements Section {
 
 	@Override
 	public void appendTo(LineAppendable appendable) {
-		Iterator<String> lines = StringUtil.splitLines(comment);
-		appendable.startLine();
-		appendable.append("<!--");
-		if (!lines.hasNext()) {
-			appendable.append(" ");
+		List<String> lines = StringUtil.splitLines(comment);
+		if (lines.isEmpty()) {
+			appendable.startLine();
+			appendable.append("<!-- -->");
+			appendable.endLine();
+		} else if (1 == lines.size()) {
+			appendable.startLine();
+			appendable.append("<!-- ");
+			appendable.append(lines.get(0));
+			appendable.append(" -->");
+			appendable.endLine();
 		} else {
-			String first = lines.next();
-			if (!lines.hasNext()) {
-				appendable.append(" ");
-				appendable.append(first.trim());
-				appendable.append(" ");
-			} else {
-				appendable.endLine();
+			appendable.startLine();
+			appendable.append("<!--");
+			appendable.endLine();
+			for (String line : lines) {
 				appendable.startLine();
-				appendable.append(first);
+				appendable.append("  ");
+				appendable.append(line);
 				appendable.endLine();
-				while (lines.hasNext()) {
-					appendable.startLine();
-					appendable.append(lines.next());
-					appendable.endLine();
-				}
-				appendable.startLine();
 			}
+			appendable.startLine();
+			appendable.append("-->");
+			appendable.endLine();
 		}
-		appendable.append("-->");
-		appendable.endLine();
 	}
 
 }

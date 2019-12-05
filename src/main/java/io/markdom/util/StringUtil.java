@@ -1,10 +1,9 @@
 package io.markdom.util;
 
-import java.util.Iterator;
-import java.util.StringTokenizer;
+import java.util.LinkedList;
+import java.util.List;
 
 import lombok.experimental.UtilityClass;
-import net.markenwerk.commons.iterators.StringTokenizerIterator;
 
 @UtilityClass
 
@@ -72,8 +71,24 @@ public class StringUtil {
 		return new String(buffer);
 	}
 
-	public static Iterator<String> splitLines(String code) {
-		return new StringTokenizerIterator(new StringTokenizer(code, "\r\n", false));
+	public static List<String> splitLines(String string) {
+		List<String> lines = new LinkedList<>();
+		while (!string.isEmpty()) {
+			int index = string.indexOf('\n');
+			if (-1 == index) {
+				lines.add(string);
+				string = "";
+			} else {
+				if (0 != index && '\r' == string.charAt(index - 1)) {
+					lines.add(string.substring(0, index - 1));
+					string = string.substring(index + 1);
+				} else {
+					lines.add(string.substring(0, index));
+					string = string.substring(index + 1);
+				}
+			}
+		}
+		return lines;
 	}
 
 }
