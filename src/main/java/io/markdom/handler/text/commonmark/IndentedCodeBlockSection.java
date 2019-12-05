@@ -1,6 +1,7 @@
 package io.markdom.handler.text.commonmark;
 
 import java.util.List;
+import java.util.ListIterator;
 
 import io.markdom.util.StringUtil;
 
@@ -17,7 +18,7 @@ final class IndentedCodeBlockSection implements Section {
 
 	@Override
 	public void appendTo(LineAppendable appendable) {
-		List<String> lines = StringUtil.splitLines(code);
+		List<String> lines = removeLeadingAndTrailingEmptyLines(StringUtil.splitLines(code));
 		if (lines.isEmpty()) {
 			new CommentBlockSection(emptyIndentedCodeBlockComment).appendTo(appendable);
 		} else {
@@ -28,6 +29,26 @@ final class IndentedCodeBlockSection implements Section {
 				appendable.endLine();
 			}
 		}
+	}
+
+	private List<String> removeLeadingAndTrailingEmptyLines(List<String> lines) {
+		return removeTrailingEmptyLines(removeLeadingEmptyLines(lines));
+	}
+
+	private List<String> removeLeadingEmptyLines(List<String> lines) {
+		ListIterator<String> iterator = lines.listIterator();
+		while (iterator.hasNext() && iterator.next().trim().isEmpty()) {
+			iterator.remove();
+		}
+		return lines;
+	}
+
+	private List<String> removeTrailingEmptyLines(List<String> lines) {
+		ListIterator<String> iterator = lines.listIterator(lines.size());
+		while (iterator.hasPrevious() && iterator.previous().trim().isEmpty()) {
+			iterator.remove();
+		}
+		return lines;
 	}
 
 }
