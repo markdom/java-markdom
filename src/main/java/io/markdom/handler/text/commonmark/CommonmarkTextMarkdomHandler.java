@@ -19,7 +19,7 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 
 	private final IndentationStack indentationStack;
 
-	private final IndentationAppendable indentationAppendable;
+	private final LineAppendable lineAppendable;
 
 	private MarkdomBlockType lastType;
 
@@ -39,7 +39,7 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 		this.configuration = ObjectHelper.notNull("configuration", configuration);
 		this.appendable = ObjectHelper.notNull("appendable", appendable);
 		this.indentationStack = new IndentationStack();
-		indentationAppendable = new IndentationAppendable(configuration, indentationStack, appendable);
+		this.lineAppendable = new IndentingAppendable(configuration, indentationStack, appendable);
 	}
 
 	@Override
@@ -55,14 +55,14 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 	public void onBlockBegin(MarkdomBlockType type) {
 		emptyBlocks = false;
 		if (null != lastType) {
-			EMPTY_SECTION.appendTo(indentationAppendable);
+			EMPTY_SECTION.appendTo(lineAppendable);
 			if (isCodeBlock(type) && isCodeBlock(lastType) && CodeBlockOption.INDENTED == configuration.getCodeBlockOption()) {
-				new CommentBlockSection(configuration.getAdjacentIndentedCodeBlockComment()).appendTo(indentationAppendable);
-				EMPTY_SECTION.appendTo(indentationAppendable);
+				new CommentBlockSection(configuration.getAdjacentIndentedCodeBlockComment()).appendTo(lineAppendable);
+				EMPTY_SECTION.appendTo(lineAppendable);
 			}
 			if (isListBlock(type) && isListBlock(lastType)) {
-				new CommentBlockSection(configuration.getAdjacentListBlocksComment()).appendTo(indentationAppendable);
-				EMPTY_SECTION.appendTo(indentationAppendable);
+				new CommentBlockSection(configuration.getAdjacentListBlocksComment()).appendTo(lineAppendable);
+				EMPTY_SECTION.appendTo(lineAppendable);
 			}
 		}
 	}
@@ -163,9 +163,9 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 	public void onBlocksEnd() {
 		if (emptyBlocks) {
 			if (0 != listDepth) {
-				new CommentBlockSection(configuration.getEmptyListItemComment()).appendTo(indentationAppendable);
+				new CommentBlockSection(configuration.getEmptyListItemComment()).appendTo(lineAppendable);
 			} else {
-				EMPTY_SECTION.appendTo(indentationAppendable);
+				EMPTY_SECTION.appendTo(lineAppendable);
 			}
 		}
 	}
@@ -273,7 +273,7 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 	}
 
 	private void endSection(boolean listBlock) {
-		section.appendTo(indentationAppendable);
+		section.appendTo(lineAppendable);
 	}
 
 }

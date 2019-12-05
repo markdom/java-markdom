@@ -2,7 +2,7 @@ package io.markdom.handler.text.commonmark;
 
 import lombok.SneakyThrows;
 
-public class IndentationAppendable implements LineAppendable {
+public class IndentingAppendable implements LineAppendable {
 
 	private final String lineEndString;
 
@@ -12,7 +12,7 @@ public class IndentationAppendable implements LineAppendable {
 
 	private boolean pendingLineEnd;
 
-	IndentationAppendable(CommonmarkTextConfiguration configuration, IndentationSupplier indentationSupplier, Appendable appendable) {
+	IndentingAppendable(CommonmarkTextConfiguration configuration, IndentationSupplier indentationSupplier, Appendable appendable) {
 		this.lineEndString = configuration.getLineEndOption().getLineEndString();
 		this.supplier = indentationSupplier;
 		this.appendable = appendable;
