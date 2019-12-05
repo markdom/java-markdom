@@ -25,6 +25,8 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 
 	private boolean emptyBlocks;
 
+	private int listDepth;
+
 	private ContentBuffer buffer;
 
 	private Section section;
@@ -160,12 +162,17 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 	@Override
 	public void onBlocksEnd() {
 		if (emptyBlocks) {
-			EMPTY_SECTION.appendTo(indentationAppendable);
+			if (0 != listDepth) {
+				new CommentBlockSection(configuration.getEmptyListItemComment()).appendTo(indentationAppendable);
+			} else {
+				EMPTY_SECTION.appendTo(indentationAppendable);
+			}
 		}
 	}
 
 	@Override
 	public void onListItemsBegin() {
+		listDepth++;
 	}
 
 	@Override
@@ -184,6 +191,7 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 
 	@Override
 	public void onListItemsEnd() {
+		listDepth--;
 	}
 
 	@Override

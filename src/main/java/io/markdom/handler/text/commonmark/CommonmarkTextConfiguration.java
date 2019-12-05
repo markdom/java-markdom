@@ -22,9 +22,11 @@ public class CommonmarkTextConfiguration {
 
 		private OrderedListOption orderedListOption = OrderedListOption.DOT;
 
-		private UnorderedListOption unorderedListOption = UnorderedListOption.DASH;
+		private UnorderedListOption unorderedListOption = UnorderedListOption.STAR;
 
 		private String adjacentListBlocksComment = "adjacent list blocks";
+
+		private String emptyListItemComment = "empty list item";
 
 		private EmphasisOption emphasisLevel1Option = EmphasisOption.STAR;
 
@@ -45,6 +47,7 @@ public class CommonmarkTextConfiguration {
 				orderedListOption,
 				unorderedListOption,
 				adjacentListBlocksComment,
+				emptyListItemComment,
 				emphasisLevel1Option,
 				emphasisLevel2Option,
 				lineBreakOption,
@@ -70,6 +73,8 @@ public class CommonmarkTextConfiguration {
 	private final UnorderedListOption unorderedListOption;
 
 	private final String adjacentListBlocksComment;
+
+	private final String emptyListItemComment;
 
 	private final EmphasisOption emphasisLevel1Option;
 
