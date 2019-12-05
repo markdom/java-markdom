@@ -1,13 +1,15 @@
-package io.markdom.handler.json.gson;
+package io.markdom.handler.json.jackson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 
+import java.io.ByteArrayOutputStream;
+import java.nio.charset.Charset;
+
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.markdom.TestHelper;
 import io.markdom.model.MarkdomDocument;
@@ -15,7 +17,7 @@ import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
 import lombok.SneakyThrows;
 
-public class GsonJsonDocumentModuleTest {
+public class JacksonJsonDocumentModuleTests {
 
 	@Test
 	@SneakyThrows
@@ -23,11 +25,10 @@ public class GsonJsonDocumentModuleTest {
 
 		MarkdomFactory factory = new BasicMarkdomFactory();
 
-		GsonBuilder builder = new GsonBuilder();
-		builder.registerTypeHierarchyAdapter(MarkdomDocument.class, new GsonMarkdomDocumentDeserializer(factory));
-		Gson gson = builder.create();
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new JacksonMarkdomDocumentModule(factory));
 
-		MarkdomDocument document = gson.fromJson(TestHelper.openExampleJson(), MarkdomDocument.class);
+		MarkdomDocument document = mapper.readValue(TestHelper.openExampleJson(), MarkdomDocument.class);
 
 		assertEquals(TestHelper.getExampleDocument(factory), document);
 
@@ -40,11 +41,13 @@ public class GsonJsonDocumentModuleTest {
 		MarkdomFactory factory = new BasicMarkdomFactory();
 		MarkdomDocument document = TestHelper.getExampleDocument(factory);
 
-		GsonBuilder builder = new GsonBuilder();
-		builder.registerTypeHierarchyAdapter(MarkdomDocument.class, new GsonMarkdomDocumentSerializer());
-		Gson gson = builder.create();
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new JacksonMarkdomDocumentModule(factory));
 
-		String json = gson.toJson(document);
+		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+		mapper.writeValue(buffer, document);
+
+		String json = new String(buffer.toByteArray(), Charset.forName("UTF-8"));
 
 		assertEquals(TestHelper.readExampleJson(), json, JSONCompareMode.STRICT_ORDER);
 

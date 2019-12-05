@@ -12,7 +12,7 @@ import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
 import lombok.SneakyThrows;
 
-public class XhtmlDocumentMarkdomHandlerTest {
+public class XhtmlDocumentMarkdomHandlerTests {
 
 	@Test
 	@SneakyThrows

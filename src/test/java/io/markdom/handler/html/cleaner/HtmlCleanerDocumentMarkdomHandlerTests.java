@@ -16,7 +16,7 @@ import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
 import lombok.SneakyThrows;
 
-public class HtmlCleanerDocumentMarkdomHandlerTest {
+public class HtmlCleanerDocumentMarkdomHandlerTests {
 
 	@Test
 	@SneakyThrows

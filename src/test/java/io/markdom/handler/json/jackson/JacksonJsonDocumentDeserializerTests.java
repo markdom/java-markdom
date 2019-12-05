@@ -16,7 +16,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 
-public class JacksonJsonDocumentDeserializerTest {
+public class JacksonJsonDocumentDeserializerTests {
 
 	@Data
 	@NoArgsConstructor

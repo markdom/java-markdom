@@ -22,7 +22,7 @@ import io.markdom.model.MarkdomFactory;
 import io.markdom.model.MarkdomParagraphBlock;
 import io.markdom.model.basic.BasicMarkdomFactory;
 
-public class CommonmarkTextMarkdomHandlerContentTest {
+public class CommonmarkTextMarkdomHandlerContentTests {
 
 	private static MarkdomFactory factory;
 

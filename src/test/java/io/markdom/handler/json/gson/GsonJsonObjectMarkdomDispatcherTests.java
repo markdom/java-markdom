@@ -1,10 +1,11 @@
-package io.markdom.handler.json.org;
+package io.markdom.handler.json.gson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.json.JSONObject;
-import org.json.JSONTokener;
 import org.junit.jupiter.api.Test;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import io.markdom.TestHelper;
 import io.markdom.handler.MarkdomDispatcher;
@@ -14,16 +15,16 @@ import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
 import lombok.SneakyThrows;
 
-public class JsonObjectMarkdomDispatcherTest {
+public class GsonJsonObjectMarkdomDispatcherTests {
 
 	@Test
 	@SneakyThrows
 	public void dispatchExampleDocument() {
 
-		JSONObject jsonObject = new JSONObject(new JSONTokener(TestHelper.openExampleJson()));
+		JsonObject jsonObject = JsonParser.parseReader(TestHelper.openExampleJson()).getAsJsonObject();
 
 		MarkdomFactory factory = new BasicMarkdomFactory();
-		MarkdomDispatcher dispatcher = new JsonObjectMarkdomDispatcher(jsonObject);
+		MarkdomDispatcher dispatcher = new GsonJsonObjectMarkdomDispatcher(jsonObject);
 		MarkdomDocument document = dispatcher.handle(new MarkdomDocumentMarkdomHandler(factory));
 
 		assertEquals(TestHelper.getExampleDocument(factory), document);

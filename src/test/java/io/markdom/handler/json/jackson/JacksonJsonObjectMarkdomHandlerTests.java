@@ -1,4 +1,4 @@
-package io.markdom.handler.json.simple;
+package io.markdom.handler.json.jackson;
 
 import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 
@@ -11,7 +11,7 @@ import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
 import lombok.SneakyThrows;
 
-public class JsonSimpleObjectMarkdomHandlerTest {
+public class JacksonJsonObjectMarkdomHandlerTests {
 
 	@Test
 	@SneakyThrows
@@ -20,7 +20,7 @@ public class JsonSimpleObjectMarkdomHandlerTest {
 		MarkdomFactory factory = new BasicMarkdomFactory();
 		MarkdomDocument document = TestHelper.getExampleDocument(factory);
 
-		String json = document.handle(new JsonSimpleObjectMarkdomHandler()).asObjectText();
+		String json = document.handle(new JacksonJsonObjectMarkdomHandler()).asObjectText();
 
 		assertEquals(TestHelper.readExampleJson(), json, JSONCompareMode.STRICT_ORDER);
 
