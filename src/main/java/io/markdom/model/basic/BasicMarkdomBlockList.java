@@ -1,10 +1,10 @@
 package io.markdom.model.basic;
 
-import io.markdom.model.ManagedMarkdomBlock;
+import io.markdom.model.MarkdomBlock;
 import io.markdom.model.MarkdomBlockParent;
 import io.markdom.util.ObjectHelper;
 
-final class BasicMarkdomBlockList extends AbstractObservableList<ManagedMarkdomBlock> {
+final class BasicMarkdomBlockList extends AbstractManagedList<MarkdomBlock, ManagedMarkdomBlock> {
 
 	private final MarkdomBlockParent parent;
 
@@ -13,13 +13,13 @@ final class BasicMarkdomBlockList extends AbstractObservableList<ManagedMarkdomB
 	}
 
 	@Override
-	protected Runnable beforeInsert(ManagedMarkdomBlock block) {
-		return ObjectHelper.notNull("block", block).onAttach(parent);
+	protected AfterInsertAction<ManagedMarkdomBlock> beforeInsert(MarkdomBlock block) {
+		return BasicMarkdomFactory.checkBlock(ObjectHelper.notNull("block", block)).onAttach(parent);
 	}
 
 	@Override
-	protected Runnable beforeRemove(ManagedMarkdomBlock block) {
-		return ObjectHelper.notNull("block", block).onDetach(parent);
+	protected AfterRemoveAction<ManagedMarkdomBlock> beforeRemove(MarkdomBlock block) {
+		return BasicMarkdomFactory.checkBlock(ObjectHelper.notNull("block", block)).onDetach(parent);
 	}
 
 }

@@ -12,7 +12,7 @@ public interface MarkdomListBlock extends MarkdomBlock {
 
 	public MarkdomListBlockType getListBlockType();
 
-	public List<? extends MarkdomListItem> getListItems();
+	public List<MarkdomListItem> getListItems();
 
 	public MarkdomListBlock addListItem(MarkdomListItem listItem);
 

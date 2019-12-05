@@ -42,7 +42,7 @@ public final class BasicMarkdomEmphasisContent extends AbstractMarkdomContent im
 	}
 
 	@Override
-	public List<? extends MarkdomContent> getContents() {
+	public List<MarkdomContent> getContents() {
 		return delegate.getContents();
 	}
 

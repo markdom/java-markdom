@@ -44,7 +44,7 @@ public final class BasicMarkdomDocument extends AbstractMarkdomNode implements M
 	}
 
 	@Override
-	public final List<? extends MarkdomBlock> getBlocks() {
+	public final List<MarkdomBlock> getBlocks() {
 		return delegate.getBlocks();
 	}
 

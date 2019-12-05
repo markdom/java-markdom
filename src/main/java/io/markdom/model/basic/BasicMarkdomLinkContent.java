@@ -56,7 +56,7 @@ public final class BasicMarkdomLinkContent extends AbstractMarkdomContent implem
 	}
 
 	@Override
-	public List<? extends MarkdomContent> getContents() {
+	public List<MarkdomContent> getContents() {
 		return delegate.getContents();
 	}
 

@@ -12,7 +12,7 @@ public interface MarkdomBlockParent extends MarkdomNode {
 
 	public MarkdomBlockParentType getBlockParentType();
 
-	public List<? extends MarkdomBlock> getBlocks();
+	public List<MarkdomBlock> getBlocks();
 
 	public MarkdomBlockParent addBlock(MarkdomBlock block);
 

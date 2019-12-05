@@ -4,25 +4,24 @@ import java.util.Iterator;
 import java.util.List;
 
 import io.markdom.handler.MarkdomHandler;
-import io.markdom.model.ManagedMarkdomListItem;
 import io.markdom.model.MarkdomListBlock;
 import io.markdom.model.MarkdomListItem;
 import io.markdom.util.ObjectHelper;
 
 public final class BasicMarkdomListBlockDelegate {
 
-	private final List<ManagedMarkdomListItem> listItems;
+	private final BasicMarkdomListItemList listItems;
 
 	BasicMarkdomListBlockDelegate(MarkdomListBlock parent) {
 		this.listItems = new BasicMarkdomListItemList(parent);
 	}
 
-	public List<? extends MarkdomListItem> getListItems() {
+	public List<MarkdomListItem> getListItems() {
 		return listItems;
 	}
 
 	public void addListItem(MarkdomListItem listItem) {
-		listItems.add((ManagedMarkdomListItem) listItem);
+		listItems.add(listItem);
 	}
 
 	public void addListItems(MarkdomListItem... listItems) {
@@ -39,7 +38,7 @@ public final class BasicMarkdomListBlockDelegate {
 
 	public void onHandle(MarkdomHandler<?> handler) {
 		handler.onListItemsBegin();
-		Iterator<ManagedMarkdomListItem> iterator = listItems.iterator();
+		Iterator<ManagedMarkdomListItem> iterator = listItems.internalIterator();
 		if (iterator.hasNext()) {
 			iterator.next().onHandle(handler);
 			while (iterator.hasNext()) {

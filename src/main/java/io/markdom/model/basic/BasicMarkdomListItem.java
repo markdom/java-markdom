@@ -27,7 +27,7 @@ public final class BasicMarkdomListItem extends AbstractMarkdomListItem {
 	}
 
 	@Override
-	public final List<? extends MarkdomBlock> getBlocks() {
+	public final List<MarkdomBlock> getBlocks() {
 		return delegate.getBlocks();
 	}
 

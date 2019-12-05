@@ -3,6 +3,7 @@ package io.markdom.model.basic;
 import java.util.Optional;
 
 import io.markdom.common.MarkdomEmphasisLevel;
+import io.markdom.common.MarkdomException;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.model.MarkdomBlock;
 import io.markdom.model.MarkdomCodeBlock;
@@ -18,6 +19,7 @@ import io.markdom.model.MarkdomImageContent;
 import io.markdom.model.MarkdomLineBreakContent;
 import io.markdom.model.MarkdomLinkContent;
 import io.markdom.model.MarkdomListItem;
+import io.markdom.model.MarkdomNode;
 import io.markdom.model.MarkdomOrderedListBlock;
 import io.markdom.model.MarkdomParagraphBlock;
 import io.markdom.model.MarkdomQuoteBlock;
@@ -269,6 +271,26 @@ public final class BasicMarkdomFactory implements MarkdomFactory {
 	@Override
 	public MarkdomUnorderedListBlock unorderedListBlock(Iterable<MarkdomListItem> listItems) {
 		return unorderedListBlock().addListItems(listItems);
+	}
+
+	public static ManagedMarkdomBlock checkBlock(MarkdomBlock listItem) {
+		return checkNode("block", listItem);
+	}
+
+	public static ManagedMarkdomContent checkContent(MarkdomContent listItem) {
+		return checkNode("content", listItem);
+	}
+
+	public static ManagedMarkdomListItem checkListItem(MarkdomListItem listItem) {
+		return checkNode("list item", listItem);
+	}
+
+	@SuppressWarnings("unchecked")
+	private static <ManagedMarkdomNode> ManagedMarkdomNode checkNode(String name, MarkdomNode node) {
+		if (!(node.getFactory() instanceof BasicMarkdomFactory)) {
+			throw new MarkdomException("The given " + name + " hasn't been created by a compatible factory");
+		}
+		return (ManagedMarkdomNode) node;
 	}
 
 }

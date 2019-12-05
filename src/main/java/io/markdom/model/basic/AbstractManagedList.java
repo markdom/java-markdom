@@ -8,17 +8,33 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
 
-abstract class AbstractObservableList<Payload> implements List<Payload> {
+abstract class AbstractManagedList<Payload, ManagedPayload extends Payload> implements List<Payload> {
+
+	interface AfterInsertAction<ManagedPayload> {
+
+		public ManagedPayload getManagedPayload();
+
+		public void perform();
+
+	}
+
+	interface AfterRemoveAction<ManagedPayload> {
+
+		public ManagedPayload getManagedPayload();
+
+		public void perform();
+
+	}
 
 	private static final int INITIAL_CAPACITY = 8;
 
-	private final List<Payload> list;
+	private final List<ManagedPayload> list;
 
-	public AbstractObservableList() {
+	public AbstractManagedList() {
 		this(new ArrayList<>(INITIAL_CAPACITY));
 	}
 
-	private AbstractObservableList(List<Payload> list) {
+	private AbstractManagedList(List<ManagedPayload> list) {
 		this.list = list;
 	}
 
@@ -54,9 +70,9 @@ abstract class AbstractObservableList<Payload> implements List<Payload> {
 
 	@Override
 	public boolean add(Payload payload) {
-		Runnable afterInsert = beforeInsert(payload);
-		boolean result = list.add(payload);
-		afterInsert.run();
+		AfterInsertAction<ManagedPayload> afterInsert = beforeInsert(payload);
+		boolean result = list.add(afterInsert.getManagedPayload());
+		afterInsert.perform();
 		return result;
 	}
 
@@ -64,9 +80,9 @@ abstract class AbstractObservableList<Payload> implements List<Payload> {
 	@SuppressWarnings("unchecked")
 	public boolean remove(Object object) {
 		if (contains(object)) {
-			Runnable afterRemove = beforeRemove((Payload) object);
+			AfterRemoveAction<ManagedPayload> afterRemove = beforeRemove((Payload) object);
 			boolean removed = list.remove(object);
-			afterRemove.run();
+			afterRemove.perform();
 			return removed;
 		} else {
 			return false;
@@ -134,27 +150,27 @@ abstract class AbstractObservableList<Payload> implements List<Payload> {
 	@Override
 	public Payload set(int index, Payload payload) {
 		Payload previousPayload = list.get(index);
-		Runnable afterRemove = beforeRemove(previousPayload);
-		Runnable afterInsert = beforeInsert(payload);
-		list.set(index, payload);
-		afterInsert.run();
-		afterRemove.run();
+		AfterRemoveAction<ManagedPayload> afterRemove = beforeRemove(previousPayload);
+		AfterInsertAction<ManagedPayload> afterInsert = beforeInsert(payload);
+		list.set(index, afterInsert.getManagedPayload());
+		afterInsert.perform();
+		afterRemove.perform();
 		return previousPayload;
 	}
 
 	@Override
 	public void add(int index, Payload payload) {
-		Runnable afterInsert = beforeInsert(payload);
-		list.add(index, payload);
-		afterInsert.run();
+		AfterInsertAction<ManagedPayload> afterInsert = beforeInsert(payload);
+		list.add(index, afterInsert.getManagedPayload());
+		afterInsert.perform();
 	}
 
 	@Override
 	public Payload remove(int index) {
 		Payload previousPayload = list.get(index);
-		Runnable afterRemove = beforeRemove(previousPayload);
+		AfterRemoveAction<ManagedPayload> afterRemove = beforeRemove(previousPayload);
 		list.remove(index);
-		afterRemove.run();
+		afterRemove.perform();
 		return previousPayload;
 	}
 
@@ -179,7 +195,7 @@ abstract class AbstractObservableList<Payload> implements List<Payload> {
 
 		return new ListIterator<Payload>() {
 
-			private final ListIterator<Payload> iterator = list.listIterator(index);
+			private final ListIterator<ManagedPayload> iterator = list.listIterator(index);
 
 			private Payload currentPayload;
 
@@ -217,27 +233,27 @@ abstract class AbstractObservableList<Payload> implements List<Payload> {
 
 			@Override
 			public void remove() {
-				Runnable afterRemove = beforeRemove(currentPayload);
+				AfterRemoveAction<ManagedPayload> afterRemove = beforeRemove(currentPayload);
 				iterator.remove();
 				currentPayload = null;
-				afterRemove.run();
+				afterRemove.perform();
 			}
 
 			@Override
 			public void set(Payload payload) {
-				Runnable afterRemove = beforeRemove(currentPayload);
-				Runnable afterInsert = beforeInsert(payload);
-				iterator.set(payload);
+				AfterRemoveAction<ManagedPayload> afterRemove = beforeRemove(currentPayload);
+				AfterInsertAction<ManagedPayload> afterInsert = beforeInsert(payload);
+				iterator.set(afterInsert.getManagedPayload());
 				currentPayload = payload;
-				afterInsert.run();
-				afterRemove.run();
+				afterInsert.perform();
+				afterRemove.perform();
 			}
 
 			@Override
 			public void add(Payload payload) {
-				Runnable afterInsert = beforeInsert(payload);
-				iterator.add(payload);
-				afterInsert.run();
+				AfterInsertAction<ManagedPayload> afterInsert = beforeInsert(payload);
+				iterator.add(afterInsert.getManagedPayload());
+				afterInsert.perform();
 			}
 
 		};
@@ -245,16 +261,16 @@ abstract class AbstractObservableList<Payload> implements List<Payload> {
 
 	@Override
 	public List<Payload> subList(int fromIndex, int toIndex) {
-		return new AbstractObservableList<Payload>(list.subList(fromIndex, toIndex)) {
+		return new AbstractManagedList<Payload, ManagedPayload>(list.subList(fromIndex, toIndex)) {
 
 			@Override
-			protected Runnable beforeInsert(Payload payload) {
-				return AbstractObservableList.this.beforeInsert(payload);
+			protected AfterInsertAction<ManagedPayload> beforeInsert(Payload payload) {
+				return AbstractManagedList.this.beforeInsert(payload);
 			}
 
 			@Override
-			protected Runnable beforeRemove(Payload payload) {
-				return AbstractObservableList.this.beforeRemove(payload);
+			protected AfterRemoveAction<ManagedPayload> beforeRemove(Payload payload) {
+				return AbstractManagedList.this.beforeRemove(payload);
 			}
 		};
 
@@ -275,8 +291,12 @@ abstract class AbstractObservableList<Payload> implements List<Payload> {
 		return list.toString();
 	}
 
-	protected abstract Runnable beforeInsert(Payload payload);
+	protected abstract AfterInsertAction<ManagedPayload> beforeInsert(Payload payload);
 
-	protected abstract Runnable beforeRemove(Payload payload);
+	protected abstract AfterRemoveAction<ManagedPayload> beforeRemove(Payload payload);
+
+	public final Iterator<ManagedPayload> internalIterator() {
+		return list.iterator();
+	}
 
 }

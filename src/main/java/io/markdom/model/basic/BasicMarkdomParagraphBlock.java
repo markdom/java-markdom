@@ -27,7 +27,7 @@ public final class BasicMarkdomParagraphBlock extends AbstractMarkdomBlock imple
 	}
 
 	@Override
-	public List<? extends MarkdomContent> getContents() {
+	public List<MarkdomContent> getContents() {
 		return delegate.getContents();
 	}
 

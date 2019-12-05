@@ -4,13 +4,32 @@ import java.util.Optional;
 
 import io.markdom.common.MarkdomBlockType;
 import io.markdom.handler.MarkdomHandler;
-import io.markdom.model.ManagedMarkdomBlock;
 import io.markdom.model.MarkdomBlockParent;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
+import io.markdom.model.basic.AbstractManagedList.AfterInsertAction;
+import io.markdom.model.basic.AbstractManagedList.AfterRemoveAction;
 import io.markdom.util.ObjectHelper;
+import lombok.AllArgsConstructor;
 
 abstract class AbstractMarkdomBlock extends AbstractMarkdomNode implements ManagedMarkdomBlock {
+
+	@AllArgsConstructor
+	private class BlockAction implements AfterInsertAction<ManagedMarkdomBlock>, AfterRemoveAction<ManagedMarkdomBlock> {
+
+		private final MarkdomBlockParent parent;
+
+		@Override
+		public ManagedMarkdomBlock getManagedPayload() {
+			return AbstractMarkdomBlock.this;
+		}
+
+		@Override
+		public void perform() {
+			AbstractMarkdomBlock.this.parent = parent;
+		}
+
+	}
 
 	private MarkdomBlockParent parent;
 
@@ -39,16 +58,16 @@ abstract class AbstractMarkdomBlock extends AbstractMarkdomNode implements Manag
 	}
 
 	@Override
-	public final Runnable onAttach(MarkdomBlockParent parent) {
+	public final BlockAction onAttach(MarkdomBlockParent parent) {
 		ObjectHelper.notNull("block parent", parent);
 		if (null != this.parent) {
 			throw new IllegalStateException("This block is already attached to a block parent");
 		}
-		return () -> AbstractMarkdomBlock.this.parent = parent;
+		return new BlockAction(parent);
 	}
 
 	@Override
-	public final Runnable onDetach(MarkdomBlockParent parent) {
+	public final BlockAction onDetach(MarkdomBlockParent parent) {
 		ObjectHelper.notNull("block parent", parent);
 		if (null == this.parent) {
 			throw new IllegalStateException("This block is currently not attached to a block parent");
@@ -56,7 +75,7 @@ abstract class AbstractMarkdomBlock extends AbstractMarkdomNode implements Manag
 		if (this.parent != parent) {
 			throw new IllegalStateException("This block is not attached to the given block parent");
 		}
-		return () -> AbstractMarkdomBlock.this.parent = null;
+		return new BlockAction(null);
 	}
 
 	@Override

@@ -12,7 +12,7 @@ public interface MarkdomContentParent extends MarkdomNode {
 
 	public MarkdomContentParentType getContentParentType();
 
-	public List<? extends MarkdomContent> getContents();
+	public List<MarkdomContent> getContents();
 
 	public MarkdomContentParent addContent(MarkdomContent content);
 

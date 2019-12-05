@@ -40,7 +40,7 @@ public final class BasicMarkdomOrderedListBlock extends AbstractMarkdomBlock imp
 	}
 
 	@Override
-	public List<? extends MarkdomListItem> getListItems() {
+	public List<MarkdomListItem> getListItems() {
 		return delegate.getListItems();
 	}
 

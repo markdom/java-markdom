@@ -42,7 +42,7 @@ public final class BasicMarkdomHeadingBlock extends AbstractMarkdomBlock impleme
 	}
 
 	@Override
-	public List<? extends MarkdomContent> getContents() {
+	public List<MarkdomContent> getContents() {
 		return delegate.getContents();
 	}
 
