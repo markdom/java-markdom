@@ -17,8 +17,10 @@ public class CommonmarkTextConfiguration {
 		private String adjacentIndentedCodeBlocksComment = "adjacent code blocks";
 
 		private String emptyIndentedCodeBlockComment = "empty code block";
-		
+
 		private DivisionOption divisionOption = DivisionOption.DASH;
+
+		private String leadingDivisionInListItemComment = "leading division in list item";
 
 		private OrderedListOption orderedListOption = OrderedListOption.DOT;
 
@@ -44,6 +46,7 @@ public class CommonmarkTextConfiguration {
 				adjacentIndentedCodeBlocksComment,
 				emptyIndentedCodeBlockComment,
 				divisionOption,
+				leadingDivisionInListItemComment,
 				orderedListOption,
 				unorderedListOption,
 				adjacentListBlocksComment,
@@ -67,6 +70,8 @@ public class CommonmarkTextConfiguration {
 	private final String emptyIndentedCodeBlockComment;
 
 	private final DivisionOption divisionOption;
+
+	private final String leadingDivisionInListItemComment;
 
 	private final OrderedListOption orderedListOption;
 

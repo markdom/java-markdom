@@ -21,9 +21,13 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 
 	private final LineAppendable lineAppendable;
 
+	private boolean emptyBlocks;
+
 	private MarkdomBlockType lastType;
 
-	private boolean emptyBlocks;
+	private MarkdomBlockType lastListBlockType;
+
+	private boolean firstBlockInListItem;
 
 	private int listDepth;
 
@@ -65,6 +69,10 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 				EMPTY_SECTION.appendTo(lineAppendable);
 			}
 		}
+		if (hasLeadingDivisionInListItemConflict(type)) {
+			new CommentBlockSection(configuration.getLeadingDivisionInListItemComment()).appendTo(lineAppendable);
+			EMPTY_SECTION.appendTo(lineAppendable);
+		}
 	}
 
 	private boolean isCodeBlock(MarkdomBlockType type) {
@@ -86,6 +94,11 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 				break;
 		}
 		endSection(false);
+	}
+
+	private boolean hasLeadingDivisionInListItemConflict(MarkdomBlockType type) {
+		return firstBlockInListItem && MarkdomBlockType.DIVISION == type && MarkdomBlockType.UNORDERED_LIST == lastListBlockType
+			&& configuration.getUnorderedListOption().getBulletCharacter() == configuration.getDivisionOption().getDivisionCharacter();
 	}
 
 	@Override
@@ -112,6 +125,7 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 
 	@Override
 	public void onOrderedListBlockBegin(Integer startIndex) {
+		lastListBlockType = MarkdomBlockType.ORDERED_LIST;
 		indentationStack.push(new OrderedListIndentation(configuration, startIndex));
 	}
 
@@ -142,6 +156,7 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 
 	@Override
 	public void onUnorderedListBlockBegin() {
+		lastListBlockType = MarkdomBlockType.UNORDERED_LIST;
 		indentationStack.push(new UnorderedListIndentation(configuration));
 	}
 
@@ -152,6 +167,7 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 
 	@Override
 	public void onBlockEnd(MarkdomBlockType type) {
+		firstBlockInListItem = false;
 		lastType = type;
 	}
 
@@ -177,6 +193,7 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 
 	@Override
 	public void onListItemBegin() {
+		firstBlockInListItem = true;
 		lastType = null;
 	}
 
