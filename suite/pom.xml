@@ -1,0 +1,81 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>suite</artifactId>
+	<packaging>jar</packaging>
+
+	<name>Markdom - Suite</name>
+
+	<parent>
+		<groupId>io.markdom</groupId>
+		<artifactId>markdom</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+
+	<dependencies>
+
+		<!-- markdom -->
+		<dependency>
+			<groupId>io.markdom</groupId>
+			<artifactId>core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.markdom</groupId>
+			<artifactId>handler-commonmark-atlassian</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.markdom</groupId>
+			<artifactId>handler-html-cleaner</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.markdom</groupId>
+			<artifactId>handler-html-w3c</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.markdom</groupId>
+			<artifactId>handler-json-org</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.markdom</groupId>
+			<artifactId>handler-text-commonmark</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.markdom</groupId>
+			<artifactId>handler-xml-w3c</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- test -->
+		<dependency>
+			<groupId>io.markdom</groupId>
+			<artifactId>test</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<classifier>tests</classifier>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
+
+</project>
