@@ -7,20 +7,10 @@
 
 ## Overview
 
-This library provides common components for [Markdom](http://markdom.io) implementations.
+This library provides the reference implementation of [Markdom](http://markdom.io).
 
-Consult the [documentation](http://markdom.github.io/java-markdom) and [usage description](#usage) for further information:
+## Components
 
 ## Maven
-
-This library is hosted in the [Maven Central Repository](https://maven-badges.herokuapp.com/maven-central/io.markdom/markdom). You can use it with the following coordinates:
-
-```xml
-<dependency>
-	<groupId>io.markdom</groupId>
-	<artifactId>markdom</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-</dependency>
-```
 
 ## Usage
