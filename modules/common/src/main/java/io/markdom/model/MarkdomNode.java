@@ -31,7 +31,7 @@ public interface MarkdomNode {
 		return !getChildren().isEmpty();
 	};
 
-	public default Integer countCount() {
+	public default Integer countChildren() {
 		return getChildren().size();
 	};
 
