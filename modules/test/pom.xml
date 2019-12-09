@@ -6,6 +6,8 @@
 	<artifactId>test</artifactId>
 	<packaging>jar</packaging>
 
+	<name>Markdom - Test</name>
+
 	<parent>
 		<groupId>io.markdom</groupId>
 		<artifactId>modules</artifactId>
