@@ -15,7 +15,7 @@ import io.markdom.util.Property;
 public final class BasicMarkdomOrderedListBlock extends AbstractMarkdomBlock implements MarkdomOrderedListBlock {
 
 	// @formatter:off
-	private static final List<Property<MarkdomOrderedListBlock, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+	private static final List<Property<MarkdomOrderedListBlock>> PROPERTIES = new ArrayList<>(Arrays.asList(
 		new Property<>(MarkdomKeys.START_INDEX, MarkdomOrderedListBlock::getStartIndex),
 		new Property<>(MarkdomKeys.ITEMS, MarkdomOrderedListBlock::getListItems)
 	));

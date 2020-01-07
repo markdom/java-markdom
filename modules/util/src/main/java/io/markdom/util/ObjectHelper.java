@@ -16,11 +16,11 @@ public class ObjectHelper {
 		return entity;
 	}
 
-	public static <Entity> int hashCode(Entity entity, List<Property<Entity, ?>> properties) {
+	public static <Entity> int hashCode(Entity entity, List<Property<Entity>> properties) {
 		return Objects.hash(mapProperties(entity, properties));
 	}
 
-	private static <Entity> Object[] mapProperties(Entity entity, List<Property<Entity, ?>> properties) {
+	private static <Entity> Object[] mapProperties(Entity entity, List<Property<Entity>> properties) {
 		Object[] objects = new Object[properties.size()];
 		for (int i = 0, n = properties.size(); i < n; i++) {
 			objects[i] = properties.get(i).apply(entity);
@@ -28,7 +28,7 @@ public class ObjectHelper {
 		return objects;
 	}
 
-	public static <Entity> boolean equals(Entity entity, Class<Entity> type, List<Property<Entity, ?>> properties, Object object) {
+	public static <Entity> boolean equals(Entity entity, Class<Entity> type, List<Property<Entity>> properties, Object object) {
 		if (entity == object) {
 			return true;
 		} else if (null == object) {
@@ -37,7 +37,7 @@ public class ObjectHelper {
 			return false;
 		}
 		Entity other = type.cast(object);
-		for (Property<Entity, ?> property : properties) {
+		for (Property<Entity> property : properties) {
 			if (!Objects.equals(property.apply(entity), property.apply(other))) {
 				return false;
 			}
@@ -45,14 +45,14 @@ public class ObjectHelper {
 		return true;
 	}
 
-	public static <Entity> String toString(Entity entity, List<Property<Entity, ?>> properties) {
+	public static <Entity> String toString(Entity entity, List<Property<Entity>> properties) {
 		StringBuilder builder = new StringBuilder(entity.getClass().getSimpleName()).append(" [");
-		Iterator<Property<Entity, ?>> iterator = properties.iterator();
+		Iterator<Property<Entity>> iterator = properties.iterator();
 		if (iterator.hasNext()) {
-			Property<Entity, ?> first = iterator.next();
+			Property<Entity> first = iterator.next();
 			builder.append(first.getName()).append("=").append(first.apply(entity));
 			while (iterator.hasNext()) {
-				Property<Entity, ?> following = iterator.next();
+				Property<Entity> following = iterator.next();
 				builder.append(", ").append(following.getName()).append("=").append(following.apply(entity));
 			}
 		}

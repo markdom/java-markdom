@@ -15,7 +15,7 @@ import io.markdom.util.Property;
 public final class BasicMarkdomUnorderedListBlock extends AbstractMarkdomBlock implements MarkdomUnorderedListBlock {
 
 	// @formatter:off
-	private static final List<Property<MarkdomUnorderedListBlock, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+	private static final List<Property<MarkdomUnorderedListBlock>> PROPERTIES = new ArrayList<>(Arrays.asList(
 		new Property<>(MarkdomKeys.ITEMS, MarkdomUnorderedListBlock::getListItems)
 	));
 	// @formatter:on	

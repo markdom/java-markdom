@@ -14,7 +14,7 @@ import io.markdom.util.Property;
 public final class BasicMarkdomCommentBlock extends AbstractMarkdomBlock implements MarkdomCommentBlock {
 
 	// @formatter:off
-	private static final List<Property<MarkdomCommentBlock, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+	private static final List<Property<MarkdomCommentBlock>> PROPERTIES = new ArrayList<>(Arrays.asList(
 		new Property<>(MarkdomKeys.COMMENT, MarkdomCommentBlock::getComment)
 	));
 	// @formatter:on		

@@ -15,7 +15,7 @@ import io.markdom.util.Property;
 public final class BasicMarkdomListItem extends AbstractMarkdomListItem {
 
 	// @formatter:off
-	private static final List<Property<MarkdomListItem, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+	private static final List<Property<MarkdomListItem>> PROPERTIES = new ArrayList<>(Arrays.asList(
 		new Property<>(MarkdomKeys.BLOCKS, MarkdomListItem::getBlocks)
 	));
 	// @formatter:on	

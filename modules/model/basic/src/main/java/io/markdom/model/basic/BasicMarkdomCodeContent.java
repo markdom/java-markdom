@@ -14,7 +14,7 @@ import io.markdom.util.Property;
 public final class BasicMarkdomCodeContent extends AbstractMarkdomContent implements MarkdomCodeContent {
 
 	// @formatter:off
-	private static final List<Property<MarkdomCodeContent, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+	private static final List<Property<MarkdomCodeContent>> PROPERTIES = new ArrayList<>(Arrays.asList(
 		new Property<>(MarkdomKeys.CODE, MarkdomCodeContent::getCode)
 	));
 	// @formatter:on		

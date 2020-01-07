@@ -13,7 +13,7 @@ import io.markdom.util.Property;
 public final class BasicMarkdomDivisionBlock extends AbstractMarkdomBlock implements MarkdomDivisionBlock {
 
 	// @formatter:off
-	private static final List<Property<MarkdomDivisionBlock, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+	private static final List<Property<MarkdomDivisionBlock>> PROPERTIES = new ArrayList<>(Arrays.asList(
 	));
 	// @formatter:on	
 

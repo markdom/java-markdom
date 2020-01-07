@@ -15,7 +15,7 @@ import io.markdom.util.Property;
 public final class BasicMarkdomQuoteBlock extends AbstractMarkdomBlock implements MarkdomQuoteBlock {
 
 	// @formatter:off
-	private static final List<Property<MarkdomQuoteBlock, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+	private static final List<Property<MarkdomQuoteBlock>> PROPERTIES = new ArrayList<>(Arrays.asList(
 		new Property<>(MarkdomKeys.BLOCKS, MarkdomQuoteBlock::getBlocks)
 	));
 	// @formatter:on	

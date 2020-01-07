@@ -16,7 +16,7 @@ import io.markdom.util.Property;
 public final class BasicMarkdomEmphasisContent extends AbstractMarkdomContent implements MarkdomEmphasisContent {
 
 	// @formatter:off
-	private static final List<Property<MarkdomEmphasisContent, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+	private static final List<Property<MarkdomEmphasisContent>> PROPERTIES = new ArrayList<>(Arrays.asList(
 		new Property<>(MarkdomKeys.LEVEL, MarkdomEmphasisContent::getLevel),
 		new Property<>(MarkdomKeys.CONTENTS, MarkdomEmphasisContent::getContents)
 	));

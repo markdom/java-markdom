@@ -14,7 +14,7 @@ import io.markdom.util.Property;
 public final class BasicMarkdomLineBreakContent extends AbstractMarkdomContent implements MarkdomLineBreakContent {
 
 	// @formatter:off
-	private static final List<Property<MarkdomLineBreakContent, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+	private static final List<Property<MarkdomLineBreakContent>> PROPERTIES = new ArrayList<>(Arrays.asList(
 		new Property<>(MarkdomKeys.HARD, MarkdomLineBreakContent::getHard)
 	));
 	// @formatter:on	

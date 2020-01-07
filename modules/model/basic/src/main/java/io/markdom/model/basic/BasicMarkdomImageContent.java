@@ -15,7 +15,7 @@ import io.markdom.util.Property;
 public final class BasicMarkdomImageContent extends AbstractMarkdomContent implements MarkdomImageContent {
 
 	// @formatter:off
-	private static final List<Property<MarkdomImageContent, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+	private static final List<Property<MarkdomImageContent>> PROPERTIES = new ArrayList<>(Arrays.asList(
 		new Property<>(MarkdomKeys.URI, MarkdomImageContent::getUri),
 		new Property<>(MarkdomKeys.TITLE, MarkdomImageContent::getTitle),
 		new Property<>(MarkdomKeys.ALTERNATIVE, MarkdomImageContent::getAlternative)

@@ -16,7 +16,7 @@ import io.markdom.util.Property;
 public final class BasicMarkdomLinkContent extends AbstractMarkdomContent implements MarkdomLinkContent {
 
 	// @formatter:off
-	private static final List<Property<MarkdomLinkContent, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+	private static final List<Property<MarkdomLinkContent>> PROPERTIES = new ArrayList<>(Arrays.asList(
 		new Property<>(MarkdomKeys.URI, MarkdomLinkContent::getUri),
 		new Property<>(MarkdomKeys.TITLE, MarkdomLinkContent::getTitle),
 		new Property<>(MarkdomKeys.CONTENTS, MarkdomLinkContent::getContents)

@@ -17,7 +17,7 @@ import io.markdom.util.Property;
 public final class BasicMarkdomDocument extends AbstractMarkdomNode implements MarkdomDocument {
 
 	// @formatter:off
-	private static final List<Property<MarkdomDocument, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+	private static final List<Property<MarkdomDocument>> PROPERTIES = new ArrayList<>(Arrays.asList(
 		new Property<>(MarkdomKeys.BLOCKS, MarkdomDocument::getBlocks)
 	));
 	// @formatter:on	

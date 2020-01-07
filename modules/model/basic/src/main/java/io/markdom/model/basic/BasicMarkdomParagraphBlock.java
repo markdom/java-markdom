@@ -15,7 +15,7 @@ import io.markdom.util.Property;
 public final class BasicMarkdomParagraphBlock extends AbstractMarkdomBlock implements MarkdomParagraphBlock {
 
 	// @formatter:off
-	private static final List<Property<MarkdomParagraphBlock, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+	private static final List<Property<MarkdomParagraphBlock>> PROPERTIES = new ArrayList<>(Arrays.asList(
 		new Property<>(MarkdomKeys.CONTENTS, MarkdomParagraphBlock::getContents)
 	));
 	// @formatter:on	

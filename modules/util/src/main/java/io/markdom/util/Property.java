@@ -8,15 +8,15 @@ import lombok.Getter;
 import lombok.ToString;
 
 @Data
-public final class Property<Entity, Value> {
+public final class Property<Entity> {
 
 	private final String name;
 
 	@ToString.Exclude
 	@Getter(AccessLevel.PRIVATE)
-	private final Function<Entity, Value> accessor;
+	private final Function<Entity, Object> accessor;
 
-	public Value apply(Entity entity) {
+	public Object apply(Entity entity) {
 		return accessor.apply(entity);
 	}
 

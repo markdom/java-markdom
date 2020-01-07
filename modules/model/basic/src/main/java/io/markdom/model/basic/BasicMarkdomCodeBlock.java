@@ -15,7 +15,7 @@ import io.markdom.util.Property;
 public final class BasicMarkdomCodeBlock extends AbstractMarkdomBlock implements MarkdomCodeBlock {
 
 	// @formatter:off
-	private static final List<Property<MarkdomCodeBlock, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+	private static final List<Property<MarkdomCodeBlock>> PROPERTIES = new ArrayList<>(Arrays.asList(
 		new Property<>(MarkdomKeys.CODE, MarkdomCodeBlock::getCode),
 		new Property<>(MarkdomKeys.HINT, MarkdomCodeBlock::getHint)
 	));

@@ -16,7 +16,7 @@ import io.markdom.util.Property;
 public final class BasicMarkdomHeadingBlock extends AbstractMarkdomBlock implements MarkdomHeadingBlock {
 
 	// @formatter:off
-	private static final List<Property<MarkdomHeadingBlock, ?>> PROPERTIES = new ArrayList<>(Arrays.asList(
+	private static final List<Property<MarkdomHeadingBlock>> PROPERTIES = new ArrayList<>(Arrays.asList(
 		new Property<>(MarkdomKeys.LEVEL, MarkdomHeadingBlock::getLevel),
 		new Property<>(MarkdomKeys.CONTENTS, MarkdomHeadingBlock::getContents)
 	));
