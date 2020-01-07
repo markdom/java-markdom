@@ -6,7 +6,7 @@
 	<artifactId>handler-json-org</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Markdom - Handler - Json - org.json</name>
+	<name>Markdom - Handler - Json - Json</name>
 
 	<parent>
 		<groupId>io.markdom</groupId>

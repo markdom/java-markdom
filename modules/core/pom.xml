@@ -22,27 +22,13 @@
 			<artifactId>common</artifactId>
 		</dependency>
 
-		<!-- utils -->
-		<dependency>
-			<groupId>net.markenwerk</groupId>
-			<artifactId>commons-iterables</artifactId>
-		</dependency>
-
 		<!-- test -->
 		<dependency>
 			<groupId>io.markdom</groupId>
 			<artifactId>test</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<classifier>tests</classifier>
 			<type>test-jar</type>
 			<scope>test</scope>
-		</dependency>
-
-		<!-- lombok -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>
