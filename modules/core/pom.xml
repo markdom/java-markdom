@@ -19,7 +19,13 @@
 		<!-- markdom -->
 		<dependency>
 			<groupId>io.markdom</groupId>
-			<artifactId>common</artifactId>
+			<artifactId>util</artifactId>
+		</dependency>
+
+		<!-- utils -->
+		<dependency>
+			<groupId>net.markenwerk</groupId>
+			<artifactId>commons-iterables</artifactId>
 		</dependency>
 
 		<!-- test -->

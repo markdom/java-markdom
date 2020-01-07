@@ -10,6 +10,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
 import io.markdom.TestHelper;
+import io.markdom.common.MarkdomExample;
 import io.markdom.handler.MarkdomDispatcher;
 import io.markdom.handler.MarkdomDocumentMarkdomHandler;
 import io.markdom.handler.MarkdomHandler;
@@ -36,7 +37,7 @@ public class XmlDocumentMarkdomDispatcherTests {
 
 		MarkdomDocument document = dispatcher.handle(handler);
 
-		assertEquals(TestHelper.getExampleDocument(factory), document);
+		assertEquals(MarkdomExample.getExampleDocument(factory), document);
 
 	}
 

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import io.markdom.TestHelper;
+import io.markdom.common.MarkdomExample;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
@@ -38,7 +39,7 @@ public class JacksonJsonDocumentDeserializerTests {
 
 		MarkdomDocument document = mapper.readValue(wrappedExampleDocument(), Holder.class).getDocument();
 
-		assertEquals(TestHelper.getExampleDocument(factory), document);
+		assertEquals(MarkdomExample.getExampleDocument(factory), document);
 
 	}
 

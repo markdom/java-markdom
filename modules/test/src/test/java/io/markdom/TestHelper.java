@@ -18,10 +18,6 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
 
-import io.markdom.common.MarkdomEmphasisLevel;
-import io.markdom.common.MarkdomHeadingLevel;
-import io.markdom.model.MarkdomDocument;
-import io.markdom.model.MarkdomFactory;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import net.markenwerk.utils.text.fetcher.BufferedTextFetcher;
@@ -69,46 +65,6 @@ public class TestHelper {
 	@SneakyThrows
 	private static String read(Reader reader) {
 		return new BufferedTextFetcher().read(reader, true);
-	}
-
-	public static MarkdomDocument getExampleDocument(MarkdomFactory factory) {
-		// @formatter:off
-		return factory.document(
-			factory.headingBlock(
-				MarkdomHeadingLevel.LEVEL_1,
-				factory.textContent("Markdom")
-			), 
-			factory.orderedListBlock(
-				1,
-				factory.listItem(
-					factory.paragraphBlock(
-						factory.linkContent(
-							"#Bar",
-							factory.textContent("Foo")
-						)
-					)
-				),
-				factory.listItem(
-					factory.paragraphBlock(
-						factory.textContent("Lorem ipsum"),
-						factory.lineBreakContent(true),
-						factory.codeContent("dolor sit amet")
-					) 
-				),
-				factory.listItem(
-					factory.quoteBlock(
-						factory.paragraphBlock(
-							factory.emphasisContent(
-								MarkdomEmphasisLevel.LEVEL_1,
-								factory.textContent("Baz")
-							)
-						)
-					)
-				)
-			),
-			factory.codeBlock("goto 11")
-		);
-		// @formatter:on
 	}
 
 	@SneakyThrows

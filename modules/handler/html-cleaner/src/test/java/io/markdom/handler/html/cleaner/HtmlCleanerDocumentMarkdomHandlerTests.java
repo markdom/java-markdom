@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.xmlunit.matchers.CompareMatcher;
 
 import io.markdom.TestHelper;
+import io.markdom.common.MarkdomExample;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
@@ -23,7 +24,7 @@ public class HtmlCleanerDocumentMarkdomHandlerTests {
 	public void handleExampleObject() {
 
 		MarkdomFactory factory = new BasicMarkdomFactory();
-		MarkdomDocument document = TestHelper.getExampleDocument(factory);
+		MarkdomDocument document = MarkdomExample.getExampleDocument(factory);
 
 		HtmlCleaner cleaner = new HtmlCleaner();
 		CleanerProperties properties = cleaner.getProperties();

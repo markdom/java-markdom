@@ -13,6 +13,7 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 
 import io.markdom.TestHelper;
+import io.markdom.common.MarkdomExample;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
@@ -25,7 +26,7 @@ public class JacksonJsonGeneratorMarkdomhandlerTests {
 	public void handleExampleObject() {
 
 		MarkdomFactory factory = new BasicMarkdomFactory();
-		MarkdomDocument document = TestHelper.getExampleDocument(factory);
+		MarkdomDocument document = MarkdomExample.getExampleDocument(factory);
 
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 		JsonGenerator generator = new JsonFactory().createGenerator(buffer, JsonEncoding.UTF8);

@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import io.markdom.TestHelper;
+import io.markdom.common.MarkdomExample;
 import io.markdom.handler.MarkdomDispatcher;
 import io.markdom.handler.MarkdomDocumentMarkdomHandler;
 import io.markdom.model.MarkdomDocument;
@@ -27,7 +28,7 @@ public class GsonJsonObjectMarkdomDispatcherTests {
 		MarkdomDispatcher dispatcher = new GsonJsonObjectMarkdomDispatcher(jsonObject);
 		MarkdomDocument document = dispatcher.handle(new MarkdomDocumentMarkdomHandler(factory));
 
-		assertEquals(TestHelper.getExampleDocument(factory), document);
+		assertEquals(MarkdomExample.getExampleDocument(factory), document);
 
 	}
 

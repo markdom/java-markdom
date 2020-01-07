@@ -13,6 +13,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonWriter;
 
 import io.markdom.TestHelper;
+import io.markdom.common.MarkdomExample;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
@@ -25,7 +26,7 @@ public class GsonJsonWriterMarkdomHandlerTests {
 	public void handleExampleObject() {
 
 		MarkdomFactory factory = new BasicMarkdomFactory();
-		MarkdomDocument document = TestHelper.getExampleDocument(factory);
+		MarkdomDocument document = MarkdomExample.getExampleDocument(factory);
 
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 		JsonWriter writer = new GsonBuilder().create().newJsonWriter(new OutputStreamWriter(buffer));

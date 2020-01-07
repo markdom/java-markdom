@@ -8,6 +8,7 @@ import javax.json.JsonObject;
 import org.junit.jupiter.api.Test;
 
 import io.markdom.TestHelper;
+import io.markdom.common.MarkdomExample;
 import io.markdom.handler.MarkdomDispatcher;
 import io.markdom.handler.MarkdomDocumentMarkdomHandler;
 import io.markdom.model.MarkdomDocument;
@@ -27,7 +28,7 @@ public class JakartaJsonObjectMarkdomDispatcherTests {
 		MarkdomDispatcher dispatcher = new JakartaJsonObjectMarkdomDispatcher(jsonObject);
 		MarkdomDocument document = dispatcher.handle(new MarkdomDocumentMarkdomHandler(factory));
 
-		assertEquals(TestHelper.getExampleDocument(factory), document);
+		assertEquals(MarkdomExample.getExampleDocument(factory), document);
 
 	}
 

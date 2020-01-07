@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.markdom.TestHelper;
+import io.markdom.common.MarkdomExample;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
@@ -37,7 +38,7 @@ public class JacksonJsonDocumentSerializerTests {
 	public void handleExampleObject() {
 
 		MarkdomFactory factory = new BasicMarkdomFactory();
-		MarkdomDocument document = TestHelper.getExampleDocument(factory);
+		MarkdomDocument document = MarkdomExample.getExampleDocument(factory);
 
 		ObjectMapper mapper = new ObjectMapper();
 

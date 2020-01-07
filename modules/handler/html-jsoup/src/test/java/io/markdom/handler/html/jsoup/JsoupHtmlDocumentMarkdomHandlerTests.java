@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.xmlunit.matchers.CompareMatcher;
 
 import io.markdom.TestHelper;
+import io.markdom.common.MarkdomExample;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
@@ -20,7 +21,7 @@ public class JsoupHtmlDocumentMarkdomHandlerTests {
 	public void handleExampleObject() {
 
 		MarkdomFactory factory = new BasicMarkdomFactory();
-		MarkdomDocument document = TestHelper.getExampleDocument(factory);
+		MarkdomDocument document = MarkdomExample.getExampleDocument(factory);
 
 		Document htmlDocument = document.handle(new JsoupHtmlDocumentMarkdomHandler()).asDocument();
 		htmlDocument.outputSettings().syntax(Document.OutputSettings.Syntax.xml);

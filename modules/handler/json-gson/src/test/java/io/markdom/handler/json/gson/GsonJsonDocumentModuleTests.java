@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import io.markdom.TestHelper;
+import io.markdom.common.MarkdomExample;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
@@ -29,7 +30,7 @@ public class GsonJsonDocumentModuleTests {
 
 		MarkdomDocument document = gson.fromJson(TestHelper.openExampleJson(), MarkdomDocument.class);
 
-		assertEquals(TestHelper.getExampleDocument(factory), document);
+		assertEquals(MarkdomExample.getExampleDocument(factory), document);
 
 	}
 
@@ -38,7 +39,7 @@ public class GsonJsonDocumentModuleTests {
 	public void serializeDocument() {
 
 		MarkdomFactory factory = new BasicMarkdomFactory();
-		MarkdomDocument document = TestHelper.getExampleDocument(factory);
+		MarkdomDocument document = MarkdomExample.getExampleDocument(factory);
 
 		GsonBuilder builder = new GsonBuilder();
 		builder.registerTypeHierarchyAdapter(MarkdomDocument.class, new GsonMarkdomDocumentSerializer());

@@ -12,6 +12,7 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.markdom.TestHelper;
+import io.markdom.common.MarkdomExample;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
@@ -30,7 +31,7 @@ public class JacksonJsonDocumentModuleTests {
 
 		MarkdomDocument document = mapper.readValue(TestHelper.openExampleJson(), MarkdomDocument.class);
 
-		assertEquals(TestHelper.getExampleDocument(factory), document);
+		assertEquals(MarkdomExample.getExampleDocument(factory), document);
 
 	}
 
@@ -39,7 +40,7 @@ public class JacksonJsonDocumentModuleTests {
 	public void serializeDocument() {
 
 		MarkdomFactory factory = new BasicMarkdomFactory();
-		MarkdomDocument document = TestHelper.getExampleDocument(factory);
+		MarkdomDocument document = MarkdomExample.getExampleDocument(factory);
 
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(new JacksonMarkdomDocumentModule(factory));
