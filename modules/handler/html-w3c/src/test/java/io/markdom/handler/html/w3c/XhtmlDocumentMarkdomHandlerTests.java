@@ -11,6 +11,7 @@ import io.markdom.common.MarkdomExample;
 import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.model.basic.BasicMarkdomFactory;
+import io.markdom.util.XmlHelper;
 import lombok.SneakyThrows;
 
 public class XhtmlDocumentMarkdomHandlerTests {
@@ -23,7 +24,7 @@ public class XhtmlDocumentMarkdomHandlerTests {
 		MarkdomDocument document = MarkdomExample.getExampleDocument(factory);
 
 		Document xhtmlDocument = document.handle(new XhtmlDocumentMarkdomHandler(TestHelper.getDocumentBuilder())).asDocument();
-		String xhtml = TestHelper.toString(xhtmlDocument);
+		String xhtml = XmlHelper.asText(xhtmlDocument, false);
 
 		assertThat(xhtml, CompareMatcher.isIdenticalTo(TestHelper.readExampleXhtml()).ignoreWhitespace());
 

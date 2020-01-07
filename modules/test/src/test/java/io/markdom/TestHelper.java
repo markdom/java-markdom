@@ -4,19 +4,10 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.StringWriter;
 import java.nio.charset.Charset;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.DocumentType;
 
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
@@ -65,29 +56,6 @@ public class TestHelper {
 	@SneakyThrows
 	private static String read(Reader reader) {
 		return new BufferedTextFetcher().read(reader, true);
-	}
-
-	@SneakyThrows
-	public String toString(Document document) {
-
-		DocumentType doctype = document.getDoctype();
-		DOMSource source = new DOMSource(document);
-		StreamResult result = new StreamResult(new StringWriter());
-
-		Transformer transformer = TransformerFactory.newInstance().newTransformer();
-		transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-
-		if (null != doctype) {
-			transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, doctype.getPublicId());
-			transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
-		}
-
-		transformer.transform(source, result);
-
-		return result.getWriter().toString();
 	}
 
 	@SneakyThrows
