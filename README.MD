@@ -199,8 +199,7 @@ public void onBlock(MarkdomBlock block) {
 }
 ```
 
-### Working wit Commonmark text
-
+### Working with Commonmark documents
 
 #### Using the Atlassian Commonmark library
 
@@ -232,6 +231,8 @@ Document commonmarkDocument = dispatcher.handle(handler);
 ```
 
 *Note: The Atlassian Comonmark library doesn't provide a mechanism to convert a Commonmark document into Commonmark text.*
+
+### Working with Commonmark text
 
 #### Using the Commonmark text module
 
