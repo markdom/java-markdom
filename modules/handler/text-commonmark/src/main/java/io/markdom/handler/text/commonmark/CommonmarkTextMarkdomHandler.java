@@ -147,6 +147,7 @@ public final class CommonmarkTextMarkdomHandler<ActualAppendable extends Appenda
 	@Override
 	public void onQuoteBlockBegin() {
 		indentationStack.push(new QuoteIndentation());
+		lastType = null;
 	}
 
 	@Override
