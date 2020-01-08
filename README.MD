@@ -1,4 +1,4 @@
-# Reference Markdom implementation for Java
+# Markdom reference implementation for Java
 
 [![Build Status][BuildStatusBadge]][BuildStatusLink]
 [![Maven Central][MavenCentralBadge]][MavenCentralLink]

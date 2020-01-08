@@ -5,10 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.markdom</groupId>
 	<artifactId>markdom</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>pom</packaging>
 
 	<name>Markdom - Root</name>
+	<description>Markdom reference implementation for Java</description>
 	<url>https://github.com/markdom/java-markdom</url>
 	<inceptionYear>2015</inceptionYear>
 
@@ -46,6 +47,10 @@
 		</developer>
 	</developers>
 
+	<scm>
+		<url>https://github.com/markdom/java-markdom</url>
+	</scm>
+
 	<dependencyManagement>
 		<dependencies>
 
@@ -53,67 +58,67 @@
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>util</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.0.1</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>core</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.0.1</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>model-basic</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.0.1</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-commonmark-atlassian</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.0.1</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-html-cleaner</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.0.1</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-html-jsoup</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.0.1</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-html-w3c</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.0.1</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-json-org</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.0.1</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-text-commonmark</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.0.1</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-xml-w3c</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.0.1</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>test</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.0.1</version>
 				<classifier>tests</classifier>
 				<type>test-jar</type>
 			</dependency>
@@ -387,5 +392,58 @@
 
 		</plugins>
 	</build>
+
+	<profiles>
+
+		<profile>
+			<id>deploy</id>
+
+			<distributionManagement>
+				<snapshotRepository>
+					<id>ossrh</id>
+					<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+				</snapshotRepository>
+				<repository>
+					<id>ossrh</id>
+					<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+				</repository>
+			</distributionManagement>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.6</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.6.8</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+							<keepStagingRepositoryOnCloseRuleFailure>true</keepStagingRepositoryOnCloseRuleFailure>
+						</configuration>
+					</plugin>
+
+				</plugins>
+			</build>
+
+		</profile>
+
+	</profiles>
 
 </project>
