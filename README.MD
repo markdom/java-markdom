@@ -257,8 +257,8 @@ Document xmlDocument = dispatcher.handle(handler).asDocument();
 [BuildStatusBadge]: https://travis-ci.com/markdom/java-markdom.svg?branch=master "Build Status"
 [BuildStatusLink]: https://travis-ci.com/markdom/java-markdom
 
-[MavenCentralBadge]: https://maven-badges.herokuapp.com/maven-central/io.markdom/common/badge.svg "Maven Central"
-[MavenCentralLink]: https://maven-badges.herokuapp.com/maven-central/io.markdom/markdom
+[MavenCentralBadge]: https://maven-badges.herokuapp.com/maven-central/io.markdom/suite/badge.svg "Maven Central"
+[MavenCentralLink]: https://maven-badges.herokuapp.com/maven-central/io.markdom/suite
 
 [IssuesBadge]: https://img.shields.io/github/issues/markdom/java-markdom.svg "Issues"
 [IssuesLink]: https://github.com/markdom/java-markdom/issues
