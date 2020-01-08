@@ -24,7 +24,7 @@ This library consists of multiple modules, namely:
 - `handler-json-jackson`: A handler that consumes and produces Markdom JSON using the [Jackson](https://github.com/FasterXML/jackson-databind) databind library.
 - `handler-json-jakarta`: A handler that consumes and produces Markdom JSON using the [Jakarta](https://github.com/eclipse-ee4j/jsonp) JSON processing library.
 - `handler-json-org`: A handler that consumes and produces Markdom JSON using the [JSON](https://github.com/stleary/JSON-java) reference library.
-- `handler-json-simple`: A handler that consumes and produces Markdom JSON using current incarnation of the [JSON simple](https://cliftonlabs.github.io/json-simple/) library.
+- `handler-json-simple`: A handler that consumes and produces Markdom JSON using the [JSON simple](https://cliftonlabs.github.io/json-simple/) library.
 - `handler-text-commonmark`: A handler that produces Commonmark text.
 - `handler-xml-w3c`: A handler that produces Markdom XML using the Java default XML implementation.
 - `model basic`: The reference Markdom model implementation.
