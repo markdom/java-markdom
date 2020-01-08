@@ -29,7 +29,7 @@
 
 		<dependency>
 			<groupId>io.markdom</groupId>
-			<artifactId>handler-html-cleaner</artifactId>
+			<artifactId>handler-html-jsoup</artifactId>
 		</dependency>
 
 		<dependency>
