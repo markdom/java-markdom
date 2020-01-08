@@ -40,7 +40,7 @@ This library is hosted in the [Maven Central Repository](https://search.maven.or
 <dependency>
   <groupId>io.markdom</groupId>
   <artifactId>suite</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
 </dependency>
 ```
 
@@ -199,11 +199,66 @@ public void onBlock(MarkdomBlock block) {
 }
 ```
 
+### Working wit Commonmark text
+
+
+#### Using the Atlassian Commonmark library
+
+Using the Atlassian Commonmark library requires the module `handler-commonmark-atlassian`. This module contains a dispatcher and a handler that consume and produce Commonmark documents.
+
+##### Consuming a Commonmark document
+
+The class `AtlassianCommonmarkDocumentMarkdomDispatcher` is a `MarkdomDispatcher` that consumes a `Document`.
+
+```java
+Parser parser = Parser.builder().build();
+Document commonmarkDocument = (Document) parser.parseReader(new FileReader("test.md"));
+
+MarkdomDispatcher dispatcher = new AtlassianCommonmarkDocumentMarkdomDispatcher(commonmarkDocument);
+MarkdomDocumentMarkdomHandler handler = new MarkdomDocumentMarkdomHandler(new BasicMarkdomFactory());
+
+MarkdomDocument document = dispatcher.handle(handler);
+```
+
+##### Producing a Commonamrk document
+
+The class `AtlassianCommonmarkDocumentMarkdomHandler` is a `MarkdomHandler` that produces a `Document`.
+
+```java
+MarkdomDispatcher dispatcher = getMarkdomDocument();
+AtlassianCommonmarkDocumentMarkdomHandler handler = new AtlassianCommonmarkDocumentMarkdomHandler();
+
+Document commonmarkDocument = dispatcher.handle(handler);
+```
+
+*Note: The Atlassian Comonmark library doesn't provide a mechanism to convert a Commonmark document into Commonmark text.*
+
+#### Using the Commonmark text module
+
+Using the Commonmark text module requires the module `handler-text-commonmark`. This module contains a dispatcher and a handler that consume and produce Commonmark documents.
+
+##### Producing Commonmark text
+
+The class `CommonmarkDocumentMarkdomHandler` is a `MarkdomHandler` that produces Commonmark text. The handler takes an `Appendable` (i.e. `System.out` or a `StringWriter`) as a constructor argument and return that `Appendable` as es result.  It appends the produced Commonmark text to the `Appendable` as a side-effect.
+
+```java
+Appendable appendable = getAppendable();
+MarkdomDispatcher dispatcher = getMarkdomDocument();
+
+dispatcher.handle(new CommonmarkTextMarkdomHandler<>(appendable));
+```
+
 ### Working with Markdom JSON
+
+All handlers that create JSON objects wrap their result as a `JsonObjectResult`. A `JsonObjectResult` has a getter for the actual result and convenience methods that convert the wrapped result into text.
 
 #### Using the JSON reference library
 
-#### Consuming a JSON document
+Using the JSON reference library requires the module `handler-json-org`. This module contains a dispatchers and a handler that consume and produce Markdom JSON objects.
+
+##### Consuming a JSON document
+
+The class `JsonObjectMarkdomDispatcher` is a `MarkdomDispatcher` that consumes a `JSONObject`.
 
 ```java
 JSONObject jsonObject = new JSONObject(new JSONTokener(openJsonInputStream()));
@@ -214,18 +269,26 @@ MarkdomDocumentMarkdomHandler handler = new MarkdomDocumentMarkdomHandler(new Ba
 MarkdomDocument document = dispatcher.handle(handler);
 ```
 
-#### Producing a JSON document
+##### Producing a JSON document
+
+The class `JsonObjectMarkdomHandler` is a `MarkdomHandler` that produces a wrapped `JSONObject`.
 
 ```java
 MarkdomDispatcher dispatcher = getMarkdomDocument();
 JsonObjectMarkdomHandler handler = new JsonObjectMarkdomHandler();
 
-JSONObject jsonObject = document.handle(handler).asObject();
+JSONObject jsonObject = dispatcher.handle(handler).asObject();
 ```
 
 ### Working with Markdom XML
 
+All handlers that create XML documents wrap their result in a `XmlDocumentResult`. A `XmlDocumentResult` has a getter for the actual result and convenience methods that convert the wrapped result into text or as the root element of the wrapped  XML document.
+
 #### Using the default XML implementation
+
+Using the default XML implementation requires the module `handler-xml-w3c`. This module contains a dispatcher and  a handler that consume and produce Markdom XML documents.
+
+The components provided by this module need a `DocumentBuilder`. The `DocumentBuilder` should be aware of namespaces.
 
 ```java
 DocumentBuilderFactory xmlFactory = DocumentBuilderFactory.newInstance();
@@ -233,7 +296,7 @@ xmlFactory.setNamespaceAware(true);
 DocumentBuilder xmlBuilder = xmlFactory.newDocumentBuilder();
 ```
 
-#### Consuming a XML document
+##### Consuming a XML document
 
 ```java
 Document xmlDocument = xmlBuilder.parse(new InputSource(TestHelper.openExampleXml()));
@@ -244,7 +307,7 @@ MarkdomDocumentMarkdomHandler handler = new MarkdomDocumentMarkdomHandler(new Ba
 MarkdomDocument document = dispatcher.handle(handler);
 ```
 
-#### Producing a XML document
+##### Producing a XML document
 
 ```java
 MarkdomDispatcher dispatcher = getMarkdomDocument();
@@ -252,7 +315,6 @@ XmlDocumentMarkdomHandler handler = handle(new XmlDocumentMarkdomHandler(xmlBuil
 
 Document xmlDocument = dispatcher.handle(handler).asDocument();
 ```
-
 
 [BuildStatusBadge]: https://travis-ci.com/markdom/java-markdom.svg?branch=master "Build Status"
 [BuildStatusLink]: https://travis-ci.com/markdom/java-markdom
