@@ -195,7 +195,7 @@ public void onNode(MarkdomNode node) {
 
 ```java
 public void onBlock(MarkdomBlock block) {
-  block.Parent().ifPresent(parent -> onBlockParent(child));
+  block.Parent().ifPresent(parent -> onBlockParent(parent));
 }
 ```
 
