@@ -178,7 +178,7 @@ public void onNode(MarkdomNode node) {
 ```
 
 ```java
-public void onBlockparent(MarkdomPblockParent parent) {
+public void onBlockparent(MarkdomBlockParent parent) {
   parent.getChildren().forEach(child -> onBlock(child));
 }
 ```
