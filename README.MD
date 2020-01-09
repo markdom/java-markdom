@@ -141,22 +141,22 @@ public void onNode(MarkdomNode node) {
 
     @Override
     public void onDocument(MarkdomDocument document) {
-      onDocument((MarkdomDocument) node);
+      onDocument(document);
     }
 
     @Override
     public void onBlock(MarkdomBlock block) {
-      onBlock((MarkdomBlock) node);
+      onBlock(block);
     }
 
     @Override
     public void onListItem(MarkdomListItem listItem) {
-      onListItem((MarkdomListItem) node);
+      onListItem(listItem);
     }
 
     @Override
     public void onContent(MarkdomContent content) {
-      onContent((MarkdomContent) node);
+      onContent(content);
     }
 
   });
