@@ -1,5 +1,6 @@
 package io.markdom.handler;
 
+import java.util.EnumSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -16,8 +17,8 @@ public class SimpleMarkdomFilter implements MarkdomFilter {
 	private final Set<MarkdomContentType> contentTypes;
 
 	public SimpleMarkdomFilter(Set<MarkdomBlockType> blockTypes, Set<MarkdomContentType> contentTypes) {
-		this.blockTypes = ObjectHelper.notNull("set of block types", blockTypes);
-		this.contentTypes = ObjectHelper.notNull("set of content types", contentTypes);
+		this.blockTypes = EnumSet.copyOf(ObjectHelper.notNull("set of block types", blockTypes));
+		this.contentTypes = EnumSet.copyOf(ObjectHelper.notNull("set of content types", contentTypes));
 	}
 
 	@Override
