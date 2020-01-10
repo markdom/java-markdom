@@ -1,6 +1,5 @@
 package io.markdom.model;
 
-import java.util.Collections;
 import java.util.List;
 
 import io.markdom.common.MarkdomBlockParentType;
@@ -22,7 +21,7 @@ public interface MarkdomBlockParent extends MarkdomNode {
 
 	@Override
 	public default List<MarkdomBlock> getChildren() {
-		return Collections.unmodifiableList(getBlocks());
+		return getBlocks();
 	}
 
 	public default void choose(MarkdomBlockParentChoice choice) {

@@ -1,6 +1,5 @@
 package io.markdom.model;
 
-import java.util.Collections;
 import java.util.List;
 
 import io.markdom.common.MarkdomContentParentType;
@@ -22,7 +21,7 @@ public interface MarkdomContentParent extends MarkdomNode {
 
 	@Override
 	public default List<MarkdomContent> getChildren() {
-		return Collections.unmodifiableList(getContents());
+		return getContents();
 	}
 
 	public default void choose(MarkdomContentParentChoice choice) {
