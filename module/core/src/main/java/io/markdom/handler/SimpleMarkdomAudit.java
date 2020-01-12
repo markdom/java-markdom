@@ -3,11 +3,14 @@ package io.markdom.handler;
 import java.util.EnumSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import io.markdom.common.MarkdomBlockType;
 import io.markdom.common.MarkdomContentType;
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
+import io.markdom.util.FunctionUtil;
+import io.markdom.util.ObjectHelper;
 
 public class SimpleMarkdomAudit implements MarkdomAudit {
 
@@ -15,77 +18,101 @@ public class SimpleMarkdomAudit implements MarkdomAudit {
 
 	private final Set<MarkdomContentType> contentTypes = EnumSet.noneOf(MarkdomContentType.class);
 
+	private final Consumer<MarkdomBlockType> blockTypeConsumer;
+
+	private final Consumer<MarkdomContentType> contentTypeConsumer;
+
 	public SimpleMarkdomAudit() {
+		this(FunctionUtil.idleConsumer(), FunctionUtil.idleConsumer());
+	}
+
+	public SimpleMarkdomAudit(Consumer<MarkdomBlockType> blockTypeConsumer, Consumer<MarkdomContentType> contentTypeConsumer) {
+		this.blockTypeConsumer = blockTypeConsumer(ObjectHelper.notNull("block type consumer", blockTypeConsumer));
+		this.contentTypeConsumer = contentTypeConsumer(ObjectHelper.notNull("content type consumer", contentTypeConsumer));
+	}
+
+	private Consumer<MarkdomBlockType> blockTypeConsumer(Consumer<MarkdomBlockType> consumer) {
+		return type -> {
+			consumer.accept(type);
+			blockTypes.add(type);
+		};
+	}
+
+	private Consumer<MarkdomContentType> contentTypeConsumer(Consumer<MarkdomContentType> consumer) {
+		return type -> {
+			consumer.accept(type);
+			contentTypes.add(type);
+		};
 	}
 
 	@Override
 	public void onCodeBlock(String code, Optional<String> hint) {
-		blockTypes.add(MarkdomBlockType.CODE);
+		blockTypeConsumer.accept(MarkdomBlockType.CODE);
 	}
 
 	@Override
 	public void onCommentBlock() {
-		blockTypes.add(MarkdomBlockType.COMMENT);
+		blockTypeConsumer.accept(MarkdomBlockType.COMMENT);
 	}
 
 	@Override
 	public void onDivisionBlock() {
-		blockTypes.add(MarkdomBlockType.DIVISION);
+		blockTypeConsumer.accept(MarkdomBlockType.DIVISION);
 	}
 
 	@Override
 	public void onHeadingBlock(MarkdomHeadingLevel level) {
-		blockTypes.add(MarkdomBlockType.HEADING);
+		blockTypeConsumer.accept(MarkdomBlockType.HEADING);
 	}
 
 	@Override
 	public void onOrderedListBlock(Integer startIndex) {
-		blockTypes.add(MarkdomBlockType.ORDERED_LIST);
+		blockTypeConsumer.accept(MarkdomBlockType.ORDERED_LIST);
 	}
 
 	@Override
 	public void onParagraphBlock() {
-		blockTypes.add(MarkdomBlockType.PARAGRAPH);
+		blockTypeConsumer.accept(MarkdomBlockType.PARAGRAPH);
 	}
 
 	@Override
 	public void onQuoteBlock() {
-		blockTypes.add(MarkdomBlockType.QUOTE);
+		blockTypeConsumer.accept(MarkdomBlockType.QUOTE);
 	}
 
 	@Override
 	public void onUnorderedListBlock() {
-		blockTypes.add(MarkdomBlockType.UNORDERED_LIST);
+		blockTypeConsumer.accept(MarkdomBlockType.UNORDERED_LIST);
 	}
 
 	@Override
 	public void onCodeContent(String code) {
-		contentTypes.add(MarkdomContentType.CODE);
+		contentTypeConsumer.accept(MarkdomContentType.CODE);
 	}
 
 	@Override
 	public void onEmphasisContent(MarkdomEmphasisLevel level) {
-		contentTypes.add(MarkdomContentType.EMPHASIS);
+		contentTypeConsumer.accept(MarkdomContentType.EMPHASIS);
 	}
 
 	@Override
 	public void onImageContent(String uri, Optional<String> title, Optional<String> alternative) {
-		contentTypes.add(MarkdomContentType.IMAGE);
+		contentTypeConsumer.accept(MarkdomContentType.IMAGE);
 	}
 
 	@Override
 	public void onLineBreakContent(Boolean hard) {
-		contentTypes.add(MarkdomContentType.LINE_BREAK);
+		contentTypeConsumer.accept(MarkdomContentType.LINE_BREAK);
 	}
 
 	@Override
 	public void onLinkContent(String uri, Optional<String> title) {
-		contentTypes.add(MarkdomContentType.LINK);
+		contentTypeConsumer.accept(MarkdomContentType.LINK);
 	}
 
 	@Override
 	public void onTextContent(String text) {
-		contentTypes.add(MarkdomContentType.TEXT);
+		contentTypeConsumer.accept(MarkdomContentType.TEXT);
 	}
 
 	public Set<MarkdomBlockType> getBlockTypes() {
