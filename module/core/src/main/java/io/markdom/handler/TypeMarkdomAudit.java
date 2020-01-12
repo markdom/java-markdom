@@ -8,11 +8,11 @@ import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.util.ObjectHelper;
 
-public final class TypebasedMarkdomAudit implements MarkdomAudit {
+public final class TypeMarkdomAudit implements MarkdomAudit {
 
-	private final TypebasedMarkdomAuditDelegate delegate;
+	private final TypeMarkdomAuditDelegate delegate;
 
-	public TypebasedMarkdomAudit(TypebasedMarkdomAuditDelegate delegate) {
+	public TypeMarkdomAudit(TypeMarkdomAuditDelegate delegate) {
 		this.delegate = ObjectHelper.notNull("delegate", delegate);
 	}
 

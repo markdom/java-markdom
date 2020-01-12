@@ -8,11 +8,11 @@ import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.util.ObjectHelper;
 
-public final class TypebasedMarkdomFilter implements MarkdomFilter {
+public final class TypeMarkdomFilter implements MarkdomFilter {
 
-	private final TypebasedMarkdomFilterDelegate delegate;
+	private final TypeMarkdomFilterDelegate delegate;
 
-	public TypebasedMarkdomFilter(TypebasedMarkdomFilterDelegate delegate) {
+	public TypeMarkdomFilter(TypeMarkdomFilterDelegate delegate) {
 		this.delegate = ObjectHelper.notNull("delegate", delegate);
 	}
 

@@ -7,13 +7,13 @@ import io.markdom.common.MarkdomBlockType;
 import io.markdom.common.MarkdomContentType;
 import io.markdom.util.ObjectHelper;
 
-public final class WhitelistTypebasedMarkdomFilterDelegate implements TypebasedMarkdomFilterDelegate {
+public final class WhitelistTypeMarkdomFilterDelegate implements TypeMarkdomFilterDelegate {
 
 	private final Set<MarkdomBlockType> blockTypes;
 
 	private final Set<MarkdomContentType> contentTypes;
 
-	public WhitelistTypebasedMarkdomFilterDelegate(Set<MarkdomBlockType> blockTypes, Set<MarkdomContentType> contentTypes) {
+	public WhitelistTypeMarkdomFilterDelegate(Set<MarkdomBlockType> blockTypes, Set<MarkdomContentType> contentTypes) {
 		this.blockTypes = EnumSet.copyOf(ObjectHelper.notNull("set of block types", blockTypes));
 		this.contentTypes = EnumSet.copyOf(ObjectHelper.notNull("set of content types", contentTypes));
 	}

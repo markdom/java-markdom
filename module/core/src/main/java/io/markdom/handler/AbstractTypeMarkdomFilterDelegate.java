@@ -3,7 +3,7 @@ package io.markdom.handler;
 import io.markdom.common.MarkdomBlockType;
 import io.markdom.common.MarkdomContentType;
 
-public abstract class AbstractTypebasedMarkdomFilterDelegate implements TypebasedMarkdomFilterDelegate {
+public abstract class AbstractTypeMarkdomFilterDelegate implements TypeMarkdomFilterDelegate {
 
 	@Override
 	public boolean testBlockType(MarkdomBlockType type) {
