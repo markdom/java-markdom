@@ -6,7 +6,7 @@
 	<artifactId>package</artifactId>
 	<packaging>pom</packaging>
 
-	<name>Markdom - Packgae</name>
+	<name>Markdom - Package</name>
 
 	<parent>
 		<groupId>io.markdom</groupId>
