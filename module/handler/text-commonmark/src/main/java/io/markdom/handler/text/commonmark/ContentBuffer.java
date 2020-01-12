@@ -196,9 +196,11 @@ final class ContentBuffer {
 	}
 
 	private void unprepareLine() {
-		if (!pendingLineBreak) {
-			pendingLineBreak = true;
-			unbeginNewLine();
+		if (!isEmpty()) {
+			if (!pendingLineBreak) {
+				pendingLineBreak = true;
+				unbeginNewLine();
+			}
 		}
 	}
 

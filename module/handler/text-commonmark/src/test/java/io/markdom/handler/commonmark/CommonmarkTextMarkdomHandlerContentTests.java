@@ -1799,6 +1799,24 @@ public class CommonmarkTextMarkdomHandlerContentTests {
 	}
 
 	@Test
+	public void nestedEmphasisesWithoutAnyContentAreRemoved() {
+
+		// @formatter:off
+		paragraph.addContents(
+			factory.emphasisContent(
+				MarkdomEmphasisLevel.LEVEL_2,
+				factory.emphasisContent(
+					MarkdomEmphasisLevel.LEVEL_1
+				)
+			)
+		);
+		// @formatter:on
+
+		assertEquals("\\", getCommonmarkText());
+
+	}
+
+	@Test
 	public void adjacentEmphasisesAreRemovedSurroundedByMultipleStars() {
 
 		// @formatter:off
@@ -1887,6 +1905,24 @@ public class CommonmarkTextMarkdomHandlerContentTests {
 		configurationBuilder.emphasisLevel2Option(EmphasisOption.UNDERSCORE);
 
 		assertEquals("__foo__*bar*", getCommonmarkText());
+
+	}
+
+	@Test
+	public void adjacentEmphasisesWithoutAnyContentAreRemoved() {
+
+		// @formatter:off
+		paragraph.addContents(
+			factory.emphasisContent(
+				MarkdomEmphasisLevel.LEVEL_2
+			),
+			factory.emphasisContent(
+				MarkdomEmphasisLevel.LEVEL_1
+			)
+		);
+		// @formatter:on
+
+		assertEquals("\\", getCommonmarkText());
 
 	}
 
@@ -3056,7 +3092,8 @@ public class CommonmarkTextMarkdomHandlerContentTests {
 
 	@ParameterizedTest
 	@ValueSource(strings = { "___", "__ __", "_ _ _", "__ __ __" })
-	public void singleTextContentThatContainsOnlyThreeOrMoreUnderscoredWithOptionalSpacesIsEscapedTheBeginning(String underscores) {
+	public void singleTextContentThatContainsOnlyThreeOrMoreUnderscoredWithOptionalSpacesIsEscapedTheBeginning(
+			String underscores) {
 
 		// @formatter:off
 		paragraph.addContents(
