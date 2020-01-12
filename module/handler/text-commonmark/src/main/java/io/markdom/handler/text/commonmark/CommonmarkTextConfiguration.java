@@ -93,4 +93,8 @@ public class CommonmarkTextConfiguration {
 		return new Builder();
 	}
 
+	public static CommonmarkTextConfiguration getDefault() {
+		return builder().build();
+	}
+
 }
