@@ -24,11 +24,11 @@ import org.commonmark.node.StrongEmphasis;
 import org.commonmark.node.Text;
 import org.commonmark.node.ThematicBreak;
 
-class CommonmarkTextVisitor extends AbstractVisitor {
+final class PlainTextCommonmarkVisitor extends AbstractVisitor {
 
 	private final StringBuilder builder;
 
-	public CommonmarkTextVisitor(StringBuilder builder) {
+	PlainTextCommonmarkVisitor(StringBuilder builder) {
 		this.builder = builder;
 	}
 
