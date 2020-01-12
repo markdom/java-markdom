@@ -15,7 +15,7 @@
 
 	<modules>
 		<module>module</module>
-		<module>suite</module>
+		<module>package</module>
 	</modules>
 
 	<properties>
@@ -99,7 +99,31 @@
 
 			<dependency>
 				<groupId>io.markdom</groupId>
+				<artifactId>handler-json-gson</artifactId>
+				<version>0.0.3-SNAPSHOT</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.markdom</groupId>
+				<artifactId>handler-json-jackson</artifactId>
+				<version>0.0.3-SNAPSHOT</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.markdom</groupId>
+				<artifactId>handler-json-jakarta</artifactId>
+				<version>0.0.3-SNAPSHOT</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.markdom</groupId>
 				<artifactId>handler-json-org</artifactId>
+				<version>0.0.3-SNAPSHOT</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.markdom</groupId>
+				<artifactId>handler-json-simple</artifactId>
 				<version>0.0.3-SNAPSHOT</version>
 			</dependency>
 

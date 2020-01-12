@@ -3,14 +3,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>suite</artifactId>
+	<artifactId>full</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Markdom - Suite</name>
+	<name>Markdom - Full</name>
 
 	<parent>
 		<groupId>io.markdom</groupId>
-		<artifactId>markdom</artifactId>
+		<artifactId>package</artifactId>
 		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 
@@ -29,6 +29,11 @@
 
 		<dependency>
 			<groupId>io.markdom</groupId>
+			<artifactId>handler-html-cleaner</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.markdom</groupId>
 			<artifactId>handler-html-jsoup</artifactId>
 		</dependency>
 
@@ -39,7 +44,27 @@
 
 		<dependency>
 			<groupId>io.markdom</groupId>
+			<artifactId>handler-json-gson</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.markdom</groupId>
+			<artifactId>handler-json-jackson</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.markdom</groupId>
+			<artifactId>handler-json-jakarta</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.markdom</groupId>
 			<artifactId>handler-json-org</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.markdom</groupId>
+			<artifactId>handler-json-simple</artifactId>
 		</dependency>
 
 		<dependency>

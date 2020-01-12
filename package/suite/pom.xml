@@ -10,8 +10,8 @@
 
 	<parent>
 		<groupId>io.markdom</groupId>
-		<artifactId>markdom</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<artifactId>package</artifactId>
+		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
@@ -29,7 +29,7 @@
 
 		<dependency>
 			<groupId>io.markdom</groupId>
-			<artifactId>handler-html-cleaner</artifactId>
+			<artifactId>handler-html-jsoup</artifactId>
 		</dependency>
 
 		<dependency>

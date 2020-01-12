@@ -29,7 +29,7 @@ This library consists of multiple modules, namely:
 - `handler-xml-w3c`: A handler that produces Markdom XML using the Java default XML implementation.
 - `model-basic`: The reference Markdom model implementation.
 
-The opinionated meta-module `suite` comprises a selection of commonly used modules, namely `util`, `core`, `handler-commonmark-atlassian`, `handler-html-jsoup`, `handler-html-w3c`, `handler-json-org`, `handler-text-commonmark`, `handler-xml-w3c` and `model-basic`.
+The opinionated meta-module `suite` comprises a selection of commonly used modules, namely `util`, `core`, `handler-commonmark-atlassian`, `handler-html-jsoup`, `handler-html-w3c`, `handler-json-org`, `handler-text-commonmark`, `handler-xml-w3c` and `model-basic`. The meta-module `full` comprises all modules.
 
 ## Maven
 
@@ -44,7 +44,7 @@ This library is hosted in the [Maven Central Repository](https://search.maven.or
 </dependency>
 ```
 
-To resolve another module, simply replace the artifact ID `suite` with the name of the desired module.
+To resolve another module or meta-module, simply replace the artifact ID `suite` with the name of the desired module or meta-module.
 
 ## Usage
 
