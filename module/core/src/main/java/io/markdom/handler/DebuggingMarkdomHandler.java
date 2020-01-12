@@ -1,7 +1,5 @@
 package io.markdom.handler;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.EnumSet;
 import java.util.Optional;
 import java.util.Stack;
@@ -127,6 +125,10 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 
 	}
 
+	private final MarkdomAudit audit = new ParameterMarkdomAudit(violation -> {
+		throw new MarkdomException(violation);
+	});
+
 	private final MarkdomHandler<Result> handler;
 
 	private final Stack<Context> contexts = new Stack<Context>();
@@ -136,7 +138,7 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	private final EnumSet<Method> expectedMethods = EnumSet.noneOf(Method.class);
 
 	public DebuggingMarkdomHandler(MarkdomHandler<Result> handler) {
-		this.handler = ObjectHelper.notNull("handler", handler);
+		this.handler = new AuditingMarkdomHandler<>(ObjectHelper.notNull("handler", handler), audit);
 		expectMethod(Method.ON_DOCUMENT_BEGIN);
 	}
 
@@ -159,7 +161,7 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onBlockBegin(MarkdomBlockType type) {
 		isExpectedMethod(Method.ON_BLOCK_BEGIN);
-		checkParameter("block type", type, true);
+		storeParameter(type);
 		expectMethod(blockBeginCallback(type));
 		handler.onBlockBegin(type);
 	}
@@ -189,7 +191,7 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onBlockEnd(MarkdomBlockType type) {
 		isExpectedMethod(Method.ON_BLOCK_END);
-		checkAndCompareParameter("block type", type);
+		restoreParameter("block type", type);
 		expectMethod(Method.ON_NEXT_BLOCK, Method.ON_BLOCKS_END);
 		handler.onBlockEnd(type);
 	}
@@ -224,9 +226,6 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onCodeBlock(String code, Optional<String> hint) {
 		isExpectedMethod(Method.ON_CODE_BLOCK);
-		checkParameter("code", code, false);
-		checkParameter("optional hint", hint, false);
-		validateNoLineBreak(hint, "hint");
 		expectMethod(Method.ON_BLOCK_END);
 		handler.onCodeBlock(code, hint);
 	}
@@ -234,7 +233,6 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onCommentBlock(String comment) {
 		isExpectedMethod(Method.ON_COMMENT_BLOCK);
-		checkParameter("comment", comment, false);
 		expectMethod(Method.ON_BLOCK_END);
 		handler.onCommentBlock(comment);
 	}
@@ -249,7 +247,7 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onHeadingBlockBegin(MarkdomHeadingLevel level) {
 		isExpectedMethod(Method.ON_HEADING_BLOCK_BEGIN);
-		checkParameter("heading level", level, true);
+		storeParameter(level);
 		contexts.push(Context.HEADING_BLOCK);
 		expectMethod(Method.ON_CONTENTS_BEGIN);
 		handler.onHeadingBlockBegin(level);
@@ -258,7 +256,7 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onHeadingBlockEnd(MarkdomHeadingLevel level) {
 		isExpectedMethod(Method.ON_HEADING_BLOCK_END);
-		checkAndCompareParameter("heading level", level);
+		restoreParameter("heading level", level);
 		contexts.pop();
 		expectMethod(Method.ON_BLOCK_END);
 		handler.onHeadingBlockEnd(level);
@@ -267,8 +265,7 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onOrderedListBlockBegin(Integer startIndex) {
 		isExpectedMethod(Method.ON_ORDERED_LIST_BLOCK_BEGIN);
-		checkParameter("start index", startIndex, true);
-		validateNotNegative(startIndex);
+		storeParameter(startIndex);
 		contexts.push(Context.ORDERED_LIST);
 		expectMethod(Method.ON_LIST_ITEMS_BEGIN);
 		handler.onOrderedListBlockBegin(startIndex);
@@ -277,7 +274,7 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onOrderedListBlockEnd(Integer startIndex) {
 		isExpectedMethod(Method.ON_ORDERED_LIST_BLOCK_END);
-		checkAndCompareParameter("start index", startIndex);
+		restoreParameter("start index", startIndex);
 		contexts.pop();
 		expectMethod(Method.ON_BLOCK_END);
 		handler.onOrderedListBlockEnd(startIndex);
@@ -389,7 +386,7 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onContentBegin(MarkdomContentType type) {
 		isExpectedMethod(Method.ON_CONTENT_BEGIN);
-		checkParameter("content type", type, true);
+		storeParameter(type);
 		expectMethod(contentBeginCallback(type));
 		handler.onContentBegin(type);
 	}
@@ -415,7 +412,7 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onContentEnd(MarkdomContentType type) {
 		isExpectedMethod(Method.ON_CONTENT_END);
-		checkAndCompareParameter("content type", type);
+		restoreParameter("content type", type);
 		expectMethod(Method.ON_NEXT_CONTENT, Method.ON_CONTENTS_END);
 		handler.onContentEnd(type);
 	}
@@ -452,8 +449,6 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onCodeContent(String code) {
 		isExpectedMethod(Method.ON_CODE_CONTENT);
-		checkParameter("code", code, false);
-		validateNoLineBreak(code, "code");
 		expectMethod(Method.ON_CONTENT_END);
 		handler.onCodeContent(code);
 	}
@@ -461,7 +456,7 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onEmphasisContentBegin(MarkdomEmphasisLevel level) {
 		isExpectedMethod(Method.ON_EMPHASIS_CONTENT_BEGIN);
-		checkParameter("emphasis level", level, true);
+		storeParameter(level);
 		contexts.push(Context.EMPHASIS_CONTENT);
 		expectMethod(Method.ON_CONTENTS_BEGIN);
 		handler.onEmphasisContentBegin(level);
@@ -470,7 +465,7 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onEmphasisContentEnd(MarkdomEmphasisLevel level) {
 		isExpectedMethod(Method.ON_EMPHASIS_CONTENT_END);
-		checkAndCompareParameter("emphasis level", level);
+		restoreParameter("emphasis level", level);
 		contexts.pop();
 		expectMethod(Method.ON_CONTENT_END);
 		handler.onEmphasisContentEnd(level);
@@ -479,12 +474,6 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onImageContent(String uri, Optional<String> title, Optional<String> alternative) {
 		isExpectedMethod(Method.ON_IMAGE_CONTENT);
-		checkParameter("uri", uri, false);
-		checkParameter("optional title", title, false);
-		checkParameter("optional alternative", title, false);
-		validateValidUri(uri);
-		validateNoLineBreak(title, "title");
-		validateNoLineBreak(alternative, "alternative");
 		expectMethod(Method.ON_CONTENT_END);
 		handler.onImageContent(uri, title, alternative);
 	}
@@ -492,7 +481,6 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onLineBreakContent(Boolean hard) {
 		isExpectedMethod(Method.ON_LINE_BREAK_CONTENT);
-		checkParameter("hard", hard, false);
 		checkLineBreakContext();
 		expectMethod(Method.ON_CONTENT_END);
 		handler.onLineBreakContent(hard);
@@ -501,10 +489,8 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onLinkContentBegin(String uri, Optional<String> title) {
 		isExpectedMethod(Method.ON_LINK_CONTENT_BEGIN);
-		checkParameter("uri", uri, true);
-		checkParameter("optional title", title, true);
-		validateValidUri(uri);
-		validateNoLineBreak(title, "title");
+		storeParameter(uri);
+		storeParameter(title);
 		checkLinkContentContext();
 		contexts.push(Context.LINK_CONTENT);
 		expectMethod(Method.ON_CONTENTS_BEGIN);
@@ -514,8 +500,8 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onLinkContentEnd(String uri, Optional<String> title) {
 		isExpectedMethod(Method.ON_LINK_CONTENT_END);
-		checkAndCompareParameter("optional title", title);
-		checkAndCompareParameter("uri", uri);
+		restoreParameter("optional title", title);
+		restoreParameter("uri", uri);
 		contexts.pop();
 		expectMethod(Method.ON_CONTENT_END);
 		handler.onLinkContentEnd(uri, title);
@@ -524,8 +510,6 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 	@Override
 	public void onTextContent(String text) {
 		isExpectedMethod(Method.ON_TEXT_CONTENT);
-		checkParameter("text", text, false);
-		validateNoLineBreak(text, "text");
 		expectMethod(Method.ON_CONTENT_END);
 		handler.onTextContent(text);
 	}
@@ -556,50 +540,14 @@ public final class DebuggingMarkdomHandler<Result> implements MarkdomHandler<Res
 		}
 	}
 
-	private void checkParameter(String name, Object value, boolean compareLater) {
-		if (null == value) {
-			throw new MarkdomException("The given " + name + " is null");
-		}
-		if (compareLater) {
-			parameters.push(new Parameter<>(value));
-		}
+	private void storeParameter(Object value) {
+		parameters.push(new Parameter<>(value));
 	}
 
-	private void checkAndCompareParameter(String name, Object value) {
-		if (null == value) {
-			throw new MarkdomException("The given " + name + " is null");
-		}
+	private void restoreParameter(String name, Object value) {
 		Parameter<?> parameter = parameters.pop();
 		if (!value.equals(parameter.payload)) {
-			throw new MarkdomException("The given " + name + " is not " + parameter.payload + ": " + value);
-		}
-	}
-
-	private void validateNotNegative(Integer startIndex) {
-		if (startIndex < 0) {
-			throw new MarkdomException("The given start index is negative: " + startIndex);
-		}
-	}
-
-	private void validateNoLineBreak(Optional<String> string, String name) {
-		if (string.isPresent()) {
-			validateNoLineBreak(string.get(), name);
-		}
-	}
-
-	private void validateNoLineBreak(String string, String name) {
-		for (int i = 0, n = string.length(); i < n; i++) {
-			if ('\n' == string.charAt(i)) {
-				throw new MarkdomException("The given " + name + " contains a line break at index " + i + ": " + string);
-			}
-		}
-	}
-
-	private void validateValidUri(String uri) {
-		try {
-			new URI(uri);
-		} catch (URISyntaxException e) {
-			throw new MarkdomException("The given uri is invalid: " + uri, e);
+			throw new MarkdomException("The given " + name + " is not equal to " + parameter.payload + ": " + value);
 		}
 	}
 
