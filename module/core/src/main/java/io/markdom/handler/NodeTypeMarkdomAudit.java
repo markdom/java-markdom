@@ -8,11 +8,11 @@ import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.util.ObjectHelper;
 
-public final class TypeMarkdomAudit extends AbstractMarkdomAudit {
+public final class NodeTypeMarkdomAudit extends AbstractMarkdomAudit {
 
-	private final TypeMarkdomAuditHandler handler;
+	private final NodeTypeMarkdomAuditHandler handler;
 
-	public TypeMarkdomAudit(TypeMarkdomAuditHandler handler) {
+	public NodeTypeMarkdomAudit(NodeTypeMarkdomAuditHandler handler) {
 		this.handler = ObjectHelper.notNull("handler", handler);
 	}
 

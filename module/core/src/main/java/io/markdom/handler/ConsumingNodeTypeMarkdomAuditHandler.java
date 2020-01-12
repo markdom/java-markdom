@@ -6,13 +6,13 @@ import io.markdom.common.MarkdomBlockType;
 import io.markdom.common.MarkdomContentType;
 import io.markdom.util.ObjectHelper;
 
-public final class ConsumingTypeMarkdomAuditHandler implements TypeMarkdomAuditHandler {
+public final class ConsumingNodeTypeMarkdomAuditHandler implements NodeTypeMarkdomAuditHandler {
 
 	private final Consumer<MarkdomBlockType> blockTypesConsumer;
 
 	private final Consumer<MarkdomContentType> contentTypeConsumer;
 
-	public ConsumingTypeMarkdomAuditHandler(Consumer<MarkdomBlockType> blockTypesConsumer,
+	public ConsumingNodeTypeMarkdomAuditHandler(Consumer<MarkdomBlockType> blockTypesConsumer,
 			Consumer<MarkdomContentType> contentTypeConsumer) {
 		this.blockTypesConsumer = ObjectHelper.notNull("block type consumer", blockTypesConsumer);
 		this.contentTypeConsumer = ObjectHelper.notNull("content type consumer", contentTypeConsumer);

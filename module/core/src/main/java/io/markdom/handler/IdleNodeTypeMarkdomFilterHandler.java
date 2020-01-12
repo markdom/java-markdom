@@ -3,7 +3,7 @@ package io.markdom.handler;
 import io.markdom.common.MarkdomBlockType;
 import io.markdom.common.MarkdomContentType;
 
-public final class IdleTypeMarkdomFilterHandler implements TypeMarkdomFilterHandler {
+public final class IdleNodeTypeMarkdomFilterHandler implements NodeTypeMarkdomFilterHandler {
 
 	@Override
 	public boolean testBlockType(MarkdomBlockType type) {

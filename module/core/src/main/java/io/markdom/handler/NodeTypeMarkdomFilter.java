@@ -8,11 +8,11 @@ import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.util.ObjectHelper;
 
-public final class TypeMarkdomFilter extends AbstractMarkdomFilter {
+public final class NodeTypeMarkdomFilter extends AbstractMarkdomFilter {
 
-	private final TypeMarkdomFilterHandler handler;
+	private final NodeTypeMarkdomFilterHandler handler;
 
-	public TypeMarkdomFilter(TypeMarkdomFilterHandler handler) {
+	public NodeTypeMarkdomFilter(NodeTypeMarkdomFilterHandler handler) {
 		this.handler = ObjectHelper.notNull("handler", handler);
 	}
 
