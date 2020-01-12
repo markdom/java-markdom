@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import io.markdom.handler.json.JsonObjectResult;
 import io.markdom.util.ObjectHelper;
 
-public class GsonJsonObjectResult implements JsonObjectResult<JsonObject> {
+public final class GsonJsonObjectResult implements JsonObjectResult<JsonObject> {
 
 	private final JsonObject object;
 

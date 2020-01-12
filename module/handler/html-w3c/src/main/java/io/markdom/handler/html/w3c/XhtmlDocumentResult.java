@@ -16,7 +16,7 @@ import io.markdom.util.ObjectHelper;
 import io.markdom.util.XmlHelper;
 import net.markenwerk.commons.iterables.NodeListIterable;
 
-public class XhtmlDocumentResult implements HtmlDocumentResult<Document, Element, NodeList> {
+public final class XhtmlDocumentResult implements HtmlDocumentResult<Document, Element, NodeList> {
 
 	private final DocumentBuilder builder;
 

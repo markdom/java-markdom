@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
 import io.markdom.util.ObjectHelper;
 import io.markdom.util.XmlHelper;
 
-public class XmlDocumentResult implements io.markdom.handler.xml.XmlDocumentResult<Document, Element> {
+public final class XmlDocumentResult implements io.markdom.handler.xml.XmlDocumentResult<Document, Element> {
 
 	private final Document document;
 

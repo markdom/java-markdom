@@ -9,7 +9,7 @@ import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.util.ObjectHelper;
 
-public class ParameterMarkdomAudit extends AbstractMarkdomAudit {
+public final class ParameterMarkdomAudit extends AbstractMarkdomAudit {
 
 	private final Consumer<String> violationConsumer;
 

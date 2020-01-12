@@ -10,7 +10,7 @@ import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.util.ObjectHelper;
 
-public class SimpleMarkdomFilter implements MarkdomFilter {
+public final class SimpleMarkdomFilter implements MarkdomFilter {
 
 	private final Set<MarkdomBlockType> blockTypes;
 

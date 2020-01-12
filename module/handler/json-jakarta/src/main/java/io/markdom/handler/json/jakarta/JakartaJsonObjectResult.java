@@ -13,7 +13,7 @@ import javax.json.stream.JsonGenerator;
 import io.markdom.handler.json.JsonObjectResult;
 import io.markdom.util.ObjectHelper;
 
-public class JakartaJsonObjectResult implements JsonObjectResult<JsonObject> {
+public final class JakartaJsonObjectResult implements JsonObjectResult<JsonObject> {
 
 	private final JsonObject object;
 

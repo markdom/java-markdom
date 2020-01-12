@@ -12,7 +12,7 @@ import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.util.FunctionUtil;
 import io.markdom.util.ObjectHelper;
 
-public class SimpleMarkdomAudit implements MarkdomAudit {
+public final class SimpleMarkdomAudit implements MarkdomAudit {
 
 	private final Set<MarkdomBlockType> blockTypes = EnumSet.noneOf(MarkdomBlockType.class);
 

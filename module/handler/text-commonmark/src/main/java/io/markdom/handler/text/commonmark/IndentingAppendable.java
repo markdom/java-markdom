@@ -2,7 +2,7 @@ package io.markdom.handler.text.commonmark;
 
 import lombok.SneakyThrows;
 
-public class IndentingAppendable implements LineAppendable {
+public final class IndentingAppendable implements LineAppendable {
 
 	private final String lineEndString;
 

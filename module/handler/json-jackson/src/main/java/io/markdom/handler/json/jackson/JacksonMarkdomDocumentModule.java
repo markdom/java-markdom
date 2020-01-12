@@ -6,7 +6,7 @@ import io.markdom.model.MarkdomDocument;
 import io.markdom.model.MarkdomFactory;
 import io.markdom.util.ObjectHelper;
 
-public class JacksonMarkdomDocumentModule extends SimpleModule {
+public final class JacksonMarkdomDocumentModule extends SimpleModule {
 
 	private static final long serialVersionUID = -1336129969582026768L;
 

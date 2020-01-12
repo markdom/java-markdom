@@ -1,6 +1,6 @@
 package io.markdom.handler.text.commonmark;
 
-public class HeadingAppendable implements LineAppendable {
+public final class HeadingAppendable implements LineAppendable {
 
 	private final LineAppendable appendable;
 

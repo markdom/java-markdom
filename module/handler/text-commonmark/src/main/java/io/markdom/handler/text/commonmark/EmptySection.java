@@ -1,6 +1,6 @@
 package io.markdom.handler.text.commonmark;
 
-public class EmptySection implements Section {
+public final class EmptySection implements Section {
 
 	@Override
 	public void appendTo(LineAppendable appendable) {

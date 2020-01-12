@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import io.markdom.util.ObjectHelper;
 
-public class JsonObjectResult implements io.markdom.handler.json.JsonObjectResult<JSONObject> {
+public final class JsonObjectResult implements io.markdom.handler.json.JsonObjectResult<JSONObject> {
 
 	private final JSONObject object;
 

@@ -6,7 +6,7 @@ import com.github.cliftonlabs.json_simple.Jsoner;
 import io.markdom.handler.json.JsonObjectResult;
 import io.markdom.util.ObjectHelper;
 
-public class JsonSimpleObjectResult implements JsonObjectResult<JsonObject> {
+public final class JsonSimpleObjectResult implements JsonObjectResult<JsonObject> {
 
 	private final JsonObject object;
 

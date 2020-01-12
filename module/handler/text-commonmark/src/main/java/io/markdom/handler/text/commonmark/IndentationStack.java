@@ -2,7 +2,7 @@ package io.markdom.handler.text.commonmark;
 
 import java.util.Stack;
 
-public class IndentationStack implements IndentationSupplier {
+public final class IndentationStack implements IndentationSupplier {
 
 	private final Stack<Indentation> indentations = new Stack<>();
 
