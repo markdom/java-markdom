@@ -3,19 +3,23 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>util</artifactId>
-	<packaging>jar</packaging>
-	
-	<name>Markdom - Util</name>
+	<artifactId>module</artifactId>
+	<packaging>pom</packaging>
+
+	<name>Markdom - Module</name>
 
 	<parent>
 		<groupId>io.markdom</groupId>
-		<artifactId>modules</artifactId>
+		<artifactId>markdom</artifactId>
 		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 
-	<dependencies>
-
-	</dependencies>
+	<modules>
+		<module>core</module>
+		<module>handler</module>
+		<module>model</module>
+		<module>test</module>
+		<module>util</module>
+	</modules>
 
 </project>

@@ -14,7 +14,7 @@
 	<inceptionYear>2015</inceptionYear>
 
 	<modules>
-		<module>modules</module>
+		<module>module</module>
 		<module>suite</module>
 	</modules>
 

@@ -3,37 +3,29 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>handler</artifactId>
-	<packaging>pom</packaging>
+	<artifactId>core</artifactId>
+	<packaging>jar</packaging>
 
-	<name>Markdom - Handler</name>
+	<name>Markdom - Core</name>
 
 	<parent>
 		<groupId>io.markdom</groupId>
-		<artifactId>modules</artifactId>
+		<artifactId>module</artifactId>
 		<version>0.0.3-SNAPSHOT</version>
 	</parent>
-
-	<modules>
-		<module>commonmark-atlassian</module>
-		<module>html-cleaner</module>
-		<module>html-jsoup</module>
-		<module>html-w3c</module>
-		<module>json-gson</module>
-		<module>json-jackson</module>
-		<module>json-jakarta</module>
-		<module>json-org</module>
-		<module>json-simple</module>
-		<module>text-commonmark</module>
-		<module>xml-w3c</module>
-	</modules>
 
 	<dependencies>
 
 		<!-- markdom -->
 		<dependency>
 			<groupId>io.markdom</groupId>
-			<artifactId>core</artifactId>
+			<artifactId>util</artifactId>
+		</dependency>
+
+		<!-- utils -->
+		<dependency>
+			<groupId>net.markenwerk</groupId>
+			<artifactId>commons-iterables</artifactId>
 		</dependency>
 
 		<!-- test -->
@@ -42,12 +34,6 @@
 			<artifactId>test</artifactId>
 			<classifier>tests</classifier>
 			<type>test-jar</type>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>io.markdom</groupId>
-			<artifactId>model-basic</artifactId>
 			<scope>test</scope>
 		</dependency>
 
