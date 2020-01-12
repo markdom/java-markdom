@@ -1,5 +1,18 @@
 package io.markdom.handler;
 
-public abstract class IdleTypeMarkdomFilterHandler extends AbstractTypeMarkdomFilterHandler {
+import io.markdom.common.MarkdomBlockType;
+import io.markdom.common.MarkdomContentType;
+
+public abstract class IdleTypeMarkdomFilterHandler implements TypeMarkdomFilterHandler {
+
+	@Override
+	public boolean testBlockType(MarkdomBlockType type) {
+		return false;
+	}
+
+	@Override
+	public boolean testContentType(MarkdomContentType type) {
+		return false;
+	}
 
 }
