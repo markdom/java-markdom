@@ -1,126 +1,89 @@
 package io.markdom.handler;
 
-import java.util.EnumSet;
 import java.util.Optional;
-import java.util.Set;
-import java.util.function.Consumer;
 
 import io.markdom.common.MarkdomBlockType;
 import io.markdom.common.MarkdomContentType;
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
-import io.markdom.util.FunctionUtil;
 import io.markdom.util.ObjectHelper;
 
 public final class TypebasedMarkdomAudit implements MarkdomAudit {
 
-	private final Set<MarkdomBlockType> blockTypes = EnumSet.noneOf(MarkdomBlockType.class);
+	private final TypebasedMarkdomAuditDelegate delegate;
 
-	private final Set<MarkdomContentType> contentTypes = EnumSet.noneOf(MarkdomContentType.class);
-
-	private final Consumer<MarkdomBlockType> blockTypeConsumer;
-
-	private final Consumer<MarkdomContentType> contentTypeConsumer;
-
-	public TypebasedMarkdomAudit() {
-		this(FunctionUtil.idleConsumer(), FunctionUtil.idleConsumer());
-	}
-
-	public TypebasedMarkdomAudit(Consumer<MarkdomBlockType> blockTypeConsumer, Consumer<MarkdomContentType> contentTypeConsumer) {
-		this.blockTypeConsumer = blockTypeConsumer(ObjectHelper.notNull("block type consumer", blockTypeConsumer));
-		this.contentTypeConsumer = contentTypeConsumer(ObjectHelper.notNull("content type consumer", contentTypeConsumer));
-	}
-
-	private Consumer<MarkdomBlockType> blockTypeConsumer(Consumer<MarkdomBlockType> consumer) {
-		return type -> {
-			consumer.accept(type);
-			blockTypes.add(type);
-		};
-	}
-
-	private Consumer<MarkdomContentType> contentTypeConsumer(Consumer<MarkdomContentType> consumer) {
-		return type -> {
-			consumer.accept(type);
-			contentTypes.add(type);
-		};
+	public TypebasedMarkdomAudit(TypebasedMarkdomAuditDelegate delegate) {
+		this.delegate = ObjectHelper.notNull("delegate", delegate);
 	}
 
 	@Override
 	public void onCodeBlock(String code, Optional<String> hint) {
-		blockTypeConsumer.accept(MarkdomBlockType.CODE);
+		delegate.onBlockType(MarkdomBlockType.CODE);
 	}
 
 	@Override
 	public void onCommentBlock() {
-		blockTypeConsumer.accept(MarkdomBlockType.COMMENT);
+		delegate.onBlockType(MarkdomBlockType.COMMENT);
 	}
 
 	@Override
 	public void onDivisionBlock() {
-		blockTypeConsumer.accept(MarkdomBlockType.DIVISION);
+		delegate.onBlockType(MarkdomBlockType.DIVISION);
 	}
 
 	@Override
 	public void onHeadingBlock(MarkdomHeadingLevel level) {
-		blockTypeConsumer.accept(MarkdomBlockType.HEADING);
+		delegate.onBlockType(MarkdomBlockType.HEADING);
 	}
 
 	@Override
 	public void onOrderedListBlock(Integer startIndex) {
-		blockTypeConsumer.accept(MarkdomBlockType.ORDERED_LIST);
+		delegate.onBlockType(MarkdomBlockType.ORDERED_LIST);
 	}
 
 	@Override
 	public void onParagraphBlock() {
-		blockTypeConsumer.accept(MarkdomBlockType.PARAGRAPH);
+		delegate.onBlockType(MarkdomBlockType.PARAGRAPH);
 	}
 
 	@Override
 	public void onQuoteBlock() {
-		blockTypeConsumer.accept(MarkdomBlockType.QUOTE);
+		delegate.onBlockType(MarkdomBlockType.QUOTE);
 	}
 
 	@Override
 	public void onUnorderedListBlock() {
-		blockTypeConsumer.accept(MarkdomBlockType.UNORDERED_LIST);
+		delegate.onBlockType(MarkdomBlockType.UNORDERED_LIST);
 	}
 
 	@Override
 	public void onCodeContent(String code) {
-		contentTypeConsumer.accept(MarkdomContentType.CODE);
+		delegate.onContentType(MarkdomContentType.CODE);
 	}
 
 	@Override
 	public void onEmphasisContent(MarkdomEmphasisLevel level) {
-		contentTypeConsumer.accept(MarkdomContentType.EMPHASIS);
+		delegate.onContentType(MarkdomContentType.EMPHASIS);
 	}
 
 	@Override
 	public void onImageContent(String uri, Optional<String> title, Optional<String> alternative) {
-		contentTypeConsumer.accept(MarkdomContentType.IMAGE);
+		delegate.onContentType(MarkdomContentType.IMAGE);
 	}
 
 	@Override
 	public void onLineBreakContent(Boolean hard) {
-		contentTypeConsumer.accept(MarkdomContentType.LINE_BREAK);
+		delegate.onContentType(MarkdomContentType.LINE_BREAK);
 	}
 
 	@Override
 	public void onLinkContent(String uri, Optional<String> title) {
-		contentTypeConsumer.accept(MarkdomContentType.LINK);
+		delegate.onContentType(MarkdomContentType.LINK);
 	}
 
 	@Override
 	public void onTextContent(String text) {
-		contentTypeConsumer.accept(MarkdomContentType.TEXT);
-	}
-
-	public Set<MarkdomBlockType> getBlockTypes() {
-		return EnumSet.copyOf(blockTypes);
-	}
-
-	public Set<MarkdomContentType> getContentTypes() {
-		return EnumSet.copyOf(contentTypes);
+		delegate.onContentType(MarkdomContentType.TEXT);
 	}
 
 }
