@@ -8,7 +8,7 @@ import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.util.ObjectHelper;
 
-public final class TypeMarkdomFilter implements MarkdomFilter {
+public final class TypeMarkdomFilter extends AbstractMarkdomFilter {
 
 	private final TypeMarkdomFilterHandler handler;
 

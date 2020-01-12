@@ -8,7 +8,7 @@ import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.util.ObjectHelper;
 
-public final class TypeMarkdomAudit implements MarkdomAudit {
+public final class TypeMarkdomAudit extends AbstractMarkdomAudit {
 
 	private final TypeMarkdomAuditHandler handler;
 
