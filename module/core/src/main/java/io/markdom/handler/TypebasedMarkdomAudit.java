@@ -12,7 +12,7 @@ import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.util.FunctionUtil;
 import io.markdom.util.ObjectHelper;
 
-public final class SimpleMarkdomAudit implements MarkdomAudit {
+public final class TypebasedMarkdomAudit implements MarkdomAudit {
 
 	private final Set<MarkdomBlockType> blockTypes = EnumSet.noneOf(MarkdomBlockType.class);
 
@@ -22,11 +22,11 @@ public final class SimpleMarkdomAudit implements MarkdomAudit {
 
 	private final Consumer<MarkdomContentType> contentTypeConsumer;
 
-	public SimpleMarkdomAudit() {
+	public TypebasedMarkdomAudit() {
 		this(FunctionUtil.idleConsumer(), FunctionUtil.idleConsumer());
 	}
 
-	public SimpleMarkdomAudit(Consumer<MarkdomBlockType> blockTypeConsumer, Consumer<MarkdomContentType> contentTypeConsumer) {
+	public TypebasedMarkdomAudit(Consumer<MarkdomBlockType> blockTypeConsumer, Consumer<MarkdomContentType> contentTypeConsumer) {
 		this.blockTypeConsumer = blockTypeConsumer(ObjectHelper.notNull("block type consumer", blockTypeConsumer));
 		this.contentTypeConsumer = contentTypeConsumer(ObjectHelper.notNull("content type consumer", contentTypeConsumer));
 	}

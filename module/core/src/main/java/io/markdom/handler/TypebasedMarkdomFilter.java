@@ -10,13 +10,13 @@ import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.util.ObjectHelper;
 
-public final class SimpleMarkdomFilter implements MarkdomFilter {
+public final class TypebasedMarkdomFilter implements MarkdomFilter {
 
 	private final Set<MarkdomBlockType> blockTypes;
 
 	private final Set<MarkdomContentType> contentTypes;
 
-	public SimpleMarkdomFilter(Set<MarkdomBlockType> blockTypes, Set<MarkdomContentType> contentTypes) {
+	public TypebasedMarkdomFilter(Set<MarkdomBlockType> blockTypes, Set<MarkdomContentType> contentTypes) {
 		this.blockTypes = EnumSet.copyOf(ObjectHelper.notNull("set of block types", blockTypes));
 		this.contentTypes = EnumSet.copyOf(ObjectHelper.notNull("set of content types", contentTypes));
 	}
