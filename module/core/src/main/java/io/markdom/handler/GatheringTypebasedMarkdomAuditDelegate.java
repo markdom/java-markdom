@@ -22,4 +22,12 @@ public final class GatheringTypebasedMarkdomAuditDelegate implements TypebasedMa
 		contentTypes.add(type);
 	}
 
+	public Set<MarkdomBlockType> getBlockTypes() {
+		return EnumSet.copyOf(blockTypes);
+	}
+
+	public Set<MarkdomContentType> getContentTypes() {
+		return EnumSet.copyOf(contentTypes);
+	}
+
 }
