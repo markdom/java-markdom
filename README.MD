@@ -40,7 +40,7 @@ This library is hosted in the [Maven Central Repository](https://search.maven.or
 <dependency>
   <groupId>io.markdom</groupId>
   <artifactId>suite</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.3</version>
 </dependency>
 ```
 
