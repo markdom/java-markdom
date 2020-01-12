@@ -3,7 +3,7 @@ package io.markdom.handler;
 import io.markdom.common.MarkdomBlockType;
 import io.markdom.common.MarkdomContentType;
 
-public interface TypeMarkdomFilterDelegate {
+public interface TypeMarkdomFilterHandler {
 
 	public boolean testBlockType(MarkdomBlockType type);
 

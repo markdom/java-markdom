@@ -6,7 +6,7 @@ import java.util.Set;
 import io.markdom.common.MarkdomBlockType;
 import io.markdom.common.MarkdomContentType;
 
-public final class GatheringTypeMarkdomAuditDelegate implements TypeMarkdomAuditDelegate {
+public final class GatheringTypeMarkdomAuditHandler implements TypeMarkdomAuditHandler {
 
 	private final Set<MarkdomBlockType> blockTypes = EnumSet.noneOf(MarkdomBlockType.class);
 

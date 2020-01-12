@@ -10,80 +10,80 @@ import io.markdom.util.ObjectHelper;
 
 public final class TypeMarkdomFilter implements MarkdomFilter {
 
-	private final TypeMarkdomFilterDelegate delegate;
+	private final TypeMarkdomFilterHandler handler;
 
-	public TypeMarkdomFilter(TypeMarkdomFilterDelegate delegate) {
-		this.delegate = ObjectHelper.notNull("delegate", delegate);
+	public TypeMarkdomFilter(TypeMarkdomFilterHandler handler) {
+		this.handler = ObjectHelper.notNull("handler", handler);
 	}
 
 	@Override
 	public boolean testCodeBlock(String code, Optional<String> hint) {
-		return delegate.testBlockType(MarkdomBlockType.CODE);
+		return handler.testBlockType(MarkdomBlockType.CODE);
 	}
 
 	@Override
 	public boolean testCommentBlock() {
-		return delegate.testBlockType(MarkdomBlockType.COMMENT);
+		return handler.testBlockType(MarkdomBlockType.COMMENT);
 	}
 
 	@Override
 	public boolean testDivisionBlock() {
-		return delegate.testBlockType(MarkdomBlockType.DIVISION);
+		return handler.testBlockType(MarkdomBlockType.DIVISION);
 	}
 
 	@Override
 	public boolean testHeadingBlock(MarkdomHeadingLevel level) {
-		return delegate.testBlockType(MarkdomBlockType.HEADING);
+		return handler.testBlockType(MarkdomBlockType.HEADING);
 	}
 
 	@Override
 	public boolean testOrderedListBlock(Integer startIndex) {
-		return delegate.testBlockType(MarkdomBlockType.ORDERED_LIST);
+		return handler.testBlockType(MarkdomBlockType.ORDERED_LIST);
 	}
 
 	@Override
 	public boolean testParagraphBlock() {
-		return delegate.testBlockType(MarkdomBlockType.PARAGRAPH);
+		return handler.testBlockType(MarkdomBlockType.PARAGRAPH);
 	}
 
 	@Override
 	public boolean testQuoteBlock() {
-		return delegate.testBlockType(MarkdomBlockType.QUOTE);
+		return handler.testBlockType(MarkdomBlockType.QUOTE);
 	}
 
 	@Override
 	public boolean testUnorderedListBlock() {
-		return delegate.testBlockType(MarkdomBlockType.UNORDERED_LIST);
+		return handler.testBlockType(MarkdomBlockType.UNORDERED_LIST);
 	}
 
 	@Override
 	public boolean testCodeContent(String code) {
-		return delegate.testContentType(MarkdomContentType.CODE);
+		return handler.testContentType(MarkdomContentType.CODE);
 	}
 
 	@Override
 	public boolean testEmphasisContent(MarkdomEmphasisLevel level) {
-		return delegate.testContentType(MarkdomContentType.EMPHASIS);
+		return handler.testContentType(MarkdomContentType.EMPHASIS);
 	}
 
 	@Override
 	public boolean testImageContent(String uri, Optional<String> title, Optional<String> alternative) {
-		return delegate.testContentType(MarkdomContentType.IMAGE);
+		return handler.testContentType(MarkdomContentType.IMAGE);
 	}
 
 	@Override
 	public boolean testLineBreakContent(Boolean hard) {
-		return delegate.testContentType(MarkdomContentType.LINE_BREAK);
+		return handler.testContentType(MarkdomContentType.LINE_BREAK);
 	}
 
 	@Override
 	public boolean testLinkContent(String uri, Optional<String> title) {
-		return delegate.testContentType(MarkdomContentType.LINK);
+		return handler.testContentType(MarkdomContentType.LINK);
 	}
 
 	@Override
 	public boolean testTextContent(String text) {
-		return delegate.testContentType(MarkdomContentType.TEXT);
+		return handler.testContentType(MarkdomContentType.TEXT);
 	}
 
 }

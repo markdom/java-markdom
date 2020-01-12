@@ -10,80 +10,80 @@ import io.markdom.util.ObjectHelper;
 
 public final class TypeMarkdomAudit implements MarkdomAudit {
 
-	private final TypeMarkdomAuditDelegate delegate;
+	private final TypeMarkdomAuditHandler handler;
 
-	public TypeMarkdomAudit(TypeMarkdomAuditDelegate delegate) {
-		this.delegate = ObjectHelper.notNull("delegate", delegate);
+	public TypeMarkdomAudit(TypeMarkdomAuditHandler handler) {
+		this.handler = ObjectHelper.notNull("handler", handler);
 	}
 
 	@Override
 	public void onCodeBlock(String code, Optional<String> hint) {
-		delegate.onBlockType(MarkdomBlockType.CODE);
+		handler.onBlockType(MarkdomBlockType.CODE);
 	}
 
 	@Override
 	public void onCommentBlock() {
-		delegate.onBlockType(MarkdomBlockType.COMMENT);
+		handler.onBlockType(MarkdomBlockType.COMMENT);
 	}
 
 	@Override
 	public void onDivisionBlock() {
-		delegate.onBlockType(MarkdomBlockType.DIVISION);
+		handler.onBlockType(MarkdomBlockType.DIVISION);
 	}
 
 	@Override
 	public void onHeadingBlock(MarkdomHeadingLevel level) {
-		delegate.onBlockType(MarkdomBlockType.HEADING);
+		handler.onBlockType(MarkdomBlockType.HEADING);
 	}
 
 	@Override
 	public void onOrderedListBlock(Integer startIndex) {
-		delegate.onBlockType(MarkdomBlockType.ORDERED_LIST);
+		handler.onBlockType(MarkdomBlockType.ORDERED_LIST);
 	}
 
 	@Override
 	public void onParagraphBlock() {
-		delegate.onBlockType(MarkdomBlockType.PARAGRAPH);
+		handler.onBlockType(MarkdomBlockType.PARAGRAPH);
 	}
 
 	@Override
 	public void onQuoteBlock() {
-		delegate.onBlockType(MarkdomBlockType.QUOTE);
+		handler.onBlockType(MarkdomBlockType.QUOTE);
 	}
 
 	@Override
 	public void onUnorderedListBlock() {
-		delegate.onBlockType(MarkdomBlockType.UNORDERED_LIST);
+		handler.onBlockType(MarkdomBlockType.UNORDERED_LIST);
 	}
 
 	@Override
 	public void onCodeContent(String code) {
-		delegate.onContentType(MarkdomContentType.CODE);
+		handler.onContentType(MarkdomContentType.CODE);
 	}
 
 	@Override
 	public void onEmphasisContent(MarkdomEmphasisLevel level) {
-		delegate.onContentType(MarkdomContentType.EMPHASIS);
+		handler.onContentType(MarkdomContentType.EMPHASIS);
 	}
 
 	@Override
 	public void onImageContent(String uri, Optional<String> title, Optional<String> alternative) {
-		delegate.onContentType(MarkdomContentType.IMAGE);
+		handler.onContentType(MarkdomContentType.IMAGE);
 	}
 
 	@Override
 	public void onLineBreakContent(Boolean hard) {
-		delegate.onContentType(MarkdomContentType.LINE_BREAK);
+		handler.onContentType(MarkdomContentType.LINE_BREAK);
 	}
 
 	@Override
 	public void onLinkContent(String uri, Optional<String> title) {
-		delegate.onContentType(MarkdomContentType.LINK);
+		handler.onContentType(MarkdomContentType.LINK);
 	}
 
 	@Override
 	public void onTextContent(String text) {
-		delegate.onContentType(MarkdomContentType.TEXT);
+		handler.onContentType(MarkdomContentType.TEXT);
 	}
 
 }
