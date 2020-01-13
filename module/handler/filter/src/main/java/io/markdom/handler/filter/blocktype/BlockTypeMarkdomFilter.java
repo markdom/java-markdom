@@ -1,19 +1,17 @@
-package io.markdom.handler.filter.nodetype;
+package io.markdom.handler.filter.blocktype;
 
 import java.util.Optional;
 
 import io.markdom.common.MarkdomBlockType;
-import io.markdom.common.MarkdomContentType;
-import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.handler.AbstractMarkdomFilter;
 import io.markdom.util.ObjectHelper;
 
-public final class NodeTypeMarkdomFilter extends AbstractMarkdomFilter {
+public final class BlockTypeMarkdomFilter extends AbstractMarkdomFilter {
 
-	private final NodeTypeMarkdomFilterHandler handler;
+	private final BlockTypeMarkdomFilterHandler handler;
 
-	public NodeTypeMarkdomFilter(NodeTypeMarkdomFilterHandler handler) {
+	public BlockTypeMarkdomFilter(BlockTypeMarkdomFilterHandler handler) {
 		this.handler = ObjectHelper.notNull("handler", handler);
 	}
 
@@ -55,36 +53,6 @@ public final class NodeTypeMarkdomFilter extends AbstractMarkdomFilter {
 	@Override
 	public boolean testUnorderedListBlock() {
 		return handler.testBlockType(MarkdomBlockType.UNORDERED_LIST);
-	}
-
-	@Override
-	public boolean testCodeContent(String code) {
-		return handler.testContentType(MarkdomContentType.CODE);
-	}
-
-	@Override
-	public boolean testEmphasisContent(MarkdomEmphasisLevel level) {
-		return handler.testContentType(MarkdomContentType.EMPHASIS);
-	}
-
-	@Override
-	public boolean testImageContent(String uri, Optional<String> title, Optional<String> alternative) {
-		return handler.testContentType(MarkdomContentType.IMAGE);
-	}
-
-	@Override
-	public boolean testLineBreakContent(Boolean hard) {
-		return handler.testContentType(MarkdomContentType.LINE_BREAK);
-	}
-
-	@Override
-	public boolean testLinkContent(String uri, Optional<String> title) {
-		return handler.testContentType(MarkdomContentType.LINK);
-	}
-
-	@Override
-	public boolean testTextContent(String text) {
-		return handler.testContentType(MarkdomContentType.TEXT);
 	}
 
 }
