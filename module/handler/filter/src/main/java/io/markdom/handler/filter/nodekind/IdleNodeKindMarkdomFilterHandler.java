@@ -1,4 +1,4 @@
-package io.markdom.handler;
+package io.markdom.handler.filter.nodekind;
 
 import io.markdom.common.MarkdomNodeKind;
 

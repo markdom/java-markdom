@@ -1,4 +1,4 @@
-package io.markdom.handler;
+package io.markdom.handler.filter.nodetype;
 
 import java.util.Optional;
 
@@ -6,6 +6,7 @@ import io.markdom.common.MarkdomBlockType;
 import io.markdom.common.MarkdomContentType;
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
+import io.markdom.handler.AbstractMarkdomFilter;
 import io.markdom.util.ObjectHelper;
 
 public final class NodeTypeMarkdomFilter extends AbstractMarkdomFilter {

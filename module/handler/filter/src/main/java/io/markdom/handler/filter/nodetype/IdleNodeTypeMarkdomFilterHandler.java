@@ -1,4 +1,4 @@
-package io.markdom.handler;
+package io.markdom.handler.filter.nodetype;
 
 import io.markdom.common.MarkdomBlockType;
 import io.markdom.common.MarkdomContentType;

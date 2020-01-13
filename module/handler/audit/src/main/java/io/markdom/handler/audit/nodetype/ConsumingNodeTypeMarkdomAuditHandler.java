@@ -1,4 +1,4 @@
-package io.markdom.handler;
+package io.markdom.handler.audit.nodetype;
 
 import java.util.function.Consumer;
 

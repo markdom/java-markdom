@@ -24,7 +24,17 @@
 
 		<dependency>
 			<groupId>io.markdom</groupId>
+			<artifactId>handler-audit</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.markdom</groupId>
 			<artifactId>handler-commonmark-atlassian</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.markdom</groupId>
+			<artifactId>handler-filter</artifactId>
 		</dependency>
 
 		<dependency>

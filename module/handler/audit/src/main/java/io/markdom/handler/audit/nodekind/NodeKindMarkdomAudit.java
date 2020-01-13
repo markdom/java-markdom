@@ -1,10 +1,11 @@
-package io.markdom.handler;
+package io.markdom.handler.audit.nodekind;
 
 import java.util.Optional;
 
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.common.MarkdomNodeKind;
+import io.markdom.handler.AbstractMarkdomAudit;
 import io.markdom.util.ObjectHelper;
 
 public final class NodeKindMarkdomAudit extends AbstractMarkdomAudit {

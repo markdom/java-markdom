@@ -15,7 +15,9 @@
 	</parent>
 
 	<modules>
+		<module>audit</module>
 		<module>commonmark-atlassian</module>
+		<module>filter</module>
 		<module>html-cleaner</module>
 		<module>html-jsoup</module>
 		<module>html-w3c</module>

@@ -1,4 +1,4 @@
-package io.markdom.handler;
+package io.markdom.handler.filter.nodekind;
 
 import java.util.EnumSet;
 import java.util.Set;
