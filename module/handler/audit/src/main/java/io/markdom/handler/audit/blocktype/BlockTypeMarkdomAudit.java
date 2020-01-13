@@ -1,19 +1,17 @@
-package io.markdom.handler.audit.nodetype;
+package io.markdom.handler.audit.blocktype;
 
 import java.util.Optional;
 
 import io.markdom.common.MarkdomBlockType;
-import io.markdom.common.MarkdomContentType;
-import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.handler.AbstractMarkdomAudit;
 import io.markdom.util.ObjectHelper;
 
-public final class NodeTypeMarkdomAudit extends AbstractMarkdomAudit {
+public final class BlockTypeMarkdomAudit extends AbstractMarkdomAudit {
 
-	private final NodeTypeMarkdomAuditHandler handler;
+	private final BlockTypeMarkdomAuditHandler handler;
 
-	public NodeTypeMarkdomAudit(NodeTypeMarkdomAuditHandler handler) {
+	public BlockTypeMarkdomAudit(BlockTypeMarkdomAuditHandler handler) {
 		this.handler = ObjectHelper.notNull("handler", handler);
 	}
 
@@ -55,36 +53,6 @@ public final class NodeTypeMarkdomAudit extends AbstractMarkdomAudit {
 	@Override
 	public void onUnorderedListBlock() {
 		handler.onBlockType(MarkdomBlockType.UNORDERED_LIST);
-	}
-
-	@Override
-	public void onCodeContent(String code) {
-		handler.onContentType(MarkdomContentType.CODE);
-	}
-
-	@Override
-	public void onEmphasisContent(MarkdomEmphasisLevel level) {
-		handler.onContentType(MarkdomContentType.EMPHASIS);
-	}
-
-	@Override
-	public void onImageContent(String uri, Optional<String> title, Optional<String> alternative) {
-		handler.onContentType(MarkdomContentType.IMAGE);
-	}
-
-	@Override
-	public void onLineBreakContent(Boolean hard) {
-		handler.onContentType(MarkdomContentType.LINE_BREAK);
-	}
-
-	@Override
-	public void onLinkContent(String uri, Optional<String> title) {
-		handler.onContentType(MarkdomContentType.LINK);
-	}
-
-	@Override
-	public void onTextContent(String text) {
-		handler.onContentType(MarkdomContentType.TEXT);
 	}
 
 }
