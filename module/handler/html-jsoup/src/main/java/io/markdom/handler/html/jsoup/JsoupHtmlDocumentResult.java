@@ -1,5 +1,7 @@
 package io.markdom.handler.html.jsoup;
 
+import java.util.Iterator;
+
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -57,11 +59,22 @@ public final class JsoupHtmlDocumentResult implements HtmlDocumentResult<Documen
 	@Override
 	public String asElementsText(boolean pretty) {
 		StringBuilder builder = new StringBuilder();
-		for (Element blockElement : asElements()) {
-			blockElement.ownerDocument().outputSettings().prettyPrint(pretty);
-			builder.append(blockElement.outerHtml());
+		Iterator<Element> iterator = asElements().iterator();
+		if (iterator.hasNext()) {
+			append(builder, iterator.next(), pretty);
+			while (iterator.hasNext()) {
+				if (pretty) {
+					builder.append("\n");
+				}
+				append(builder, iterator.next(), pretty);
+			}
 		}
 		return builder.toString();
+	}
+
+	private void append(StringBuilder builder, Element blockElement, boolean pretty) {
+		blockElement.ownerDocument().outputSettings().prettyPrint(pretty);
+		builder.append(blockElement.outerHtml());
 	}
 
 }

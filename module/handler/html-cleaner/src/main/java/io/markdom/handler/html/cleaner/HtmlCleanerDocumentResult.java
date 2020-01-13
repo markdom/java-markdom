@@ -1,5 +1,6 @@
 package io.markdom.handler.html.cleaner;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -36,7 +37,7 @@ public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNo
 		properties.setOmitDoctypeDeclaration(true);
 		properties.setOmitXmlDeclaration(true);
 
-		prettySerializer = new PrettyHtmlSerializer(properties);
+		prettySerializer = new PrettyHtmlSerializer(properties, " ");
 
 		serializer = new SimpleHtmlSerializer(properties);
 
@@ -77,10 +78,21 @@ public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNo
 	@Override
 	public String asElementsText(boolean pretty) {
 		StringBuilder builder = new StringBuilder();
-		for (TagNode blockNode : asElements()) {
-			builder.append(asText(blockNode, pretty));
+		Iterator<TagNode> iterator = asElements().iterator();
+		if (iterator.hasNext()) {
+			append(builder, iterator.next(), pretty);
+			while (iterator.hasNext()) {
+				if (pretty) {
+					builder.append("\n");
+				}
+				append(builder, iterator.next(), pretty);
+			}
 		}
 		return builder.toString();
+	}
+
+	private void append(StringBuilder builder, TagNode blockNode, boolean pretty) {
+		builder.append(asText(blockNode, pretty));
 	}
 
 	private String asText(TagNode tagNode, boolean pretty) {
