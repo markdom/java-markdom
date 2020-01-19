@@ -33,7 +33,7 @@ public abstract class AbstractJsonObjectMarkdomDispatcher<JsonObject, JsonArray>
 
 	private void checkVersion(String version) {
 		if (!"1.0".equals(version)) {
-			throw new MarkdomException("Unsupported major version: " + version);
+			throw new MarkdomException("Unsupported version: " + version);
 		}
 	}
 

@@ -33,15 +33,7 @@ public abstract class AbstractXmlDocumentMarkdomDispatcher<XmlElement> implement
 
 	private void checkVersion(String version) {
 		if (!"1.0".equals(version)) {
-			throw new MarkdomException("Invalid version string: " + version);
-		}
-		int separatorIndex = version.indexOf('.');
-		int major = Integer.parseInt(version.substring(0, separatorIndex));
-		int minor = Integer.parseInt(version.substring(separatorIndex + 1));
-		if (major != 1) {
-			throw new MarkdomException("Unsupported major version: " + major);
-		} else if (minor < 0) {
-			throw new MarkdomException("Unsupported minor version: " + minor);
+			throw new MarkdomException("Unsupported version: " + version);
 		}
 	}
 
