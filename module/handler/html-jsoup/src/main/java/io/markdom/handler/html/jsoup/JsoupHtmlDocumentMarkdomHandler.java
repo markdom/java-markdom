@@ -49,7 +49,6 @@ public final class JsoupHtmlDocumentMarkdomHandler extends AbstractHtmlDocumentM
 		Element element = document.createElement(tagName);
 		this.element.appendChild(element);
 		this.element = element;
-
 	}
 
 	@Override
@@ -61,12 +60,12 @@ public final class JsoupHtmlDocumentMarkdomHandler extends AbstractHtmlDocumentM
 
 	@Override
 	protected final void setText(String text) {
-		element.text(text);
+		element.appendText(text);
 	}
 
 	@Override
 	protected void setCharacterData(String text) {
-		element.text(text);
+		element.appendText(text);
 	}
 
 	@Override
