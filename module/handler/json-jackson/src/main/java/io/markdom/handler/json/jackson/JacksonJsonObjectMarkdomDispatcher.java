@@ -57,7 +57,7 @@ public final class JacksonJsonObjectMarkdomDispatcher extends AbstractJsonObject
 	@SneakyThrows
 	protected ArrayNode optArray(ObjectNode objectNode, String key) {
 		JsonNode jsonNode = objectNode.get(key);
-		if (null != jsonNode) {
+		if (null != jsonNode && !jsonNode.isNull()) {
 			if (!jsonNode.isArray()) {
 				throw new MarkdomException("Expected array node for key " + key);
 			}
@@ -71,7 +71,7 @@ public final class JacksonJsonObjectMarkdomDispatcher extends AbstractJsonObject
 	@SneakyThrows
 	protected Optional<String> optString(ObjectNode objectNode, String key) {
 		JsonNode jsonNode = objectNode.get(key);
-		if (null != jsonNode) {
+		if (null != jsonNode && !jsonNode.isNull()) {
 			if (!jsonNode.isTextual()) {
 				throw new MarkdomException("Expected text node for key " + key);
 			}
