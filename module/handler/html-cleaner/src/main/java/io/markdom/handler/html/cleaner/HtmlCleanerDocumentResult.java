@@ -1,23 +1,28 @@
 package io.markdom.handler.html.cleaner;
 
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.htmlcleaner.CData;
 import org.htmlcleaner.CleanerProperties;
+import org.htmlcleaner.ContentNode;
 import org.htmlcleaner.DoctypeToken;
 import org.htmlcleaner.HtmlCleaner;
+import org.htmlcleaner.HtmlNode;
 import org.htmlcleaner.PrettyHtmlSerializer;
 import org.htmlcleaner.Serializer;
 import org.htmlcleaner.SimpleHtmlSerializer;
 import org.htmlcleaner.TagNode;
+import org.htmlcleaner.TagNodeVisitor;
 
 import io.markdom.handler.html.HtmlDocumentResult;
 import io.markdom.util.Attribute;
 import io.markdom.util.Attributes;
 import io.markdom.util.ObjectHelper;
 
-public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNode, TagNode, List<TagNode>> {
+public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNode, TagNode, List<HtmlNode>> {
 
 	private final HtmlCleaner cleaner;
 
@@ -59,9 +64,7 @@ public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNo
 		for (Attribute attribute : attributes) {
 			tagNode.addAttribute(attribute.getKey(), attribute.getValue());
 		}
-		for (TagNode blockNode : asElements()) {
-			tagNode.addChild(makeDeepCopy(blockNode));
-		}
+		tagNode.addChildren(asElements());
 		return tagNode;
 	}
 
@@ -71,28 +74,19 @@ public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNo
 	}
 
 	@Override
-	public List<TagNode> asElements() {
-		return asDocument().findElementByName("body", true).getChildTagList();
+	@SuppressWarnings("unchecked")
+	public List<HtmlNode> asElements() {
+		return (List<HtmlNode>) asDocument().findElementByName("body", true).getAllChildren();
 	}
 
 	@Override
 	public String asElementsText(boolean pretty) {
-		StringBuilder builder = new StringBuilder();
-		Iterator<TagNode> iterator = asElements().iterator();
-		if (iterator.hasNext()) {
-			append(builder, iterator.next(), pretty);
-			while (iterator.hasNext()) {
-				if (pretty) {
-					builder.append("\n");
-				}
-				append(builder, iterator.next(), pretty);
-			}
+		String elementText = asElementText("foo", pretty);
+		if (pretty) {
+			return elementText.substring("<foo>\n".length(), elementText.length() - "\n</foo>".length());
+		} else {
+			return elementText.substring("<foo>".length(), elementText.length() - "</foo>".length());
 		}
-		return builder.toString();
-	}
-
-	private void append(StringBuilder builder, TagNode blockNode, boolean pretty) {
-		builder.append(asText(blockNode, pretty));
 	}
 
 	private String asText(TagNode tagNode, boolean pretty) {
@@ -113,11 +107,45 @@ public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNo
 	}
 
 	private TagNode makeDeepCopy(TagNode tagNode) {
-		TagNode copyNode = tagNode.makeCopy();
-		for (TagNode childNode : tagNode.getChildTagList()) {
-			copyNode.addChild(makeDeepCopy(childNode));
-		}
-		return tagNode;
+
+		Map<TagNode, TagNode> copyMap = new HashMap<>();
+
+		tagNode.traverse(new TagNodeVisitor() {
+
+			@Override
+			public boolean visit(TagNode parentNode, HtmlNode htmlNode) {
+
+				if (htmlNode instanceof TagNode) {
+
+					TagNode tagNode = (TagNode) htmlNode;
+					TagNode copyNode = tagNode.makeCopy();
+					copyMap.put(tagNode, copyNode);
+					if (null != parentNode) {
+						copyMap.get(parentNode).addChild(copyNode);
+					}
+
+				} else if (htmlNode instanceof CData) {
+
+					CData cdata = (CData) htmlNode;
+					if (null != parentNode) {
+						copyMap.get(parentNode).addChild(new CData(cdata.getContent()));
+					}
+
+				} else if (htmlNode instanceof ContentNode) {
+
+					ContentNode contentNode = (ContentNode) htmlNode;
+					if (null != parentNode) {
+						copyMap.get(parentNode).addChild(new ContentNode(contentNode.getContent()));
+					}
+
+				}
+
+				return true;
+
+			}
+		});
+
+		return copyMap.get(tagNode);
 	}
 
 }

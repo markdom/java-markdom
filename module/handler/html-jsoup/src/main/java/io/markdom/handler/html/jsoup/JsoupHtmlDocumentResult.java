@@ -1,17 +1,18 @@
 package io.markdom.handler.html.jsoup;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import org.jsoup.nodes.Node;
 
 import io.markdom.handler.html.HtmlDocumentResult;
 import io.markdom.util.Attribute;
 import io.markdom.util.Attributes;
 import io.markdom.util.ObjectHelper;
 
-public final class JsoupHtmlDocumentResult implements HtmlDocumentResult<Document, Element, Elements> {
+public final class JsoupHtmlDocumentResult implements HtmlDocumentResult<Document, Element, List<Node>> {
 
 	private final Document document;
 
@@ -38,8 +39,8 @@ public final class JsoupHtmlDocumentResult implements HtmlDocumentResult<Documen
 		for (Attribute attribute : attributes) {
 			element.attr(attribute.getKey(), attribute.getValue());
 		}
-		for (Element blockElement : asElements()) {
-			element.appendChild(blockElement.clone());
+		for (Node blockNode : asElements()) {
+			element.appendChild(blockNode.clone());
 		}
 		return element;
 	}
@@ -52,14 +53,14 @@ public final class JsoupHtmlDocumentResult implements HtmlDocumentResult<Documen
 	}
 
 	@Override
-	public Elements asElements() {
-		return asDocument().body().children();
+	public List<Node> asElements() {
+		return asDocument().body().childNodes();
 	}
 
 	@Override
 	public String asElementsText(boolean pretty) {
 		StringBuilder builder = new StringBuilder();
-		Iterator<Element> iterator = asElements().iterator();
+		Iterator<Node> iterator = asElements().iterator();
 		if (iterator.hasNext()) {
 			append(builder, iterator.next(), pretty);
 			while (iterator.hasNext()) {
@@ -72,9 +73,9 @@ public final class JsoupHtmlDocumentResult implements HtmlDocumentResult<Documen
 		return builder.toString();
 	}
 
-	private void append(StringBuilder builder, Element blockElement, boolean pretty) {
-		blockElement.ownerDocument().outputSettings().prettyPrint(pretty);
-		builder.append(blockElement.outerHtml());
+	private void append(StringBuilder builder, Node blockNode, boolean pretty) {
+		blockNode.ownerDocument().outputSettings().prettyPrint(pretty);
+		builder.append(blockNode.outerHtml());
 	}
 
 }
