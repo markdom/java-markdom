@@ -10,7 +10,7 @@ import io.markdom.handler.html.HtmlDelegate;
 import io.markdom.util.Attribute;
 import io.markdom.util.Attributes;
 
-public final class HtmlCleanerDocumentMarkdomHandler extends AbstractHtmlDocumentMarkdomHandler<HtmlCleanerDocumentResult> {
+public final class HtmlCleanerHtmlDocumentMarkdomHandler extends AbstractHtmlDocumentMarkdomHandler<HtmlCleanerHtmlDocumentResult> {
 
 	private static final DefaultHtmlDelegate DEFAULT_DELEGATE = new DefaultHtmlDelegate();
 
@@ -20,19 +20,19 @@ public final class HtmlCleanerDocumentMarkdomHandler extends AbstractHtmlDocumen
 
 	private TagNode element;
 
-	public HtmlCleanerDocumentMarkdomHandler() {
+	public HtmlCleanerHtmlDocumentMarkdomHandler() {
 		this(DEFAULT_DELEGATE, DEFAULT_TITLE);
 	}
 
-	public HtmlCleanerDocumentMarkdomHandler(String title) {
+	public HtmlCleanerHtmlDocumentMarkdomHandler(String title) {
 		this(DEFAULT_DELEGATE, title);
 	}
 
-	public HtmlCleanerDocumentMarkdomHandler(HtmlDelegate delegate) {
+	public HtmlCleanerHtmlDocumentMarkdomHandler(HtmlDelegate delegate) {
 		this(delegate, DEFAULT_TITLE);
 	}
 
-	public HtmlCleanerDocumentMarkdomHandler(HtmlDelegate delegate, String title) {
+	public HtmlCleanerHtmlDocumentMarkdomHandler(HtmlDelegate delegate, String title) {
 		super(delegate, title);
 	}
 
@@ -78,8 +78,8 @@ public final class HtmlCleanerDocumentMarkdomHandler extends AbstractHtmlDocumen
 	}
 
 	@Override
-	public HtmlCleanerDocumentResult getResult() {
-		return new HtmlCleanerDocumentResult(document);
+	public HtmlCleanerHtmlDocumentResult getResult() {
+		return new HtmlCleanerHtmlDocumentResult(document);
 	}
 
 }

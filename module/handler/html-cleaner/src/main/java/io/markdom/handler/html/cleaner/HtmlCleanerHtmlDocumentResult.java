@@ -22,7 +22,7 @@ import io.markdom.util.Attribute;
 import io.markdom.util.Attributes;
 import io.markdom.util.ObjectHelper;
 
-public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNode, TagNode, List<HtmlNode>> {
+public final class HtmlCleanerHtmlDocumentResult implements HtmlDocumentResult<TagNode, TagNode, List<HtmlNode>> {
 
 	private final HtmlCleaner cleaner;
 
@@ -32,7 +32,7 @@ public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNo
 
 	private final TagNode document;
 
-	public HtmlCleanerDocumentResult(TagNode document) {
+	public HtmlCleanerHtmlDocumentResult(TagNode document) {
 		this.document = ObjectHelper.notNull("document", document);
 
 		cleaner = new HtmlCleaner();

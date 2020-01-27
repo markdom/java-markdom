@@ -30,7 +30,7 @@ public class HtmlCleanerDocumentMarkdomHandlerTests {
 		CleanerProperties properties = cleaner.getProperties();
 		Serializer serializer = new PrettyXmlSerializer(properties);
 
-		TagNode htmlDocument = document.handle(new HtmlCleanerDocumentMarkdomHandler()).asDocument();
+		TagNode htmlDocument = document.handle(new HtmlCleanerHtmlDocumentMarkdomHandler()).asDocument();
 		String html = serializer.getAsString(htmlDocument);
 
 		TagNode exampleDocument = cleaner.clean(TestHelper.openExampleHtml());
