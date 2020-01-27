@@ -30,8 +30,6 @@ public class JsoupHtmlDocumentMarkdomHandlerTests {
 		Document exampleDocument = Jsoup.parse(TestHelper.readExampleHtml());
 		exampleDocument.outputSettings().syntax(Document.OutputSettings.Syntax.xml);
 		
-		System.out.println(html);
-
 		assertThat(html, CompareMatcher.isIdenticalTo(exampleDocument.html()).ignoreWhitespace());
 
 	}
