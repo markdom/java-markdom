@@ -39,7 +39,7 @@ public final class JsoupHtmlDocumentResult implements HtmlDocumentResult<Documen
 		for (Attribute attribute : attributes) {
 			element.attr(attribute.getKey(), attribute.getValue());
 		}
-		for (Node blockNode : asElements()) {
+		for (Node blockNode : asNodes()) {
 			element.appendChild(blockNode.clone());
 		}
 		return element;
@@ -53,14 +53,14 @@ public final class JsoupHtmlDocumentResult implements HtmlDocumentResult<Documen
 	}
 
 	@Override
-	public List<Node> asElements() {
+	public List<Node> asNodes() {
 		return asDocument().body().childNodes();
 	}
 
 	@Override
-	public String asElementsText(boolean pretty) {
+	public String asNodesText(boolean pretty) {
 		StringBuilder builder = new StringBuilder();
-		Iterator<Node> iterator = asElements().iterator();
+		Iterator<Node> iterator = asNodes().iterator();
 		if (iterator.hasNext()) {
 			append(builder, iterator.next(), pretty);
 			while (iterator.hasNext()) {

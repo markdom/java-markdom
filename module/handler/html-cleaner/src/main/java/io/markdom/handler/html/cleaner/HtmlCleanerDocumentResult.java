@@ -64,7 +64,7 @@ public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNo
 		for (Attribute attribute : attributes) {
 			tagNode.addAttribute(attribute.getKey(), attribute.getValue());
 		}
-		tagNode.addChildren(asElements());
+		tagNode.addChildren(asNodes());
 		return tagNode;
 	}
 
@@ -75,12 +75,12 @@ public final class HtmlCleanerDocumentResult implements HtmlDocumentResult<TagNo
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<HtmlNode> asElements() {
+	public List<HtmlNode> asNodes() {
 		return (List<HtmlNode>) asDocument().findElementByName("body", true).getAllChildren();
 	}
 
 	@Override
-	public String asElementsText(boolean pretty) {
+	public String asNodesText(boolean pretty) {
 		String elementText = asElementText("foo", pretty);
 		if (pretty) {
 			return elementText.substring("<foo>\n".length(), elementText.length() - "\n</foo>".length());

@@ -2,7 +2,7 @@ package io.markdom.handler.html;
 
 import io.markdom.util.Attributes;
 
-public interface HtmlDocumentResult<Document, Element, Elements> {
+public interface HtmlDocumentResult<Document, Element, Nodes> {
 
 	public Document asDocument();
 
@@ -32,12 +32,12 @@ public interface HtmlDocumentResult<Document, Element, Elements> {
 
 	public String asElementText(String tagName, Attributes attributes, boolean pretty);
 
-	public Elements asElements();
+	public Nodes asNodes();
 
-	public default String asElementsText() {
-		return asElementsText(false);
+	public default String asNodesText() {
+		return asNodesText(false);
 	}
 
-	public String asElementsText(boolean pretty);
+	public String asNodesText(boolean pretty);
 
 }

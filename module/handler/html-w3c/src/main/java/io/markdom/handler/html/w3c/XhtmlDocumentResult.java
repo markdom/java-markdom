@@ -48,7 +48,7 @@ public final class XhtmlDocumentResult implements HtmlDocumentResult<Document, E
 		for (Attribute attribute : attributes) {
 			element.setAttribute(attribute.getKey(), attribute.getValue());
 		}
-		for (Node node : new NodeListIterable(asElements())) {
+		for (Node node : new NodeListIterable(asNodes())) {
 			element.appendChild(document.importNode(node, true));
 		}
 		return element;
@@ -60,14 +60,14 @@ public final class XhtmlDocumentResult implements HtmlDocumentResult<Document, E
 	}
 
 	@Override
-	public NodeList asElements() {
+	public NodeList asNodes() {
 		return ((Element) asDocument().getLastChild().getChildNodes()).getLastChild().getChildNodes();
 	}
 
 	@Override
-	public String asElementsText(boolean pretty) {
+	public String asNodesText(boolean pretty) {
 		StringBuilder builder = new StringBuilder();
-		for (Node node : new NodeListIterable(asElements())) {
+		for (Node node : new NodeListIterable(asNodes())) {
 			builder.append(XmlHelper.asText(node, pretty));
 		}
 		return builder.toString();
