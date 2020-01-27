@@ -4,36 +4,39 @@ import java.util.Optional;
 
 import io.markdom.common.MarkdomEmphasisLevel;
 import io.markdom.common.MarkdomHeadingLevel;
-import io.markdom.util.Elements;
+import io.markdom.util.Gap;
+import io.markdom.util.Nodes;
 
 public interface HtmlDelegate {
 
-	public Elements onCodeBlock(String code, Optional<String> hint);
+	public Nodes onDocument(Gap gap);
 
-	public Elements onDivisionBlock();
+	public Nodes onCodeBlock(String code, Optional<String> hint);
 
-	public Elements onHeadingBlock(MarkdomHeadingLevel level);
+	public Nodes onDivisionBlock();
 
-	public Elements onOrderdListBlock(Integer startIndex);
+	public Nodes onHeadingBlock(MarkdomHeadingLevel level, Gap gap);
 
-	public Elements onParagraphBlock();
+	public Nodes onOrderdListBlock(Integer startIndex, Gap gap);
 
-	public Elements onQuoteBlock();
+	public Nodes onParagraphBlock(Gap gap);
 
-	public Elements onUnorderedListBlock();
+	public Nodes onQuoteBlock(Gap gap);
 
-	public Elements onListItem();
+	public Nodes onUnorderedListBlock(Gap gap);
 
-	public Elements onCodeContent(String code);
+	public Nodes onListItem(Gap gap);
 
-	public Elements onEmphasisContent(MarkdomEmphasisLevel level);
+	public Nodes onCodeContent(String code);
 
-	public Elements onImageContent(String uri, Optional<String> title, Optional<String> alternative);
+	public Nodes onEmphasisContent(MarkdomEmphasisLevel level, Gap gap);
 
-	public Elements onLineBreakContent();
+	public Nodes onImageContent(String uri, Optional<String> title, Optional<String> alternative);
 
-	public Elements onLinkContent(String uri, Optional<String> title);
+	public Nodes onLineBreakContent();
 
-	public Elements onTextContent(String text);
+	public Nodes onLinkContent(String uri, Optional<String> title, Gap gap);
+
+	public Nodes onTextContent(String text);
 
 }

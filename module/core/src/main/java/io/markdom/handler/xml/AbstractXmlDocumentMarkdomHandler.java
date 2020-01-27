@@ -9,6 +9,7 @@ import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.common.MarkdomKeys;
 import io.markdom.common.MarkdomSchemas;
 import io.markdom.handler.MarkdomHandler;
+import io.markdom.util.Attribute;
 import io.markdom.util.Attributes;
 
 public abstract class AbstractXmlDocumentMarkdomHandler<Result> implements MarkdomHandler<Result> {
@@ -29,7 +30,7 @@ public abstract class AbstractXmlDocumentMarkdomHandler<Result> implements Markd
 
 	@Override
 	public final void onCodeBlock(String code, Optional<String> hint) {
-		setAttributes(new Attributes().add(MarkdomKeys.HINT, hint));
+		setAttributes(new Attributes().add(map(MarkdomKeys.HINT, hint)));
 		setCharacterData(code);
 	}
 
@@ -44,7 +45,7 @@ public abstract class AbstractXmlDocumentMarkdomHandler<Result> implements Markd
 
 	@Override
 	public final void onHeadingBlockBegin(MarkdomHeadingLevel level) {
-		setAttributes(new Attributes().add(MarkdomKeys.LEVEL, Integer.toString(level.ordinal() + 1)));
+		setAttributes(new Attributes().add(new Attribute(MarkdomKeys.LEVEL, Integer.toString(level.ordinal() + 1))));
 	}
 
 	@Override
@@ -53,7 +54,7 @@ public abstract class AbstractXmlDocumentMarkdomHandler<Result> implements Markd
 
 	@Override
 	public final void onOrderedListBlockBegin(Integer startIndex) {
-		setAttributes(new Attributes().add(MarkdomKeys.START_INDEX, Integer.toString(startIndex)));
+		setAttributes(new Attributes().add(new Attribute(MarkdomKeys.START_INDEX, Integer.toString(startIndex))));
 	}
 
 	@Override
@@ -135,7 +136,7 @@ public abstract class AbstractXmlDocumentMarkdomHandler<Result> implements Markd
 
 	@Override
 	public final void onEmphasisContentBegin(MarkdomEmphasisLevel level) {
-		setAttributes(new Attributes().add(MarkdomKeys.LEVEL, Integer.toString(level.ordinal() + 1)));
+		setAttributes(new Attributes().add(new Attribute(MarkdomKeys.LEVEL, Integer.toString(level.ordinal() + 1))));
 	}
 
 	@Override
@@ -144,18 +145,18 @@ public abstract class AbstractXmlDocumentMarkdomHandler<Result> implements Markd
 
 	@Override
 	public final void onImageContent(String uri, Optional<String> title, Optional<String> alternative) {
-		setAttributes(new Attributes().add(MarkdomKeys.URI, uri).add(MarkdomKeys.TITLE, title).add(MarkdomKeys.ALTERNATIVE,
-				alternative));
+		setAttributes(new Attributes().add(new Attribute(MarkdomKeys.URI, uri)).add(map(MarkdomKeys.TITLE, title))
+			.add(map(MarkdomKeys.ALTERNATIVE, alternative)));
 	}
 
 	@Override
 	public final void onLineBreakContent(Boolean hard) {
-		setAttributes(new Attributes().add(MarkdomKeys.HARD, Boolean.toString(hard)));
+		setAttributes(new Attributes().add(new Attribute(MarkdomKeys.HARD, Boolean.toString(hard))));
 	}
 
 	@Override
 	public final void onLinkContentBegin(String uri, Optional<String> title) {
-		setAttributes(new Attributes().add(MarkdomKeys.URI, uri).add(MarkdomKeys.TITLE, title));
+		setAttributes(new Attributes().add(new Attribute(MarkdomKeys.URI, uri)).add(map(MarkdomKeys.TITLE, title)));
 	}
 
 	@Override
@@ -193,8 +194,12 @@ public abstract class AbstractXmlDocumentMarkdomHandler<Result> implements Markd
 		endDocument();
 	}
 
+	private Optional<Attribute> map(String key, Optional<String> value) {
+		return value.map(actualValue -> new Attribute(key, actualValue));
+	}
+
 	protected abstract void beginDocument(String dtdQualifiedName, String dtdPublicId, String dtdSystemId, String rootTagName,
-			String documentVersion, String xmlnsNameSpace);
+		String documentVersion, String xmlnsNameSpace);
 
 	protected abstract void pushElement(String tagName);
 

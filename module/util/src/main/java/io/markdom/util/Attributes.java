@@ -17,15 +17,8 @@ public final class Attributes implements Iterable<Attribute> {
 		return this;
 	}
 
-	public Attributes add(String key, Optional<String> value) {
-		if (ObjectHelper.notNull("optional value", value).isPresent()) {
-			attributes.add(new Attribute(key, value.get()));
-		}
-		return this;
-	}
-
-	public Attributes add(String key, String value) {
-		attributes.add(new Attribute(key, value));
+	public Attributes add(Optional<Attribute> attribute) {
+		ObjectHelper.notNull("attribute", attribute).map(this::add);
 		return this;
 	}
 

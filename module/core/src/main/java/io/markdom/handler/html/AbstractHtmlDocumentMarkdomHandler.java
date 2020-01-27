@@ -6,16 +6,47 @@ import java.util.Stack;
 import io.markdom.common.MarkdomBlockType;
 import io.markdom.common.MarkdomContentType;
 import io.markdom.common.MarkdomEmphasisLevel;
+import io.markdom.common.MarkdomException;
 import io.markdom.common.MarkdomHeadingLevel;
 import io.markdom.handler.MarkdomHandler;
 import io.markdom.util.Attributes;
+import io.markdom.util.CharacterData;
 import io.markdom.util.Element;
-import io.markdom.util.Elements;
+import io.markdom.util.Gap;
+import io.markdom.util.Node;
+import io.markdom.util.NodeChoice;
+import io.markdom.util.NodeSelection;
+import io.markdom.util.Nodes;
 import io.markdom.util.ObjectHelper;
+import io.markdom.util.Text;
 
 public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements MarkdomHandler<Result> {
 
-	private final Stack<Integer> depths = new Stack<Integer>();
+	private static final NodeSelection<Integer> COUNT_GAP_SELECTION = new NodeSelection<Integer>() {
+
+		@Override
+		public Integer select(Element element) {
+			return countGaps(element.getNodes());
+		}
+
+		@Override
+		public Integer select(Text text) {
+			return 0;
+		}
+
+		@Override
+		public Integer select(CharacterData characterData) {
+			return 0;
+		}
+
+		@Override
+		public Integer select(Gap gap) {
+			return 1;
+		}
+
+	};
+
+	private final Stack<Nodes> nodes = new Stack<>();
 
 	private final HtmlDelegate delegate;
 
@@ -35,6 +66,7 @@ public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements Mark
 		popElement();
 		popElement();
 		pushElement("body");
+		addPreGapNodes(delegate.onDocument(new Gap()));
 	}
 
 	@Override
@@ -47,8 +79,7 @@ public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements Mark
 
 	@Override
 	public final void onCodeBlock(String code, Optional<String> hint) {
-		pushElements(delegate.onCodeBlock(code, hint));
-		setCharacterData(code);
+		addNodes(delegate.onCodeBlock(code, hint));
 	}
 
 	@Override
@@ -57,57 +88,61 @@ public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements Mark
 
 	@Override
 	public final void onDivisionBlock() {
-		pushElements(delegate.onDivisionBlock());
+		addNodes(delegate.onDivisionBlock());
 	}
 
 	@Override
 	public final void onHeadingBlockBegin(MarkdomHeadingLevel level) {
-		pushElements(delegate.onHeadingBlock(level));
+		addPreGapNodes(delegate.onHeadingBlock(level, new Gap()));
 	}
 
 	@Override
 	public final void onHeadingBlockEnd(MarkdomHeadingLevel level) {
+		addPostGapNodes();
 	}
 
 	@Override
 	public final void onOrderedListBlockBegin(Integer startIndex) {
-		pushElements(delegate.onOrderdListBlock(startIndex));
+		addPreGapNodes(delegate.onOrderdListBlock(startIndex, new Gap()));
 	}
 
 	@Override
 	public final void onOrderedListBlockEnd(Integer startIndex) {
+		addPostGapNodes();
 	}
 
 	@Override
 	public final void onParagraphBlockBegin() {
-		pushElements(delegate.onParagraphBlock());
+		addPreGapNodes(delegate.onParagraphBlock(new Gap()));
 	}
 
 	@Override
 	public final void onParagraphBlockEnd() {
+		addPostGapNodes();
 	}
 
 	@Override
 	public final void onQuoteBlockBegin() {
-		pushElements(delegate.onQuoteBlock());
+		addPreGapNodes(delegate.onQuoteBlock(new Gap()));
 	}
 
 	@Override
 	public final void onQuoteBlockEnd() {
+		addPostGapNodes();
 	}
 
 	@Override
 	public final void onUnorderedListBlockBegin() {
-		pushElements(delegate.onUnorderedListBlock());
+		addPreGapNodes(delegate.onUnorderedListBlock(new Gap()));
 	}
 
 	@Override
 	public final void onUnorderedListBlockEnd() {
+		addPostGapNodes();
 	}
 
 	@Override
 	public final void onBlockEnd(MarkdomBlockType type) {
-		popElements();
 	}
 
 	@Override
@@ -124,12 +159,12 @@ public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements Mark
 
 	@Override
 	public final void onListItemBegin() {
-		pushElements(delegate.onListItem());
+		addPreGapNodes(delegate.onListItem(new Gap()));
 	}
 
 	@Override
 	public final void onListItemEnd() {
-		popElements();
+		addPostGapNodes();
 	}
 
 	@Override
@@ -150,52 +185,50 @@ public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements Mark
 
 	@Override
 	public final void onCodeContent(String code) {
-		pushElements(delegate.onCodeContent(code));
-		setText(code);
+		addNodes(delegate.onCodeContent(code));
 	}
 
 	@Override
 	public final void onEmphasisContentBegin(MarkdomEmphasisLevel level) {
-		pushElements(delegate.onEmphasisContent(level));
+		addPreGapNodes(delegate.onEmphasisContent(level, new Gap()));
 	}
 
 	@Override
 	public final void onEmphasisContentEnd(MarkdomEmphasisLevel level) {
+		addPostGapNodes();
 	}
 
 	@Override
 	public final void onImageContent(String uri, Optional<String> title, Optional<String> alternative) {
-		pushElements(delegate.onImageContent(uri, title, alternative));
+		addNodes(delegate.onImageContent(uri, title, alternative));
 	}
 
 	@Override
 	public final void onLineBreakContent(Boolean hard) {
 		if (hard) {
-			pushElements(delegate.onLineBreakContent());
+			addNodes(delegate.onLineBreakContent());
 		} else {
-			pushElements(new Elements());
-			setText(" ");
+			addNodes(new Nodes().add(new Text(" ")));
 		}
 	}
 
 	@Override
 	public final void onLinkContentBegin(String uri, Optional<String> title) {
-		pushElements(delegate.onLinkContent(uri, title));
+		addPreGapNodes(delegate.onLinkContent(uri, title, new Gap()));
 	}
 
 	@Override
 	public final void onLinkContentEnd(String uri, Optional<String> title) {
+		addPostGapNodes();
 	}
 
 	@Override
 	public final void onTextContent(String text) {
-		pushElements(delegate.onTextContent(text));
-		setText(text);
+		addNodes(delegate.onTextContent(text));
 	}
 
 	@Override
 	public final void onContentEnd(MarkdomContentType type) {
-		popElements();
 	}
 
 	@Override
@@ -208,20 +241,167 @@ public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements Mark
 
 	@Override
 	public final void onDocumentEnd() {
+		addPostGapNodes();
 		popElement();
 		endDocument();
 	}
 
 	protected abstract void beginDocument(String dtdQualifiedName, String rootTagName);
 
-	private void pushElements(Elements elements) {
-		int depth = 0;
-		for (Element element : elements) {
-			pushElement(element.getTagName());
-			setAttributes(element.getAttributes());
-			depth++;
+	private void addNodes(Nodes nodes) {
+		checkNodesHaveNoGaps(nodes);
+		NodeChoice addNodesChoice = getAddNodesChoice();
+		for (Node node : nodes) {
+			node.choose(addNodesChoice);
 		}
-		depths.push(depth);
+	}
+
+	private void checkNodesHaveNoGaps(Nodes nodes) {
+		if (0 != countGaps(nodes)) {
+			throw new MarkdomException("Got nodes without exactly zero gaps: " + nodes);
+		}
+	}
+
+	private NodeChoice getAddNodesChoice() {
+		return new NodeChoice() {
+
+			@Override
+			public void choose(Element element) {
+				pushElement(element.getTagName());
+				setAttributes(element.getAttributes());
+				for (Node node : element.getNodes()) {
+					node.choose(this);
+				}
+				popElement();
+			}
+
+			@Override
+			public void choose(CharacterData characterData) {
+				setCharacterData(characterData.getText());
+			}
+
+			@Override
+			public void choose(Text text) {
+				setText(text.getText());
+			}
+
+			@Override
+			public void choose(Gap gap) {
+			}
+
+		};
+	}
+
+	private void addPreGapNodes(Nodes nodes) {
+		checkNodesHaveOneGap(nodes);
+		NodeChoice choice = getAddPreGapNodesChoice();
+		for (Node node : nodes) {
+			node.choose(choice);
+		}
+		this.nodes.push(nodes);
+	}
+
+	private void checkNodesHaveOneGap(Nodes nodes) {
+		if (1 != countGaps(nodes)) {
+			throw new MarkdomException("Got nodes without exactly one gap: " + nodes);
+		}
+	}
+
+	private NodeChoice getAddPreGapNodesChoice() {
+		return new NodeChoice() {
+
+			boolean gapSeen = false;
+
+			@Override
+			public void choose(Element element) {
+				if (!gapSeen) {
+					pushElement(element.getTagName());
+					setAttributes(element.getAttributes());
+				}
+				for (Node node : element.getNodes()) {
+					node.choose(this);
+				}
+				if (!gapSeen) {
+					popElement();
+				}
+			}
+
+			@Override
+			public void choose(CharacterData characterData) {
+				if (!gapSeen) {
+					setCharacterData(characterData.getText());
+				}
+			}
+
+			@Override
+			public void choose(Text text) {
+				if (!gapSeen) {
+					setText(text.getText());
+				}
+			}
+
+			@Override
+			public void choose(Gap gap) {
+				gapSeen = true;
+			}
+
+		};
+	}
+
+	private void addPostGapNodes() {
+		NodeChoice choice = getAddPostGapNodesChoice();
+		for (Node node : this.nodes.pop()) {
+			node.choose(choice);
+		}
+	}
+
+	private NodeChoice getAddPostGapNodesChoice() {
+		return new NodeChoice() {
+
+			boolean gapSeen = false;
+
+			@Override
+			public void choose(Element element) {
+				if (gapSeen) {
+					pushElement(element.getTagName());
+					setAttributes(element.getAttributes());
+				}
+				for (Node node : element.getNodes()) {
+					node.choose(this);
+				}
+				if (gapSeen) {
+					popElement();
+				}
+			}
+
+			@Override
+			public void choose(CharacterData characterData) {
+				if (gapSeen) {
+					setCharacterData(characterData.getText());
+				}
+			}
+
+			@Override
+			public void choose(Text text) {
+				if (gapSeen) {
+					setText(text.getText());
+				}
+			}
+
+			@Override
+			public void choose(Gap gap) {
+				gapSeen = true;
+			}
+
+		};
+	}
+
+	private static int countGaps(Nodes nodes) {
+		int numberOfGaps = 0;
+		for (Node node : nodes) {
+			numberOfGaps += node.select(COUNT_GAP_SELECTION);
+		}
+		return numberOfGaps;
 	}
 
 	protected abstract void pushElement(String tagName);
@@ -231,13 +411,6 @@ public abstract class AbstractHtmlDocumentMarkdomHandler<Result> implements Mark
 	protected abstract void setCharacterData(String text);
 
 	protected abstract void setText(String text);
-
-	private void popElements() {
-		int depth = depths.pop();
-		for (int i = 0; i < depth; i++) {
-			popElement();
-		}
-	}
 
 	protected abstract void popElement();
 
