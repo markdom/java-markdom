@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.markdom</groupId>
 	<artifactId>markdom</artifactId>
-	<version>0.0.7</version>
+	<version>0.0.8-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Markdom - Root</name>
@@ -58,103 +58,103 @@
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>util</artifactId>
-				<version>0.0.7</version>
+				<version>0.0.8-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>core</artifactId>
-				<version>0.0.7</version>
+				<version>0.0.8-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-audit</artifactId>
-				<version>0.0.7</version>
+				<version>0.0.8-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-commonmark-atlassian</artifactId>
-				<version>0.0.7</version>
+				<version>0.0.8-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-filter</artifactId>
-				<version>0.0.7</version>
+				<version>0.0.8-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-html-cleaner</artifactId>
-				<version>0.0.7</version>
+				<version>0.0.8-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-html-jsoup</artifactId>
-				<version>0.0.7</version>
+				<version>0.0.8-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-html-w3c</artifactId>
-				<version>0.0.7</version>
+				<version>0.0.8-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-json-gson</artifactId>
-				<version>0.0.7</version>
+				<version>0.0.8-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-json-jackson</artifactId>
-				<version>0.0.7</version>
+				<version>0.0.8-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-json-jakarta</artifactId>
-				<version>0.0.7</version>
+				<version>0.0.8-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-json-org</artifactId>
-				<version>0.0.7</version>
+				<version>0.0.8-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-json-simple</artifactId>
-				<version>0.0.7</version>
+				<version>0.0.8-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-text-commonmark</artifactId>
-				<version>0.0.7</version>
+				<version>0.0.8-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>handler-xml-w3c</artifactId>
-				<version>0.0.7</version>
+				<version>0.0.8-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>model-basic</artifactId>
-				<version>0.0.7</version>
+				<version>0.0.8-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>io.markdom</groupId>
 				<artifactId>test</artifactId>
-				<version>0.0.7</version>
+				<version>0.0.8-SNAPSHOT</version>
 				<classifier>tests</classifier>
 				<type>test-jar</type>
 			</dependency>
